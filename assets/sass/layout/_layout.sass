@@ -1,0 +1,37 @@
+html
+  font-size: $rem
+  @media only screen and (min-width: $xlarge)
+    font-size: rem2px(1.2)
+  @media only screen and (max-width: $large)
+    font-size: rem2px(0.8)
+
+body
+  line-height: 1
+  font-weight: 400
+  color: $color-form-text
+  background-color: $color-white
+  font-size: 1.4rem
+  margin: 0
+  -webkit-font-smoothing: subpixel-antialiased
+  -moz-osx-font-smoothing: auto
+  overflow-y: scroll
+
+.b-page
+  min-height: 100vh
+  position: relative
+  &__header, &__content, &__footer
+    position: relative
+    z-index: 5
+    text-align: center
+  &__header, &__footer
+    height: 5rem
+    background-color: $color-white
+    border: 1px solid $color-red
+  &__footer
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 0
+  &__content
+    flex-grow: 1
