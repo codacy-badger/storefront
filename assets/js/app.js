@@ -7,9 +7,7 @@ import Vuex from 'vuex';
 import router from './router';
 import store from './store';
 import {sync} from 'vuex-router-sync';
-
 import Toasted from 'vue-toasted';
-
 import AppView from './components/App.vue'
 
 Vue.use(VueRouter);
