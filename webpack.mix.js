@@ -9,4 +9,4 @@ mix
     )
     .js('assets/js/app.js', 'public/js')
     .sass('assets/sass/app.scss', 'public/css')
-    .copyDirectory('assets/img', 'public/images');
+    .copyDirectory('assets/img', 'public/img');
