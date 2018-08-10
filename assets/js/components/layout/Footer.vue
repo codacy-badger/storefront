@@ -18,7 +18,6 @@
             storefrontPreview: {
                 handler: function (status, old) {
                     this.isStorefrontPreview = status;
-                    console.log(status);
                 },
                 deep: true
             }
