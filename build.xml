@@ -17,7 +17,7 @@
     <target name="yarn:build" description="Build Frontend">
         <exec executable="yarn">
             <arg value="run"/>
-            <arg value="prod"/>
+            <arg value="dev"/>
         </exec>
     </target>
 
