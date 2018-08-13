@@ -45,7 +45,7 @@
                 },
                 storageManager: { type: null },
                 assetManager: {
-                    upload: 'http://images.sinichkin.eu.local/restapi',
+                    upload: 'http://images.stg.gamenet.ru/restapi',
                     uploadName: 'file',
                     params: { method: 'storefront.upload', format: 'json' },
                     uploadFile: (e) => {
