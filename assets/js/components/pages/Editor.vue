@@ -12,7 +12,7 @@
     import {mapMutations} from 'vuex';
 
     export default {
-        componets: {
+        components: {
             grapesjs
         },
         name: 'StorefrontEditor',
@@ -43,7 +43,38 @@
                         // options
                     }
                 },
-                storageManager: { type: null }
+                storageManager: { type: null },
+                assetManager: {
+                    upload: 'http://images.sinichkin.eu.local/restapi',
+                    uploadName: 'file',
+                    params: { method: 'storefront.upload', format: 'json' },
+                    uploadFile: (e) => {
+                        let files = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+                        let formData = new FormData();
+
+                        for(let i = 0; i < files.length; i++){
+                            formData.append('file[]', files[i])
+                        }
+
+                        formData.append('method', 'storefront.upload');
+                        formData.append('format', 'json');
+
+                        window.axios.post(
+                            'http://images.sinichkin.ru.local/restapi',
+                            formData,
+                            { headers: { 'Content-Type': 'multipart/form-data' }}
+                        ).then(function (response) {
+                            if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
+                                || !response['data']['response'].hasOwnProperty('data')) {
+                                return;
+                            }
+
+                            editor.AssetManager.add(response['data']['response']['data']);
+                        }).catch(function (response) {
+                            console.log(response);
+                        });
+                    }
+                }
             }),
             blockManager = editor.BlockManager,
             categories = blockManager.getCategories();
@@ -53,7 +84,7 @@
             //
 
             categories.models.forEach(function(item, i) {
-                if ( i == 0) {
+                if (i === 0) {
                     return;
                 }
 

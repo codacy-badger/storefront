@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="storefront" default="build">
+    <target name="build" depends="yarn:install, yarn:build">
+        <echo message="storefront project"/>
+    </target>
+
+    <target name="yarn:install" description="Yarn - update JavaScript packages dependencies.">
+        <exec executable="yarn" failonerror="true">
+            <arg value="install" />
+        </exec>
+
+        <exec executable="yarn" failonerror="true">
+            <arg value="upgrade" />
+        </exec>
+    </target>
+
+    <target name="yarn:build" description="Build Frontend">
+        <exec executable="yarn">
+            <arg value="run"/>
+            <arg value="prod"/>
+        </exec>
+    </target>
+
+    <target name="deploy.tgz">
+        <tar destfile="${basedir}/${deploy_archive_name}.tar"
+             basedir="${basedir}"
+             includes="**/*.*"
+             excludes="**/.git/**,**/.gitignore"
+        />
+
+        <gzip destfile="${basedir}/${deploy_archive_name}.tar.gz" src="${basedir}/${deploy_archive_name}.tar"/>
+
+        <delete file="${basedir}/${deploy_archive_name}.tar"/>
+
+        <exec executable="scp" failonerror="true">
+            <arg value="${basedir}/${deploy_archive_name}.tar.gz" />
+            <arg value="${deploy_host}:${deploy_path}" />
+        </exec>
+
+        <delete file="${basedir}/${deploy_archive_name}.tar.gz"/>
+    </target>
+</project>

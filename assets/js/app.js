@@ -9,10 +9,13 @@ import store from './store';
 import {sync} from 'vuex-router-sync';
 import Toasted from 'vue-toasted';
 import AppView from './components/App.vue'
+import VueDraggableResizable from 'vue-draggable-resizable';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(Toasted);
+
+Vue.component('vue-draggable-resizable', VueDraggableResizable);
 
 sync(store, router);
 

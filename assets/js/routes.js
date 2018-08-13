@@ -3,6 +3,7 @@ import NotFound from './components/NotFound.vue';
 
 import Dashboard from './components/pages/Dashboard.vue';
 import Editor from './components/pages/Editor.vue';
+import CustomEditor from './components/pages/CustomEditor.vue';
 
 const routes = [
     {
@@ -19,6 +20,12 @@ const routes = [
                 path: 'editor',
                 component: Editor,
                 name: 'Editor',
+                alias: ''
+            },
+            {
+                path: 'custom-editor',
+                component: CustomEditor,
+                name: 'CustomEditor',
                 alias: ''
             }
         ]
