@@ -10,8 +10,6 @@ export default grapesjs.plugins.add('gjs-video-background', (editor, opts = {}) 
         blocks: [cVideoBgRef],
         defaultStyle: 1,
         videoBgClsPfx: 'video',
-        labelBurger: 'Burger',
-        labelBurgerLine: 'Burger Line',
         labelVideoBgBlock: 'Video background',
         labelVideoBgCategory: 'Extra'
     };

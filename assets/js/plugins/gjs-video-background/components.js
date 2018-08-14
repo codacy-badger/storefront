@@ -1,28 +1,48 @@
-export default (editor, opt = {}) => {
-    const c = opt;
+export default (editor = {}) => {
     const dc = editor.DomComponents;
-    const defaultType = dc.getType('default');
-    const defaultModel = defaultType.model;
-    const burgerType = 'burger-menu';
+    const videoType = dc.getType('video');
 
-    dc.addType(burgerType, {
-        model: defaultModel.extend({
-            defaults: {
-                ...defaultModel.prototype.defaults,
-                'custom-name': c.labelBurger,
-                draggable: false,
-                droppable: false,
-                copyable: false,
-                removable: false
+    const videoModel = videoType.model;
+    const videoView = videoType.view;
+
+    let model = videoModel.extend(
+        {
+            defaults: Object.assign({}, videoModel.prototype.defaults, {
+                traits: [
+                    'name',
+                    'placeholder',
+                    {
+                        type: 'select',
+                        label: 'Type',
+                        name: 'type',
+                        options: [
+                            {value: 'text', name: 'Text'},
+                            {value: 'email', name: 'Email'},
+                            {value: 'password', name: 'Password'},
+                            {value: 'number', name: 'Number'},
+                        ]
+                    }, {
+                        type: 'checkbox',
+                        label: 'Required',
+                        name: 'required',
+                    }],
+                }
+            ),
+            init: function () {
+                this.listenTo(this, 'change:model-prop-name', this.doStuff);
             },
-        }, {
+            doStuff: function () {
+                console.log('ololo');
+            }
+        },
+        {
             isComponent(el) {
-                if(el.getAttribute &&
-                    el.getAttribute('data-gjs-type') == burgerType) {
-                    return {type: burgerType};
+                if(el.tagName && el.tagName === 'video') {
+                    return { type: 'video' };
                 }
             },
-        }),
-        view: defaultType.view,
-    });
+        }
+    );
+
+    dc.addType('video', { model: model, view: videoView });
 }
