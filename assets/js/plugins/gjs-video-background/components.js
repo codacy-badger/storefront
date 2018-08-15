@@ -38,12 +38,6 @@ export default function(editor, opt = {}) {
                             changeProp: 1
                         }
                     ]
-                },
-                init() {
-                    this.listenTo(this, 'change:sourceMp4', this.updateSourceMp4());
-                },
-                updateSourceMp4: function () {
-                    console.log('updateSourceMp4');
                 }
             },
             {
@@ -60,6 +54,7 @@ export default function(editor, opt = {}) {
         ),
         view: defaultView.extend({
             init() {
+                this.listenTo(this.model, 'change:sourceMp4', this.updateSourceMp4);
                 this.listenTo(this.model, 'change:sourceWebm change:poster change:autoPlay change:loop change:muted', this.updateScript);
                 const comps = this.model.get('components');
 
@@ -73,25 +68,8 @@ export default function(editor, opt = {}) {
                   `);
                 }
             },
-            renderComponent () {
-                let el = document.createElement('video');
-                el.src = this.model.get('src');
-                el.className = this.pfx + 'no-pointer';
-                el.style.height = '100%';
-                el.style.width = '100%';
-
-
-                return el;
-            },
-            render(...args) {
-                ComponentView.prototype.render.apply(this, args);
-                this.updateClasses();
-                let prov = this.model.get('provider');
-                this.el.appendChild(this.renderByProvider(prov));
-
-                console.log('render');
-
-                return this;
+            updateSourceMp4() {
+                $(this.el).find('source:first').attr('src', this.model.get('sourceMp4'));
             }
         })
     });
