@@ -33,6 +33,7 @@ export default (editor, opt = {}) => {
         bm.add(cVideoBgRef, {
             label: c['labelVideoBgBlock'],
             category: c['labelVideoBgCategory'],
+            attributes: { class: 'fa fa-youtube-play' },
             content: `<div class="${videoBgPfx}" data-gjs-type="video-background"></div>${style}`,
         });
     }

@@ -37,7 +37,33 @@ export default function(editor, opt = {}) {
                             placeholder: 'eg. path to static image',
                             changeProp: 1
                         }
-                    ]
+                    ],
+                    script () {
+                        const sourceMp4 = '{[ sourceMp4 ]}';
+                        const sourceWebm = '{[ sourceWebm ]}';
+                        const poster = '{[ poster ]}';
+
+                        let videoEl = this.querySelector('[data-js=video-bg-video]');
+                        let sourceMp4El = this.querySelector('[data-js=video-bg-source-mp4]');
+                        let sourceWebmEl = this.querySelector('[data-js=video-bg-source-webm]');
+
+                        if (sourceMp4El) {
+                            sourceMp4El.src = sourceMp4;
+                        }
+
+                        if (sourceWebmEl) {
+                            sourceWebmEl.src = sourceWebm;
+                        }
+
+                        if (videoEl) {
+                            videoEl.poster = poster;
+
+                            if (sourceMp4 || sourceWebm) {
+                                videoEl.load();
+                                videoEl.play();
+                            }
+                        }
+                    }
                 }
             },
             {
@@ -47,29 +73,25 @@ export default function(editor, opt = {}) {
                     }
 
                     if (el.tagName && el.tagName === 'VIDEO') {
-                        return { type: VIDEO_BACKGROUND_TYPE };
+                        return {};
                     }
                 }
             }
         ),
         view: defaultView.extend({
             init() {
-                this.listenTo(this.model, 'change:sourceMp4', this.updateSourceMp4);
-                this.listenTo(this.model, 'change:sourceWebm change:poster change:autoPlay change:loop change:muted', this.updateScript);
+                this.listenTo(this.model, 'change:sourceMp4 change:sourceWebm change:poster change:autoPlay change:loop change:muted', this.updateScript);
                 const comps = this.model.get('components');
 
                 if (!comps.length) {
                     comps.reset();
                     comps.add(`
-                        <video class="${pfx}__video" autoplay="autoplay" loop="loop" muted="muted" width="100%" height="auto" preload="auto">
-                            <source />
+                        <video data-js="video-bg-video" class="${pfx}__video" autoplay="autoplay" loop="loop" muted="muted" width="100%" height="auto" preload="auto">
+                            <source data-js="video-bg-source-mp4" />
                             <source data-js="video-bg-source-webm" type='video/webm; codecs="vp8, vorbis"' />
                         </video>
                   `);
                 }
-            },
-            updateSourceMp4() {
-                $(this.el).find('source:first').attr('src', this.model.get('sourceMp4'));
             }
         })
     });
