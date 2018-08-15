@@ -16,15 +16,16 @@ export default (editor, opt = {}) => {
         bottom: 0;
         left: 0;
         overflow: hidden;
-        z-index: -1;
+        z-index: -3;
     }
 
     .${videoBgPfx}__video {
         position: absolute;
-        height: 160%;
-        top: -40%;
-        width: 160%;
-        left: -40%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
   </style>
   ` : '';
