@@ -42,7 +42,7 @@
                     'gjs-preset-webpage': {
                         // options
                     },
-                    gjsVideoBg: {}
+                    'gjs-video-background': {}
                 },
                 storageManager: { type: null },
                 assetManager: {

@@ -9,7 +9,7 @@ export default grapesjs.plugins.add('gjs-video-background', (editor, opts = {}) 
     let defaults = {
         blocks: [cVideoBgRef],
         defaultStyle: 1,
-        videoBgClsPfx: 'video',
+        videoBgClsPfx: 'b-lp-video-video',
         labelVideoBgBlock: 'Video background',
         labelVideoBgCategory: 'Extra'
     };
