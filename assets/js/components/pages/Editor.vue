@@ -43,8 +43,12 @@
                     'gjs-preset-webpage': {
                         // options
                     },
-                    gjsVideoBg: {},
-                    gjsBlockBg: {}
+                    'gjs-video-background': {
+                        // options
+                    },
+                    'gjs-block-background': {
+                        // options
+                    },
                 },
                 storageManager: { type: null },
                 assetManager: {
