@@ -70,7 +70,7 @@
                         formData.append('format', 'json');
 
                         window.axios.post(
-                            'http://images.sinichkin.ru.local/restapi',
+                            'http://images.stg.gamenet.ru/restapi',
                             formData,
                             { headers: { 'Content-Type': 'multipart/form-data' }}
                         ).then(function (response) {
