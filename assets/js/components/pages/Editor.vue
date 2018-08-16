@@ -55,7 +55,10 @@
                     upload: 'http://images.stg.gamenet.ru/restapi',
                     uploadName: 'file',
                     params: { method: 'storefront.upload', format: 'json' },
-                    uploadFile: (e) => {
+                    addBtnText: 'Add',
+                    modalTitle: 'Select image or video',
+                    inputPlaceholder: 'Enter url to image or video file here',
+                    uploadFile(e)  {
                         let files = e.dataTransfer ? e.dataTransfer.files : e.target.files;
                         let formData = new FormData();
 
@@ -67,7 +70,7 @@
                         formData.append('format', 'json');
 
                         window.axios.post(
-                            'http://images.stg.gamenet.ru/restapi',
+                            'http://images.sinichkin.ru.local/restapi',
                             formData,
                             { headers: { 'Content-Type': 'multipart/form-data' }}
                         ).then(function (response) {
@@ -101,25 +104,30 @@
             editor.on('run:preview', () => this.runPreview() );
             editor.on('stop:preview', () => this.stopPreview() );
 
-            /*let customBlock = {
-                label: 'Button',
-                attributes: {
-                    class: "gjs-fonts gjs-f-button"
-                },
-                content: "<button class='btn btn-success' >Button</button>",
-                id: "myButtonId"
-            };
-            blockManager.add(customBlock.id, customBlock);*/
+            let am = editor.AssetManager;
 
-            let customBlock = {
-                label: 'Header',
-                attributes: {
-                    class: "gjs-fonts gjs-f-button"
+            am.addType('video', {
+                view: {
+                    getPreview() {
+                        const name = this.model.get('name');
+
+                        return `
+                            <div class="b-landing-constructor__video_type">
+		                        <span class="fa fa-play fa-2x">
+	                        </div>
+                            <div class="gjs-am-meta"><div class="gjs-am-name">${name}</div></div>
+                            <div class="gjs-am-close" data-toggle="asset-remove">&Cross;</div>`
+                    }
                 },
-                content: '<div class="b__header">Header</div>',
-                id: 'myHeader'
-            };
-            blockManager.add(customBlock.id, customBlock);
+                isType(value) {
+                    let extension = (/[.]/.exec(value)) ? /[^.]+$/.exec(value).pop() : undefined;
+                    let name = value.split('/');
+
+                    if (extension === 'mp4' || extension === 'webm') {
+                        return { type: 'video', name: name[name.length - 1] };
+                    }
+                }
+            });
         }
     }
 </script>

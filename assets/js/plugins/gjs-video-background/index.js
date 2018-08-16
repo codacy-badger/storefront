@@ -1,6 +1,7 @@
 import grapesjs from 'grapesjs';
 import loadBlocks from './blocks';
 import loadComponents from './components';
+import loadTraits from './traits';
 import { cVideoBgRef } from './consts';
 
 export default grapesjs.plugins.add('gjs-video-background', (editor, opts = {}) => {
@@ -19,6 +20,7 @@ export default grapesjs.plugins.add('gjs-video-background', (editor, opts = {}) 
             c[name] = defaults[name];
     }
 
+    loadTraits(editor, c);
     loadBlocks(editor, c);
     loadComponents(editor, c);
 });

@@ -22,20 +22,20 @@ export default function(editor, opt = {}) {
                         {
                             label: 'Source mp4',
                             name: 'sourceMp4',
-                            placeholder: 'eg. path to mp4 movie',
-                            changeProp: 1
+                            changeProp: 1,
+                            type: 'button'
                         },
                         {
                             label: 'Source webm',
                             name: 'sourceWebm',
-                            placeholder: 'eg. path to webm movie',
-                            changeProp: 1
+                            changeProp: 1,
+                            type: 'button'
                         },
                         {
                             label: 'Poster',
                             name: 'poster',
-                            placeholder: 'eg. path to static image',
-                            changeProp: 1
+                            changeProp: 1,
+                            type: 'button'
                         }
                     ],
                     script () {
