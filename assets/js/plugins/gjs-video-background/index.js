@@ -12,7 +12,7 @@ export default grapesjs.plugins.add('gjs-video-background', (editor, opts = {}) 
         defaultStyle: 1,
         videoBgClsPfx: 'b-lp-video-video',
         labelVideoBgBlock: 'Video Background',
-        labelVideoBgCategory: 'Basic'
+        labelVideoBgCategory: 'Landing Constructor'
     };
 
     for (let name in defaults) {
