@@ -16,16 +16,7 @@ export default function(editor, opt = {}) {
                     droppable: 1,
                     resizable: 1,
                     traits: [
-                        {
-                            label: 'Color (HTML)',
-                            name: 'color',
-                            changeProp: 1
-                        },
-                        {
-                            label: 'Transparent',
-                            name: 'transparent',
-                            changeProp: 1
-                        }
+
                     ],
                     script () {
 
