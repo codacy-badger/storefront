@@ -57,6 +57,10 @@ export default (editor, opt = {}) => {
         margin-right: 7px;
     }
     
+    .${footerPfx}__links_underline a:hover {
+        text-decoration: underline;
+    }
+    
     .${footerPfx}__links:first-child {
         margin-right: 0;
     }

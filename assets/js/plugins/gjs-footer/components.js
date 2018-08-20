@@ -15,11 +15,27 @@ export default function(editor, opt = {}) {
                     ...defaultModel.prototype.defaults,
                     droppable: 1,
                     resizable: 1,
+                    linkUnderline: false,
                     traits: [
-
+                        {
+                            label: '"U" link',
+                            name: 'linkUnderline',
+                            changeProp: 1,
+                            type: 'checkbox'
+                        }
                     ],
                     script () {
+                        const linkUnderline = '{[ linkUnderline ]}';
 
+                        let linksContainerEl = this.querySelector('[data-js=footer-links-container]');
+
+                        if (linksContainerEl) {
+                            if (linkUnderline) {
+                                linksContainerEl.classList.add('b-lp-footer__links_underline');
+                            } else {
+                                linksContainerEl.classList.remove('b-lp-footer__links_underline');
+                            }
+                        }
                     }
                 }
             },
@@ -33,7 +49,7 @@ export default function(editor, opt = {}) {
         ),
         view: defaultView.extend({
             init() {
-                this.listenTo(this.model, 'change:logo1 change:logo2', this.updateScript);
+                this.listenTo(this.model, 'change:linkUnderline', this.updateScript);
                 const comps = this.model.get('components');
 
                 if (!comps.length) {
@@ -60,7 +76,7 @@ export default function(editor, opt = {}) {
                             <div class="${pfx}__footer__item">
                                 <span class="js-copyright-year">©&nbsp;2018&nbsp;</span>ProtocolOne
                             </div>
-                            <div class="${pfx}__footer__item ${pfx}__links">
+                            <div data-js="footer-links-container" class="${pfx}__footer__item ${pfx}__links">
                                 <a target="_blank" class="${pfx}__el_link" href="#">Link 1</a>
                                 <a target="_blank" class="${pfx}__el_link" href="#">Link 2</a>
                                 <a target="_blank" class="${pfx}__el_link" href="#">Link 3</a>
