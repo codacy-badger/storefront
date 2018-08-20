@@ -40,11 +40,11 @@
                 container : '#gjs',
                 components: '',
                 style: '',
-                    canvas: {
-                        styles: [
-                            'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
-                        ]
-                    },
+                canvas: {
+                    styles: [
+                        'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
+                    ]
+                },
                 plugins: ['gjs-preset-webpage', 'gjs-video-background','gjs-block-background'],
                 pluginsOpts: {
                     'gjs-preset-webpage': {
