@@ -12,7 +12,7 @@ export default grapesjs.plugins.add('gjs-footer', (editor, opts = {}) => {
         defaultStyle: 1,
         footerClsPfx: 'b-lp-footer',
         labelFooterBlock: 'Footer',
-        labelFooterCategory: 'Basic'
+        labelFooterCategory: 'Landing Constructor'
     };
 
     for (let name in defaults) {
