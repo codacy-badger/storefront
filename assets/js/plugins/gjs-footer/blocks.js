@@ -15,6 +15,9 @@ export default (editor, opt = {}) => {
         background-color: rgba(0, 0, 0, 0.5);
         padding: 5px;
         z-index: 510;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
 	}
 	
 	.${footerPfx}, 
@@ -25,8 +28,7 @@ export default (editor, opt = {}) => {
 	.${footerPfx}__container {
 	    display: flex;
         align-items: stretch;
-        max-height: 80px;
-        min-height: 20px;
+        min-height: 50px;
 	}
     
     .${footerPfx}__footer__item {

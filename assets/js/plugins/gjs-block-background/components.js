@@ -37,7 +37,7 @@ export default (editor, opt = {}) => {
                 Object.assign({}, defaultModel.prototype.defaults, {
                 droppable: true,
                 bgUrl: c.bgUrl,
-                heightType: '500px',
+                heightType: '100%',
                 traits: [
                     {
                         type: 'button',
