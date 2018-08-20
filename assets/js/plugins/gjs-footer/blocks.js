@@ -60,7 +60,7 @@ export default (editor, opt = {}) => {
         bm.add(cFooterRef, {
             label: c['labelFooterBlock'],
             category: c['labelFooterCategory'],
-            attributes: { class: 'fa fa-youtube-play' },
+            attributes: { class: 'fa fa-arrow-down' },
             content: `<footer class="${footerPfx}" data-gjs-type="gjs-footer"></footer>${style}`,
         });
     }
