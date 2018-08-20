@@ -3,43 +3,113 @@ export default (editor, opt = {}) => {
     const dc = editor.DomComponents;
     const defaultType = dc.getType('default');
     const defaultModel = defaultType.model;
-    const blockBgType = 'block-background';
+    const defaultView = defaultType.view;
 
-    var inputTypes = [
-        {value: '100%', name: 'heigth: 100%'},
-        {value: 'auto', name: 'heigth: auto'},
-        {value: '', name: 'heigth: value'},
+    const BLOCK_BG_TYPE = 'block-background';
+    const blockBgPfx = c['blockBgClsPfx'] || 'b-block-background';
+
+    var blockBgHeightTypes = [
+        {value: 'auto', name: 'auto'},
+        {value: '100%', name: '100%'},
+        {value: '50%', name: '50%'},
     ];
 
-    dc.addType(blockBgType, {
+    var flexDirectionObj = [
+        {value: 'row', name: 'row'},
+        {value: 'column', name: 'column'},
+    ];
+
+    var justifyContentObj = [
+        {value: 'flex-start', name: 'start'},
+        {value: 'center', name: 'center'},
+        {value: 'flex-end', name: 'end'},
+    ];
+
+    var alignItemsObj = [
+        {value: 'flex-start', name: 'start'},
+        {value: 'center', name: 'center'},
+        {value: 'flex-end', name: 'end'},
+    ];
+
+    dc.addType(BLOCK_BG_TYPE, {
         model: defaultModel.extend({
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
-                // Can be dropped only inside `form` elements
-                //draggable: 'form, form *',
-                // Can't drop other elements inside it
-                droppable: false,
-                // Traits (Settings)
-                traits: ['name', 'placeholder', {
-                    // Change the type of the input (text, password, email, etc.)
-                    type: 'select',
-                    label: 'Type',
-                    name: 'type',
-                    options: inputTypes,
-                },{
-                    // Can make it required for the form
-                    type: 'checkbox',
-                    label: 'Required',
-                    name: 'required',
-                }],
+            defaults:
+                Object.assign({}, defaultModel.prototype.defaults, {
+                droppable: true,
+                bgUrl: c.bgUrl,
+                heightType: '500px',
+                traits: [
+                    {
+                        type: 'button',
+                        label: 'Background image',
+                        name: 'bgUrl',
+                        placeholder: 'path to background image',
+                        changeProp: 1
+                    },
+                    {
+                        type: 'select',
+                        label: 'Heigth block',
+                        name: 'heightType',
+                        options: blockBgHeightTypes,
+                        changeProp: 1
+                    },
+                    {
+                        type: 'select',
+                        label: 'Direction',
+                        name: 'flexDirection',
+                        options: flexDirectionObj,
+                        changeProp: 1
+                    },
+                    {
+                        type: 'select',
+                        label: 'Justify Content',
+                        name: 'justifyContent',
+                        options: justifyContentObj,
+                        changeProp: 1
+                    },
+                    {
+                        type: 'select',
+                        label: 'Align Items',
+                        name: 'alignItems',
+                        options: alignItemsObj,
+                        changeProp: 1
+                    }
+                ],
+                script: function () {
+                    console.log('script done');
+                    console.log(this);
+
+                    var bg = '{[ bgUrl ]}';
+                    var heightType = '{[ heightType ]}';
+                    var flexDirection = '{[ flexDirection ]}';
+                    var justifyContent = '{[ justifyContent ]}';
+                    var alignItems = '{[ alignItems ]}';
+                    var blockBgEl = this;
+
+                    blockBgEl.style.backgroundImage = 'url('+ bg +')';
+                    blockBgEl.setAttribute("style","background-image: url("+bg+"); height:" +  heightType + "; flex-direction: " + flexDirection + "; justify-content: " + justifyContent + "; align-items: " + alignItems + ";");
+                }
             }),
         }, {
             isComponent(el) {
                 if(el.getAttribute &&
-                    el.getAttribute('data-gjs-type') == blockBgType) {
-                    return {type: blockBgType};
+                    el.getAttribute('data-gjs-type') == BLOCK_BG_TYPE) {
+                    return {type: BLOCK_BG_TYPE};
                 }
             },
         }),
-        view: defaultType.view,
+        view: defaultView.extend({
+            init() {
+                const model = this.model;
+                const em = this.em;
+
+                this.modal = em.get('Modal');
+                this.am = em.get('AssetManager');
+                this.listenTo(model, 'change:heightType change:bgUrl change:flexDirection change:justifyContent change:alignItems', this.updateScript);
+            },
+
+
+
+        })
     });
 }

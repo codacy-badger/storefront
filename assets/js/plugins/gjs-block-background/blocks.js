@@ -7,20 +7,23 @@ export default (editor, opt = {}) => {
     const style = c.defaultStyle ? `
       <style>
         .${blockBgPfx} {
-            display: inline-block;
-            border: 1px soild red;
+            display: block;
             width: 100%;
             height: 100%;
+            background: transparent none center center ;
+            display: flex;
         }
       </style>
-  ` : '';
+    ` : '';
 
     if (c.blocks.indexOf(cBlockBgRef) >= 0) {
         bm.add(cBlockBgRef, {
             label: c['labelBlockBg'],
             category: c['labelBlockBgCategory'],
+            attributes: {class:'fa fa-picture-o'},
             content: `
-                <div class=\"${blockBgPfx}\" data-gjs-type=\"${blockBgRef}\" data-gjs-droppable=\"true\" data-gjs-custom-name=\"${c.labelBlockBg}\" data-gjs=\"${blockBgRef}\"></div>
+                <div class=\"${blockBgPfx}\" data-gjs-type=\"${blockBgRef}\" data-gjs-droppable=\"true\" data-gjs-custom-name=\"${c.labelBlockBg}\" data-gjs=\"${blockBgRef}\">
+                </div>
                 ${style}
             `,
         });
