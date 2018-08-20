@@ -38,6 +38,10 @@ export default (editor, opt = {}) => {
                 droppable: true,
                 bgUrl: c.bgUrl,
                 heightType: '100%',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                stylable: [],
                 traits: [
                     {
                         type: 'button',
@@ -76,9 +80,6 @@ export default (editor, opt = {}) => {
                     }
                 ],
                 script: function () {
-                    console.log('script done');
-                    console.log(this);
-
                     var bg = '{[ bgUrl ]}';
                     var heightType = '{[ heightType ]}';
                     var flexDirection = '{[ flexDirection ]}';

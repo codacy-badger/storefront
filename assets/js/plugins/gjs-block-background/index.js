@@ -20,8 +20,6 @@ export default grapesjs.plugins.add('gjs-block-background', (editor, opts = {}) 
             c[name] = defaults[name];
     }
 
-    console.log(opts);
-
     loadBlocks(editor, c);
     loadComponents(editor, c);
 });

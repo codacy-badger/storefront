@@ -10,7 +10,8 @@ export default (editor, opt = {}) => {
             display: block;
             width: 100%;
             height: 100%;
-            background: transparent none center center ;
+            background: transparent none center center no-repeat ;
+            background-size: auto 100%;
             display: flex;
         }
       </style>
