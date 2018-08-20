@@ -45,7 +45,7 @@
                         'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
                     ]
                 },
-                plugins: ['gjs-preset-webpage', 'gjs-video-background','gjs-block-background'],
+                plugins: ['gjs-preset-webpage', 'gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button'],
                 pluginsOpts: {
                     'gjs-preset-webpage': {
                         // options
