@@ -7,7 +7,6 @@ export default (editor, opt = {}) => {
     const style = c.defaultStyle ? `
   <style type="text/css">
     .${footerPfx} {
-        display: block;
         position: absolute;
         left: 0;
         bottom: 0;
@@ -37,6 +36,17 @@ export default (editor, opt = {}) => {
         display: flex;
         align-items: center;
         justify-content: center;    
+    }
+    
+    @media (max-width: 576px) {
+        .${footerPfx}__container {
+            flex-direction: column;
+        }
+        
+        .${footerPfx}__footer__item {
+            min-height: 50px;
+            width: 100%;
+        }
     }
     
     .${footerPfx}__links a {
