@@ -28,6 +28,7 @@ export default (editor, opt = {}) => {
 	    display: flex;
         align-items: stretch;
         min-height: 50px;
+        width: 100%;
 	}
     
     .${footerPfx}__footer__item {
