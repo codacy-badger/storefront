@@ -68,6 +68,7 @@
                     }
                 },
                 storageManager: { type: null },
+                //
                 assetManager: {
                     upload: 'http://images.stg.gamenet.ru/restapi',
                     uploadName: 'file',
@@ -103,15 +104,12 @@
                     }
                 }
             }),
+            //
             blockManager = editor.BlockManager,
             categories = blockManager.getCategories();
 
-            // потом удалить
-            console.log(editor);
-            //
-
             categories.models.forEach(function(item, i) {
-                if (i === 0) {
+                if (i === 3) {
                     return;
                 }
 
