@@ -12,6 +12,7 @@
     import gjsBlockBg from './../../plugins/gjs-block-background';
     import gjsButton from './../../plugins/gjs-button';
     import gjsFooter from './../../plugins/gjs-footer';
+    import gjsLogo from './../../plugins/gjs-logo';
     import {mapMutations} from 'vuex';
 
     export default {
@@ -45,7 +46,7 @@
                         'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
                     ]
                 },
-                plugins: ['gjs-preset-webpage', 'gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button'],
+                plugins: ['gjs-preset-webpage', 'gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button', 'gjs-logo'],
                 pluginsOpts: {
                     'gjs-preset-webpage': {
                         // options
@@ -56,8 +57,15 @@
                     'gjs-block-background': {
                         // options
                     },
-                    'gjs-button': {},
-                    'gjs-footer': {}
+                    'gjs-button': {
+                        // options
+                    },
+                    'gjs-footer': {
+                        // options
+                    },
+                    'gjs-logo': {
+                        // options
+                    }
                 },
                 storageManager: { type: null },
                 assetManager: {
