@@ -14,6 +14,11 @@ export default (editor, opt = {}) => {
             background-size: cover;
             display: flex;
         }
+        @media (max-width: 768px) {
+            .${blockBgPfx} {
+                flex-wrap: wrap;
+            }
+        }
       </style>
     ` : '';
 
