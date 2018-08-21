@@ -29,10 +29,7 @@ export default function(editor, opt = {}) {
                     traits: [
                         'alt',
                         'title',
-                    ],
-                    script () {
-                        // script
-                    }
+                    ]
                 }
             },
             {
