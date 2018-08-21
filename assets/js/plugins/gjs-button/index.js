@@ -11,7 +11,7 @@ export default grapesjs.plugins.add('gjs-button', (editor, opts = {}) => {
         defaultStyle: 1,
         buttonClsPfx: 'b-lp-buttons',
         labelButtonBlock: 'Button',
-        labelButtonCategory: 'Basic'
+        labelButtonCategory: 'Landing Constructor'
     };
 
     for (let name in defaults) {
