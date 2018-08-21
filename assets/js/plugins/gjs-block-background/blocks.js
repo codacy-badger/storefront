@@ -9,9 +9,9 @@ export default (editor, opt = {}) => {
         .${blockBgPfx} {
             display: block;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background: transparent none center center no-repeat ;
-            background-size: auto 100%;
+            background-size: cover;
             display: flex;
         }
       </style>

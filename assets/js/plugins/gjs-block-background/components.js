@@ -10,8 +10,8 @@ export default (editor, opt = {}) => {
 
     var blockBgHeightTypes = [
         {value: 'auto', name: 'auto'},
-        {value: '100%', name: '100%'},
-        {value: '50%', name: '50%'},
+        {value: '100vh', name: 'full screen'},
+        {value: '50vh', name: 'half screen'},
     ];
 
     var flexDirectionObj = [
@@ -37,7 +37,7 @@ export default (editor, opt = {}) => {
                 Object.assign({}, defaultModel.prototype.defaults, {
                 droppable: true,
                 bgUrl: c.bgUrl,
-                heightType: '100%',
+                heightType: '100vh',
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
