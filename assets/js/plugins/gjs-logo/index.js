@@ -11,7 +11,8 @@ export default grapesjs.plugins.add('gjs-logo', (editor, opts = {}) => {
         defaultStyle: 1,
         buttonClsPfx: 'b-lp-logo',
         labelLogoBlock: 'Logo',
-        labelLogoCategory: 'Landing Constructor'
+        labelLogoCategory: 'Landing Constructor',
+        defaultLogoUrl: 'https://gn266.cdn.gamenet.ru/TY0Xv2riHu/6hxyU/o_1DNqc3.png'
     };
 
     for (let name in defaults) {

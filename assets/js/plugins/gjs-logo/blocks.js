@@ -7,8 +7,11 @@ export default (editor, opt = {}) => {
     const style = c.defaultStyle ? `
       <style type="text/css">
         .${logoPfx} {
-            width: 37.4rem;
+            width: 360px;
             height: auto;
+            min-width: 80px;
+            min-height: 40px;
+            margin: 20px;
         }
       </style>
   ` : '';
@@ -18,7 +21,7 @@ export default (editor, opt = {}) => {
             label: c['labelLogoBlock'],
             category: c['labelLogoCategory'],
             attributes: { class: 'fa fa-square' },
-            content: `<div class="${logoPfx}" data-gjs-type="gjs-logo"></div>${style}`,
+            content: `<img class="${logoPfx}"  src="https://gn266.cdn.gamenet.ru/TY0Xv2riHu/6hxyU/o_1DNqc3.png" data-gjs-type="gjs-logo"></img>${style}`,
         });
     }
 }

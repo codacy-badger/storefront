@@ -19,13 +19,19 @@ export default function(editor, opt = {}) {
                     copyable: 0,
                     resizable: 1,
                     stylable: [
-                        'width', 'height'
+                        'width',
+                        'margin',
+                        'margin-top',
+                        'margin-bottom',
+                        'margin-left',
+                        'margin-right',
                     ],
                     traits: [
-
+                        'alt',
+                        'title',
                     ],
                     script () {
-
+                        // script
                     }
                 }
             },
@@ -37,18 +43,6 @@ export default function(editor, opt = {}) {
                 }
             }
         ),
-        view: defaultView.extend({
-            init() {
-                //this.listenTo(this.model, '', this.updateScript);
-                const comps = this.model.get('components');
-
-                if (!comps.length) {
-                    comps.reset();
-                    comps.add(`
-                        <span style="border: 1px solid red;"></span>
-                  `);
-                }
-            }
-        })
+        view: defaultView
     });
 }

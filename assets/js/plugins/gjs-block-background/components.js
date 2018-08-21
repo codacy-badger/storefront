@@ -87,7 +87,6 @@ export default (editor, opt = {}) => {
                     var alignItems = '{[ alignItems ]}';
                     var blockBgEl = this;
 
-                    blockBgEl.style.backgroundImage = 'url('+ bg +')';
                     blockBgEl.setAttribute("style","background-image: url("+bg+"); height:" +  heightType + "; flex-direction: " + flexDirection + "; justify-content: " + justifyContent + "; align-items: " + alignItems + ";");
                 }
             }),
@@ -102,15 +101,9 @@ export default (editor, opt = {}) => {
         view: defaultView.extend({
             init() {
                 const model = this.model;
-                const em = this.em;
 
-                this.modal = em.get('Modal');
-                this.am = em.get('AssetManager');
                 this.listenTo(model, 'change:heightType change:bgUrl change:flexDirection change:justifyContent change:alignItems', this.updateScript);
             },
-
-
-
         })
     });
 }
