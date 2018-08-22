@@ -20,6 +20,7 @@ export default (editor, opt = {}) => {
     ];
 
     var justifyContentObj = [
+        {value: 'stretch', name: 'stretch'},
         {value: 'flex-start', name: 'start'},
         {value: 'center', name: 'center'},
         {value: 'flex-end', name: 'end'},
