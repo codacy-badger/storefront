@@ -29,6 +29,7 @@ export default (editor, opt = {}) => {
         align-items: stretch;
         min-height: 50px;
         width: 100%;
+        flex-direction: row;
 	}
     
     .${footerPfx}__footer__item {
@@ -39,7 +40,7 @@ export default (editor, opt = {}) => {
         justify-content: center;    
     }
     
-    @media (max-width: 576px) {
+    @media screen and (max-width: 576px) {
         .${footerPfx}__container {
             flex-direction: column;
         }
@@ -49,7 +50,7 @@ export default (editor, opt = {}) => {
             width: 100%;
         }
     }
-    
+
     .${footerPfx}__links a {
         white-space: nowrap;
         text-decoration: none;
