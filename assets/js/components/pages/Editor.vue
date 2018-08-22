@@ -8,6 +8,7 @@
 <script>
     import grapesjs from 'grapesjs';
     import gjspresetwebpage from 'grapesjs-preset-webpage';
+    import gjsExport from 'grapesjs-plugin-export';
     import gjsVideoBg from './../../plugins/gjs-video-background';
     import gjsBlockBg from './../../plugins/gjs-block-background';
     import gjsButton from './../../plugins/gjs-button';
@@ -42,13 +43,23 @@
                 container : '#gjs',
                 components: '',
                 style: '',
+                body: '<meta name="viewport" content="width=device-width,initial-scale=1.0">',
                 canvas: {
                     styles: [
                         'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
                     ]
                 },
-                plugins: ['gjs-preset-webpage', 'gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button', 'gjs-logo','gjs-blocks-flexbox'],
+                plugins: ['gjs-preset-webpage','gjs-plugin-export','gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button', 'gjs-logo','gjs-blocks-flexbox'],
                 pluginsOpts: {
+                    'gjs-plugin-export': {
+                        preHtml: `<!doctype>
+                            <html>
+                                <head>
+                                    <link rel="stylesheet" href="./css/style.css" />
+                                    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+                                </head>
+                            <body>`
+                    },
                     'gjs-preset-webpage': {
                         // options
                     },

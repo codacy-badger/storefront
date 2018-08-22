@@ -16,13 +16,27 @@ export default function(editor, opt = {}) {
                     droppable: 1,
                     draggable: 1,
                     removable: 1,
-                    copyable: 0,
+                    copyable: 1,
                     resizable: 1,
                     traits: [
-
+                        {
+                            label: 'Title',
+                            name: 'title',
+                            changeProp: 1
+                        }
                     ],
                     script () {
+                        const title = '{[ title ]}';
 
+                        let buttonContainerEl = this.querySelector('[data-js=button-container]');
+
+                        if (!buttonContainerEl) {
+                            return;
+                        }
+
+                        if (title) {
+                            buttonContainerEl.innerHTML = title + buttonContainerEl.innerHTML;
+                        }
                     }
                 }
             },
@@ -36,13 +50,15 @@ export default function(editor, opt = {}) {
         ),
         view: defaultView.extend({
             init() {
-                //this.listenTo(this.model, '', this.updateScript);
+                this.listenTo(this.model, 'change:title', this.updateScript);
                 const comps = this.model.get('components');
 
                 if (!comps.length) {
                     comps.reset();
                     comps.add(`
-                        <span style="border: 1px solid red;"></span>
+                        <span data-js="button-container" class="btn-container__button">        
+                            <a class="b-bt-start-navi"></a>
+                        </span>
                   `);
                 }
             }

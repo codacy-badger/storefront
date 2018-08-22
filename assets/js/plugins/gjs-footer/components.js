@@ -58,19 +58,13 @@ export default function(editor, opt = {}) {
                         <div class="${pfx}__container">
                             <div class="${pfx}__footer__item ${pfx}__logo">
                                 <div>
-                                    <a target="_blank" href="#">
-                                        <img alt="Logo" src="https://gn571.cdn.stg.gamenet.ru/0/6hazL/o_14AxJK.png" />
-                                    </a>
+                                    <img alt="Logo" src="https://gn571.cdn.stg.gamenet.ru/0/6hazL/o_14AxJK.png" />
                                 </div>
                                 <div>
-                                    <a target="_blank" href="#">
-                                        <img alt="Logo" src="https://gn571.cdn.stg.gamenet.ru/0/6hazL/o_14AxJK.png" />
-                                    </a>
+                                    <img alt="Logo" src="https://gn571.cdn.stg.gamenet.ru/0/6hazL/o_14AxJK.png" />
                                 </div>
                                 <div>
-                                    <a target="_blank" href="#">
-                                        <img alt="Logo" src="https://gn571.cdn.stg.gamenet.ru/0/6hazL/o_14AxJK.png" />
-                                    </a>
+                                    <img alt="Logo" src="https://gn571.cdn.stg.gamenet.ru/0/6hazL/o_14AxJK.png" />
                                 </div>
                             </div>
                             <div class="${pfx}__footer__item">
