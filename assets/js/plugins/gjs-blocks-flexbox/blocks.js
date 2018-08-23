@@ -27,17 +27,20 @@ export default (editor, opt = {}) => {
   // Flex elements do not react on width style change therefore I use
   // 'flex-basis' as keyWidth for the resizer on columns
   const keyWidth = 'flex-basis';
+  const keyHeight = 'height';
   const step = 0.2;
   const minDim = 1;
   const currentUnit = 1;
-  const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, minDim };
-  const resizerRight = { ...resizerBtm, cr: 1, bc: 0, keyWidth, currentUnit, minDim, step };
+  const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, keyHeight, currentUnit, minDim, step };
+  const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, bl:0, br: 0, bc: 0, keyWidth, currentUnit, minDim, step };
   const rowAttr = {
     class: clsRow,
     'data-gjs-type': cBlocksFlexboxRef,
     'data-gjs-droppable': `.${clsCell}`,
     'data-gjs-resizable': resizerBtm,
     'data-gjs-custom-name': labelRow,
+    'data-gjs-unstylable': ['height'],
+    'data-gjs-stylable-require': ['flex-basis'],
   };
 
   const colAttr = {
@@ -45,7 +48,6 @@ export default (editor, opt = {}) => {
     'data-gjs-draggable': `.${clsRow}`,
     'data-gjs-resizable': resizerRight,
     'data-gjs-custom-name': labelCell,
-    // X Flex
     'data-gjs-unstylable': ['width'],
     'data-gjs-stylable-require': ['flex-basis'],
   };
@@ -60,28 +62,34 @@ export default (editor, opt = {}) => {
   const attrsCell = attrsToString(colAttr);
   const styleRow = `
     .${clsRow} {
+        min-width: 5rem;
+        min-height: 1%;
         display: flex;
         justify-content: flex-start;
         align-items: stretch;
         flex-wrap: nowrap;
-        padding: 10px;
+        padding: 1rem;
+        height: 20%;
+        position: relative;
     }
     @media (max-width: 768px) {
       .${clsRow} {
         flex-wrap: wrap;
+        min-height: 0;
       }
     }
   `;
 
   const styleClm = `
     .${clsCell} {
-        min-height: 75px;
+        min-height: 7rem;
         flex-grow: 1;
         flex-basis: 100%;
+        position: relative;
     }
     @media (max-width: 768px) {
         .${clsCell} {
-            flex-wrap: wrap;
+            min-height: 0;
         }
     }
   `;

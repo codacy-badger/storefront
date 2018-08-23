@@ -20,13 +20,15 @@ export default (editor, opt = {}) => {
     ];
 
     var justifyContentObj = [
-        {value: 'stretch', name: 'stretch'},
+        {value: 'space-between', name: 'space-between'},
+        {value: 'space-around', name: 'space-around'},
         {value: 'flex-start', name: 'start'},
         {value: 'center', name: 'center'},
         {value: 'flex-end', name: 'end'},
     ];
 
     var alignItemsObj = [
+        {value: 'stretch', name: 'stretch'},
         {value: 'flex-start', name: 'start'},
         {value: 'center', name: 'center'},
         {value: 'flex-end', name: 'end'},
@@ -39,9 +41,9 @@ export default (editor, opt = {}) => {
                 droppable: true,
                 bgUrl: c.bgUrl,
                 heightType: '100vh',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'stretch',
                 stylable: [],
                 traits: [
                     {

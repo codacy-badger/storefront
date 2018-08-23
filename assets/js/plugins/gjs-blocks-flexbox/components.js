@@ -11,6 +11,8 @@ export default function(editor, opt = {}) {
         {value: 'flex-start', name: 'start'},
         {value: 'center', name: 'center'},
         {value: 'flex-end', name: 'end'},
+        {value: 'space-between', name: 'space-between'},
+        {value: 'space-around', name: 'space-around'},
     ];
 
     var alignItemsObj = [
@@ -25,7 +27,7 @@ export default function(editor, opt = {}) {
             {
                 defaults: {
                     ...defaultModel.prototype.defaults,
-                    justifyContent: 'flex-start',
+                    justifyContent: 'space-between',
                     alignItems: 'stretch',
                     stylable: [
                         'padding','padding-top','padding-right','padding-bottom','padding-left'

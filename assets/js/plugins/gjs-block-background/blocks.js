@@ -13,10 +13,13 @@ export default (editor, opt = {}) => {
             background: transparent none center center no-repeat ;
             background-size: cover;
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
         @media (max-width: 768px) {
             .${blockBgPfx} {
                 flex-wrap: wrap;
+                height: auto;
             }
         }
       </style>
