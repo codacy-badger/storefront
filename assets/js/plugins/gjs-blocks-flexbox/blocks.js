@@ -32,7 +32,7 @@ export default (editor, opt = {}) => {
   const minDim = 1;
   const currentUnit = 1;
   const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, keyHeight, currentUnit, minDim, step };
-  const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, bl:0, br: 0, bc: 0, keyWidth, currentUnit, minDim, step };
+  const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, cl: 1,  bl:0, br: 0, bc: 0, keyWidth, currentUnit, minDim, step };
   const rowAttr = {
     class: clsRow,
     'data-gjs-type': cBlocksFlexboxRef,
