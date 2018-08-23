@@ -28,11 +28,12 @@ export default (editor, opt = {}) => {
   // 'flex-basis' as keyWidth for the resizer on columns
   const keyWidth = 'flex-basis';
   const keyHeight = 'height';
-  const step = 0.2;
-  const minDim = 1;
-  const currentUnit = 1;
-  const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, keyHeight, currentUnit, minDim, step };
-  const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, cl: 1,  bl:0, br: 0, bc: 0, keyWidth, currentUnit, minDim, step };
+  const unitHeight =  '%';
+  const step = 0.5;
+  const minDim = 0.;
+  const currentUnit = 0;
+  const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, unitHeight, keyHeight, currentUnit, minDim, step };
+  const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, cl: 1,  bl:0, br: 0, bc: 0, keyWidth, currentUnit: 1 , minDim, step };
   const rowAttr = {
     class: clsRow,
     'data-gjs-type': cBlocksFlexboxRef,
@@ -88,7 +89,6 @@ export default (editor, opt = {}) => {
         flex-grow: 1;
         flex-basis: 100%;
         position: relative;
-        display: flex;
     }
     @media (max-width: 768px) {
         .${clsCell} {

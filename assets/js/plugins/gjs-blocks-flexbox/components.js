@@ -28,50 +28,22 @@ export default function(editor, opt = {}) {
             {
                 defaults: {
                     ...defaultModel.prototype.defaults,
-                    justifyContent: 'center',
-                    alignItems: 'center',
                     stylable: [
                         'padding','padding-top','padding-right','padding-bottom','padding-left'
                     ],
-                    traits: [
-                        {
-                            type: 'select',
-                            label: 'Horizontal Align',
-                            name: 'justifyContent',
-                            options: justifyContentObj,
-                            changeProp: 1
-                        },
-                        {
-                            type: 'select',
-                            label: 'Vertical Align',
-                            name: 'alignItems',
-                            options: alignItemsObj,
-                            changeProp: 1
-                        }
-                    ],
-                    script () {
-                        var justifyContent = '{[ justifyContent ]}';
-                        var alignItems = '{[ alignItems ]}';
-                        var style = this.style;
-                        var fb = style.flexBasis;
-
-                        this.style.justifyContent =  justifyContent;
-                        this.style.alignItems =  alignItems;
-                        this.style.flexBasis =  fb;
-                    },
                 }
             },
             {
                 isComponent(el) {
-                    if(el.getAttribute && el.getAttribute('data-gjs-type') === BLOCKS_FLEXBOX_TYPE) {
-                        return { type: BLOCK_FLEXBOX_TYPE };
+                    if(el.getAttribute && el.getAttribute('data-gjs-type') === BLOCK_TYPE) {
+                        return { type: BLOCK_TYPE };
                     }
                 }
             }
         ),
         view: defaultView.extend({
             init() {
-                this.listenTo(this.model, 'change:justifyContent change:alignItems', this.updateScript);
+                this.listenTo(this.model, '', this.updateScript);
             }
         })
     });
