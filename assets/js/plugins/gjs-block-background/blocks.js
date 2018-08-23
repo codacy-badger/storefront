@@ -18,8 +18,12 @@ export default (editor, opt = {}) => {
         }
         @media (max-width: 768px) {
             .${blockBgPfx} {
-                flex-wrap: wrap;
-                height: auto;
+                background-position: 60% center;
+            }
+        }
+        @media (max-width: 576px) {
+        .${blockBgPfx} {
+                background-position: 52% center;
             }
         }
       </style>
