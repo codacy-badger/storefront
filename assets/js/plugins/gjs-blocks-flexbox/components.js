@@ -5,44 +5,98 @@ export default function(editor, opt = {}) {
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
+    const BLOCK_TYPE = 'gjs-block';
     const BLOCKS_FLEXBOX_TYPE = 'gjs-blocks-flexbox';
 
     var justifyContentObj = [
-        {value: 'flex-start', name: 'start'},
+        {value: 'flex-start', name: 'left'},
         {value: 'center', name: 'center'},
-        {value: 'flex-end', name: 'end'},
+        {value: 'flex-end', name: 'right'},
         {value: 'space-between', name: 'space-between'},
         {value: 'space-around', name: 'space-around'},
     ];
 
     var alignItemsObj = [
         {value: 'stretch', name: 'stretch'},
-        {value: 'flex-start', name: 'start'},
+        {value: 'flex-start', name: 'left'},
         {value: 'center', name: 'center'},
-        {value: 'flex-end', name: 'end'},
+        {value: 'flex-end', name: 'right'},
     ];
 
-    domc.addType(BLOCKS_FLEXBOX_TYPE, {
+    domc.addType(BLOCK_TYPE, {
         model: defaultModel.extend(
             {
                 defaults: {
                     ...defaultModel.prototype.defaults,
-                    justifyContent: 'space-between',
-                    alignItems: 'stretch',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     stylable: [
                         'padding','padding-top','padding-right','padding-bottom','padding-left'
                     ],
                     traits: [
                         {
                             type: 'select',
-                            label: 'Justify Content',
+                            label: 'Horizontal Align',
                             name: 'justifyContent',
                             options: justifyContentObj,
                             changeProp: 1
                         },
                         {
                             type: 'select',
-                            label: 'Align Items',
+                            label: 'Vertical Align',
+                            name: 'alignItems',
+                            options: alignItemsObj,
+                            changeProp: 1
+                        }
+                    ],
+                    script () {
+                        var justifyContent = '{[ justifyContent ]}';
+                        var alignItems = '{[ alignItems ]}';
+                        var style = this.style;
+                        var fb = style.flexBasis;
+
+                        this.style.justifyContent =  justifyContent;
+                        this.style.alignItems =  alignItems;
+                        this.style.flexBasis =  fb;
+                    },
+                }
+            },
+            {
+                isComponent(el) {
+                    if(el.getAttribute && el.getAttribute('data-gjs-type') === BLOCKS_FLEXBOX_TYPE) {
+                        return { type: BLOCK_FLEXBOX_TYPE };
+                    }
+                }
+            }
+        ),
+        view: defaultView.extend({
+            init() {
+                this.listenTo(this.model, 'change:justifyContent change:alignItems', this.updateScript);
+            }
+        })
+    });
+
+    domc.addType(BLOCKS_FLEXBOX_TYPE, {
+        model: defaultModel.extend(
+            {
+                defaults: {
+                    ...defaultModel.prototype.defaults,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    stylable: [
+                        'padding','padding-top','padding-right','padding-bottom','padding-left'
+                    ],
+                    traits: [
+                        {
+                            type: 'select',
+                            label: 'Horizontal Align',
+                            name: 'justifyContent',
+                            options: justifyContentObj,
+                            changeProp: 1
+                        },
+                        {
+                            type: 'select',
+                            label: 'Vertical Align',
                             name: 'alignItems',
                             options: alignItemsObj,
                             changeProp: 1
@@ -51,8 +105,9 @@ export default function(editor, opt = {}) {
                     script () {
                        var justifyContent = '{[ justifyContent ]}';
                        var alignItems = '{[ alignItems ]}';
+                       var style = this.getAttribute('style');
 
-                       this.setAttribute("style","justify-content: " + justifyContent + "; align-items: " + alignItems + ";");
+                       this.setAttribute("style","justify-content: " + justifyContent + "; align-items: " + alignItems + ";" + style );
                     }
                 }
             },
@@ -70,4 +125,6 @@ export default function(editor, opt = {}) {
             }
         })
     });
+
+
 }

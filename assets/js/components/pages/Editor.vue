@@ -42,7 +42,22 @@
             let editor = grapesjs.init({
                 container : '#gjs',
                 components: '',
-                style: '',
+                style: `
+                    html {
+                        height: 100%;
+                        font-size: 10px;
+                    }
+                    @media only screen and (max-width: 1200px) {
+                        html {
+                            font-size: 8px !important;
+                        }
+                    }
+                    @media only screen and (max-width: 768px) {
+                        html {
+                            font-size: 10px !important;
+                        }
+                    }
+                `,
                 body: '<meta name="viewport" content="width=device-width,initial-scale=1.0">',
                 canvas: {
                     styles: [

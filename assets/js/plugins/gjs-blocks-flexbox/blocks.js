@@ -45,6 +45,7 @@ export default (editor, opt = {}) => {
 
   const colAttr = {
     class: clsCell,
+    'data-gjs-type': 'gjs-block',
     'data-gjs-draggable': `.${clsRow}`,
     'data-gjs-resizable': resizerRight,
     'data-gjs-custom-name': labelCell,
@@ -69,7 +70,7 @@ export default (editor, opt = {}) => {
         align-items: stretch;
         flex-wrap: nowrap;
         padding: 1rem;
-        height: 20%;
+        height: 7rem;
         position: relative;
     }
     @media (max-width: 768px) {
@@ -82,10 +83,12 @@ export default (editor, opt = {}) => {
 
   const styleClm = `
     .${clsCell} {
-        min-height: 7rem;
+        min-height: 1rem;
+        height: 100%;
         flex-grow: 1;
         flex-basis: 100%;
         position: relative;
+        display: flex;
     }
     @media (max-width: 768px) {
         .${clsCell} {
