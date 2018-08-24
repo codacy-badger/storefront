@@ -6,7 +6,7 @@ export default (editor, opt = {}) => {
     const logoPfx = c['logoClsPfx'] || cLogoRef;
     const style = c.defaultStyle ? `
         .${logoPfx} {
-            width: 18rem;
+            width: 18%;
             height: auto;
             min-width: 4rem;
             min-height: 2rem;
@@ -40,7 +40,7 @@ export default (editor, opt = {}) => {
         'data-gjs-type': 'gjs-logo',
         'data-gjs-resizable': resizerRight,
         'data-gjs-custom-name': logoRef,
-        'data-gjs-unstylable': ['width'],
+        /*'data-gjs-unstylable': ['width'],*/
         'src': 'https://gn266.cdn.gamenet.ru/TY0Xv2riHu/6hxyU/o_1DNqc3.png'
     };
     const attrsLogo = attrsToString(logoAttr);

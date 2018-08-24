@@ -19,7 +19,7 @@ export default function(editor, opt = {}) {
                     copyable: 0,
                     resizable: 1,
                     stylable: [
-                        'width',
+                        /*'width',*/
                         'margin',
                         'margin-top',
                         'margin-bottom',

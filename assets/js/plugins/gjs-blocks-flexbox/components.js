@@ -29,7 +29,7 @@ export default function(editor, opt = {}) {
                 defaults: {
                     ...defaultModel.prototype.defaults,
                     stylable: [
-                        'padding','padding-top','padding-right','padding-bottom','padding-left',
+                        'padding','padding-top','padding-right','padding-bottom','padding-left', 'text-align'
                     ],
                 }
             },
