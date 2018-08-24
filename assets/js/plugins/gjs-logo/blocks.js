@@ -10,6 +10,7 @@ export default (editor, opt = {}) => {
             height: auto;
             min-width: 4rem;
             min-height: 2rem;
+            max-height: 100%;
             margin: 1rem;
         }
   ` : '';
@@ -33,7 +34,7 @@ export default (editor, opt = {}) => {
     const minDim = 1;
     const currentUnit = 1;
     const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, minDim };
-    const resizerRight = { ...resizerBtm, cr: 1, bc: 0, keyWidth, currentUnit, minDim, step };
+    const resizerRight = { ...resizerBtm, cr: 1, cl: 1, bc: 0, keyWidth, currentUnit, minDim, step };
 
     const logoAttr = {
         class: logoPfx,

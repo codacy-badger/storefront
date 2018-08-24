@@ -10,9 +10,9 @@ export default grapesjs.plugins.add('gjs-block-background', (editor, opts = {}) 
         blocks: [cBlockBgRef],
         defaultStyle: 1,
         blockBgClsPfx: 'b-block-background',
-        labelBlockBg: 'Block background',
+        labelBlockBg: 'Block',
         labelBlockBgCategory: 'Landing Constructor',
-        bgUrl: 'https://gn415.cdn.gamenet.ru/TY0Xv2riHu/6Uv7G/o_aZ54z.png'
+        bgUrl: ''
     };
 
     for (let name in defaults) {

@@ -18,6 +18,13 @@ export default (editor, opt = {}) => {
         align-items: stretch;
         justify-content: center;
 	}
+
+
+    @media screen and (max-width: 768px) {
+        .${footerPfx}{
+            position: relative;
+        }
+    }
 	
 	.${footerPfx}, 
 	.${footerPfx} a {

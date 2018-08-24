@@ -13,7 +13,7 @@ export default (editor, opt = {}) => {
             background: transparent none center center no-repeat ;
             background-size: cover;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: no-wrap;
             justify-content: space-between;
         }
         @media (max-width: 768px) {

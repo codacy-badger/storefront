@@ -29,8 +29,8 @@ export default (editor, opt = {}) => {
   const keyWidth = 'flex-basis';
   const keyHeight = 'height';
   const unitHeight =  '%';
-  const step = 0.5;
-  const minDim = 1;
+  const step = 0.1;
+  const minDim = 0.1;
   const currentUnit = 0;
   const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, unitHeight, keyHeight, currentUnit, minDim, step };
   const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, cl: 1,  bl:0, br: 0, bc: 0, keyWidth, currentUnit: 1 , minDim, step };
