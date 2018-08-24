@@ -30,7 +30,7 @@ export default (editor, opt = {}) => {
   const keyHeight = 'height';
   const unitHeight =  '%';
   const step = 0.5;
-  const minDim = 0.;
+  const minDim = 1;
   const currentUnit = 0;
   const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, unitHeight, keyHeight, currentUnit, minDim, step };
   const resizerRight = { tl: 0, tc: 0, tr: 0, cl: 0, cr:1, cl: 1,  bl:0, br: 0, bc: 0, keyWidth, currentUnit: 1 , minDim, step };
@@ -40,8 +40,6 @@ export default (editor, opt = {}) => {
     'data-gjs-droppable': `.${clsCell}`,
     'data-gjs-resizable': resizerBtm,
     'data-gjs-custom-name': labelRow,
-    'data-gjs-unstylable': ['height'],
-    'data-gjs-stylable-require': ['flex-basis'],
   };
 
   const colAttr = {
@@ -50,8 +48,8 @@ export default (editor, opt = {}) => {
     'data-gjs-draggable': `.${clsRow}`,
     'data-gjs-resizable': resizerRight,
     'data-gjs-custom-name': labelCell,
-    'data-gjs-unstylable': ['width'],
-    'data-gjs-stylable-require': ['flex-basis'],
+    /*'data-gjs-unstylable': ['width'],
+    'data-gjs-stylable-require': ['flex-basis'],*/
   };
 
   const privateCls = [`.${clsRow}`, `.${clsCell}`];
