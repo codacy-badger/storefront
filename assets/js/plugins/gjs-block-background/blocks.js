@@ -22,8 +22,13 @@ export default (editor, opt = {}) => {
             }
         }
         @media (max-width: 576px) {
-        .${blockBgPfx} {
+            .${blockBgPfx} {
                 background-position: 52% center;
+            }
+        }
+         @media (max-height: 4840px) {
+            .${blockBgPfx} {
+                height: 150vh;
             }
         }
       </style>
