@@ -23,6 +23,7 @@ export default (editor, opt = {}) => {
     @media screen and (max-width: 768px) {
         .${footerPfx}{
             position: relative;
+            height: auto;
         }
     }
 	

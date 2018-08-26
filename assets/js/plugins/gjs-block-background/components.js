@@ -5,7 +5,7 @@ export default (editor, opt = {}) => {
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
-    const BLOCK_BG_TYPE = 'block-background';
+    const BLOCK_BG_TYPE = 'gjs-block-background';
     const blockBgPfx = c['blockBgClsPfx'] || 'b-block-background';
 
     var blockBgHeightTypes = [
@@ -96,7 +96,7 @@ export default (editor, opt = {}) => {
         }, {
             isComponent(el) {
                 if(el.getAttribute &&
-                    el.getAttribute('data-gjs-type') == BLOCK_BG_TYPE) {
+                    (el.getAttribute('data-gjs-type') == BLOCK_BG_TYPE) ) {
                     return {type: BLOCK_BG_TYPE};
                 }
             },

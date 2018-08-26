@@ -15,6 +15,7 @@
     import gjsFooter from './../../plugins/gjs-footer';
     import gjsLogo from './../../plugins/gjs-logo';
     import gjsBlocksFlexbox from './../../plugins/gjs-blocks-flexbox';
+    import gjsLayouts from './../../plugins/gjs-layouts';
     import {mapMutations} from 'vuex';
 
     export default {
@@ -64,7 +65,17 @@
                         'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
                     ]
                 },
-                plugins: ['gjs-preset-webpage','gjs-plugin-export','gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button', 'gjs-logo','gjs-blocks-flexbox'],
+                plugins: [
+                    'gjs-preset-webpage',
+                    'gjs-plugin-export',
+                    'gjs-video-background',
+                    'gjs-block-background',
+                    'gjs-footer',
+                    'gjs-button',
+                    'gjs-logo',
+                    'gjs-blocks-flexbox',
+                    'gjs-layouts'
+                ],
                 pluginsOpts: {
                     'gjs-plugin-export': {
                         preHtml: `<!doctype>
@@ -94,6 +105,9 @@
                         // options
                     },
                     'gjs-blocks-flexbox': {
+                        // options
+                    },
+                    'gjs-layouts': {
                         // options
                     }
                 },
@@ -140,7 +154,7 @@
                             'https://gn556.cdn.gamenet.ru/TY0Xv2riHu/6j3Kf/o_iv0k2.png',
                             // video
                             'https://gn268.cdn.gamenet.ru/TY0Xv2riHu/1qjS2/o_1cRTGy.mp4',
-                            'https://gn268.cdn.gamenet.ru/TY0Xv2riHu/1qjS2/o_1cRTGy.mp4',
+                            'https://gn749.cdn.gamenet.ru/TY0Xv85rCS/5ZcGp/o_27wM1u.mp4',
                             'https://gn392.cdn.gamenet.ru/TY0Xv7cuq8/3Bkcg/o_1UNmgX.mp4'
 
                     ],

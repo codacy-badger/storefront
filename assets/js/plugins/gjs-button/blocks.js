@@ -11,11 +11,11 @@ export default (editor, opt = {}) => {
             display: inline-flex;
             justify-content: center;
             align-content: center;
-            width: 239px;
-            height: 65px;
+            width: 24rem;
+            height: 7rem;
 	        color: #000000;
-	        font-size: 20px;
-	        line-height: 55px;
+	        font-size: 2rem;
+	        line-height: 7rem;
 	        text-decoration: none;
 	        cursor:pointer;
 	        border-radius: 0;
@@ -25,8 +25,8 @@ export default (editor, opt = {}) => {
             display: inline-flex;
             align-content: normal;
             color: #000000;
-            font-size: 24px;
-            line-height: 48px;
+            font-size: 2rem;
+            line-height: 7rem
             text-decoration: none;
             width: 100%;
             height: 100%;

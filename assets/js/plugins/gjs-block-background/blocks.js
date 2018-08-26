@@ -10,11 +10,13 @@ export default (editor, opt = {}) => {
             display: block;
             width: 100%;
             height: 100vh;
-            background: transparent none center center no-repeat ;
+            background-position: center center;
+            background-repeat: no-repeat ;
             background-size: cover;
             display: flex;
             flex-wrap: no-wrap;
             justify-content: space-between;
+            flex-direction: column;
         }
         @media (max-width: 768px) {
             .${blockBgPfx} {
@@ -26,7 +28,12 @@ export default (editor, opt = {}) => {
                 background-position: 52% center;
             }
         }
-         @media (max-height: 4840px) {
+        @media (max-height: 480px) {
+            .${blockBgPfx} {
+                height: 150vh;
+            }
+        }
+        @media (max-width: 768px) {
             .${blockBgPfx} {
                 height: 150vh;
             }
@@ -40,7 +47,7 @@ export default (editor, opt = {}) => {
             category: c['labelBlockBgCategory'],
             attributes: {class:'fa fa-picture-o'},
             content: `
-                <div class=\"${blockBgPfx}\" data-gjs-type=\"${blockBgRef}\" data-gjs-droppable=\"true\" data-gjs-custom-name=\"${c.labelBlockBg}\" data-gjs=\"${blockBgRef}\">
+                <div class=\"${blockBgPfx}\" data-gjs-type=\"${cBlockBgRef}\" data-gjs-droppable=\"true\" data-gjs-custom-name=\"${c.labelBlockBg}\" data-gjs=\"${blockBgRef}\">
                 </div>
                 ${style}
             `,

@@ -6,7 +6,7 @@ export default (editor, opt = {}) => {
     const logoPfx = c['logoClsPfx'] || cLogoRef;
     const style = c.defaultStyle ? `
         .${logoPfx} {
-            width: 18%;
+            width: 18rem;
             height: auto;
             min-width: 4rem;
             min-height: 2rem;

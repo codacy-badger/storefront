@@ -71,6 +71,7 @@ export default (editor, opt = {}) => {
         padding: 1rem;
         height: 7rem;
         position: relative;
+        width: 100%;
     }
     @media (max-width: 768px) {
       .${clsRow} {
@@ -99,7 +100,7 @@ export default (editor, opt = {}) => {
       bm.add(cBlocksFlexboxRef, {
         label,
         category,
-        attributes: { class: 'gjs-fonts gjs-f-b2' },
+        attributes: { class: 'fa fa-object-group' },
         content: `
             <div ${attrsRow}>
               <div ${attrsCell}></div>
