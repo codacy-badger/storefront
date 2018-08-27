@@ -58,6 +58,11 @@
                             font-size: 10px !important;
                         }
                     }
+                    @media only screen and (max-width: 768px) {
+                        .g-hidden-mobile {
+                            display: none;
+                        }
+                    }
                 `,
                 body: '<meta name="viewport" content="width=device-width,initial-scale=1.0">',
                 canvas: {

@@ -48,7 +48,7 @@ export default (editor, opt = {}) => {
     'data-gjs-resizable': resizerRight,
     'data-gjs-custom-name': labelCell,
     /*'data-gjs-unstylable': ['width'],*/
-    'data-gjs-stylable-require': ['flex-basis'],
+    /*'data-gjs-stylable-require': ['flex-basis'],*/
   };
 
   const privateCls = [`.${clsRow}`, `.${clsCell}`];

@@ -30,7 +30,7 @@ export default function(editor, opt = {}) {
                     ...defaultModel.prototype.defaults,
                     stylable: [
                         'padding','padding-top','padding-right','padding-bottom','padding-left', 'text-align',
-                        'display', 'width','height','min-height'
+                        'display', 'width','height','min-height','background-color'
                     ],
                 }
             },
@@ -60,6 +60,7 @@ export default function(editor, opt = {}) {
                     stylable: [
                         'padding','padding-top','padding-right','padding-bottom','padding-left',
                         'height', 'min-height','width', 'max-width', 'margin', 'margin-top','margin-right','margin-bottom','margin-left',
+                        'background-color'
                     ],
                     traits: [
                         {
