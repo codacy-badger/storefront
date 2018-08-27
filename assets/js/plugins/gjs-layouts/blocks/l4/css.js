@@ -205,11 +205,11 @@ body {
     color:rgb(0, 0, 0);
     font-size:2rem;
     width:100%;
-    height:100%;
+    height: 4rem;
     justify-content:center;
     cursor:pointer;
     background-color:#ff4f02;
-    line-height:7rem;
+    line-height:4rem;
     font-family:Georgia, serif;
     transform:rotateX(0) rotateY(0) rotateZ(0) scaleX(1) scaleY(1) scaleZ(1);
 }

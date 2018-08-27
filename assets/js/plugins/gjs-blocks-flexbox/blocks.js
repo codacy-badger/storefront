@@ -3,13 +3,12 @@ import { cBlocksFlexboxRef, blocksFlexboxRef } from './consts';
 export default (editor, opt = {}) => {
   const c = opt;
   const bm = editor.BlockManager;
-  const blocks = opt.blocks || [];
-  const stylePrefix = opt.stylePrefix;
-  const toAdd = name => blocks.indexOf(name) >= 0;
+  const blocks = c.blocks || [];
+  const stylePrefix = c.stylePrefix;
   const clsRow = `${stylePrefix}`;
   const clsCell = `${stylePrefix}_cell`;
-  const labelRow = opt.labelRow;
-  const labelCell = opt.labelColumn;
+  const labelRow = c['labelRow'];
+  const labelCell = c['labelColumn'];
 
   const attrsToString = attrs => {
     const result = [];
@@ -45,18 +44,17 @@ export default (editor, opt = {}) => {
   const colAttr = {
     class: clsCell,
     'data-gjs-type': 'gjs-block',
-    'data-gjs-draggable': `.${clsRow}`,
+    /*'data-gjs-draggable': `.${clsRow}`,*/
     'data-gjs-resizable': resizerRight,
     'data-gjs-custom-name': labelCell,
-    /*'data-gjs-unstylable': ['width'],
-    'data-gjs-stylable-require': ['flex-basis'],*/
+    /*'data-gjs-unstylable': ['width'],*/
+    'data-gjs-stylable-require': ['flex-basis'],
   };
 
   const privateCls = [`.${clsRow}`, `.${clsCell}`];
   editor.on('selector:add', selector =>
     privateCls.indexOf(selector.getFullName()) >= 0 && selector.set('private', 1))
 
-  const label = 'Containers';
   const category = 'Landing Constructor';
   const attrsRow = attrsToString(rowAttr);
   const attrsCell = attrsToString(colAttr);
@@ -69,9 +67,10 @@ export default (editor, opt = {}) => {
         align-items: stretch;
         flex-wrap: nowrap;
         padding: 1rem;
-        height: 7rem;
+        height: 5rem;
         position: relative;
         width: 100%;
+        margin: 0 auto;
     }
     @media (max-width: 768px) {
       .${clsRow} {
@@ -92,13 +91,14 @@ export default (editor, opt = {}) => {
     @media (max-width: 768px) {
         .${clsCell} {
             min-height: 0;
+            height: auto;
         }
     }
   `;
 
   if (c.blocks.indexOf(cBlocksFlexboxRef) >= 0) {
       bm.add(cBlocksFlexboxRef, {
-        label,
+        label:labelRow,
         category,
         attributes: { class: 'fa fa-object-group' },
         content: `
@@ -113,4 +113,18 @@ export default (editor, opt = {}) => {
             `,
       });
   }
+
+        bm.add('gjs-block', {
+            label: labelCell,
+            category,
+            attributes: { class: 'fa fa-object-group' },
+            content: `
+                <div ${attrsCell}></div>
+                <style>
+                    ${styleClm}
+                </style>
+            `,
+        });
+
+
 }

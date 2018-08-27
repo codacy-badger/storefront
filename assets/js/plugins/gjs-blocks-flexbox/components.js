@@ -29,7 +29,8 @@ export default function(editor, opt = {}) {
                 defaults: {
                     ...defaultModel.prototype.defaults,
                     stylable: [
-                        'padding','padding-top','padding-right','padding-bottom','padding-left', 'text-align'
+                        'padding','padding-top','padding-right','padding-bottom','padding-left', 'text-align',
+                        'display', 'width','height','min-height'
                     ],
                 }
             },
@@ -55,9 +56,10 @@ export default function(editor, opt = {}) {
                     ...defaultModel.prototype.defaults,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    alignContentItems: 'flex-start',
                     stylable: [
                         'padding','padding-top','padding-right','padding-bottom','padding-left',
-                        'height'
+                        'height', 'min-height','width', 'max-width', 'margin', 'margin-top','margin-right','margin-bottom','margin-left',
                     ],
                     traits: [
                         {

@@ -18,7 +18,7 @@ export const
 </div>
 </div>
 </div>
-</div>100
+</div>
 <div id="i4wzt1" class="b-blocks-flexbox" data-gjs-type="gjs-blocks-flexbox">
 <div class="b-blocks-flexbox_cell" id="irlnt9" data-gjs-type="gjs-block">
 <div class="b-lp-button" data-gjs-type="gjs-button">

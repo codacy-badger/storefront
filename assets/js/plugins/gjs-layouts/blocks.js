@@ -10,6 +10,12 @@ import { html3 } from './blocks/l3/html';
 import { css4 } from './blocks/l4/css';
 import { html4 } from './blocks/l4/html';
 
+import { css5 } from './blocks/l5/css';
+import { html5 } from './blocks/l5/html';
+
+import { css6 } from './blocks/l6/css';
+import { html6 } from './blocks/l6/html';
+
 export default (editor, opt = {}) => {
     const c = opt;
     const bm = editor.BlockManager;
@@ -60,6 +66,30 @@ export default (editor, opt = {}) => {
                     ${css4}
                 </style>
             `,
+        });
+
+        bm.add('gjs-layout-5', {
+            label: 'Layout 5',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html5}
+                <style>
+                    ${css5}
+                </style>
+            `,
+        });
+
+        bm.add('gjs-layout-6', {
+            label: 'Layout 6',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html6}
+                <style>
+                    ${css6}
+                </style>
+        `,
         });
 
 

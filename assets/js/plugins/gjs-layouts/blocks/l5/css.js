@@ -154,12 +154,12 @@ body {
     color:rgb(0, 0, 0);
     font-size:2rem;
     width:100%;
-    height:70px;
+    height:7rem;
     justify-content:center;
     cursor:pointer;
     line-height:7rem;
     background-color:#f8f63a;
-    max-width:300px;
+    max-width:30rem;
     font-family:Georgia, serif;
 }
 .c14440{

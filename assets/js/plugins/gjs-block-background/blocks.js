@@ -14,7 +14,6 @@ export default (editor, opt = {}) => {
             background-repeat: no-repeat ;
             background-size: cover;
             display: flex;
-            flex-wrap: no-wrap;
             justify-content: space-between;
             flex-direction: column;
         }

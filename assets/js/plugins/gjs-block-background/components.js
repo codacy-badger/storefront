@@ -44,7 +44,7 @@ export default (editor, opt = {}) => {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'stretch',
-                stylable: [],
+                stylable: ['background', 'background-position'],
                 traits: [
                     {
                         type: 'button',
@@ -80,7 +80,7 @@ export default (editor, opt = {}) => {
                         name: 'alignItems',
                         options: alignItemsObj,
                         changeProp: 1
-                    }
+                    },
                 ],
                 script: function () {
                     var bg = '{[ bgUrl ]}';
