@@ -15,6 +15,7 @@
     import gjsFooter from './../../plugins/gjs-footer';
     import gjsLogo from './../../plugins/gjs-logo';
     import gjsBlocksFlexbox from './../../plugins/gjs-blocks-flexbox';
+    import gjsGallery1 from './../../plugins/gjs-gallery-1';
     import {mapMutations} from 'vuex';
 
     export default {
@@ -46,10 +47,25 @@
                 body: '<meta name="viewport" content="width=device-width,initial-scale=1.0">',
                 canvas: {
                     styles: [
-                        'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
+                        'https://use.fontawesome.com/releases/v5.2.0/css/all.css',
+                        'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/css/jquery.fancybox.min.css'
+                    ],
+                    scripts: [
+                        'https://code.jquery.com/jquery-3.3.1.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js'
                     ]
                 },
-                plugins: ['gjs-preset-webpage','gjs-plugin-export','gjs-video-background', 'gjs-block-background', 'gjs-footer', 'gjs-button', 'gjs-logo','gjs-blocks-flexbox'],
+                plugins: [
+                    'gjs-preset-webpage',
+                    'gjs-plugin-export',
+                    'gjs-video-background',
+                    'gjs-block-background',
+                    'gjs-footer',
+                    'gjs-button',
+                    'gjs-logo',
+                    'gjs-blocks-flexbox',
+                    'gjs-gallery-1'
+                ],
                 pluginsOpts: {
                     'gjs-plugin-export': {
                         preHtml: `<!doctype>
@@ -80,7 +96,8 @@
                     },
                     'gjs-blocks-flexbox': {
                         // options
-                    }
+                    },
+                    'gjs-gallery-1': {}
                 },
                 storageManager: { type: null },
                 //

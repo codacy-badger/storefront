@@ -3,7 +3,7 @@ import NotFound from './components/NotFound.vue';
 
 import Dashboard from './components/pages/Dashboard.vue';
 import Editor from './components/pages/Editor.vue';
-import CustomEditor from './components/pages/CustomEditor.vue';
+import VuseEditor from './components/pages/VuseEditor.vue';
 
 const routes = [
     {
@@ -21,12 +21,6 @@ const routes = [
                 component: Editor,
                 name: 'Editor',
                 alias: ''
-            },
-            {
-                path: 'custom-editor',
-                component: CustomEditor,
-                name: 'CustomEditor',
-                alias: ''
             }
         ]
     },
@@ -34,6 +28,12 @@ const routes = [
         path: '/404',
         name: '404',
         component: NotFound
+    },
+    {
+        path: '/vuse-editor',
+        component: VuseEditor,
+        name: 'VuseEditor',
+        alias: ''
     }
 ];
 
