@@ -5,44 +5,74 @@ export default function(editor, opt = {}) {
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
 
+    const BLOCK_TYPE = 'gjs-block';
     const BLOCKS_FLEXBOX_TYPE = 'gjs-blocks-flexbox';
 
     var justifyContentObj = [
-        {value: 'flex-start', name: 'start'},
+        {value: 'flex-start', name: 'left'},
         {value: 'center', name: 'center'},
-        {value: 'flex-end', name: 'end'},
+        {value: 'flex-end', name: 'right'},
         {value: 'space-between', name: 'space-between'},
         {value: 'space-around', name: 'space-around'},
     ];
 
     var alignItemsObj = [
         {value: 'stretch', name: 'stretch'},
-        {value: 'flex-start', name: 'start'},
+        {value: 'flex-start', name: 'left'},
         {value: 'center', name: 'center'},
-        {value: 'flex-end', name: 'end'},
+        {value: 'flex-end', name: 'right'},
     ];
+
+    domc.addType(BLOCK_TYPE, {
+        model: defaultModel.extend(
+            {
+                defaults: {
+                    ...defaultModel.prototype.defaults,
+                    stylable: [
+                        'padding','padding-top','padding-right','padding-bottom','padding-left', 'text-align',
+                        'display', 'width','height','min-height','background-color'
+                    ],
+                }
+            },
+            {
+                isComponent(el) {
+                    if(el.getAttribute && el.getAttribute('data-gjs-type') === BLOCK_TYPE) {
+                        return { type: BLOCK_TYPE };
+                    }
+                }
+            }
+        ),
+        view: defaultView.extend({
+            init() {
+                this.listenTo(this.model, '', this.updateScript);
+            }
+        })
+    });
 
     domc.addType(BLOCKS_FLEXBOX_TYPE, {
         model: defaultModel.extend(
             {
                 defaults: {
                     ...defaultModel.prototype.defaults,
-                    justifyContent: 'space-between',
-                    alignItems: 'stretch',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    alignContentItems: 'flex-start',
                     stylable: [
-                        'padding','padding-top','padding-right','padding-bottom','padding-left'
+                        'padding','padding-top','padding-right','padding-bottom','padding-left',
+                        'height', 'min-height','width', 'max-width', 'margin', 'margin-top','margin-right','margin-bottom','margin-left',
+                        'background-color'
                     ],
                     traits: [
                         {
                             type: 'select',
-                            label: 'Justify Content',
+                            label: 'Horizontal Align',
                             name: 'justifyContent',
                             options: justifyContentObj,
                             changeProp: 1
                         },
                         {
                             type: 'select',
-                            label: 'Align Items',
+                            label: 'Vertical Align',
                             name: 'alignItems',
                             options: alignItemsObj,
                             changeProp: 1
@@ -51,8 +81,9 @@ export default function(editor, opt = {}) {
                     script () {
                        var justifyContent = '{[ justifyContent ]}';
                        var alignItems = '{[ alignItems ]}';
+                       var style = this.getAttribute('style');
 
-                       this.setAttribute("style","justify-content: " + justifyContent + "; align-items: " + alignItems + ";");
+                       this.setAttribute("style","justify-content: " + justifyContent + "; align-items: " + alignItems + ";" + style );
                     }
                 }
             },
@@ -70,4 +101,6 @@ export default function(editor, opt = {}) {
             }
         })
     });
+
+
 }

@@ -19,6 +19,21 @@ export default (editor, opt = {}) => {
         z-index: -3;
     }
 
+    .${videoBgPfx}:after{
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGklEQVQImWNgYGBYZmJiMoXBxMRkCgMDwzIAHgwDrawJG44AAAAASUVORK5CYII=) repeat;
+        content: '';
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+     }
+
     .${videoBgPfx}__video {
         position: absolute;
         top: 0;

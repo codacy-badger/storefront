@@ -12,12 +12,20 @@ export default (editor, opt = {}) => {
         bottom: 0;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        padding: 5px;
+        padding: 0.5rem;
         z-index: 510;
         display: flex;
         align-items: stretch;
         justify-content: center;
 	}
+
+
+    @media screen and (max-width: 768px) {
+        .${footerPfx}{
+            position: relative;
+            height: auto;
+        }
+    }
 	
 	.${footerPfx}, 
 	.${footerPfx} a {
@@ -27,7 +35,7 @@ export default (editor, opt = {}) => {
 	.${footerPfx}__container {
 	    display: flex;
         align-items: stretch;
-        min-height: 50px;
+        min-height: 5rem;
         width: 100%;
         flex-direction: row;
 	}
@@ -46,7 +54,7 @@ export default (editor, opt = {}) => {
         }
         
         .${footerPfx}__footer__item {
-            min-height: 50px;
+            min-height: 5rem;
             width: 100%;
         }
     }
@@ -54,8 +62,8 @@ export default (editor, opt = {}) => {
     .${footerPfx}__links a {
         white-space: nowrap;
         text-decoration: none;
-        font-size: 16px;
-        margin-right: 7px;
+        font-size: 1.2rem;
+        margin-right: 0.7rem;
     }
     
     .${footerPfx}__links_underline a:hover {

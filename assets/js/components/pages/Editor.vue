@@ -15,7 +15,7 @@
     import gjsFooter from './../../plugins/gjs-footer';
     import gjsLogo from './../../plugins/gjs-logo';
     import gjsBlocksFlexbox from './../../plugins/gjs-blocks-flexbox';
-    import gjsGallery1 from './../../plugins/gjs-gallery-1';
+    import gjsLayouts from './../../plugins/gjs-layouts';
     import {mapMutations} from 'vuex';
 
     export default {
@@ -43,16 +43,36 @@
             let editor = grapesjs.init({
                 container : '#gjs',
                 components: '',
-                style: '',
+                style: `
+                    html {
+                        height: 100%;
+                        font-size: 10px;
+                    }
+                    @media only screen and (max-width: 1200px) {
+                        html {
+                            font-size: 8px !important;
+                        }
+                    }
+                    @media only screen and (max-width: 768px) {
+                        html {
+                            font-size: 10px !important;
+                        }
+                    }
+                    @media only screen and (max-width: 768px) {
+                        .g-hidden-tab {
+                            display: none;
+                        }
+                    }
+                    @media only screen and (max-width: 540px) {
+                        .g-hidden-mobile {
+                            display: none;
+                        }
+                    }
+                `,
                 body: '<meta name="viewport" content="width=device-width,initial-scale=1.0">',
                 canvas: {
                     styles: [
-                        'https://use.fontawesome.com/releases/v5.2.0/css/all.css',
-                        'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/css/jquery.fancybox.min.css'
-                    ],
-                    scripts: [
-                        'https://code.jquery.com/jquery-3.3.1.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js'
+                        'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
                     ]
                 },
                 plugins: [
@@ -64,7 +84,7 @@
                     'gjs-button',
                     'gjs-logo',
                     'gjs-blocks-flexbox',
-                    'gjs-gallery-1'
+                    'gjs-layouts'
                 ],
                 pluginsOpts: {
                     'gjs-plugin-export': {
@@ -97,11 +117,57 @@
                     'gjs-blocks-flexbox': {
                         // options
                     },
-                    'gjs-gallery-1': {}
+                    'gjs-layouts': {
+                        // options
+                    }
                 },
                 storageManager: { type: null },
                 //
                 assetManager: {
+                    assets: [
+                            // backgrounds
+                            'https://gn856.cdn.gamenet.ru/TY0Xv2riHu/6j39g/o_1P7PuY.jpg',
+                            'https://gn74.cdn.gamenet.ru/TY0Xv2riHu/6j39u/o_QOw5c.jpg',
+                            'https://gn667.cdn.gamenet.ru/TY0Xv2riHu/6j3AJ/o_zOeMp.jpg',
+                            'https://gn8.cdn.gamenet.ru/TY0Xv2riHu/6j3BV/o_6MYBt.jpg',
+                            'https://gn490.cdn.gamenet.ru/TY0Xv2riHu/6j3Bx/o_7HItq.jpg',
+                            'https://gn968.cdn.gamenet.ru/TY0Xv2riHu/6j3C9/o_H2UqZ.jpg',
+                            'https://gn781.cdn.gamenet.ru/TY0Xv2riHu/6j3CJ/o_FqCvl.jpg',
+                            // logos
+                            'https://gn18.cdn.gamenet.ru/TY0Xv2riHu/6j3Ce/o_2Fqi4r.png',
+                            'https://gn790.cdn.gamenet.ru/TY0Xv2riHu/6j3Ct/o_1ASG20.png',
+                            'https://gn191.cdn.gamenet.ru/TY0Xv2riHu/6j3D4/o_nSzgK.png',
+                            'https://gn890.cdn.gamenet.ru/TY0Xv2riHu/6j3DF/o_1Jc38z.png',
+                            'https://gn293.cdn.gamenet.ru/TY0Xv2riHu/6j3DR/o_5iiIG.png',
+                            'https://gn607.cdn.gamenet.ru/TY0Xv2riHu/6j3Db/o_hfRRC.png',
+                            'https://gn865.cdn.gamenet.ru/TY0Xv2riHu/6j3Dn/o_1oge9w.png',
+                            'https://gn748.cdn.gamenet.ru/TY0Xv2riHu/6j3E2/o_2BayVq.png',
+                            'https://gn458.cdn.gamenet.ru/TY0Xv2riHu/6j3ED/o_1tIWYQ.png',
+                            'https://gn210.cdn.gamenet.ru/TY0Xv2riHu/6j3EP/o_fJMlf.png',
+                            'https://gn965.cdn.gamenet.ru/TY0Xv2riHu/6j3Ec/o_1HQuWI.png',
+                            'https://gn975.cdn.gamenet.ru/TY0Xv2riHu/6j3Eq/o_1vpGDi.png',
+                            'https://gn771.cdn.gamenet.ru/TY0Xv2riHu/6j3F5/o_15kPtV.png',
+                            'https://gn328.cdn.gamenet.ru/TY0Xv2riHu/6j3FH/o_2A6sHr.png',
+                            'https://gn771.cdn.gamenet.ru/TY0Xv2riHu/6j3FS/o_1uYPPw.png',
+                            'https://gn899.cdn.gamenet.ru/TY0Xv2riHu/6j3Fc/o_2L8T8T.png',
+                            'https://gn265.cdn.gamenet.ru/TY0Xv2riHu/6j3Fo/o_1qdZ4t.png',
+                            'https://gn239.cdn.gamenet.ru/TY0Xv2riHu/6j3G1/o_14nUlQ.png',
+                            'https://gn885.cdn.gamenet.ru/TY0Xv2riHu/6j3GD/o_xZ7s5.png',
+                            'https://gn63.cdn.gamenet.ru/TY0Xv2riHu/6j3GN/o_1FiR94.png',
+                            // images
+                            'https://gn368.cdn.gamenet.ru/TY0Xv2riHu/6j3Ga/o_74JNg.png',
+                            'https://gn879.cdn.gamenet.ru/TY0Xv2riHu/6j3Gx/o_1UaHQ9.png',
+                            'https://gn642.cdn.gamenet.ru/TY0Xv2riHu/6j3HF/o_RG5rm.png',
+                            'https://gn48.cdn.gamenet.ru/TY0Xv2riHu/6j3HV/o_1swG9k.png',
+                            'https://gn770.cdn.gamenet.ru/TY0Xv2riHu/6j3KC/o_1FEi10.png',
+                            'https://gn416.cdn.gamenet.ru/TY0Xv2riHu/6j3KV/o_gMbBg.png',
+                            'https://gn556.cdn.gamenet.ru/TY0Xv2riHu/6j3Kf/o_iv0k2.png',
+                            // video
+                            'https://gn268.cdn.gamenet.ru/TY0Xv2riHu/1qjS2/o_1cRTGy.mp4',
+                            'https://gn749.cdn.gamenet.ru/TY0Xv85rCS/5ZcGp/o_27wM1u.mp4',
+                            'https://gn392.cdn.gamenet.ru/TY0Xv7cuq8/3Bkcg/o_1UNmgX.mp4'
+
+                    ],
                     upload: 'http://images.stg.gamenet.ru/restapi',
                     uploadName: 'file',
                     params: { method: 'storefront.upload', format: 'json' },
