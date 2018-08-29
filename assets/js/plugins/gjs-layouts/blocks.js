@@ -16,6 +16,10 @@ import { html5 } from './blocks/l5/html';
 import { css6 } from './blocks/l6/css';
 import { html6 } from './blocks/l6/html';
 
+import { css7 } from './blocks/l7/css';
+import { html7 } from './blocks/l7/html';
+
+
 export default (editor, opt = {}) => {
     const c = opt;
     const bm = editor.BlockManager;
@@ -90,6 +94,18 @@ export default (editor, opt = {}) => {
                     ${css6}
                 </style>
         `,
+        });
+
+        bm.add('gjs-layout-7', {
+            label: 'Layout 7',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html7}
+                <style>
+                    ${css7}
+                </style>
+            `,
         });
 
 

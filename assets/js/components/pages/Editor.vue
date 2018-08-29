@@ -59,6 +59,11 @@
                         }
                     }
                     @media only screen and (max-width: 768px) {
+                        .g-hidden-tab {
+                            display: none;
+                        }
+                    }
+                    @media only screen and (max-width: 540px) {
                         .g-hidden-mobile {
                             display: none;
                         }
