@@ -39,20 +39,20 @@ export default (editor, opt = {}) => {
             defaults:
                 Object.assign({}, defaultModel.prototype.defaults, {
                 droppable: true,
-                bgUrl: c.bgUrl,
+                /*bgUrl: c.bgUrl,*/
                 heightType: '100vh',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'stretch',
-                stylable: ['background', 'background-position'],
+                stylable: ['background','background-image','background-position'],
                 traits: [
-                    {
+                    /*{
                         type: 'button',
                         label: 'Background image',
                         name: 'bgUrl',
                         placeholder: 'path to background image',
                         changeProp: 1
-                    },
+                    },*/
                     {
                         type: 'select',
                         label: 'Heigth block',
@@ -90,7 +90,7 @@ export default (editor, opt = {}) => {
                     var alignItems = '{[ alignItems ]}';
                     var blockBgEl = this;
 
-                    blockBgEl.setAttribute("style","background-image: url("+bg+"); height:" +  heightType + "; flex-direction: " + flexDirection + "; justify-content: " + justifyContent + "; align-items: " + alignItems + ";");
+                    blockBgEl.setAttribute("style","height:" +  heightType + "; flex-direction: " + flexDirection + "; justify-content: " + justifyContent + "; align-items: " + alignItems + ";");
                 }
             }),
         }, {

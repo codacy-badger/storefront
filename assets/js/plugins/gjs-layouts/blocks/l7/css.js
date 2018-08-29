@@ -279,7 +279,7 @@ h1, h2, h3, h4 {
 .panel {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
-    width: 40rem;
+    width: 40%;
     padding: 0 0.3rem;
     color: #fff;
     line-height: 1; }
