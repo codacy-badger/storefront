@@ -21,19 +21,23 @@
                               </ul>
                           </div>
                           <div class="panel__section panel__section_grow">
-                            <span class="button" @click.prevent="onClick" :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href" v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button">
-                                Играть бесплатно
+                            <span class="b-button" @click.prevent="onClick" :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href" v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button">
+
                             </span>
                           </div>
                           <div class="panel__section">
                               <footer class="footer">
                                   <div class="footer__group">
                                       <uploader class="footer__el footer__el_gamenet" path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt" :alt="$sectionData.logos[1].alt"></uploader>
-                                      <span class="footer__el"><span class="js-copyright-year">2010-2018 </span>GameNet.ru</span>
+                                      <span class="footer__el"><span>2010-2018 </span>GameNet.ru</span>
                                   </div>
                                   <div class="footer__group footer__group_light">
-                                      <a @click.prevent="openLink(item)" class="footer__el footer__el_link" v-for="(item, index) in $sectionData.links" :href="item" v-text="item.title"  v-styler="item.text">
-                                      </a>
+                                      <span v-for="(item, index) in $sectionData.links">
+                                          <a @click.prevent="openLink(item)" :class="item.classes"
+                                                class="footer__el footer__el_link" :href="item.href" v-html="item.text"  v-styler="item.button">
+                                                asdasd
+                                          </a>
+                                      </span>
                                   </div>
                               </footer>
                           </div>
@@ -80,11 +84,11 @@
         slogan: [
                 {
                     title: 'Останови',
-                    text: types.Text,
+                    text: types.Title,
                 },
                 {
                     title: 'армию тьмы!',
-                    text: types.Text,
+                    text: types.Title,
                 },
         ],
         logos: [
@@ -101,19 +105,19 @@
         ],
         links: [
             {
-                title: 'Каталог игр',
+                text: 'Каталог игр',
                 href: 'https://gamenet.ru/games/',
-                text: types.Link,
+                button: types.Button,
             },
             {
-                title: 'Поддержка',
+                text: 'Поддержка',
                 href: 'https://support.gamenet.ru/',
-                text: types.Link,
+                button: types.Button,
             },
             {
-                title: 'Пользовательское соглашение',
+                text: 'Пользовательское соглашение',
                 href: 'https://gamenet.ru/platform/rules/',
-                text: types.Link,
+                button: types.Button,
             },
         ],
       },
@@ -149,8 +153,6 @@
 <style>
     /*integration*/
     body {
-        overflow: hidden;
-        background-image: none;
     }
 
     .l_main {
@@ -349,7 +351,7 @@
         margin: 0;
         font-weight: normal; }
 
-    .button {
+    .b-button {
         position: relative;
         display: block;
         font-size: 2.4rem;
@@ -366,7 +368,7 @@
         -ms-user-select: none;
         padding:  2rem 3rem;
         user-select: none; }
-    .button:hover {
+    .b-button:hover {
         background-color: #ffef7c;
         box-shadow: inset 0 0 2.5rem #ffba21, 0 0 3.5rem #e45b00; }
 
