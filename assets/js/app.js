@@ -20,6 +20,7 @@ import social1 from './components/vuse/social/social1';
 import social2 from './components/vuse/social/social2';
 import social3 from './components/vuse/social/social3';
 import social4 from './components/vuse/social/social4';
+import layout1 from './components/vuse/layouts/layout1';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -39,6 +40,7 @@ Vuse.component(social1);
 Vuse.component(social2);
 Vuse.component(social3);
 Vuse.component(social4);
+Vuse.component(layout1);
 
 Vue.use(Vuse, {
     themes: [
@@ -49,6 +51,10 @@ Vue.use(Vuse, {
         {
             name: 'Theme 2',
             sections: [hero2, section2, social3, social4, newsletter]
+        },
+        {
+            name: 'Layout 1',
+            sections: [layout1]
         }
     ]
 });
