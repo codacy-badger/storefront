@@ -22,6 +22,7 @@ import social2 from './components/vuse/social/social2';
 import social3 from './components/vuse/social/social3';
 import social4 from './components/vuse/social/social4';
 import pwa from './components/vuse/plugins/pwa';
+import layout1 from './components/vuse/layouts/layout1';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -55,6 +56,10 @@ Vue.use(Vuse, {
         {
             name: 'Theme 2',
             sections: [hero2, section2, social3, social4, newsletter]
+        },
+        {
+            name: 'Layout 1',
+            sections: [layout1]
         },
         {
             name: 'Battle Carnival. Fun to play',
