@@ -16,10 +16,12 @@ import section2 from './components/vuse/sections/section2';
 import newsletter from './components/vuse/forms/newsletter';
 import hero1 from './components/vuse/hero/hero1';
 import hero2 from './components/vuse/hero/hero2';
+import hero_funtoplay3 from './components/vuse/hero/hero_funtoplay3';
 import social1 from './components/vuse/social/social1';
 import social2 from './components/vuse/social/social2';
 import social3 from './components/vuse/social/social3';
 import social4 from './components/vuse/social/social4';
+import pwa from './components/vuse/plugins/pwa';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -35,12 +37,16 @@ Vuse.component(section2);
 Vuse.component(newsletter);
 Vuse.component(hero1);
 Vuse.component(hero2);
+Vuse.component(hero_funtoplay3);
 Vuse.component(social1);
 Vuse.component(social2);
 Vuse.component(social3);
 Vuse.component(social4);
 
+Vuse.use(pwa);
+
 Vue.use(Vuse, {
+    css: 'css/app.css',
     themes: [
         {
             name: 'Theme 1',
@@ -49,6 +55,10 @@ Vue.use(Vuse, {
         {
             name: 'Theme 2',
             sections: [hero2, section2, social3, social4, newsletter]
+        },
+        {
+            name: 'Battle Carnival. Fun to play',
+            sections: [hero_funtoplay3]
         }
     ]
 });

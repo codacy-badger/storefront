@@ -5,8 +5,8 @@
 <script>
     export default {
         methods: {
-            onSave() {
-                console.log('save');
+            onSave(builder) {
+                builder.export('pwa');
             }
         }
     }
