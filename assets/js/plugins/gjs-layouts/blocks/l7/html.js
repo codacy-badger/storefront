@@ -21,7 +21,7 @@ export const
 </ul>
 </div>
 <div class="panel__section panel__section_grow">
-<span class="button" data-gjs-type="gjsbutton">
+<span class="button" data-gjs-type="gjs-button">
 Играть бесплатно
 </span>
 </div>

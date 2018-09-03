@@ -19,6 +19,18 @@ import { html6 } from './blocks/l6/html';
 import { css7 } from './blocks/l7/css';
 import { html7 } from './blocks/l7/html';
 
+import { css8 } from './blocks/l8/css';
+import { html8 } from './blocks/l8/html';
+
+import { css9 } from './blocks/l9/css';
+import { html9 } from './blocks/l9/html';
+
+import { css10 } from './blocks/l10/css';
+import { html10 } from './blocks/l10/html';
+
+import { css11 } from './blocks/l11/css';
+import { html11 } from './blocks/l11/html';
+
 
 export default (editor, opt = {}) => {
     const c = opt;
@@ -104,6 +116,54 @@ export default (editor, opt = {}) => {
                 ${html7}
                 <style>
                     ${css7}
+                </style>
+            `,
+        });
+
+        bm.add('gjs-layout-8', {
+            label: 'Layout 8',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html8}
+                <style>
+                    ${css8}
+                </style>
+            `,
+        });
+
+        bm.add('gjs-layout-9', {
+            label: 'Layout 9',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html9}
+                <style>
+                    ${css9}
+                </style>
+            `,
+        });
+
+        bm.add('gjs-layout-10', {
+            label: 'Layout 10',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html10}
+                <style>
+                    ${css10}
+                </style>
+            `,
+        });
+
+        bm.add('gjs-layout-11', {
+            label: 'Layout 11',
+            category: 'Layouts',
+            attributes: { class: 'fa fa-object-ungroup' },
+            content: `
+                ${html11}
+                <style>
+                    ${css11}
                 </style>
             `,
         });
