@@ -32,9 +32,10 @@
                                       <span class="footer__el"><span>2010-2018 </span>GameNet.ru</span>
                                   </div>
                                   <div class="footer__group footer__group_light">
-                                      <span v-for="(item, index) in $sectionData.links">
+                                      <span v-for="item in $sectionData.links">
+
                                           <a @click.prevent="openLink(item)" :class="item.classes"
-                                                class="footer__el footer__el_link" :href="item.href" v-html="item.text"  v-styler="item.button">
+                                                class="footer__el footer__el_link" :href="item.href" v-html="item.text"  v-styler="item">
                                                 asdasd
                                           </a>
                                       </span>
