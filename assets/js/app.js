@@ -43,6 +43,7 @@ Vuse.component(social1);
 Vuse.component(social2);
 Vuse.component(social3);
 Vuse.component(social4);
+Vuse.component(layout1);
 
 Vuse.use(pwa);
 
