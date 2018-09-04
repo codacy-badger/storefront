@@ -8,21 +8,22 @@ import router from './router';
 import store from './store';
 import {sync} from 'vuex-router-sync';
 import AppView from './components/App.vue'
-import Vuse from 'vuse';
-import Uploader from './components/vuse/Uploader.vue'
+import Vuse from './plugins/Vuse';
+import Uploader from './plugins/Vuse/plugins/Uploader.vue'
 
-import section1 from './components/vuse/sections/section1';
-import section2 from './components/vuse/sections/section2';
-import newsletter from './components/vuse/forms/newsletter';
-import hero1 from './components/vuse/hero/hero1';
-import hero2 from './components/vuse/hero/hero2';
-import hero_funtoplay3 from './components/vuse/hero/hero_funtoplay3';
-import social1 from './components/vuse/social/social1';
-import social2 from './components/vuse/social/social2';
-import social3 from './components/vuse/social/social3';
-import social4 from './components/vuse/social/social4';
-import pwa from './components/vuse/plugins/pwa';
-import layout1 from './components/vuse/layouts/layout1';
+import section1 from './components/landings/sections/section1';
+import section2 from './components/landings/sections/section2';
+import newsletter from './components/landings/forms/newsletter';
+import hero1 from './components/landings/hero/hero1';
+import hero2 from './components/landings/hero/hero2';
+import hero_funtoplay3 from './components/landings/hero/hero_funtoplay3';
+import social1 from './components/landings/social/social1';
+import social2 from './components/landings/social/social2';
+import social3 from './components/landings/social/social3';
+import social4 from './components/landings/social/social4';
+import layout1 from './components/landings/layouts/layout1';
+
+import pwa from './plugins/Vuse/plugins/pwa';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
