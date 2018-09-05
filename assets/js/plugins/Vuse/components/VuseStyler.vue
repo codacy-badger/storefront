@@ -283,9 +283,10 @@
             },
             addStyle: function(style, sValue) {
                 this.section.set(this.name, (value) => {
-                    if (value && value.hasOwnProperty('styles') && typeof value.styles === 'object') {
-                        value = value.styles;
-                    }
+                    //console.log(value);
+                    //if (value && value.hasOwnProperty('styles') && typeof value.styles === 'object') {
+                        //value = value.styles;
+                    //}
 
                     value[style] = sValue;
                 });
@@ -361,19 +362,16 @@
                 $form[0].reset();
 
                 window.axios.post('http://images.stg.gamenet.ru/restapi', request)
-                    .then(function (data) {
-                        let itemIndex = self.itemIndex;
-                        self.itemIndex = null;
-
-                        if (type === 0) {
-                            if (!data['data']['fileName'] || data['data']['fileName'].length <= 0) {
-                                return;
-                            }
-
-                            self.files[itemIndex]['gameScreenShot'] = data['data']['fileName'];
-                        } else {
-                            self.files[itemIndex] = window.$.extend(self.buildFile(self.files[itemIndex]), data['data']['data']);
+                    .then(function (response) {
+                        if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
+                            || !response['data']['response'].hasOwnProperty('data')
+                            || !Array.isArray(response['data']['response']['data'])) {
+                            return;
                         }
+
+                        const data = response['data']['response']['data'][0];
+
+                        self.addStyle('background-image', data['src']);
                     }).catch(function (e) {
                         console.warn(e);
                     });
