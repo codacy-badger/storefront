@@ -2,7 +2,6 @@ import Layout from './components/Layout.vue';
 import NotFound from './components/NotFound.vue';
 
 import Dashboard from './components/pages/Dashboard.vue';
-import Editor from './components/pages/Editor.vue';
 import VuseEditor from './components/pages/VuseEditor.vue';
 
 const routes = [
@@ -15,12 +14,6 @@ const routes = [
                 component: Dashboard,
                 name: 'Dashboard',
                 alias: ''
-            },
-            {
-                path: 'editor',
-                component: Editor,
-                name: 'Editor',
-                alias: ''
             }
         ]
     },
@@ -30,7 +23,7 @@ const routes = [
         component: NotFound
     },
     {
-        path: '/vuse-editor',
+        path: '/editor',
         component: VuseEditor,
         name: 'VuseEditor',
         alias: ''

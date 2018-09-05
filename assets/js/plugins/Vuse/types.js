@@ -1,19 +1,22 @@
-export class Avatar {};
+export class Avatar {}
 
-export class Title {};
+export class Title {}
 
-export class Text {};
+export class Text {}
 
-export class Logo {};
+export class Logo {}
 
-export class Image {};
+export class Image {}
 
-export class Quote {};
+export class Quote {}
 
-export class Link {};
+export class Link {}
 
-export class ClassList {};
+export class ClassList {}
 
-export class Button {};
+export class Button {}
 
-export class Grid { };
+export class Grid {}
+
+export class Class {}
+

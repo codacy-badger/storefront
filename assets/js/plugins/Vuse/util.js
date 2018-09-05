@@ -46,7 +46,7 @@ export function getImageBlob (URL) {
       const randomNumber = new Date().getUTCMilliseconds();
       const filename = `image-${randomNumber}.${fileType}`;
       resolve({ blob: imageBlob, name: filename });
-    }
+    };
     xhr.send(null);
   });
 }

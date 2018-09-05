@@ -39,7 +39,7 @@ class Vuse {
     this.components = {};
     this.assets = {
       css: options.css || 'dist/css/app.css'
-    }
+    };
     this.installPlugins();
   }
 
@@ -263,6 +263,7 @@ class Vuse {
   export (method = 'json') {
     if (method === 'pwa' || method === 'zip') {
       if (typeof this.download === 'function') {
+        console.log(this.sections);
         return this.download(this.assets);
       }
 
