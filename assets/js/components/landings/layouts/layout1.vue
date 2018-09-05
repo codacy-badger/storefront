@@ -1,7 +1,6 @@
 <template>
   <section class="layout" v-styler:section="$sectionData.classes" :class="$sectionData.classes">
 
-          <div class="b-18plus"></div>
           <div class="layout__wrap">
               <div class="layout__content">
                   <div class="panel">
@@ -29,14 +28,17 @@
                               <footer class="footer">
                                   <div class="footer__group">
                                       <uploader class="footer__el footer__el_gamenet" path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt" :alt="$sectionData.logos[1].alt"></uploader>
-                                      <span class="footer__el"><span>2010-2018 </span>GameNet.ru</span>
+                                      <span class="footer__el">
+                                          <span v-text="$sectionData.copyright.title" v-styler="$sectionData.copyright.text">
+                                              2018-2018 gamesite.com
+                                          </span>
+                                      </span>
                                   </div>
                                   <div class="footer__group footer__group_light">
                                       <span v-for="item in $sectionData.links">
 
                                           <a @click.prevent="openLink(item)" :class="item.classes"
                                                 class="footer__el footer__el_link" :href="item.href" v-html="item.text"  v-styler="item">
-                                                asdasd
                                           </a>
                                       </span>
                                   </div>
@@ -45,6 +47,9 @@
                       </div>
                   </div>
               </div>
+          </div>
+          <div class="b-18plus" v-text="$sectionData.age.title" v-styler="$sectionData.age.text">
+              18+
           </div>
 
     </section>
@@ -61,63 +66,71 @@
       group: 'Layouts',
       $schema: {
         classes: types.ClassList,
+        age: {
+            title: '18+',
+            text: types.Text
+        },
+        copyright: {
+            title: '2018-2018 gamesite.com',
+            text: types.Text
+        },
         buttons: [
            {
-               text: 'Играть',
-               href: "//gamenet.ru",
+               text: 'Play Now',
+               href: "#",
                button: types.Button,
            },
         ],
         features: [
             {
-                title: 'Современная 3D-графика в браузере',
+                title: 'Modern 3D graphics in the browser',
                 text: types.Text,
             },
             {
-                title: 'Создание нескольких персонажей на сервере',
+                title: 'Create multiple characters on the server',
                 text: types.Text,
             },
             {
-                title: 'Широкие возможности прокачки героя',
+                title: 'Wide opportunities for pumping the hero',
                 text: types.Text,
             },
         ],
         slogan: [
                 {
-                    title: 'Останови',
+                    title: 'CaLL',
                     text: types.Title,
                 },
                 {
-                    title: 'армию тьмы!',
+                    title: 'to action!',
                     text: types.Title,
                 },
         ],
         logos: [
             {
-                path: 'https://gn298.cdn.gamenet.ru/TY0Xv7cuq8/40t85/o_14Msj0.png',
-                alt: 'Fantasis',
+                path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
+                alt: 'Default Logo',
                 logo: types.Logo,
             },
             {
-                path: 'https://gn35.cdn.gamenet.ru/TY0Xv7cuq8/40t7s/o_10wksT.png',
-                alt: 'GameNet',
+                path: 'https://gn839.cdn.gamenet.ru/TY0Xv2riHu/6nOU5/o_21POBx.png',
+                alt: 'Default Logo',
                 logo: types.Logo,
             },
         ],
         links: [
             {
-                text: 'Каталог игр',
-                href: 'https://gamenet.ru/games/',
+                text: 'Catalog of games',
+                href: '#',
                 button: types.Button,
             },
             {
-                text: 'Поддержка',
-                href: 'https://support.gamenet.ru/',
+                text: 'Support',
+                href: '#',
                 button: types.Button,
             },
             {
-                text: 'Пользовательское соглашение',
-                href: 'https://gamenet.ru/platform/rules/',
+                text: 'Rules',
+                href: '#',
                 button: types.Button,
             },
         ],
@@ -325,7 +338,7 @@
     .layout {
         position: relative;
         min-height: 100vh;
-        background: center url("https://gn931.cdn.gamenet.ru/TY0Xv2riHu/6kuKg/o_1Vjpsx.jpg") no-repeat;
+        background: center url(https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png) no-repeat;
         background-size: cover; }
     .layout__wrap {
         position: relative;
@@ -376,7 +389,7 @@
     .footer {
         font-family: Arial, sans-serif;
         font-size: 1.1rem;
-        color: #a28f7b; }
+        color: #000; }
     .footer__group {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -401,11 +414,12 @@
         -ms-flex-negative: 0;
         flex-shrink: 0; }
     .footer__el_gamenet {
-        width:8.6rem;
+        width:11.6rem;
         margin-bottom: 0; }
     .footer__el_link {
         line-height: 1.15;
         border-bottom: 1px solid;
+        margin: 0 0.5rem;
         white-space: nowrap; }
     .footer__el_link:hover {
         border-bottom: 1px solid transparent; }
@@ -427,7 +441,7 @@
 
     .panel {
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.75);
+        background-color: rgba(96, 125, 139, 0.75);
         width: 40%;
         padding: 0 0.3rem;
         color: #fff;
@@ -489,10 +503,10 @@
     .b-18plus {
         position: absolute;
         display: block;
-        top: 1rem;
-        right: 1rem;
-        background: center url('https://gn465.cdn.gamenet.ru/TY0Xv85rCS/48mWu/o_7sHSf.png') no-repeat;
-        width: 3.6rem;
-        height: 3.6rem;
+        bottom: 2rem;
+        left: 5rem;
+        font-size: 3.6rem;
+        line-height: 3.6rem;
+        color: #000;
     }
 </style>
