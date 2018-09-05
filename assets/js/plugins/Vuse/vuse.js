@@ -247,6 +247,7 @@ class Vuse {
           <head>
             <title>${this.title}</title>
             <link href="${this.assets.css}" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
           </head>
           <body>
             ${artboard.innerHTML}

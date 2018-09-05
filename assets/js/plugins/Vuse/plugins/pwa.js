@@ -116,6 +116,7 @@ function download (assets) {
           <head>
             <title>${title}</title>
             <link href="assets/css/app.css" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
           </head>
           <body>
             ${artboard.innerHTML}
