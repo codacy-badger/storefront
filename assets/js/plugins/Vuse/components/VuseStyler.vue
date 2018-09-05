@@ -281,6 +281,15 @@
                     value.splice(idx, 1);
                 });
             },
+            addStyle: function(style, sValue) {
+                this.section.set(this.name, (value) => {
+                    if (value && value.hasOwnProperty('styles') && typeof value.styles === 'object') {
+                        value = value.styles;
+                    }
+
+                    value[style] = sValue;
+                });
+            },
             removeSection() {
                 this.$builder.remove(this.section);
             },

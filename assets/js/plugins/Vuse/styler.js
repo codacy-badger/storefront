@@ -25,6 +25,6 @@ function installStyler ({ builder, Vue }) {
       }).$mount(newNode));
     }
   };
-};
+}
 
 export default installStyler;

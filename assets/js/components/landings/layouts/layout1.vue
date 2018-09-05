@@ -1,5 +1,5 @@
 <template>
-  <section class="layout" v-styler:section="$sectionData.classes" :class="$sectionData.classes">
+  <section class="layout" v-styler:section="$sectionData.styles" :class="$sectionData.styles">
 
           <div class="b-18plus"></div>
           <div class="layout__wrap">
@@ -60,7 +60,7 @@
       cover: 'img/covers/layout1.png',
       group: 'Layouts',
       $schema: {
-        classes: types.ClassList,
+        styles: types.StyleList,
         buttons: [
            {
                text: 'Играть',

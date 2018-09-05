@@ -263,7 +263,6 @@ class Vuse {
   export (method = 'json') {
     if (method === 'pwa' || method === 'zip') {
       if (typeof this.download === 'function') {
-        console.log(this.sections);
         return this.download(this.assets);
       }
 
