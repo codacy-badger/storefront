@@ -2,12 +2,12 @@
     <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
          @click.stop="">
         <ul class="styler-list">
-            <li v-if="type === 'button' || type === 'section'">
+            <li v-if="type === 'button' || type === 'link' || type === 'section'">
                 <button class="styler-button" @click="updateOption('colorer')">
                     <VuseIcon name="palettes"></VuseIcon>
                 </button>
             </li>
-            <li v-if="type === 'button'">
+            <li v-if="type === 'button' || type === 'link'">
                 <button class="styler-button" @click="updateOption('link')">
                     <VuseIcon name="link"></VuseIcon>
                 </button>
@@ -17,6 +17,43 @@
                     <VuseIcon name="trash"></VuseIcon>
                 </button>
             </li>
+            <template v-if="type === 'link'">
+                <li>
+                    <button class="styler-button" @click="removeLink">
+                        <VuseIcon name="trash"></VuseIcon>
+                    </button>
+                <li>
+                    <button class="styler-button" @click="copyLink">
+                        <VuseIcon name="plus"></VuseIcon>
+                    </button>
+                </li>
+            </template>
+            <template v-if="type === 'title'">
+                <li>
+                    <button class="styler-button" @click="updateOption('textColor')">
+                        <VuseIcon name="palettes"></VuseIcon>
+                    </button>
+                </li>
+                <li>
+                    <button class="styler-button" @click="updateOption('align')">
+                        <VuseIcon name="align"></VuseIcon>
+                    </button>
+                </li>
+                <li>
+                    <button class="styler-button" @click="updateOption('textStyle')">
+                        <VuseIcon name="textStyle"></VuseIcon>
+                    </button>
+                </li>
+                <li>
+                    <button class="styler-button" @click="removeTitle">
+                        <VuseIcon name="trash"></VuseIcon>
+                    </button>
+                <li>
+                    <button class="styler-button" @click="copyTitle">
+                        <VuseIcon name="plus"></VuseIcon>
+                    </button>
+                </li>
+            </template>
             <template v-if="type === 'text'">
                 <li>
                     <button class="styler-button" @click="updateOption('textColor')">
@@ -165,6 +202,7 @@
     import Popper from 'popper.js';
     import VuseIcon from './VuseIcon';
     import {isParentTo} from './../util';
+    import _clone from 'lodash-es/clone';
 
     export default {
         name: 'Styler',
@@ -222,6 +260,12 @@
                 this.el.contentEditable = 'true';
             }
             if (this.type === 'text') {
+                this.el.contentEditable = 'true';
+            }
+            if (this.type === 'title') {
+                this.el.contentEditable = 'true';
+            }
+            if (this.type === 'link') {
                 this.el.contentEditable = 'true';
             }
         },
@@ -293,6 +337,25 @@
             },
             removeSection() {
                 this.$builder.remove(this.section);
+            },
+            insertAfter(elem, refElem) {
+                return refElem.parentNode.parentNode.insertBefore(elem, refElem.nextSibling);
+            },
+            copyLink() {
+                let l = this.section.data.links[0];
+                this.section.data.links.push(l);
+            },
+            removeLink() {
+                this.el.remove();
+                this.$refs.styler.remove();
+            },
+            copyTitle() {
+                let s = this.section.data.titles[0];
+                this.section.data.titles.push(s);
+            },
+            removeTitle() {
+                this.el.remove();
+                this.$refs.styler.remove();
             },
             execute(command, value = null) {
                 this.el.focus();

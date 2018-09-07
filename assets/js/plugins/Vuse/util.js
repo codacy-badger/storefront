@@ -25,8 +25,9 @@ export function getTypeFromSchema(target, schema) {
     const value = getPath(schema, tempTarget.join('.'));
     if (value === types.Grid) return 'grid';
     if (value === types.Text) return 'text';
-    if (value === types.Title) return 'text';
+    if (value === types.Title) return 'title';
     if (value === types.Button) return 'button';
+    if (value === types.Link) return 'link';
     if (value === types.ClassList) return 'section';
     if (value === types.StyleList) return 'text';
     if (value === String) return 'text';
@@ -76,11 +77,13 @@ export function getTypeFromTagName(tagName) {
         case 'BUTTON':
             return 'button';
         case 'A':
-            return 'button';
+            return 'link';
         case 'SECTION':
             return 'section';
         case 'HEADER':
             return 'section';
+        case 'BTITLE':
+            return 'title';
         default:
             break;
     }
