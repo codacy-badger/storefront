@@ -15,7 +15,8 @@ const data = new Map([
     [types.Quote, 'When you were made a leader, you weren\'t given a crown; you were given the responsibility to bring out the best in others.'],
     [types.Grid, () => ({mobile: '', tablet: '', desktop: '', widescreen: ''})],
     [Number, 100],
-    [String, 'This is pretty neat']
+    [String, 'This is pretty neat'],
+    [types.GalleryItem, `${ASSETS_DIR}/img/avatar.png`],
 ]);
 
 export default class Seeder {

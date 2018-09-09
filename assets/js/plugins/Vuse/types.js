@@ -10,4 +10,5 @@ export class Button {}
 export class Grid {}
 export class StyleList {}
 export class Slogan {}
+export class GalleryItem {}
 

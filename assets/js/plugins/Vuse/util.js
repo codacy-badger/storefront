@@ -84,6 +84,8 @@ export function getTypeFromTagName(tagName) {
             return 'section';
         case 'BTITLE':
             return 'title';
+        case 'GALLERY-ITEM':
+            return 'gallery-item';
         default:
             break;
     }

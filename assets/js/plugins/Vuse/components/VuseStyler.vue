@@ -28,6 +28,67 @@
                     </button>
                 </li>
             </template>
+            <template v-if="type === 'gallery-item'">
+                <div>
+                    <div>
+                        <li>
+                            <button class="styler-button" @click="removeItemGallery">
+                                <VuseIcon name="trash"></VuseIcon>
+                            </button>
+                        <li>
+                            <button class="styler-button" @click="copyItemGallery">
+                                <VuseIcon name="plus"></VuseIcon>
+                            </button>
+                        </li>
+                    </div>
+                    <div>
+                        <div class="input-group is-rounded has-itemAfter is-primary">
+                            <input class="input" type="text" placeholder="enter title" v-model="title"/>
+                            <button class="button" @click="addTitle">
+                                <VuseIcon name="plus"></VuseIcon>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group is-rounded has-itemAfter is-primary">
+                            <input class="input" type="text" placeholder="enter text" v-model="text"/>
+                            <button class="button" @click="addText">
+                                <VuseIcon name="plus"></VuseIcon>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: none;">
+                            <form>
+                                <input
+                                        type="file"
+                                        accept="image/*,video/mp4,video/x-m4v,video/*"
+                                        v-bind:ref="'choseGalleryItemPreviewInput'"
+                                        @change="onChooseGalleryItemPreview"/>
+                            </form>
+                        </div>
+
+                        <button class="styler-button" @click="choseGalleryItemPreview">
+                            <VuseIcon name="upload"></VuseIcon>
+                        </button>
+                    </div>
+                    <div>
+                        <div style="display: none;">
+                            <form>
+                                <input
+                                        type="file"
+                                        accept="image/*,video/mp4,video/x-m4v,video/*"
+                                        v-bind:ref="'choseGalleryItemImageInput'"
+                                        @change="onChooseGalleryItemImage"/>
+                            </form>
+                        </div>
+
+                        <button class="styler-button" @click="choseGalleryItemImage">
+                            <VuseIcon name="upload"></VuseIcon>
+                        </button>
+                    </div>
+                </div>
+            </template>
             <template v-if="type === 'title'">
                 <li>
                     <button class="styler-button" @click="updateOption('textColor')">
@@ -236,6 +297,10 @@
             mouseTarget: '',
             currentOption: '',
             url: '',
+            title: '',
+            text: '',
+            preview: '',
+            image: '',
             gridValue: 0,
             isVisible: false,
             bgChoiceType: null
@@ -349,6 +414,14 @@
                 this.el.remove();
                 this.$refs.styler.remove();
             },
+            copyItemGallery() {
+                let l = this.section.data.images[0];
+                this.section.data.images.push(l);
+            },
+            removeItemGallery() {
+                this.el.remove();
+                this.$refs.styler.remove();
+            },
             copyTitle() {
                 let s = this.section.data.titles[0];
                 this.section.data.titles.push(s);
@@ -356,6 +429,16 @@
             removeTitle() {
                 this.el.remove();
                 this.$refs.styler.remove();
+            },
+            addTitle() {
+                let index = this.el.getAttribute('data-index');
+
+                this.section.data.images[index].title = this.title;
+            },
+            addText() {
+                let index = this.el.getAttribute('data-index');
+
+                this.section.data.images[index].text = this.text;
             },
             execute(command, value = null) {
                 this.el.focus();
@@ -438,6 +521,82 @@
                     }).catch(function (e) {
                         console.warn(e);
                     });
+            },
+            choseGalleryItemPreview: function () {
+                this.bgChoiceType = null;
+                this['$refs']['choseGalleryItemPreviewInput'].click();
+            },
+            choseGalleryItemImage: function () {
+                this.bgChoiceType = null;
+                this['$refs']['choseGalleryItemImageInput'].click();
+            },
+            onChooseGalleryItemPreview: function (event) {
+                let self = this;
+                let file = event.target.files || event.dataTransfer.files;
+                let index = this.el.getAttribute('data-index');
+
+                if (!file.length) {
+                    return;
+                }
+
+                let request = new FormData();
+                let $form = window.$(event.target).parent();
+
+                request.append('file[]', file[0]);
+                request.append('method', 'storefront.upload');
+                request.append('format', 'json');
+
+                $form[0].reset();
+
+                window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+                        .then(function (response) {
+                            if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
+                                    || !response['data']['response'].hasOwnProperty('data')
+                                    || !Array.isArray(response['data']['response']['data'])) {
+                                return;
+                            }
+
+                            const data = response['data']['response']['data'][0];
+
+                            self.section.data.images[index].preview = data['src'];
+
+                        }).catch(function (e) {
+                            console.warn(e);
+                        });
+            },
+            onChooseGalleryItemImage: function (event) {
+                let self = this;
+                let file = event.target.files || event.dataTransfer.files;
+                let index = this.el.getAttribute('data-index');
+
+                if (!file.length) {
+                    return;
+                }
+
+                let request = new FormData();
+                let $form = window.$(event.target).parent();
+
+                request.append('file[]', file[0]);
+                request.append('method', 'storefront.upload');
+                request.append('format', 'json');
+
+                $form[0].reset();
+
+                window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+                        .then(function (response) {
+                            if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
+                                    || !response['data']['response'].hasOwnProperty('data')
+                                    || !Array.isArray(response['data']['response']['data'])) {
+                                return;
+                            }
+
+                            const data = response['data']['response']['data'][0];
+
+                            self.section.data.images[index].image = data['src'];
+
+                        }).catch(function (e) {
+                            console.warn(e);
+                        });
             }
         }
     };
