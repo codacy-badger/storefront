@@ -1,5 +1,6 @@
 <template>
-    <section class="pages__page pages__page_main funtoplay" v-styler:section="$sectionData.classes" :class="$sectionData.classes">
+    <section class="pages__page pages__page_main funtoplay" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
+             v-bind:style="$sectionData.mainStyle.styles">
         <div class="pages__bg p-bg">
             <div class="p-bg__cont">
                 <div class="p-bg__heros"></div>
@@ -33,11 +34,11 @@
         cover: 'img/covers/page-1-bg-alt.jpg',
         group: 'hero',
         $schema: {
+            mainStyle: types.StyleObject,
             title: types.Title,
             content: types.Text,
             images: [types.Image],
             button: types.Button,
-            classes: types.ClassList,
             slogan: [
                 {
                     title: 'Драйвовый шутер',
