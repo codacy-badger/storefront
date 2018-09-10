@@ -528,11 +528,12 @@
 
                 this.section.set(this.name, (value) => {
                     if (!value || !value.hasOwnProperty('styles') || typeof value.styles !== 'object'
-                        || !value.styles.hasOwnProperty('background')) {
+                        || !value.styles.hasOwnProperty('background-image')) {
                         return;
                     }
 
-                    value.styles['background'] = 'none';
+                    value.styles['background-image'] = 'none';
+                    value.styles['background-color'] = 'transparent';
                 });
             },
             removeSection() {
@@ -681,6 +682,7 @@
                     this.addStyle('background-position', 'inherit');
                     this.addStyle('background-repeat', 'inherit');
                     this.addStyle('background-size', 'inherit');
+                    this.addStyle('background-color', 'none');
 
                     this.videoBackgroundSources.push({source: data['src'], type: data['mime']});
                     this.addVideoBackground();
@@ -697,6 +699,7 @@
                     this.addStyle('background-position', DEFAULT_BACKGROUND_POSITION);
                     this.addStyle('background-repeat', DEFAULT_BACKGROUND_REPEAT);
                     this.addStyle('background-size', DEFAULT_BACKGROUND_SIZE);
+                    this.addStyle('background-color', 'none');
 
                     this.imageBgSelected = true;
                     this.videoBgSelected = false;
@@ -778,7 +781,6 @@
                             const data = response['data']['response']['data'][0];
 
                             self.section.data.images[index].preview = data['src'];
-
                         }).catch(function (e) {
                             console.warn(e);
                         });
@@ -822,7 +824,7 @@
 </script>
 
 <style lang="stylus">
-    @import '~@baianat/base.framework/src/stylus/util/colors'
+    @import '~@baianat/base.framework/src/stylus/util/colors';
 
     .styler
         position: absolute
