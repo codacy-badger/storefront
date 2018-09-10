@@ -10,7 +10,16 @@ const data = new Map([
     [types.Link, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
     [types.Image, `${ASSETS_DIR}/img/baianat.png`],
     [types.ClassList, () => []],
-    [types.StyleList, () => ({})],
+    [types.StyleObject, () => (
+        {
+            styles: {
+                'background-image': false,
+                'background-position': false,
+                'background-repeat': false,
+                'background-size': false
+            },
+            classes: []
+        })],
     [types.Button, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
     [types.Quote, 'When you were made a leader, you weren\'t given a crown; you were given the responsibility to bring out the best in others.'],
     [types.Grid, () => ({mobile: '', tablet: '', desktop: '', widescreen: ''})],
@@ -34,6 +43,7 @@ export default class Seeder {
         }
 
         let value = data.get(schema);
+
         if (value === undefined) {
             value = schema;
         }

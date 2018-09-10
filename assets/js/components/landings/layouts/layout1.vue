@@ -1,6 +1,6 @@
 <template>
-    <section class="b-layout-1" v-styler:section="$sectionData.classes" :class="$sectionData.classes"
-             v-styler="$sectionData.styles[0]">
+    <section class="b-layout-1" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
+             v-bind:style="$sectionData.mainStyle.styles">
         <div class="b-layout-1__wrap">
             <div class="b-layout-1__content">
                 <div class="b-layout-1__panel">
@@ -72,12 +72,7 @@
         cover: 'img/covers/layout1.png',
         group: 'Layouts',
         $schema: {
-            classes: types.ClassList,
-            styles: [
-                {
-                    text: types.StyleList
-                }
-            ],
+            mainStyle: types.StyleObject,
             age: {
                 title: '18+',
                 text: types.Text
