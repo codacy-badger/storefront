@@ -642,7 +642,7 @@
 
                 $form[0].reset();
 
-                window.axios.post('http://images.sinichkin.ru.local/restapi', request)
+                window.axios.post('http://images.stg.gamenet.ru/restapi', request)
                     .then(function (response) {
                         if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
                             || !response['data']['response'].hasOwnProperty('data')
