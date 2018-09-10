@@ -51,10 +51,11 @@
             <li v-if="currentOption === 'colorer'">
                 <ul class="colorer">
                     <li>
-                        <button class="styler-button" @click="bgChoiceType = 0">
+                        <button class="styler-button" @click="showBackgroundSettingsSection('link')">
                             <VuseIcon name="link"></VuseIcon>
                         </button>
                     </li>
+
                     <li>
                         <div style="display: none">
                             <form>
@@ -71,18 +72,64 @@
                         </button>
                     </li>
 
+                    <li v-if="imageBgSelected === true || videoBgSelected === true">
+                        <button class="styler-button" @click="identifyBackgroundSettingsSection">
+                            <VuseIcon name="cog"></VuseIcon>
+                        </button>
+                    </li>
+
                     <li v-for="color in colors">
                         <input type="radio" :id="`color${color.charAt(0).toUpperCase() + color.slice(1)}`"
                                name="colorer" :value="color" v-model="colorerColor"/>
                     </li>
                 </ul>
 
-                <div v-if="bgChoiceType === 0">
+                <div v-if="backgroundSettingsShow.link === true">
                     <div class="input-group is-rounded has-itemAfter is-primary">
-                        <input class="input" type="text" placeholder="type your link" v-model="url"/>
-                        <button class="button" @click="addLink">
+                        <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
+                        <button class="button" @click="addBackgroundAsLink">
                             <VuseIcon name="link"></VuseIcon>
                         </button>
+                    </div>
+                </div>
+
+                <div v-if="imageBgSelected === true && backgroundSettingsShow.image === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item">
+                        <label>Repeat</label>
+                        <select class="form-control" v-model="backgroundSelectedOptions.repeat" title="backgroundRepeatOption">
+                            <option v-for="option in backgroundOptions.repeat" v-bind:value="option">
+                                {{ option }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="b-styler__bg_options__item">
+                        <label>Position</label>
+                        <select class="form-control" v-model="backgroundSelectedOptions.position" title="backgroundPositionOption">
+                            <option v-for="option in backgroundOptions.positions" v-bind:value="option">
+                                {{ option }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="b-styler__bg_options__item">
+                        <label>Size</label>
+                        <select class="form-control" v-model="backgroundSelectedOptions.size" title="backgroundSizeOption">
+                            <option v-for="option in backgroundOptions.sizes" v-bind:value="option">
+                                {{ option }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div v-if="videoBgSelected === true && backgroundSettingsShow.video === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item">
+                        <label>Upload video at other format</label>
+                        <div>
+                            <button class="button" @click="choseBackground" style="width: 100%;">
+                                <VuseIcon name="upload"></VuseIcon>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -166,6 +213,13 @@
     import VuseIcon from './VuseIcon';
     import {isParentTo} from './../util';
 
+    const DEFAULT_BACKGROUND_REPEAT = 'no-repeat';
+    const DEFAULT_BACKGROUND_POSITION = 'center center';
+    const DEFAULT_BACKGROUND_SIZE = 'cover';
+
+    const VIDEO_BACKGROUND_MP4_EXTENSION = 'mp4';
+    const VIDEO_BACKGROUND_WEBM_EXTENSION = 'webm';
+
     export default {
         name: 'Styler',
         components: {
@@ -173,8 +227,14 @@
         },
         props: {
             el: {
-                type: Object,
-                required: true
+                required: true,
+                validator: function (value) {
+                    return (
+                        typeof HTMLElement === 'object' ? value instanceof HTMLElement :
+                            value && typeof value === 'object' && value !== null && value.nodeType === 1
+                            && typeof value.nodeName === 'string'
+                    );
+                }
             },
             type: {
                 type: String,
@@ -200,7 +260,31 @@
             url: '',
             gridValue: 0,
             isVisible: false,
-            bgChoiceType: null
+            imageBgSelected: false,
+            videoBgSelected: false,
+            videoBackgroundSources: [],
+            backgroundUrl: '',
+            backgroundOptions: {
+                repeat: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y'],
+                positions: [
+                    'left top',
+                    'left center',
+                    'left bottom',
+                    'right top',
+                    'right center',
+                    'right bottom',
+                    'center top',
+                    'center center',
+                    'center bottom'
+                ],
+                sizes: ['auto', 'cover', 'contain']
+            },
+            backgroundSelectedOptions: {
+                repeat: DEFAULT_BACKGROUND_REPEAT,
+                position: DEFAULT_BACKGROUND_POSITION,
+                size: DEFAULT_BACKGROUND_SIZE
+            },
+            backgroundSettingsShow: {video: false, image: false, link: false}
         }),
         watch: {
             colorerColor: function () {
@@ -214,6 +298,15 @@
                 this.section.set(this.name, (grid) => {
                     grid[this.device] = this.gridValue;
                 });
+            },
+            'backgroundSelectedOptions.repeat': function(value) {
+                this.addStyle('background-repeat', value);
+            },
+            'backgroundSelectedOptions.position': function(value) {
+                this.addStyle('background-position', value);
+            },
+            'backgroundSelectedOptions.size': function(value) {
+                this.addStyle('background-size', value);
             }
         },
         created() {
@@ -228,7 +321,6 @@
         mounted() {
             if (!this.$builder.isEditing) return;
 
-            // add listeners to show/hide styler
             this.el.addEventListener('click', this.showStyler);
         },
         beforeDestroy() {
@@ -282,13 +374,39 @@
                 });
             },
             addStyle: function(style, sValue) {
-                this.section.set(this.name, (value) => {
-                    //console.log(value);
-                    //if (value && value.hasOwnProperty('styles') && typeof value.styles === 'object') {
-                        //value = value.styles;
-                    //}
+                let self = this;
 
-                    value[style] = sValue;
+                this.section.set(this.name, (value) => {
+                    if (!value || !value.hasOwnProperty('styles') || typeof value.styles !== 'object'
+                        || !value.styles.hasOwnProperty(style)) {
+                        return;
+                    }
+
+                    value.styles[style] = sValue;
+
+                    $(self.el).find('div.b-video-bg').remove();
+                });
+            },
+            addVideoBackground: function() {
+                let el = $(this.el);
+                let content = '<div class="b-video-bg">' +
+                    '<video preload="auto" autoplay="autoplay" loop="loop" muted="muted">';
+
+                for (let i = 0; i < this.videoBackgroundSources.length; i++) {
+                    content += '<source src="' + this.videoBackgroundSources[i]['source'] + '" type="' + this.videoBackgroundSources[i]['type'] + '" />'
+                }
+
+                content += '</video></div>';
+
+                el.append(content);
+
+                this.section.set(this.name, (value) => {
+                    if (!value || !value.hasOwnProperty('styles') || typeof value.styles !== 'object'
+                        || !value.styles.hasOwnProperty('background')) {
+                        return;
+                    }
+
+                    value.styles['background'] = 'none';
                 });
             },
             removeSection() {
@@ -341,7 +459,7 @@
                 this.section.set(this.name, this.el.innerHTML);
             },
             choseBackground: function () {
-                this.bgChoiceType = null;
+                this.backgroundUrl = '';
                 this['$refs']['choseBackgroundContentInput'].click();
             },
             onChooseBackground: function (event) {
@@ -361,7 +479,7 @@
 
                 $form[0].reset();
 
-                window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+                window.axios.post('http://images.sinichkin.ru.local/restapi', request)
                     .then(function (response) {
                         if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
                             || !response['data']['response'].hasOwnProperty('data')
@@ -369,12 +487,74 @@
                             return;
                         }
 
-                        const data = response['data']['response']['data'][0];
-
-                        self.addStyle('background-image', data['src']);
+                        self.showBackground(response['data']['response']['data'][0]);
                     }).catch(function (e) {
                         console.warn(e);
                     });
+            },
+            identifyBackgroundSettingsSection: function() {
+                if (true === this.imageBgSelected) {
+                    this.showBackgroundSettingsSection('image');
+                }
+
+                if (true === this.videoBgSelected) {
+                    this.showBackgroundSettingsSection('video');
+                }
+            },
+            showBackground: function(data) {
+                if (data['type'] === 'video') {
+                    this.addStyle('background-image', 'none');
+                    this.addStyle('background-position', 'inherit');
+                    this.addStyle('background-repeat', 'inherit');
+                    this.addStyle('background-size', 'inherit');
+
+                    this.videoBackgroundSources.push({source: data['src'], type: data['mime']});
+                    this.addVideoBackground();
+
+                    this.imageBgSelected = false;
+                    this.videoBgSelected = true;
+
+                    this.showBackgroundSettingsSection('video');
+                } else {
+                    this.videoBackgroundSources = [];
+
+                    this.addStyle('background-image', 'url(' + data['src'] + ')');
+                    this.addStyle('background-position', DEFAULT_BACKGROUND_POSITION);
+                    this.addStyle('background-repeat', DEFAULT_BACKGROUND_REPEAT);
+                    this.addStyle('background-size', DEFAULT_BACKGROUND_SIZE);
+
+
+                    this.imageBgSelected = true;
+                    this.videoBgSelected = false;
+
+                    this.showBackgroundSettingsSection('image');
+                }
+            },
+            addBackgroundAsLink: function() {
+                const extension = (/[.]/.exec(this.backgroundUrl)) ? /[^.]+$/.exec(this.backgroundUrl).pop() : undefined;
+
+                if (extension === VIDEO_BACKGROUND_MP4_EXTENSION || extension === VIDEO_BACKGROUND_WEBM_EXTENSION) {
+                    this.showBackground({type: 'video', mime: 'video/' + extension, src: this.backgroundUrl});
+                } else {
+                    this.showBackground({src: this.backgroundUrl});
+                }
+            },
+            showBackgroundSettingsSection: function (type) {
+                for (let key in this.backgroundSettingsShow) {
+                    if (!this.backgroundSettingsShow.hasOwnProperty(key)) {
+                        continue;
+                    }
+
+                    this.backgroundSettingsShow[key] = false;
+                }
+
+                if (!this.backgroundSettingsShow.hasOwnProperty(type)) {
+                    return;
+                }
+
+                $(this.$refs['styler']).css('transform', 'translate3d(899px, 5px, 0px)');
+
+                this.backgroundSettingsShow[type] = true;
             }
         }
     };
@@ -481,4 +661,38 @@
     input[type=number]::-webkit-outer-spin-button
         -webkit-appearance: none
         margin: 0
+
+    label
+        display: inline-block
+        max-width: 100%
+        margin-bottom: 5px
+        font-weight: 400
+
+    .form-control
+        display: block
+        width: 100%
+        height: 34px
+        //padding: 6px 12px
+        font-size: 14px
+        line-height: 1.42857143
+        color: #555
+        background-color: #fff
+        background-image: none
+        border: 1px solid #ccc
+        border-radius: 4px
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+
+    .b-styler__bg_options_container
+        margin-top: 10px
+        padding: 15px 5px
+        border-top: 1px solid #ffffff
+        display: flex
+        flex-direction: column
+
+    .b-styler__bg_options__item
+        margin-bottom: 10px
 </style>

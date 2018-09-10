@@ -15,6 +15,7 @@ function installStyler ({ builder, Vue }) {
       const rootApp = vnode.context.$root.$el;
       rootApp.appendChild(newNode);
       el.classList.add('is-editable');
+
       section.stylers.push(new StylerInstance({
         propsData: {
           el,
