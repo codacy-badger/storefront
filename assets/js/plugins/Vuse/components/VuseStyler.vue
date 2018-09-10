@@ -365,6 +365,7 @@
             }
         },
         data: () => ({
+            colors: ['blue', 'green', 'red', 'black', 'white'],
             textColors: ['#4da1ff', '#38E4B7', '#EA4F52', '#000000', '#FFFFFF'],
             textColor: '',
             oldColorerColor: '',
