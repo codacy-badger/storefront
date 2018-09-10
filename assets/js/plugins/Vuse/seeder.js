@@ -7,7 +7,7 @@ const data = new Map([
     [types.Text, 'We\'re creating the best place to go when starting a new business or company.With Baianat you can instantly search domain names, social media handles, and see your logo in beautiful logotypes.'],
     [types.Avatar, `${ASSETS_DIR}/img/avatar.png`],
     [types.Logo, `${ASSETS_DIR}/img/google.svg`],
-    [types.Link, 'http://example.com'],
+    [types.Link, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
     [types.Image, `${ASSETS_DIR}/img/baianat.png`],
     [types.ClassList, () => []],
     [types.StyleObject, () => (
@@ -24,7 +24,8 @@ const data = new Map([
     [types.Quote, 'When you were made a leader, you weren\'t given a crown; you were given the responsibility to bring out the best in others.'],
     [types.Grid, () => ({mobile: '', tablet: '', desktop: '', widescreen: ''})],
     [Number, 100],
-    [String, 'This is pretty neat']
+    [String, 'This is pretty neat'],
+    [types.GalleryItem, `${ASSETS_DIR}/img/avatar.png`],
 ]);
 
 export default class Seeder {

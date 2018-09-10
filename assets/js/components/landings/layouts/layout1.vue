@@ -12,15 +12,15 @@
                         <div class="b-layout-1__panel__section">
                             <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].text"
                                  v-text="$sectionData.slogan[0].title"></div>
-                            <div class="b-layout-1__panel__title panel__title_big"
-                                 v-styler="$sectionData.slogan[1].text" v-text="$sectionData.slogan[1].title"></div>
+                            <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].text"
+                                 v-text="$sectionData.slogan[1].title"></div>
                         </div>
 
                         <div class="b-layout-1__panel__section">
                             <ul class="b-layout-1__panel__features">
-                                <div class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.features">
-                                    <span v-text="item.title" v-styler="item.text"></span>
-                                </div>
+                                <btitle class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" v-styler="$sectionData.titles[index]">
+                                    {{ item.text }}
+                                </btitle>
                             </ul>
                         </div>
                         <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
@@ -88,28 +88,28 @@
                     button: types.Button,
                 },
             ],
-            features: [
+            titles: [
                 {
-                    title: 'Modern 3D graphics in the browser',
-                    text: types.Text,
+                    text: 'Modern 3D graphics in the browser',
+                    title: types.Title,
                 },
                 {
-                    title: 'Create multiple characters on the server',
-                    text: types.Text,
+                    text: 'Create multiple characters on the server',
+                    title: types.Title,
                 },
                 {
-                    title: 'Wide opportunities for pumping the hero',
-                    text: types.Text,
+                    text: 'Wide opportunities for pumping the hero',
+                    title: types.Title,
                 },
             ],
             slogan: [
                 {
                     title: 'CaLL',
-                    text: types.Title,
+                    text: types.Text,
                 },
                 {
                     title: 'to action!',
-                    text: types.Title,
+                    text: types.Text,
                 },
             ],
             logos: [

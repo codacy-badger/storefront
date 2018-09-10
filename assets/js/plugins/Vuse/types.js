@@ -8,5 +8,7 @@ export class Link {}
 export class ClassList {}
 export class Button {}
 export class Grid {}
+export class Slogan {}
+export class GalleryItem {}
 export class StyleObject {}
 

@@ -22,6 +22,7 @@ import social2 from './components/landings/social/social2';
 import social3 from './components/landings/social/social3';
 import social4 from './components/landings/social/social4';
 import layout1 from './components/landings/layouts/layout1';
+import gallery1 from './components/landings/galleries/gallery1';
 
 import pwa from './plugins/Vuse/plugins/pwa';
 
@@ -45,6 +46,7 @@ Vuse.component(social2);
 Vuse.component(social3);
 Vuse.component(social4);
 Vuse.component(layout1);
+Vuse.component(gallery1);
 
 Vuse.use(pwa);
 
@@ -66,6 +68,10 @@ Vue.use(Vuse, {
         {
             name: 'Battle Carnival. Fun to play',
             sections: [hero_funtoplay3]
+        },
+        {
+            name: 'Gallery',
+            sections: [gallery1]
         }
     ]
 });
