@@ -597,7 +597,7 @@
                 this.currentOption = '';
             },
             hideStyler(event) {
-                if ((event && isParentTo(event.target, this.$el)) || (event && isParentTo(event.target, this.el))) {
+                if (event && isParentTo(event.target, this.$el)) {
                     return;
                 }
 
