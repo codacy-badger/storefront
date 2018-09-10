@@ -21,7 +21,16 @@ const data = new Map([
             },
             classes: []
         })],
-    [types.Button, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
+    [types.Button, () => (
+        {
+            text: 'Click Me!',
+            classes: [],
+            href: 'http://example.com',
+            styles: {
+                'background-color': false
+            }
+        }
+    )],
     [types.Quote, 'When you were made a leader, you weren\'t given a crown; you were given the responsibility to bring out the best in others.'],
     [types.Grid, () => ({mobile: '', tablet: '', desktop: '', widescreen: ''})],
     [Number, 100],

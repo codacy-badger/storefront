@@ -26,7 +26,8 @@
                         <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
                             <span class="b-layout-1__b-button" @click.prevent="onClick"
                                   :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href"
-                                  v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button">
+                                  v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button"
+                                    v-bind:style="$sectionData.buttons[0].button.styles">
 
                             </span>
                         </div>

@@ -1,5 +1,6 @@
 <template>
-  <section class="pages__page pages__page_hero"  v-styler:section="$sectionData.classes" :class="$sectionData.classes">
+  <section class="pages__page pages__page_hero"  v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
+           v-bind:style="$sectionData.mainStyle.styles">
           <div class="page-2-stain medium-hide"></div>
           <div class="pages__wrap flex flex_columns ie-height-fix">
               <div class="l-title flex__item">
@@ -45,7 +46,7 @@
       name: 'Gallery1',      cover: 'img/covers/gallery1.png',
       group: 'galleries',
       $schema: {
-        classes: types.ClassList,
+        mainStyle: types.StyleObject,
         bigImage: {
             title: '',
             text: '',
