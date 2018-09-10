@@ -4,7 +4,7 @@
         <ul class="styler-list">
             <li v-if="type === 'button' || type === 'link' || type === 'section'">
                 <button class="styler-button" @click="updateOption('colorer')">
-                    <VuseIcon name="palettes"></VuseIcon>
+                    <VuseIcon name="bar"></VuseIcon>
                 </button>
             </li>
             <li v-if="type === 'button' || type === 'link'">
@@ -176,18 +176,32 @@
                         </button>
                     </li>
 
-                    <li v-for="color in colors">
-                        <input type="radio" :id="`color${color.charAt(0).toUpperCase() + color.slice(1)}`"
-                               name="colorer" :value="color" v-model="colorerColor"/>
+                    <li>
+                        <button class="styler-button" @click="showColorPeckerSection">
+                            <VuseIcon name="palettes"></VuseIcon>
+                        </button>
                     </li>
                 </ul>
 
-                <div v-if="backgroundSettingsShow.link === true">
-                    <div class="input-group is-rounded has-itemAfter is-primary">
-                        <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
-                        <button class="button" @click="addBackgroundAsLink">
-                            <VuseIcon name="link"></VuseIcon>
+                <div v-if="backgroundSettingsShow.color === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item">
+                        <sketch-color-pecker v-model="backgroundColor"></sketch-color-pecker>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="button" style="width: 120px;" @click="setBackgroundColor">
+                            <VuseIcon name="check"></VuseIcon>&nbsp;&nbsp;Set color
                         </button>
+                    </div>
+                </div>
+
+                <div v-if="backgroundSettingsShow.link === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item">
+                        <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
+                            <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
+                            <button class="button" @click="addBackgroundAsLink">
+                                <VuseIcon name="link"></VuseIcon>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -311,6 +325,7 @@
     import VuseIcon from './VuseIcon';
     import {isParentTo} from './../util';
     import _clone from 'lodash-es/clone';
+    import { Sketch } from 'vue-color'
 
     const DEFAULT_BACKGROUND_REPEAT = 'no-repeat';
     const DEFAULT_BACKGROUND_POSITION = 'center center';
@@ -322,7 +337,8 @@
     export default {
         name: 'Styler',
         components: {
-            VuseIcon
+            VuseIcon,
+            SketchColorPecker: Sketch
         },
         props: {
             el: {
@@ -349,7 +365,6 @@
             }
         },
         data: () => ({
-            colors: ['blue', 'green', 'red', 'black', 'white'],
             textColors: ['#4da1ff', '#38E4B7', '#EA4F52', '#000000', '#FFFFFF'],
             textColor: '',
             oldColorerColor: '',
@@ -367,6 +382,7 @@
             videoBgSelected: false,
             videoBackgroundSources: [],
             backgroundUrl: '',
+            backgroundColor: '#ffffff',
             backgroundOptions: {
                 repeat: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y'],
                 positions: [
@@ -387,7 +403,7 @@
                 position: DEFAULT_BACKGROUND_POSITION,
                 size: DEFAULT_BACKGROUND_SIZE
             },
-            backgroundSettingsShow: {video: false, image: false, link: false}
+            backgroundSettingsShow: {video: false, image: false, link: false, color: false}
         }),
         watch: {
             colorerColor: function () {
@@ -638,6 +654,17 @@
                         console.warn(e);
                     });
             },
+            setBackgroundColor: function() {
+                this.addStyle('background-image', 'none');
+                this.addStyle('background-position', 'inherit');
+                this.addStyle('background-repeat', 'inherit');
+                this.addStyle('background-size', 'inherit');
+
+                this.imageBgSelected = false;
+                this.videoBgSelected = false;
+
+                this.addStyle('background-color', this.backgroundColor.hex8);
+            },
             identifyBackgroundSettingsSection: function() {
                 if (true === this.imageBgSelected) {
                     this.showBackgroundSettingsSection('image');
@@ -659,6 +686,7 @@
 
                     this.imageBgSelected = false;
                     this.videoBgSelected = true;
+                    this.backgroundColor = '#ffffff';
 
                     this.showBackgroundSettingsSection('video');
                 } else {
@@ -669,9 +697,9 @@
                     this.addStyle('background-repeat', DEFAULT_BACKGROUND_REPEAT);
                     this.addStyle('background-size', DEFAULT_BACKGROUND_SIZE);
 
-
                     this.imageBgSelected = true;
                     this.videoBgSelected = false;
+                    this.backgroundColor = '#ffffff';
 
                     this.showBackgroundSettingsSection('image');
                 }
@@ -684,6 +712,10 @@
                 } else {
                     this.showBackground({src: this.backgroundUrl});
                 }
+            },
+            showColorPeckerSection: function() {
+                $(this.$refs['styler']).css('transform', 'translate3d(1020px, 5px, 0px)');
+                this.showBackgroundSettingsSection('color');
             },
             showBackgroundSettingsSection: function (type) {
                 for (let key in this.backgroundSettingsShow) {
@@ -698,7 +730,13 @@
                     return;
                 }
 
-                $(this.$refs['styler']).css('transform', 'translate3d(899px, 5px, 0px)');
+                let position = '899px';
+
+                if (type === 'link') {
+                    position = '969px';
+                }
+
+                $(this.$refs['styler']).css('transform', 'translate3d(' + position + ', 5px, 0px)');
 
                 this.backgroundSettingsShow[type] = true;
             },
