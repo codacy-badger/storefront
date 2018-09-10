@@ -12,20 +12,20 @@
                             :class="{'hero-tile_active' : $sectionData.indexActive == index }"
                             v-for="(item, index) in $sectionData.images"
                             @click.prevent="onSelect(item, index)"
-                            v-styler="item"
+                            v-styler="$sectionData.images[index]"
                             :data-index="index"
                             >
                           <div class="hero-tile__frame">
-                              <img class="hero-tile__img" :src="item.preview" :alt="item.title"/>
+                              <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                           </div>
-                          <div class="hero-tile__name">{{ item.title }}</div>
+                          <btitle class="hero-tile__name" v-styler="$sectionData.images[index].names">{{ $sectionData.images[index].title }}</btitle>
                       </gallery-item>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
-                      <div class="loader__content">
-                          <div class="hero-detail__name h1" v-text="$sectionData.bigImage.title"></div>
-                          <div class="hero-detail__img" :style="{ 'backgroundImage': 'url(' + $sectionData.bigImage.image + ')'}"></div>
-                          <div class="hero-detail__bio" v-text="$sectionData.bigImage.text"></div>
+                      <div class="loader__content" v-for="(item, index) in $sectionData.images" v-if="index == $sectionData.indexActive">
+                          <btitle class="hero-detail__name h1" v-styler="$sectionData.images[index].names">{{ $sectionData.images[index].title }}</btitle>
+                          <div class="hero-detail__img" :style="{ 'backgroundImage': 'url(' + item.image + ')'}"></div>
+                          <btitle class="hero-detail__bio" v-styler="$sectionData.images[index].texts">{{ $sectionData.images[index].text }}</btitle>
                       </div>
                   </div>
               </div>
@@ -71,20 +71,26 @@
         ],
         images: [
             {
-                title: 'Boy',
+                title: types.Title,
+                names: '$sectionData.images[0].title',
                 text: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.',
+                texts: '$sectionData.images[0].text',
                 preview: 'https://gn261.cdn.gamenet.ru/TY0Xv2riHu/6oAY0/o_2BUAMA.png',
                 image: 'https://gn419.cdn.gamenet.ru/TY0Xv2riHu/6oAYY/o_1x1wuT.png',
             },
             {
-                title: 'Char',
+                title: types.Title,
+                names: '$sectionData.images[1].title',
                 text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+                texts: '$sectionData.images[1].text',
                 preview: 'https://gn437.cdn.gamenet.ru/TY0Xv2riHu/6oAyS/o_VTkSB.png',
                 image: 'https://gn530.cdn.gamenet.ru/TY0Xv2riHu/6oAyH/o_Qg1IO.png',
             },
             {
-                title: 'Boy Second',
+                title: types.Title,
+                names: '$sectionData.images[2].title',
                 text: 'Text for Boy Second',
+                texts: '$sectionData.images[2].text',
                 preview: 'https://gn261.cdn.gamenet.ru/TY0Xv2riHu/6oAY0/o_2BUAMA.png',
                 image: 'https://gn419.cdn.gamenet.ru/TY0Xv2riHu/6oAYY/o_1x1wuT.png',
             },
@@ -104,14 +110,13 @@
           onSelect (item, index) {
               let self = this;
 
-              self.$sectionData.bigImage = item;
               self.$sectionData.indexActive = index;
           }
       },
       mounted: function(){
           let self = this;
 
-          self.$sectionData.bigImage = self.$sectionData.images[0];
+          self.$sectionData.indexActive = 0;
 
           console.log(types);
       },
