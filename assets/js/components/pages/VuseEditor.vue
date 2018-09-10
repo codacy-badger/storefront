@@ -1,5 +1,5 @@
 <template>
-    <VuseBuilder @saved="onSave" />
+    <VuseBuilder @saved="onSave" @preview="onPreview" />
 </template>
 
 <script>
@@ -7,6 +7,9 @@
         methods: {
             onSave(builder) {
                 builder.export('pwa');
+            },
+            onPreview: function (builder) {
+                builder.export('preview');
             }
         }
     }
