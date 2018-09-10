@@ -541,7 +541,7 @@
                 return refElem.parentNode.parentNode.insertBefore(elem, refElem.nextSibling);
             },
             copyLink() {
-                let l = this.section.data.links[0];
+                let l = Object.assign({}, this.section.data.links[0]);
                 this.section.data.links.push(l);
             },
             removeLink() {
@@ -549,7 +549,7 @@
                 this.$refs.styler.remove();
             },
             copyItemGallery() {
-                let l = this.section.data.images[0];
+                let l = Object.assign({}, this.section.data.images[0]);
                 this.section.data.images.push(l);
             },
             removeItemGallery() {
@@ -557,7 +557,7 @@
                 this.$refs.styler.remove();
             },
             copyTitle() {
-                let s = this.section.data.titles[0];
+                let s = Object.assign({}, this.section.data.titles[0]);
                 this.section.data.titles.push(s);
             },
             removeTitle() {
