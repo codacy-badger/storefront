@@ -710,7 +710,8 @@
                     this.addStyle('background-position', 'inherit');
                     this.addStyle('background-repeat', 'inherit');
                     this.addStyle('background-size', 'inherit');
-                    this.addStyle('background-color', 'none');
+                    this.addStyle('background-color', 'transparent');
+                    this.addStyle('background', 'none');
 
                     this.videoBackgroundSources.push({source: data['src'], type: data['mime']});
                     this.addVideoBackground();
@@ -727,7 +728,6 @@
                     this.addStyle('background-repeat', 'inherit');
                     this.addStyle('background-size', 'inherit');
                     this.addStyle('background-color', 'transparent');
-                    this.addStyle('background', 'none');
 
                     this.videoBackgroundPosterSource = data['src'];
 
@@ -746,7 +746,7 @@
                     this.addStyle('background-position', DEFAULT_BACKGROUND_POSITION);
                     this.addStyle('background-repeat', DEFAULT_BACKGROUND_REPEAT);
                     this.addStyle('background-size', DEFAULT_BACKGROUND_SIZE);
-                    this.addStyle('background-color', 'none');
+                    this.addStyle('background-color', 'transparent');
 
                     this.imageBgSelected = true;
                     this.videoBgSelected = false;

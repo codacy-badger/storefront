@@ -19,7 +19,7 @@
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                           </div>
-                          <btitle class="hero-tile__name" v-styler="$sectionData.images[index].names">{{ $sectionData.images[index].title }}</btitle>
+                          <btitle class="hero-tile__name" v-styler="$sectionData.images[index].type">{{ $sectionData.images[index].type.text }}</btitle>
                       </gallery-item>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
@@ -78,6 +78,7 @@
                 texts: '$sectionData.images[0].text',
                 preview: 'https://gn261.cdn.gamenet.ru/TY0Xv2riHu/6oAY0/o_2BUAMA.png',
                 image: 'https://gn419.cdn.gamenet.ru/TY0Xv2riHu/6oAYY/o_1x1wuT.png',
+                type: types.Button
             },
             {
                 title: types.Title,
@@ -86,6 +87,7 @@
                 texts: '$sectionData.images[1].text',
                 preview: 'https://gn437.cdn.gamenet.ru/TY0Xv2riHu/6oAyS/o_VTkSB.png',
                 image: 'https://gn530.cdn.gamenet.ru/TY0Xv2riHu/6oAyH/o_Qg1IO.png',
+                type: types.Button
             },
             {
                 title: types.Title,
@@ -94,6 +96,7 @@
                 texts: '$sectionData.images[2].text',
                 preview: 'https://gn261.cdn.gamenet.ru/TY0Xv2riHu/6oAY0/o_2BUAMA.png',
                 image: 'https://gn419.cdn.gamenet.ru/TY0Xv2riHu/6oAYY/o_1x1wuT.png',
+                type: types.Button
             },
         ]
       },
