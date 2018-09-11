@@ -72,7 +72,7 @@
                             <VuseIcon name="upload"></VuseIcon>
                         </button>
                     </div>
-                    <div>
+                    <!--div>
                         <div style="display: none;">
                             <form>
                                 <input
@@ -86,7 +86,7 @@
                         <button class="styler-button" @click="choseGalleryItemImage">
                             <VuseIcon name="upload"></VuseIcon>
                         </button>
-                    </div>
+                    </div-->
                 </div>
             </template>
             <template v-if="type === 'title'">

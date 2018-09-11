@@ -29,6 +29,7 @@ export default {
   }),
   created () {
     this.src = this.$section.get(this.path);
+    console.log(this.path);
   },
   methods: {
     updateImage () {
