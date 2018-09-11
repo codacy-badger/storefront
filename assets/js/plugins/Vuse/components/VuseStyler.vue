@@ -726,7 +726,8 @@
                     this.addStyle('background-position', 'inherit');
                     this.addStyle('background-repeat', 'inherit');
                     this.addStyle('background-size', 'inherit');
-                    this.addStyle('background-color', 'none');
+                    this.addStyle('background-color', 'transparent');
+                    this.addStyle('background', 'none');
 
                     this.videoBackgroundPosterSource = data['src'];
 

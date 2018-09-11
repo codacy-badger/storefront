@@ -17,7 +17,8 @@ const data = new Map([
                 'background-position': false,
                 'background-repeat': false,
                 'background-size': false,
-                'background-color': false
+                'background-color': false,
+                'background': false
             },
             classes: []
         })],
