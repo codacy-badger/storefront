@@ -18,20 +18,26 @@
                             >
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
+                              <!--uploader class="hero-tile__img" :path="$sectionData.images[index].img" :src="item.preview" :alt="item.title" /-->
                           </div>
                           <btitle class="hero-tile__name" v-styler="$sectionData.images[index].type">{{ $sectionData.images[index].type.text }}</btitle>
                       </gallery-item>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
-                      <div class="loader__content" v-for="(item, index) in $sectionData.images" v-if="index == $sectionData.indexActive">
-                          <btitle class="hero-detail__name h1" v-styler="$sectionData.images[index].names">{{ $sectionData.images[index].title }}</btitle>
-                          <div class="hero-detail__img" :style="{ 'backgroundImage': 'url(' + item.image + ')'}"></div>
-                          <btitle class="hero-detail__bio" v-styler="$sectionData.images[index].texts">{{ $sectionData.images[index].text }}</btitle>
+                      <div class="loader__content" v-for="(item, index) in $sectionData.images" v-if="index == index1">
+                          <btitle class="hero-detail__name h1" v-styler="$sectionData.images[index].title">
+                              {{ $sectionData.images[index].title.text }}
+                          </btitle>
+                          <!--uploader class="hero-tile__img" :path="$sectionData.images[index].img[0]" /-->
+                          <btitle class="hero-detail__bio" v-styler="$sectionData.images[index].text">
+                              {{ $sectionData.images[index].text }}
+                          </btitle>
                       </div>
                   </div>
               </div>
               <div class="btn-container flex__item">
-                <span class="btn-container__button" @click.prevent="onClick" :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href" v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button">
+                <span class="btn-container__button" @click.prevent="onClick"
+                      :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href" v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button">
                 </span>
               </div>
           </div>
@@ -45,13 +51,12 @@
     export default {
       name: 'Gallery1',      cover: 'img/covers/gallery1.png',
       group: 'galleries',
+        data: () => ({
+        index1: 0
+    }),
       $schema: {
         mainStyle: types.StyleObject,
-        bigImage: {
-            title: '',
-            text: '',
-            image: '',
-        },
+        bigImage: {},
         indexActive: 0,
         buttons: [
            {
@@ -72,31 +77,25 @@
         ],
         images: [
             {
-                title: types.Title,
-                names: '$sectionData.images[0].title',
-                text: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.',
-                texts: '$sectionData.images[0].text',
-                preview: 'https://gn261.cdn.gamenet.ru/TY0Xv2riHu/6oAY0/o_2BUAMA.png',
-                image: 'https://gn419.cdn.gamenet.ru/TY0Xv2riHu/6oAYY/o_1x1wuT.png',
-                type: types.Button
+                preview: [types.Image],
+                type: types.Button,
+                title: types.Button,
+                img: [types.Image],
+                text: types.Text,
             },
             {
-                title: types.Title,
-                names: '$sectionData.images[1].title',
-                text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                texts: '$sectionData.images[1].text',
-                preview: 'https://gn437.cdn.gamenet.ru/TY0Xv2riHu/6oAyS/o_VTkSB.png',
-                image: 'https://gn530.cdn.gamenet.ru/TY0Xv2riHu/6oAyH/o_Qg1IO.png',
-                type: types.Button
+                preview: [types.Image],
+                type: types.Button,
+                title: types.Button,
+                img: [types.Image],
+                text: types.Text,
             },
             {
-                title: types.Title,
-                names: '$sectionData.images[2].title',
-                text: 'Text for Boy Second',
-                texts: '$sectionData.images[2].text',
-                preview: 'https://gn261.cdn.gamenet.ru/TY0Xv2riHu/6oAY0/o_2BUAMA.png',
-                image: 'https://gn419.cdn.gamenet.ru/TY0Xv2riHu/6oAYY/o_1x1wuT.png',
-                type: types.Button
+                preview: [types.Image],
+                type: types.Button,
+                title: types.Button,
+                img: [types.Image],
+                text: types.Text,
             },
         ]
       },
@@ -114,15 +113,13 @@
           onSelect (item, index) {
               let self = this;
 
-              self.$sectionData.indexActive = index;
+              self.index1 = index;
           }
       },
       mounted: function(){
           let self = this;
 
-          self.$sectionData.indexActive = 0;
-
-          console.log(types);
+          self.$sectionData.bigImage = this.$sectionData.images[this.index1];
       },
     };
 </script>
