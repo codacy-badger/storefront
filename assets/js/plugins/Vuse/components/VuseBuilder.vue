@@ -4,7 +4,7 @@
             <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
         </div>
         <div class="controller">
-            <div class="controller-intro" v-if="showIntro &amp;&amp; !this.$builder.sections.length">
+            <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
                 <label for="projectName">Hello, start your project</label>
                 <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
                 <template v-if="themes">
