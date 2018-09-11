@@ -329,7 +329,7 @@ export default {
   user-select: none
   -moz-user-select: none
   position: fixed
-  z-index 300
+  z-index 1000
   top: 0
   left: 0
   bottom: 0

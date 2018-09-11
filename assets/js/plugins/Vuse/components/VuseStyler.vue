@@ -238,7 +238,8 @@
                     <div class="b-styler__bg_options__item">
                         <label>Upload video at other format</label>
                         <div>
-                            <button class="button" @click="choseBackground" style="width: 100%;">
+                            <button class="button" @click="choseBackground" style="width: 100%;"
+                                    v-bind:disabled="isRequestProcess === true">
                                 <VuseIcon name="upload"></VuseIcon>
                             </button>
                         </div>
@@ -247,7 +248,8 @@
                     <div class="b-styler__bg_options__item">
                         <label>Upload poster image</label>
                         <div>
-                            <button class="button" @click="choseVideoBackgroundPoster" style="width: 100%;">
+                            <button class="button" @click="choseVideoBackgroundPoster" style="width: 100%;"
+                                    v-bind:disabled="isRequestProcess === true">
                                 <VuseIcon name="upload"></VuseIcon>
                             </button>
                         </div>
@@ -415,7 +417,8 @@
             },
             backgroundSettingsShow: {video: false, image: false, link: false, color: false},
             isVideoBackgroundPoster: false,
-            videoBackgroundPosterSource: ''
+            videoBackgroundPosterSource: '',
+            isRequestProcess: false
         }),
         watch: {
             colorerColor: function () {
@@ -655,6 +658,8 @@
                     return;
                 }
 
+                this.isRequestProcess = true;
+
                 let request = new FormData();
                 let $form = window.$(event.target).parent();
 
@@ -675,6 +680,8 @@
                         self.showBackground(response['data']['response']['data'][0]);
                     }).catch(function (e) {
                         console.warn(e);
+                    }).then(function () {
+                        self.isRequestProcess = false;
                     });
             },
             setBackgroundColor: function() {
