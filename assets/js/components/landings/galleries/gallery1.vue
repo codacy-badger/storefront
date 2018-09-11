@@ -10,7 +10,7 @@
               <div class="p-split flex__item flex flex_center">
                   <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
                       <gallery-item class="hero-tile"
-                            :class="{'hero-tile_active' : $sectionData.indexActive == index }"
+                            :class="{'hero-tile_active' : $sectionData.indexActive === index }"
                             v-for="(item, index) in $sectionData.images"
                             @click.prevent="onSelect(item, index)"
                             v-styler="$sectionData.images[index]"
@@ -24,11 +24,11 @@
                       </gallery-item>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
-                      <div class="loader__content" v-for="(item, index) in $sectionData.images" v-if="index == index1">
+                      <div class="loader__content" v-for="(item, index) in $sectionData.images" v-show="index === $sectionData.indexActive">
                           <btitle class="hero-detail__name h1" v-styler="$sectionData.images[index].title">
                               {{ $sectionData.images[index].title.text }}
                           </btitle>
-                          <!--uploader class="hero-tile__img" :path="$sectionData.images[index].img[0]" /-->
+                          <uploader class="hero-tile__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
                           <btitle class="hero-detail__bio" v-styler="$sectionData.images[index].text">
                               {{ $sectionData.images[index].text }}
                           </btitle>
@@ -49,11 +49,9 @@
     import * as types from './../../../plugins/Vuse/types';
 
     export default {
-      name: 'Gallery1',      cover: 'img/covers/gallery1.png',
+      name: 'Gallery1',
+      cover: 'img/covers/gallery1.png',
       group: 'galleries',
-        data: () => ({
-        index1: 0
-    }),
       $schema: {
         mainStyle: types.StyleObject,
         bigImage: {},
@@ -113,13 +111,13 @@
           onSelect (item, index) {
               let self = this;
 
-              self.index1 = index;
+              this.$sectionData.indexActive = index;
           }
       },
-      mounted: function(){
-          let self = this;
+        mounted: function () {
+            let self = this;
 
-          self.$sectionData.bigImage = this.$sectionData.images[this.index1];
-      },
+            self.$sectionData.bigImage = this.$sectionData.images[this.index1];
+        },
     };
 </script>

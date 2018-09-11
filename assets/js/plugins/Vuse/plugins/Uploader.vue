@@ -29,7 +29,6 @@ export default {
   }),
   created () {
     this.src = this.$section.get(this.path);
-    console.log(this.path);
   },
   methods: {
     updateImage () {
@@ -38,6 +37,7 @@ export default {
       const imageURL = URL.createObjectURL(file);
 
       this.src = imageURL;
+
       this.$section.set(this.path, imageURL);
     }
   }
