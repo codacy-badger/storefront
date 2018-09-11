@@ -20,8 +20,8 @@ function installStyler ({ builder, Vue }) {
         propsData: {
           el,
           section: section,
-          type: binding.arg || getTypeFromSchema(binding.expression, section.schema) || getTypeFromTagName(el.tagName),
-          name: binding.expression
+          type: binding.arg  ||  getTypeFromSchema(binding.expression, section.schema) || getTypeFromTagName(el.tagName),
+          name: binding.value
         }
       }).$mount(newNode));
     }

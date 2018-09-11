@@ -41,7 +41,7 @@
                             </button>
                         </li>
                     </div>
-                    <div>
+                    <!--div>
                         <div class="input-group is-rounded has-itemAfter is-primary">
                             <input class="input" type="text" placeholder="enter title" v-model="title"/>
                             <button class="button" @click="addTitle">
@@ -56,7 +56,7 @@
                                 <VuseIcon name="plus"></VuseIcon>
                             </button>
                         </div>
-                    </div>
+                    </div-->
                     <div>
                         <div style="display: none;">
                             <form>
