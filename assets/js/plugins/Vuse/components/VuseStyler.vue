@@ -243,6 +243,15 @@
                             </button>
                         </div>
                     </div>
+
+                    <div class="b-styler__bg_options__item">
+                        <label>Upload poster image</label>
+                        <div>
+                            <button class="button" @click="choseVideoBackgroundPoster" style="width: 100%;">
+                                <VuseIcon name="upload"></VuseIcon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </li>
             <li v-if="currentOption === 'textColor'">
@@ -404,7 +413,9 @@
                 position: DEFAULT_BACKGROUND_POSITION,
                 size: DEFAULT_BACKGROUND_SIZE
             },
-            backgroundSettingsShow: {video: false, image: false, link: false, color: false}
+            backgroundSettingsShow: {video: false, image: false, link: false, color: false},
+            isVideoBackgroundPoster: false,
+            videoBackgroundPosterSource: ''
         }),
         watch: {
             colorerColor: function () {
@@ -516,7 +527,13 @@
             addVideoBackground: function() {
                 let el = $(this.el);
                 let content = '<div class="b-video-bg">' +
-                    '<video preload="auto" autoplay="autoplay" loop="loop" muted="muted">';
+                    '<video preload="auto" autoplay="autoplay" loop="loop" muted="muted"';
+
+                if (this.isVideoBackgroundPoster === true) {
+                    content += ' poster="' + this.videoBackgroundPosterSource + '">'
+                } else {
+                    content += '>';
+                }
 
                 for (let i = 0; i < this.videoBackgroundSources.length; i++) {
                     content += '<source src="' + this.videoBackgroundSources[i]['source'] + '" type="' + this.videoBackgroundSources[i]['type'] + '" />'
@@ -626,6 +643,10 @@
                 this.backgroundUrl = '';
                 this['$refs']['choseBackgroundContentInput'].click();
             },
+            choseVideoBackgroundPoster: function() {
+                this.isVideoBackgroundPoster = true;
+                this.choseBackground();
+            },
             onChooseBackground: function (event) {
                 let self = this;
                 let file = event.target.files || event.dataTransfer.files;
@@ -690,6 +711,24 @@
                     this.imageBgSelected = false;
                     this.videoBgSelected = true;
                     this.backgroundColor = '#ffffff';
+                    this.isVideoBackgroundPoster = false;
+
+                    this.showBackgroundSettingsSection('video');
+                } else if (this.isVideoBackgroundPoster === true) {
+                    this.addStyle('background-image', 'none');
+                    this.addStyle('background-position', 'inherit');
+                    this.addStyle('background-repeat', 'inherit');
+                    this.addStyle('background-size', 'inherit');
+                    this.addStyle('background-color', 'none');
+
+                    this.videoBackgroundPosterSource = data['src'];
+
+                    this.addVideoBackground();
+
+                    this.imageBgSelected = false;
+                    this.videoBgSelected = true;
+                    this.backgroundColor = '#ffffff';
+                    this.isVideoBackgroundPoster = false;
 
                     this.showBackgroundSettingsSection('video');
                 } else {
@@ -704,6 +743,8 @@
                     this.imageBgSelected = true;
                     this.videoBgSelected = false;
                     this.backgroundColor = '#ffffff';
+                    this.isVideoBackgroundPoster = false;
+                    this.videoBackgroundPosterSource = '';
 
                     this.showBackgroundSettingsSection('image');
                 }

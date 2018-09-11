@@ -14,6 +14,9 @@
                 </template>
             </div>
             <div class="controller-panel">
+                <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
+                    <VuseIcon name="eye"></VuseIcon>
+                </button>
                 <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
                     <VuseIcon name="download"></VuseIcon>
                 </button>
@@ -188,6 +191,9 @@ export default {
     },
     submit () {
       this.$emit('saved', this.$builder);
+    },
+    preview: function() {
+        this.$emit('preview', this.$builder);
     },
     generateGroups () {
       let groups = { random: [] };
