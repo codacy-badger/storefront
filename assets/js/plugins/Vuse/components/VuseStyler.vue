@@ -105,11 +105,11 @@
                         <VuseIcon name="textStyle"></VuseIcon>
                     </button>
                 </li>
-                <li>
+                <li v-if="Array.isArray(this.section.data.titles)">
                     <button class="styler-button" @click="removeTitle">
                         <VuseIcon name="trash"></VuseIcon>
                     </button>
-                <li>
+                <li v-if="Array.isArray(this.section.data.titles)">
                     <button class="styler-button" @click="copyTitle">
                         <VuseIcon name="plus"></VuseIcon>
                     </button>
