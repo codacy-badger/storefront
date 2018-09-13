@@ -256,6 +256,150 @@ class Vuse {
         );
     }
 
+    previewDevices() {
+        const frag = this.outputFragment();
+        const artboard = frag.querySelector('#artboard');
+        const printPreview = window.open('about:blank', 'print_preview');
+        const printDocument = printPreview.document;
+        cleanDOM(frag);
+
+        let html = `<!DOCTYPE html>
+        <html>
+          <head>
+            <link href="${window.location.origin + '/' + this.assets.css}" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+          </head>
+          <body>
+            ${artboard.innerHTML}
+          <body>
+        </html>`;
+
+        html = encodeURIComponent(html);
+
+        printDocument.open();
+        printDocument.write(
+            `<!DOCTYPE html>
+        <html>
+          <head>
+            <title>${this.title}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            
+            <style type="text/css">
+                button {
+                    -webkit-appearance: button;
+                    cursor: pointer;
+                }
+            
+                .controller-panel {
+                    position: fixed;
+                    z-index: 200;
+                    bottom: 30px;
+                    right: 40px;
+                }
+                
+                .controller-button.is-green {
+                    background-color: #18d88b;
+                }
+                
+                .controller-button:not(:last-child) {
+                    margin-right: 20px;
+                }
+
+                .controller-button {
+                    -webkit-transition: 0.2s;
+                    transition: 0.2s;
+                    border: none;
+                    outline: none;
+                    border-radius: 20px;
+                    padding: 5px;
+                    color: #fff;
+                    fill: #fff;
+                    font-size: 16px;
+                }
+                
+                .controller-button.is-green:hover {
+                    background-color: #13ad6f;
+                }
+                
+                .controller-button svg {
+                    -webkit-transition: 0.2s;
+                    transition: 0.2s;
+                }
+                svg:not(:root) {
+                    overflow: hidden;
+                }
+                
+                .vuse-icon {
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                }
+            
+                iframe {
+                    outline: medium none;
+                    height: 100%;
+                    border: none;
+                    margin: auto;
+                    display: block;
+                    transition: width 0.35s ease,height 0.35s ease;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+                
+                iframe.is-desktop {
+                    width: 100%;
+                }
+                
+                iframe.is-tablet {
+                    width: 768px;
+                }
+                
+                iframe.is-mobile {
+                    width: 375px;
+                }            
+            </style>
+            
+            <script type="text/javascript">
+                function setDevice(device) {
+                  var frame = document.getElementById('container');
+                  
+                  console.log(frame);
+                  
+                  if (frame.length <= 0) {
+                      return;
+                  }
+                  
+                  frame.className = device;
+                }
+            </script>
+          </head>
+          <body>
+            <div class="controller-panel" style="height: 30px;">
+                <button class="controller-button is-green" onclick="setDevice('is-desktop')">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="vuse-icon" viewBox="0 0 576 512">
+                        <path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"></path>
+                    </svg>
+                </button>
+                <button class="controller-button is-green" onclick="setDevice('is-tablet')">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="vuse-icon" viewBox="0 0 448 512">
+                        <path d="M400 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM224 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm176-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h328c6.6 0 12 5.4 12 12v312z"></path>
+                    </svg>
+                </button>
+                <button class="controller-button is-green" onclick="setDevice('is-mobile')">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="vuse-icon" viewBox="0 0 320 512">
+                        <path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path>
+                    </svg>
+                </button>            
+            </div>
+            <iframe id="container" allowfullscreen="allowfullscreen" class="is-desktop" src="data:text/html;charset=utf-8,${html}"></iframe>
+          <body>
+        </html>`
+        );
+    }
+
     /**
      * Exports the builder instance to a specified output. default is json.
      *
@@ -272,6 +416,10 @@ class Vuse {
 
         if (method === 'preview') {
             return this.preview();
+        }
+
+        if (method === 'preview-devices') {
+            return this.previewDevices();
         }
 
         return this.toJSON();

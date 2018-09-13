@@ -1,7 +1,7 @@
 import * as types from './types';
 import {isObject} from './util';
 
-const ASSETS_DIR = '.';
+const ASSETS_DIR = window.location.origin;
 const data = new Map([
     [types.Title, 'Awesome title'],
     [types.Text, 'We\'re creating the best place to go when starting a new business or company.With Baianat you can instantly search domain names, social media handles, and see your logo in beautiful logotypes.'],

@@ -9,7 +9,7 @@
                 builder.export('pwa');
             },
             onPreview: function (builder) {
-                builder.export('preview');
+                builder.export('preview-devices');
             }
         }
     }
