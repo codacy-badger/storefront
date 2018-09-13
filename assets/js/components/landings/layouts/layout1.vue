@@ -18,7 +18,7 @@
 
                         <div class="b-layout-1__panel__section">
                             <ul class="b-layout-1__panel__features">
-                                <btitle class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" v-styler="$sectionData.titles[index]">
+                                <btitle class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" v-styler="$sectionData.titles[index].title">
                                     {{ item.text }}
                                 </btitle>
                             </ul>

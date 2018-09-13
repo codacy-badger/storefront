@@ -7,7 +7,7 @@
                   <h1 class="l-title__title" v-styler="$sectionData.slogan[0].text" v-text="$sectionData.slogan[0].title"/>
                   <div class="l-title__subtitle" v-styler="$sectionData.slogan[1].text" v-text="$sectionData.slogan[1].title"/>
               </div>
-              <div class="p-split flex__item flex flex_center">
+              <div class="p-split flex__item flex">
                   <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
                       <gallery-item class="hero-tile"
                             :class="{'hero-tile_active' : $sectionData.indexActive === index }"
@@ -25,10 +25,11 @@
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
                       <div class="loader__content" v-for="(item, index) in $sectionData.images" v-show="index === $sectionData.indexActive">
-                          <btitle class="hero-detail__name h1" v-styler="$sectionData.images[index].title">
-                              {{ $sectionData.images[index].title.text }}
+                          <btitle class="hero-detail__name h1"
+                               v-html="$sectionData.images[index].title"
+                               v-styler="$sectionData.images[index].title">
                           </btitle>
-                          <uploader class="hero-tile__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
+                          <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
                           <btitle class="hero-detail__bio" v-styler="$sectionData.images[index].text">
                               {{ $sectionData.images[index].text }}
                           </btitle>
@@ -77,21 +78,21 @@
             {
                 preview: [types.Image],
                 type: types.Button,
-                title: types.Button,
+                title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
             {
                 preview: [types.Image],
                 type: types.Button,
-                title: types.Button,
+                title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
             {
                 preview: [types.Image],
                 type: types.Button,
-                title: types.Button,
+                title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
