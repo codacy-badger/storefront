@@ -7,7 +7,10 @@ mix
             assetsPath: 'assets'
         }
     )
-    .js('assets/js/app.js', 'public/js')
+    .js([
+        'assets/js/app.js',
+        'assets/js/cscripts/gallery1.js'
+    ], 'public/js')
     .sass('assets/sass/app.scss', 'public/css/app_sass.css')
     .stylus('assets/sass/stylus/_sections.styl', 'public/css/sections_stylus.css')
     .stylus('assets/sass/stylus/_app.styl', 'public/css/app_stylus.css')
@@ -22,4 +25,8 @@ mix
         ],
         'public/css/app.css'
     )
+    // for gallery1
+    .js('assets/js/cscripts/gallery1.js', 'public/js/cscripts/gallery1.js')
+    .sass('assets/sass/themes/gallery1.sass', 'public/css/gallery1.css')
+    //
     .copyDirectory('assets/img', 'public/img');

@@ -11,26 +11,26 @@ const data = new Map([
     [types.Image, `${ASSETS_DIR}/img/baianat.png`],
     [types.ClassList, () => []],
     [types.StyleObject, () => (
-        {
-            styles: {
-                'background-image': false,
-                'background-position': false,
-                'background-repeat': false,
-                'background-size': false,
-                'background-color': false,
-                'background': false
-            },
-            classes: []
-        })],
+    {
+        styles: {
+            'background-image': false,
+            'background-position': false,
+            'background-repeat': false,
+            'background-size': false,
+            'background-color': false,
+            'background': false
+        },
+        classes: []
+    })],
     [types.Button, () => (
-        {
-            text: 'Click Me!',
-            classes: [],
-            href: 'http://example.com',
-            styles: {
-                'background-color': false
-            }
+    {
+        text: 'Click Me!',
+        classes: [],
+        href: 'http://example.com',
+        styles: {
+            'background-color': false
         }
+    }
     )],
     [types.Quote, 'When you were made a leader, you weren\'t given a crown; you were given the responsibility to bring out the best in others.'],
     [types.Grid, () => ({mobile: '', tablet: '', desktop: '', widescreen: ''})],
@@ -44,20 +44,20 @@ export default class Seeder {
     static seed(schema) {
         if (isObject(schema)) {
             return Object.keys(schema).reduce((values, key) => {
-                values[key] = Seeder.seed(schema[key]);
-                return values;
-            }, {});
-        } else if (Array.isArray(schema)) {
-            return schema.map(s => {
+                    values[key] = Seeder.seed(schema[key]);
+            return values;
+        }, {});
+    } else if (Array.isArray(schema)) {
+        return schema.map(s => {
                 return Seeder.seed(s)
             });
-        }
-
-        let value = data.get(schema);
-
-        if (value === undefined) {
-            value = schema;
-        }
-        return typeof value === 'function' ? value() : value;
     }
+
+    let value = data.get(schema);
+
+    if (value === undefined) {
+        value = schema;
+    }
+    return typeof value === 'function' ? value() : value;
+}
 };

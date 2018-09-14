@@ -52,6 +52,16 @@ Vuse.use(pwa);
 
 Vue.use(Vuse, {
     css: 'css/app.css',
+    /*assets: {
+        preview: [{
+            css: 'css/app.css',
+            js: 'js/app.js'
+        }],
+        download: [{
+            css: 'css/app.css',
+            js: 'js/app.js'
+        }],
+    },*/
     themes: [
         {
             name: 'Theme 1',

@@ -38,7 +38,8 @@ class Vuse {
         this.themes = options.themes;
         this.components = {};
         this.assets = {
-            css: options.css || 'dist/css/app.css'
+            css: options.css || 'css/app.css',
+            js: options.js || 'js/app.js',
         };
         this.installPlugins();
     }
@@ -251,6 +252,7 @@ class Vuse {
           </head>
           <body>
             ${artboard.innerHTML}
+            <script src="${this.assets.js}"></script>
           <body>
         </html>`
         );
@@ -283,24 +285,24 @@ class Vuse {
           <head>
             <title>${this.title}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            
+
             <style type="text/css">
                 button {
                     -webkit-appearance: button;
                     cursor: pointer;
                 }
-            
+
                 .controller-panel {
                     position: fixed;
                     z-index: 200;
                     bottom: 30px;
                     right: 40px;
                 }
-                
+
                 .controller-button.is-green {
                     background-color: #18d88b;
                 }
-                
+
                 .controller-button:not(:last-child) {
                     margin-right: 20px;
                 }
@@ -316,11 +318,11 @@ class Vuse {
                     fill: #fff;
                     font-size: 16px;
                 }
-                
+
                 .controller-button.is-green:hover {
                     background-color: #13ad6f;
                 }
-                
+
                 .controller-button svg {
                     -webkit-transition: 0.2s;
                     transition: 0.2s;
@@ -328,13 +330,13 @@ class Vuse {
                 svg:not(:root) {
                     overflow: hidden;
                 }
-                
+
                 .vuse-icon {
                     display: block;
                     width: 20px;
                     height: 20px;
                 }
-            
+
                 iframe {
                     outline: medium none;
                     height: 100%;
@@ -348,30 +350,30 @@ class Vuse {
                     left: 0;
                     right: 0;
                 }
-                
+
                 iframe.is-desktop {
                     width: 100%;
                 }
-                
+
                 iframe.is-tablet {
                     width: 768px;
                 }
-                
+
                 iframe.is-mobile {
                     width: 375px;
-                }            
+                }
             </style>
-            
+
             <script type="text/javascript">
                 function setDevice(device) {
                   var frame = document.getElementById('container');
-                  
+
                   console.log(frame);
-                  
+
                   if (frame.length <= 0) {
                       return;
                   }
-                  
+
                   frame.className = device;
                 }
             </script>
@@ -392,7 +394,7 @@ class Vuse {
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="vuse-icon" viewBox="0 0 320 512">
                         <path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path>
                     </svg>
-                </button>            
+                </button>
             </div>
             <iframe id="container" allowfullscreen="allowfullscreen" class="is-desktop" src="data:text/html;charset=utf-8,${html}"></iframe>
           <body>

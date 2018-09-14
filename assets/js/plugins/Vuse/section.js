@@ -31,9 +31,6 @@ export default class Section {
     }
 
     obj[prop] = value;
-
-    console.log("section.js set name: " + name);
-    console.log("section.js set value: " + value);
   }
 
   get (name) {

@@ -41,22 +41,6 @@
                             </button>
                         </li>
                     </div>
-                    <!--div>
-                        <div class="input-group is-rounded has-itemAfter is-primary">
-                            <input class="input" type="text" placeholder="enter title" v-model="title"/>
-                            <button class="button" @click="addTitle">
-                                <VuseIcon name="plus"></VuseIcon>
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group is-rounded has-itemAfter is-primary">
-                            <input class="input" type="text" placeholder="enter text" v-model="text"/>
-                            <button class="button" @click="addText">
-                                <VuseIcon name="plus"></VuseIcon>
-                            </button>
-                        </div>
-                    </div-->
                     <div>
                         <div style="display: none;">
                             <form>
@@ -72,21 +56,6 @@
                             <VuseIcon name="upload"></VuseIcon>
                         </button>
                     </div>
-                    <!--div>
-                        <div style="display: none;">
-                            <form>
-                                <input
-                                        type="file"
-                                        accept="image/*,video/mp4,video/x-m4v,video/*"
-                                        v-bind:ref="'choseGalleryItemImageInput'"
-                                        @change="onChooseGalleryItemImage"/>
-                            </form>
-                        </div>
-
-                        <button class="styler-button" @click="choseGalleryItemImage">
-                            <VuseIcon name="upload"></VuseIcon>
-                        </button>
-                    </div-->
                 </div>
             </template>
             <template v-if="type === 'title'">
@@ -573,6 +542,7 @@
             copyItemGallery() {
                 let l = Object.assign({}, this.section.data.images[0]);
                 this.section.data.images.push(l);
+                this.section.schema.images.push(l);
             },
             removeItemGallery() {
                 this.el.remove();
@@ -581,20 +551,17 @@
             copyTitle() {
                 let s = Object.assign({}, this.section.data.titles[0]);
                 this.section.data.titles.push(s);
+                this.section.schema.titles.push(s);
             },
             removeTitle() {
-                this.el.remove();
+                let index;
+
+                if ($(this.el).data('index')) {
+                    index = $(this.el).data('index');
+                }
                 this.$refs.styler.remove();
-            },
-            addTitle() {
-                let index = this.el.getAttribute('data-index');
-
-                this.section.data.images[index].title = this.title;
-            },
-            addText() {
-                let index = this.el.getAttribute('data-index');
-
-                this.section.data.images[index].text = this.text;
+                this.el.remove();
+                this.section.schema.titles.splice(index, 1);
             },
             execute(command, value = null) {
                 this.el.focus();

@@ -1,30 +1,30 @@
 <template>
-  <section class="pages__page pages__page_hero"  v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
+  <section id="gallery1" class="pages__page pages__page_hero"  v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
            v-bind:style="$sectionData.mainStyle.styles">
-          <div class="page-2-stain medium-hide"></div>
           <div class="pages__wrap flex flex_columns ie-height-fix">
               <div class="l-title flex__item">
                   <h1 class="l-title__title" v-styler="$sectionData.slogan[0].text" v-text="$sectionData.slogan[0].title"/>
                   <div class="l-title__subtitle" v-styler="$sectionData.slogan[1].text" v-text="$sectionData.slogan[1].title"/>
               </div>
-              <div class="p-split flex__item flex">
+              <div class="p-split flex__item flex flex__item_full">
                   <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
                       <gallery-item class="hero-tile"
-                            :class="{'hero-tile_active' : $sectionData.indexActive === index }"
                             v-for="(item, index) in $sectionData.images"
-                            @click.prevent="onSelect(item, index)"
                             v-styler="$sectionData.images[index]"
                             :data-index="index"
+                            :gallery-one-preview="'loader__content_show'"
                             >
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                               <!--uploader class="hero-tile__img" :path="$sectionData.images[index].img" :src="item.preview" :alt="item.title" /-->
                           </div>
-                          <btitle class="hero-tile__name" v-styler="$sectionData.images[index].type">{{ $sectionData.images[index].type.text }}</btitle>
+                          <btitle class="hero-tile__name" v-styler="$sectionData.images[index].type">
+                              {{ $sectionData.images[index].type.text }}
+                          </btitle>
                       </gallery-item>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
-                      <div class="loader__content" v-for="(item, index) in $sectionData.images" v-show="index === $sectionData.indexActive">
+                      <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images">
                           <btitle class="hero-detail__name h1"
                                v-html="$sectionData.images[index].title"
                                v-styler="$sectionData.images[index].title">
@@ -48,6 +48,7 @@
 
 <script>
     import * as types from './../../../plugins/Vuse/types';
+    import { galleryPreviewClick } from './../../../../js/cscripts/gallery1';
 
     export default {
       name: 'Gallery1',
@@ -56,7 +57,6 @@
       $schema: {
         mainStyle: types.StyleObject,
         bigImage: {},
-        indexActive: 0,
         buttons: [
            {
                text: 'Choose character',
@@ -109,16 +109,13 @@
 
                const endpoint = this.$sectionData.buttons[0].href;
           },
-          onSelect (item, index) {
-              let self = this;
-
-              this.$sectionData.indexActive = index;
-          }
       },
-        mounted: function () {
-            let self = this;
+      mounted: function () {
+        let self = this;
+;
+        galleryPreviewClick();
 
-            self.$sectionData.bigImage = this.$sectionData.images[this.index1];
-        },
+        this.$builder
+      },
     };
 </script>

@@ -13,15 +13,23 @@ function installStyler ({ builder, Vue }) {
       const newNode = document.createElement('div');
       const section = vnode.context.$section;
       const rootApp = vnode.context.$root.$el;
+      let name, type;
+
       rootApp.appendChild(newNode);
       el.classList.add('is-editable');
+
+      if (binding.arg == 'index') {
+          name = binding.value;
+      } else {
+          name = binding.expression;
+      }
 
       section.stylers.push(new StylerInstance({
         propsData: {
           el,
           section: section,
-          type: binding.arg || getTypeFromSchema(binding.expression, section.schema) || getTypeFromTagName(el.tagName),
-          name: binding.expression
+          type: ( binding.arg != 'index' && binding.arg ) || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
+          name: name
         }
       }).$mount(newNode));
     }

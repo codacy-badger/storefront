@@ -74,6 +74,9 @@ body
         -ms-user-select: none
         padding: 2rem 3rem
         user-select: none
+        @media only screen and (max-width: 540px)
+            &
+                padding: 1rem
         &:hover
             background-color: #ffef7c
             box-shadow: inset 0 0 2.5rem #ffba21, 0 0 3.5rem #e45b00
@@ -105,6 +108,9 @@ body
             &_logo
                 width: 11.6rem
                 margin-bottom: 0
+                @media only screen and (max-width: 540px)
+                    &
+                        width: 8rem
             &_link
                 line-height: 1.15
                 border-bottom: 1px solid
@@ -143,6 +149,9 @@ body
             height: 100%
             border-left: 1px dotted rgba(162, 143, 123, 0.5)
             border-right: 1px dotted rgba(162, 143, 123, 0.5)
+            @media only screen and (max-width: 540px)
+                &
+                    padding: 1rem
         &__section
             margin-bottom: 3rem
             &_grow
@@ -153,18 +162,28 @@ body
             margin-bottom: 0
         &__logo-img
             display: block
-            margin: 2rem auto 0 auto
+            margin: 2rem auto 0
+            max-width: 80%
+            @media only screen and (max-width: 540px)
+                &
+                    margin: 1rem auto
         &__title
             font-size: 2.4rem
             text-align: center
         &__title_big
             font-size: 3.5rem
             text-transform: uppercase
+            @media only screen and (max-width: 540px)
+                &
+                    font-size: 2rem
         &__features
             font-size: 1.9rem
             list-style: none
             padding-left: 3.5rem
             margin: 0 0 1rem 0
+            @media only screen and (max-width: 540px)
+                &
+                    font-size: 1.4rem
         &__feature
             margin-bottom: 0.5em
             position: relative
