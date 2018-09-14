@@ -59,9 +59,6 @@
                 </div>
             </div>
         </div>
-        <div class="b-layout-1__b-18plus" v-text="$sectionData.age.title" v-styler="$sectionData.age.text">
-            18+
-        </div>
     </section>
 </template>
 
@@ -71,7 +68,7 @@
     export default {
         name: 'Layout1',
         cover: 'img/covers/layout1.png',
-        group: 'Layouts',
+        group: 'layouts',
         $schema: {
             mainStyle: types.StyleObject,
             age: {

@@ -1,12 +1,14 @@
 <template>
     <div class="uploader">
         <img v-bind:src="src" />
-        <input
+        <form>
+            <input
                 class="uploader-input"
                 type="file"
                 ref="uploader"
-                @change="updateImage"
+                @change="uploadImg"
                 v-if="$builder.isEditing && mode === 'input'" />
+        </form>
     </div>
 </template>
 
@@ -31,15 +33,39 @@ export default {
     this.src = this.$section.get(this.path);
   },
   methods: {
-    updateImage () {
-      const file = this.$refs.uploader.files[0];
-      if (!file) return;
-      const imageURL = URL.createObjectURL(file);
+    uploadImg: function (event) {
+        let file = event.target.files || event.dataTransfer.files;
+        let self = this;
 
-      this.src = imageURL;
+          if (!file) {
+              return;
+          }
 
-      this.$section.set(this.path, imageURL);
-    }
+          let request = new FormData();
+          let $form = window.$(event.target).parent();
+
+          request.append('file[]', file[0]);
+          request.append('method', 'storefront.upload');
+          request.append('format', 'json');
+
+          $form[0].reset();
+
+          window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+            .then(function (response) {
+                if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
+                    || !response['data']['response'].hasOwnProperty('data')
+                    || !Array.isArray(response['data']['response']['data'])) {
+                        return;
+                }
+
+                const data = response['data']['response']['data'][0];
+
+               self.$section.set(self.path, data['src']);
+               self.src = data['src'];
+            }).catch(function (e) {
+               console.warn(e);
+            });
+      },
   }
 }
 </script>

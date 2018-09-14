@@ -23,57 +23,6 @@
 .stains, .l-popup__content, .btn-container__button
   position: relative
 
-.stains:before, .l-popup__content:before, .btn-container__button:before, .stains:after, .l-popup__content:after, .btn-container__button:after
-  content: ''
-  position: absolute
-  display: block
-  height: 60px
-  width: 60px
-  background: url("../../img/funtoplay3/button-stain.png") center center no-repeat
-  background-size: contain
-  opacity: 0
-  -webkit-transition: 100ms all
-  transition: 100ms all
-  -webkit-backface-visibility: hidden
-  backface-visibility: hidden
-  pointer-events: none
-  z-index: -1
-
-.stains:before, .l-popup__content:before, .btn-container__button:before
-  right: -18px
-  top: -39px
-
-.stains:after, .l-popup__content:after, .btn-container__button:after
-  left: -14px
-  bottom: -25px
-  -webkit-transform: rotate(-180deg)
-  transform: rotate(-180deg)
-
-.stains_hover:before, .l-popup__content:before, .btn-container__button:hover:before, .stains_hover:after, .l-popup__content:after, .btn-container__button:hover:after
-  opacity: 1
-
-.stains_hover:before, .l-popup__content:before, .btn-container__button:hover:before
-  right: -23px
-  top: -44px
-
-.stains_hover:after, .l-popup__content:after, .btn-container__button:hover:after
-  left: -19px
-  bottom: -30px
-
-@font-face
-  font-family: 'bebas'
-  src: url("../../fonts/bebasneue/bebasneue_regular-webfont.woff2") format("woff2"), url("../../fonts/bebasneue/bebasneue_regular-webfont.woff") format("woff")
-  font-weight: normal
-  font-style: normal
-
-
-@font-face
-  font-family: 'bebas'
-  src: url("../../fonts/bebasneue/bebasneue_bold-webfont.woff2") format("woff2"), url("../../fonts/bebasneue/bebasneue_bold-webfont.woff") format("woff")
-  font-weight: 700
-  font-style: normal
-
-
 img
   border: 0
   max-width: 100%
@@ -199,14 +148,13 @@ a
   color: #000
 
 .pages__page
-  font-family: 'bebas'
+  font-family: Helvetica Neue, Helvetica, Arial
   position: relative
   width: 100%
   min-height: 100vh
   background-position: center
   background-size: cover
   color: #ffffff
-  text-transform: uppercase
 
 
 .pages__page_main
@@ -454,6 +402,7 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
   text-align: center
   position: relative
   z-index: 100
+  padding-bottom: 5vh
 
 .btn-container__button
   position: relative
@@ -551,21 +500,20 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
   position: relative
   overflow: hidden
   border-radius: 0.5rem
-  background-color: #333
-  width: 130px
-  height: 150px
+  width: 13rem
+  height: 15rem
   -webkit-transform: skewX(-14.92632deg) translateX(20px)
   transform: skewX(-14.92632deg) translateX(20px)
-  border: 4px solid transparent
+  border: 4px solid #333
   -webkit-transition: all 200ms
   transition: all 200ms
 
 .hero-tile__img
   position: absolute
   top: 0
-  left: -20px
-  width: 170px
-  max-width: 200px
+  left: -2rem
+  width: 1rem
+  max-width: 20rem
   height: 100%
   -o-object-fit: contain
   object-fit: contain
@@ -574,7 +522,7 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
 
 .hero-tile__name
   border-radius: 0.25rem
-  padding: 3px 5px
+  padding: 0.3rem 0.5rem
   display: inline-block
   -webkit-transition: all 200ms
   transition: all 200ms
@@ -587,8 +535,8 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
   .hero-tile__name
     background-color: #fcff00
     color: #000
-    -webkit-transform: translateY(-10px)
-    transform: translateY(-10px)
+    -webkit-transform: translateY(-1rem)
+    transform: translateY(-1rem)
 
 .hero-tile:hover .hero-tile__frame
   border-color: #fcff00
@@ -597,13 +545,13 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
   .hero-tile:nth-child(6)
     clear: left
   .hero-tile__frame
-    width: 65px
-    height: 75px
+    width: 6.5rem
+    height: 7.5rem
     -webkit-transform: skewX(-14.92584deg) translateX(10px)
     transform: skewX(-14.92584deg) translateX(10px)
   .hero-tile__img
-    left: -10px
-    width: 85px
+    left: -1rem
+    width: 8.5rem
     -webkit-transform: skewX(14.92584deg)
     transform: skewX(14.92584deg)
   .hero-tile_active
@@ -642,19 +590,22 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
 .hero-detail__img
   position: relative
   width: 100%
-  max-height: 430px
+  margin: 1rem auto
   background-repeat: no-repeat
   background-position: center
   background-size: contain
+  @media only screen and (max-width: 768px)
+    &
+      width: 70%
+      max-height: none
+      margin: 0.5rem auto
 
 .hero-detail__bio
-  font-size: 20.4px
+  font-size: 2rem
   line-height: 1.1
-  max-width: 500px
+  max-width: 50rem
 
 @media only screen and (max-width: 768px)
   .hero-detail
     margin-bottom: 1rem
-  .hero-detail__img
-    height: 50vh
 

@@ -8,7 +8,7 @@ const data = new Map([
     [types.Avatar, `${ASSETS_DIR}/img/avatar.png`],
     [types.Logo, `${ASSETS_DIR}/img/google.svg`],
     [types.Link, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
-    [types.Image, `${ASSETS_DIR}/img/baianat.png`],
+    [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
     [types.ClassList, () => []],
     [types.StyleObject, () => (
     {

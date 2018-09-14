@@ -274,6 +274,7 @@ class Vuse {
           <body>
             ${artboard.innerHTML}
           <body>
+            <script src="${window.location.origin + '/' + this.assets.js}"></script>
         </html>`;
 
         html = encodeURIComponent(html);

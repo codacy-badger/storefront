@@ -101,7 +101,7 @@ export function cleanDOM(artboard) {
         el.classList.remove('is-editable');
     });
     uploaders.forEach((el) => {
-        const input = el.querySelector(':scope > input');
+        const input = el.querySelector(':scope > form input');
         const image = el.querySelector(':scope > img');
 
         image.classList.add('add-full-width');
