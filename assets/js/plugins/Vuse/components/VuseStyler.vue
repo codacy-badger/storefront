@@ -28,7 +28,7 @@
                     </button>
                 </li>
             </template>
-            <template v-if="type === 'gallery-item'">
+            <template v-if="type === 'galleryItem'">
                         <li>
                             <button class="styler-button" @click="removeItemGallery">
                                 <VuseIcon name="trash"></VuseIcon>

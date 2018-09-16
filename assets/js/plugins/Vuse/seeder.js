@@ -5,8 +5,8 @@ const ASSETS_DIR = window.location.origin;
 const data = new Map([
     [types.Title, 'Awesome title'],
     [types.Text, 'We\'re creating the best place to go when starting a new business or company.With Baianat you can instantly search domain names, social media handles, and see your logo in beautiful logotypes.'],
-    [types.Avatar, `${ASSETS_DIR}/img/avatar.png`],
-    [types.Logo, `${ASSETS_DIR}/img/google.svg`],
+    [types.Avatar, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
+    [types.Logo, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
     [types.Link, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
     [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
     [types.ClassList, () => []],
@@ -36,7 +36,7 @@ const data = new Map([
     [types.Grid, () => ({mobile: '', tablet: '', desktop: '', widescreen: ''})],
     [Number, 100],
     [String, 'This is pretty neat'],
-    [types.GalleryItem, `${ASSETS_DIR}/img/avatar.png`],
+    [types.GalleryItem, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
 ]);
 
 export default class Seeder {

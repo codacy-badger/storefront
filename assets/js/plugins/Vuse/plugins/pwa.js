@@ -79,25 +79,26 @@ function createPWA (output, payload) {
 
 function download (assets) {
   const frag = this.outputFragment();
-  const images = Array.from(frag.querySelectorAll('img'));
   const artboard = frag.querySelector('#artboard');
   const title = document.title;
   const zip = new JSZip();
   const output = zip.folder('project');
-  const imgFolder = output.folder('assets/img');
   const cssFolder = output.folder('assets/css');
+  const jsFolder = output.folder('assets/js');
 
-  Promise.all(images.map((image) => {
-    const imageLoader = getImageBlob(image.src);
-    return imageLoader.then((img) => {
-      imgFolder.file(img.name, img.blob, { base64: true });
-      image.src = `assets/img/${img.name}`;
 
-      return img;
-    });
-  })).then(images => {
-    createPWA(output, { images });
-  }).then(() => {
+  var promise =  new Promise((resolve, reject) => {
+    const assetsClient = new XMLHttpRequest();
+    assetsClient.open('GET', assets.js);
+    assetsClient.onload = function () {
+        resolve(this.response);
+    };
+    assetsClient.send(null);
+    }).then((content) => {
+        jsFolder.file('app.js', content);
+        return content;
+    })
+    .then(() => {
     return new Promise((resolve, reject) => {
       const assetsClient = new XMLHttpRequest();
       assetsClient.open('GET', assets.css);
@@ -120,7 +121,7 @@ function download (assets) {
           </head>
           <body>
             ${artboard.innerHTML}
-          <script src="assets/js/main.js"></script>
+          <script src="assets/js/app.js"></script>
           </body>
         </html>`);
 

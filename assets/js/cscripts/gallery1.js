@@ -3,8 +3,6 @@ export function galleryPreviewClick() {
     const TARGET_PREVIEW = 'gallery-one-preview';
     const TARGET_STAGE = 'gallery-one-stage';
     const PREVIEW_ACTIVE_CLASS = 'hero-tile_active';
-    const NUM = 0;
-
     var previews = document.querySelectorAll('['+ TARGET_PREVIEW +']'),
         stages = document.querySelectorAll('['+ TARGET_STAGE +']');
 
@@ -29,7 +27,9 @@ export function galleryPreviewClick() {
             el.onclick = function(e) {
                 clickPreview(el);
             };
-            if (i == NUM) {
+            if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
+                el.click();
+            } else if (i == 0) {
                 el.click();
             }
         });
@@ -37,6 +37,10 @@ export function galleryPreviewClick() {
 
     function previewReset(items, index) {
         [].forEach.call(items, function(el, i) {
+            if (i == index && el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
+                return;
+            }
+
             if (i == index) {
                 el.classList.add(PREVIEW_ACTIVE_CLASS);
             } else if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {

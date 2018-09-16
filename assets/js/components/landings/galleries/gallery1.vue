@@ -8,31 +8,31 @@
               </div>
               <div class="p-split flex__item flex flex__item_full">
                   <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
-                      <gallery-item class="hero-tile"
+                      <div class="hero-tile"
                             v-for="(item, index) in $sectionData.images"
-                            v-styler="$sectionData.images[index]"
+                            v-styler:galleryItem="$sectionData.images[index]"
                             :data-index="index"
+                            :key="index"
                             :gallery-one-preview="'loader__content_show'"
                             >
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
-                              <!--uploader class="hero-tile__img" :path="$sectionData.images[index].img" :src="item.preview" :alt="item.title" /-->
                           </div>
-                          <btitle class="hero-tile__name" v-styler="$sectionData.images[index].type">
+                          <div class="hero-tile__name" v-styler:title="$sectionData.images[index].type">
                               {{ $sectionData.images[index].type.text }}
-                          </btitle>
-                      </gallery-item>
+                          </div>
+                      </div>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
-                      <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images">
-                          <btitle class="hero-detail__name h1"
+                      <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
+                          <div class="hero-detail__name h1"
                                v-html="$sectionData.images[index].title"
-                               v-styler="$sectionData.images[index].title">
-                          </btitle>
+                               v-styler:title="$sectionData.images[index].title">
+                          </div>
                           <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
-                          <btitle class="hero-detail__bio" v-styler="$sectionData.images[index].text">
+                          <div class="hero-detail__bio" v-styler:text="$sectionData.images[index].text">
                               {{ $sectionData.images[index].text }}
-                          </btitle>
+                          </div>
                       </div>
                   </div>
               </div>
@@ -56,7 +56,6 @@
       group: 'galleries',
       $schema: {
         mainStyle: types.StyleObject,
-        bigImage: {},
         buttons: [
            {
                text: 'Choose character',
@@ -96,12 +95,20 @@
                 img: [types.Image],
                 text: types.Text,
             },
-        ]
+        ],
       },
       props: {
         id: {
           type: Number, required: true
         }
+      },
+      watch: {
+          $sectionData:  {
+                handler: function () {
+                    setTimeout(this.bindingClickPreview(),2000);
+                },
+                deep: true
+            }
       },
       methods: {
           onClick () {
@@ -109,13 +116,15 @@
 
                const endpoint = this.$sectionData.buttons[0].href;
           },
+          bindingClickPreview () {
+              galleryPreviewClick();
+          }
       },
       mounted: function () {
-        let self = this;
-;
-        galleryPreviewClick();
-
-        this.$builder
+        this.bindingClickPreview();
+      },
+      updated: function(){
+        this.bindingClickPreview();
       },
     };
 </script>

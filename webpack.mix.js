@@ -27,6 +27,5 @@ mix
     )
     // for gallery1
     .js('assets/js/cscripts/gallery1.js', 'public/js/cscripts/gallery1.js')
-    .sass('assets/sass/themes/gallery1.sass', 'public/css/gallery1.css')
     //
     .copyDirectory('assets/img', 'public/img');
