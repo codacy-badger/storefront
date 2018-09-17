@@ -489,11 +489,12 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
 
 .hero-tile
   margin: 0 12px 12px 0
-  float: left
   cursor: pointer
   text-align: center
   -webkit-backface-visibility: hidden
   backface-visibility: hidden
+  display: inline-block
+  vertical-align: top
 
 .hero-tile__frame
   position: relative
@@ -525,6 +526,7 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
   display: inline-block
   -webkit-transition: all 200ms
   transition: all 200ms
+  max-width: 13rem
 
 .hero-tile_active
   .hero-tile__frame
@@ -593,11 +595,16 @@ p, h1, .h1, h2, .h2, h3, .h3, h4, .h4
   background-repeat: no-repeat
   background-position: center
   background-size: contain
+  height: 43rem
   @media only screen and (max-width: 768px)
     &
       width: 70%
       max-height: none
       margin: 0.5rem auto
+  & img
+    height: 100%
+    width: auto !important
+    margin: 0 auto
 
 .hero-detail__bio
   font-size: 2rem
