@@ -6,7 +6,7 @@
                   <h1 class="l-title__title" v-styler="$sectionData.slogan[0].text" v-text="$sectionData.slogan[0].title"/>
                   <div class="l-title__subtitle" v-styler="$sectionData.slogan[1].text" v-text="$sectionData.slogan[1].title"/>
               </div>
-              <div class="p-split flex__item flex flex__item_full">
+              <div class="p-split flex__item flex flex__item_full flex_center">
                   <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
                       <div class="hero-tile"
                             v-for="(item, index) in $sectionData.images"
