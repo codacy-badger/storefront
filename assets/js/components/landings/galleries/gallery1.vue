@@ -18,8 +18,7 @@
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                           </div>
-                          <div class="hero-tile__name" v-styler:title="$sectionData.images[index].type">
-                              {{ $sectionData.images[index].type.text }}
+                          <div class="hero-tile__name" v-styler:title="$sectionData.images[index].type" v-html="$sectionData.images[index].type.text">
                           </div>
                       </div>
                   </div>
@@ -30,8 +29,7 @@
                                v-styler:title="$sectionData.images[index].title">
                           </div>
                           <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
-                          <div class="hero-detail__bio" v-styler:text="$sectionData.images[index].text">
-                              {{ $sectionData.images[index].text }}
+                          <div class="hero-detail__bio" v-styler:text="$sectionData.images[index].text" v-html="$sectionData.images[index].text">
                           </div>
                       </div>
                   </div>
