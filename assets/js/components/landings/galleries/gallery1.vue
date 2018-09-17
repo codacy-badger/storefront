@@ -14,6 +14,7 @@
                             :data-index="index"
                             :key="index"
                             :gallery-one-preview="'loader__content_show'"
+                            @click="onFocus(index)"
                             >
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
@@ -94,6 +95,7 @@
                 text: types.Text,
             },
         ],
+        index: 0
       },
       props: {
         id: {
@@ -114,15 +116,18 @@
 
                const endpoint = this.$sectionData.buttons[0].href;
           },
-          bindingClickPreview () {
-              galleryPreviewClick();
+          bindingClickPreview (index) {
+              galleryPreviewClick(index);
+          },
+          onFocus (index) {
+              this.index = index;
           }
       },
       mounted: function () {
-        this.bindingClickPreview();
+        this.bindingClickPreview(0);
       },
       updated: function(){
-        this.bindingClickPreview();
+        this.bindingClickPreview(this.index);
       },
     };
 </script>

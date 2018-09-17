@@ -1,5 +1,5 @@
 ;
-export function galleryPreviewClick() {
+export function galleryPreviewClick(num) {
     const TARGET_PREVIEW = 'gallery-one-preview';
     const TARGET_STAGE = 'gallery-one-stage';
     const PREVIEW_ACTIVE_CLASS = 'hero-tile_active';
@@ -29,7 +29,7 @@ export function galleryPreviewClick() {
             };
             if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
                 el.click();
-            } else if (i == 0) {
+            } else if (i == num) {
                 el.click();
             }
         });
@@ -53,4 +53,4 @@ export function galleryPreviewClick() {
 
 }
 
-galleryPreviewClick();
+galleryPreviewClick(0);
