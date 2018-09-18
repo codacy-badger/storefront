@@ -141,7 +141,9 @@ a
   width: 20rem
   min-width: 20rem
   min-height: 7rem
-  display: block
+  display: flex
+  align-items: center
+  justify-content: center
   &:hover
     filter: brightness(120%)
   &:active
@@ -165,11 +167,15 @@ a
     padding: 2rem 4rem
     background-color: #fff
     color: #000
+    width: 25rem
+    min-width: 25rem
     margin: 0 auto
     transition: 100ms
-    display: inline-block
     cursor: pointer
     text-align: center
+    display: flex
+    align-items: center
+    justify-content: center
     @media only screen and (max-width: 768px)
       &
         font-size: 2rem

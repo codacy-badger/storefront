@@ -18,8 +18,8 @@
 
                         <div class="b-layout-1__panel__section">
                             <ul class="b-layout-1__panel__features">
-                                <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" v-styler:title="$sectionData.titles[index].title">
-                                    {{ item.text }}
+                                <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" v-styler:index="`$sectionData.titles[${index}].title`">
+                                    {{ $sectionData.titles[index].text }}
                                 </li>
                             </ul>
                         </div>

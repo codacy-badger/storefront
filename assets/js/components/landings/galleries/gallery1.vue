@@ -20,10 +20,11 @@
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                           </div>
                           <a class="hero-tile__name"
-                               v-styler:button="$sectionData.images[index].button"
+                               v-styler:index="`$sectionData.images[${index}].button`"
                                v-html="$sectionData.images[index].button.text"
+                               :href="$sectionData.images[index].button.href"
                                v-bind:style="$sectionData.images[index].button.styles"
-                                  >
+                               >
                           </a>
                       </div>
                   </div>
@@ -31,10 +32,10 @@
                       <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
                           <div class="hero-detail__name h1"
                                v-html="$sectionData.images[index].title"
-                               v-styler:title="$sectionData.images[index].title">
+                               v-styler:index="`$sectionData.images[${index}].title`">
                           </div>
                           <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
-                          <div class="hero-detail__bio" v-styler:text="$sectionData.images[index].text" v-html="$sectionData.images[index].text">
+                          <div class="hero-detail__bio" v-styler:index="`$sectionData.images[${index}].text`" v-html="$sectionData.images[index].text">
                           </div>
                       </div>
                   </div>
