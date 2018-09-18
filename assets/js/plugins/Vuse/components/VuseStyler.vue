@@ -2,12 +2,12 @@
     <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
          @click.stop="">
         <ul class="styler-list">
-            <li v-if="type === 'button' || type === 'link' || type === 'section'">
+            <li v-if="type === 'link' || type === 'section'">
                 <button class="styler-button" @click="updateOption('colorer')">
                     <VuseIcon name="bar"></VuseIcon>
                 </button>
             </li>
-            <li v-if="type === 'button' || type === 'link'">
+            <li v-if="type === 'link'">
                 <button class="styler-button" @click="updateOption('link')">
                     <VuseIcon name="link"></VuseIcon>
                 </button>
@@ -25,6 +25,33 @@
                 <li>
                     <button class="styler-button" @click="copyLink">
                         <VuseIcon name="plus"></VuseIcon>
+                    </button>
+                </li>
+            </template>
+            <template v-if="type === 'button'">
+                <!--li>
+                    <button class="styler-button" @click="updateOption('textColor')">
+                        <VuseIcon name="palettes"></VuseIcon>
+                    </button>
+                </li-->
+                <li>
+                    <button class="styler-button" @click="updateOption('align')">
+                        <VuseIcon name="align"></VuseIcon>
+                    </button>
+                </li>
+                <li>
+                    <button class="styler-button" @click="updateOption('textStyle')">
+                        <VuseIcon name="textStyle"></VuseIcon>
+                    </button>
+                </li>
+                <li>
+                    <button class="styler-button" @click="updateOption('link')">
+                        <VuseIcon name="link"></VuseIcon>
+                    </button>
+                </li>
+                <li>
+                    <button class="styler-button" @click="updateOption('colorer')">
+                        <VuseIcon name="pic"></VuseIcon>
                     </button>
                 </li>
             </template>
@@ -55,11 +82,11 @@
                         </li>
             </template>
             <template v-if="type === 'title'">
-                <li>
+                <!--li>
                     <button class="styler-button" @click="updateOption('textColor')">
                         <VuseIcon name="palettes"></VuseIcon>
                     </button>
-                </li>
+                </li-->
                 <li>
                     <button class="styler-button" @click="updateOption('align')">
                         <VuseIcon name="align"></VuseIcon>
@@ -81,11 +108,11 @@
                 </li>
             </template>
             <template v-if="type === 'text'">
-                <li>
+                <!--li>
                     <button class="styler-button" @click="updateOption('textColor')">
                         <VuseIcon name="palettes"></VuseIcon>
                     </button>
-                </li>
+                </li-->
                 <li>
                     <button class="styler-button" @click="updateOption('align')">
                         <VuseIcon name="align"></VuseIcon>
@@ -113,7 +140,7 @@
         <ul class="styler-list">
             <li v-if="currentOption === 'colorer'">
                 <ul class="colorer">
-                    <li>
+                    <li v-if="type !== 'button'">
                         <button class="styler-button" @click="showBackgroundSettingsSection('link')">
                             <VuseIcon name="link"></VuseIcon>
                         </button>
@@ -154,7 +181,7 @@
                     </div>
                     <div style="text-align: center;">
                         <button class="button" style="width: 120px;" @click="setBackgroundColor">
-                            <VuseIcon name="check"></VuseIcon>&nbsp;&nbsp;Set color
+                            <VuseIcon name="check"></VuseIcon> Set color
                         </button>
                     </div>
                 </div>
@@ -221,14 +248,14 @@
                     </div>
                 </div>
             </li>
-            <li v-if="currentOption === 'textColor'">
+            <!--li v-if="currentOption === 'textColor'">
                 <ul class="colorer">
                     <li v-for="(color, index) in colors">
                         <input type="radio" :id="`color${color.charAt(0).toUpperCase() + color.slice(1)}`"
                                name="colorer" :value="textColors[index]" v-model="textColor"/>
                     </li>
                 </ul>
-            </li>
+            </li-->
             <li v-if="currentOption === 'link'">
                 <div class="input-group is-rounded has-itemAfter is-primary">
                     <input class="input" type="text" placeholder="type your link" v-model="url"/>
@@ -273,7 +300,22 @@
                             <VuseIcon name="underline"></VuseIcon>
                         </button>
                     </li>
+                    <li>
+                        <button class="styler-button" @click="showColorPeckerTextStyle">
+                            <VuseIcon name="palettes"></VuseIcon>
+                        </button>
+                    </li>
                 </ul>
+                <div v-if="isTextSelectColor === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item">
+                        <sketch-color-pecker v-model="textSelectColor"></sketch-color-pecker>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="button" style="width: 12rem;" @click="setTextSelectColor(textSelectColor)">
+                            <VuseIcon name="check"></VuseIcon> Set color
+                        </button>
+                    </div>
+                </div>
             </li>
             <li v-if="currentOption === 'columnWidth'">
                 <ul class="align">
@@ -383,7 +425,9 @@
             backgroundSettingsShow: {video: false, image: false, link: false, color: false},
             isVideoBackgroundPoster: false,
             videoBackgroundPosterSource: '',
-            isRequestProcess: false
+            isRequestProcess: false,
+            isTextSelectColor: false,
+            textSelectColor: '#000',
         }),
         watch: {
             colorerColor: function () {
@@ -655,6 +699,7 @@
 
                 this.imageBgSelected = false;
                 this.videoBgSelected = false;
+                this.backgroundSettingsShow.color =false;
 
                 this.addStyle('background-color', this.backgroundColor.hex8);
             },
@@ -730,7 +775,7 @@
                 }
             },
             showColorPeckerSection: function() {
-                $(this.$refs['styler']).css('transform', 'translate3d(1020px, 5px, 0px)');
+                /*$(this.$refs['styler']).css('transform', 'translate3d(20px, 5px, 0px)');*/
                 this.showBackgroundSettingsSection('color');
             },
             showBackgroundSettingsSection: function (type) {
@@ -752,9 +797,20 @@
                     position = '969px';
                 }
 
-                $(this.$refs['styler']).css('transform', 'translate3d(' + position + ', 5px, 0px)');
+               /* $(this.$refs['styler']).css('transform', 'translate3d(' + position + ', 5px, 0px)');*/
 
                 this.backgroundSettingsShow[type] = true;
+            },
+            showColorPeckerTextStyle: function() {
+                /*$(this.$refs['styler']).css('transform', 'translate3d(20px, 5px, 0px)');*/
+                this.showColorPeckerSettingsTextStyle();
+            },
+            showColorPeckerSettingsTextStyle: function (type) {
+                this.isTextSelectColor = true;
+            },
+            setTextSelectColor: function(color) {
+                this.addStyle('color', color.hex);
+                this.isTextSelectColor = false;
             },
             choseGalleryItemPreview: function () {
                 this['$refs']['choseGalleryItemPreviewInput'].click();

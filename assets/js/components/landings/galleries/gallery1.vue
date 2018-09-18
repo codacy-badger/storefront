@@ -19,8 +19,12 @@
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                           </div>
-                          <div class="hero-tile__name" v-styler:title="$sectionData.images[index].type" v-html="$sectionData.images[index].type.text">
-                          </div>
+                          <a class="hero-tile__name"
+                               v-styler:button="$sectionData.images[index].button"
+                               v-html="$sectionData.images[index].button.text"
+                               v-bind:style="$sectionData.images[index].button.styles"
+                                  >
+                          </a>
                       </div>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
@@ -35,10 +39,14 @@
                       </div>
                   </div>
               </div>
-              <div class="btn-container flex__item">
-                <span class="btn-container__button" @click.prevent="onClick"
-                      :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href" v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button">
-                </span>
+              <div class="gallery1-btn-container flex__item">
+                <a class="gallery1-btn-container__button" target="_blank"
+                   v-styler:button="$sectionData.button"
+                   :href="$sectionData.button.href"
+                   v-html="$sectionData.button.text"
+                   v-bind:style="$sectionData.button.styles"
+                   >
+                </a>
               </div>
           </div>
       </section>
@@ -55,13 +63,7 @@
       group: 'galleries',
       $schema: {
         mainStyle: types.StyleObject,
-        buttons: [
-           {
-               text: 'Choose character',
-               href: "#",
-               button: types.Button,
-           },
-        ],
+        button: types.Button,
         slogan: [
             {
                 title: 'Who are you in Your Game?',
@@ -75,21 +77,21 @@
         images: [
             {
                 preview: [types.Image],
-                type: types.Button,
+                button: types.Button,
                 title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
             {
                 preview: [types.Image],
-                type: types.Button,
+                button: types.Button,
                 title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
             {
                 preview: [types.Image],
-                type: types.Button,
+                button: types.Button,
                 title: types.Title,
                 img: [types.Image],
                 text: types.Text,
@@ -111,11 +113,6 @@
             }
       },
       methods: {
-          onClick () {
-               if (this.$builder.isEditing) return;
-
-               const endpoint = this.$sectionData.buttons[0].href;
-          },
           bindingClickPreview (index) {
               galleryPreviewClick(index);
           },

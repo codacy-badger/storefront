@@ -7,13 +7,17 @@ const data = new Map([
     [types.Text, 'We\'re creating the best place to go when starting a new business or company.With Baianat you can instantly search domain names, social media handles, and see your logo in beautiful logotypes.'],
     [types.Avatar, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
     [types.Logo, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
-    [types.Link, () => ({text: 'Click Me!', classes: [], href: 'http://example.com'})],
+    [types.Link, () => ({
+        text: 'Click Me!',
+        classes: [],
+        href: 'http://example.com'})
+    ],
     [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
     [types.ClassList, () => []],
     [types.StyleObject, () => (
     {
         styles: {
-            'background-image': false,
+            'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
             'background-position': false,
             'background-repeat': false,
             'background-size': false,
@@ -26,9 +30,15 @@ const data = new Map([
     {
         text: 'Click Me!',
         classes: [],
-        href: 'http://example.com',
+        href: '#',
         styles: {
-            'background-color': false
+            'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
+            'background-position': false,
+            'background-repeat': false,
+            'background-size': false,
+            'background-color': false,
+            'background': false,
+            'color': '#000'
         }
     }
     )],

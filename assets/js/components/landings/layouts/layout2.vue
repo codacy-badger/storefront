@@ -1,12 +1,9 @@
 <template>
-    <section class="pages__page pages__page_main funtoplay" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
+    <section class="pages__page pages__page_main layout2" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes"
              v-bind:style="$sectionData.mainStyle.styles">
         <div class="pages__bg p-bg">
             <div class="p-bg__cont">
-                <div class="p-bg__heros"></div>
-            </div>
-            <div class="p-bg__low">
-                <div class="p-bg__low-img"></div>
+
             </div>
         </div>
         <div class="pages__wrap flex flex_columns flex_center ie-height-fix">
@@ -15,12 +12,20 @@
             </div>
             <div class="flex__item flex__item_full slogan">
                 <div class="slogan__wrap">
-                    <h2 class="slogan__h2" v-styler="$sectionData.slogan[0].text" v-text="$sectionData.slogan[0].title"></h2>
-                    <div class="slogan__h3 h3" v-styler="$sectionData.slogan[1].text" v-text="$sectionData.slogan[1].title"></div>
+                    <h2 class="slogan__h2" v-styler:title="$sectionData.slogan[0].title" v-text="$sectionData.slogan[0].text"></h2>
+                    <div class="slogan__h3 h3" v-styler:title="$sectionData.slogan[1].title" v-text="$sectionData.slogan[1].text"></div>
                 </div>
             </div>
-            <div class="flex__item">
-                <div class="play-btn"></div>
+            <div class="flex__item flex flex_center">
+                <div class="l-layout2-btn">
+                    <a class="b-layout2-btn" target="_blank"
+                       v-styler:button="$sectionData.button"
+                       v-html="$sectionData.button.text"
+                       :href="$sectionData.button.href"
+                       v-bind:style="$sectionData.button.styles"
+                       >
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -30,7 +35,7 @@
     import * as types from './../../../plugins/Vuse/types';
 
     export default {
-        name: 'HeroFunToPlay3',
+        name: 'Layout2',
         cover: 'img/covers/page-1-bg-alt.jpg',
         group: 'hero',
         $schema: {
@@ -41,27 +46,38 @@
             button: types.Button,
             slogan: [
                 {
-                    title: 'Драйвовый шутер',
-                    text: types.Title,
+                    text: 'Drivers Shooter',
+                    title: types.Title,
                 },
                 {
-                    title: 'Бунтарские герои',
-                    text: types.Title,
+                    text: 'Bounty heroes',
+                    title: types.Title,
                 },
             ],
             logos: [
                 {
-                    path: '../../../../img/funtoplay3/logo.png',
-                    alt: 'Battle Carnival',
+                    path: 'https://gn839.cdn.gamenet.ru/TY0Xv2riHu/6nOU5/o_21POBx.png',
+                    alt: 'Default Logo',
                     logo: types.Logo,
                 }
-            ]
+            ],
+            width: 0,
+            height: 0,
+            top: 0,
+            left: 0
         },
         props: {
             id: {
                 type: Number,
                 required: true
             }
-        }
+        },
+        methods: {
+
+        },
     };
 </script>
+
+<style scoped>
+
+</style>
