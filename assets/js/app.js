@@ -10,6 +10,7 @@ import {sync} from 'vuex-router-sync';
 import AppView from './components/App.vue'
 import Vuse from './plugins/Vuse';
 import Uploader from './plugins/Vuse/plugins/Uploader.vue'
+import VueCircleSlider from 'vue-circle-slider'
 
 import section1 from './components/landings/sections/section1';
 import section2 from './components/landings/sections/section2';
@@ -28,6 +29,7 @@ import pwa from './plugins/Vuse/plugins/pwa';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(VueCircleSlider);
 
 Vuse.mix({
     components: {

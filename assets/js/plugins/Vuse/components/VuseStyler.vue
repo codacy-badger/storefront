@@ -300,6 +300,11 @@
                             <VuseIcon name="underline"></VuseIcon>
                         </button>
                     </li>
+                    <li>
+                        <button class="styler-button" @click="showFontSizer">
+                            <VuseIcon name="fontSize"></VuseIcon>
+                        </button>
+                    </li>
                     <li v-if="type !== 'title' && type !== 'text'">
                         <button class="styler-button" @click="showColorPeckerTextStyle">
                             <VuseIcon name="palettes"></VuseIcon>
@@ -315,6 +320,27 @@
                             <VuseIcon name="check"></VuseIcon> Set color
                         </button>
                     </div-->
+                </div>
+                <div v-if="isShowFontSizer === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item" style="text-align: center;">
+                        <circle-slider @click.native=""
+                                v-model="fontSize"
+                                :step-size="0.5"
+                                :circle-width-rel="30"
+                                :progress-width-rel="15"
+                                :knob-radius-rel="8"
+                                :min="1"
+                                :max="8"
+                                circle-color="#fff"
+                                progress-color="#fcff00"
+                                ></circle-slider>
+                        <input ref="inputFontSize" type="number" v-model="fontSize"/>
+                        <div>
+                            <button class="button" style="width: 12rem;" @click="setFontSize(fontSize)">
+                                <VuseIcon name="check"></VuseIcon> Set font size
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </li>
             <li v-if="currentOption === 'columnWidth'">
@@ -343,7 +369,8 @@
     import VuseIcon from './VuseIcon';
     import {isParentTo} from './../util';
     import _clone from 'lodash-es/clone';
-    import { Sketch } from 'vue-color'
+    import { Sketch } from 'vue-color';
+    import VueCircleSlider from 'vue-circle-slider';
 
     const DEFAULT_BACKGROUND_REPEAT = 'no-repeat';
     const DEFAULT_BACKGROUND_POSITION = 'center center';
@@ -356,6 +383,7 @@
         name: 'Styler',
         components: {
             VuseIcon,
+            VueCircleSlider,
             SketchColorPecker: Sketch
         },
         props: {
@@ -428,6 +456,8 @@
             isRequestProcess: false,
             isTextSelectColor: false,
             textSelectColor: '#000',
+            fontSize: '2',
+            isShowFontSizer: false,
         }),
         watch: {
             colorerColor: function () {
@@ -450,7 +480,7 @@
             },
             'backgroundSelectedOptions.size': function(value) {
                 this.addStyle('background-size', value);
-            }
+            },
         },
         created() {
             if (this.type === 'button') {
@@ -847,6 +877,12 @@
                         }).catch(function (e) {
                             console.warn(e);
                         });
+            },
+            showFontSizer: function() {
+                this.isShowFontSizer = true;
+            },
+            setFontSize: function(value) {
+                this.addStyle('font-size', value + 'rem');
             },
         }
     };
