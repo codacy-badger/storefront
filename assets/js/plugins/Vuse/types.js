@@ -11,6 +11,4 @@ export class Grid {}
 export class Slogan {}
 export class GalleryItem {}
 export class StyleObject {}
-export class Gallery {}
-export class GalleryTitle {}
 

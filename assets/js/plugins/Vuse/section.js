@@ -23,6 +23,9 @@ export default class Section {
     const path = toPath(name);
     const prop = path.pop();
 
+    //console.log(path);
+    //console.log(value);
+
     path.shift();
     const obj = path.length === 0 ? this.data : getPath(this.data, path);
     if (typeof value === 'function') {

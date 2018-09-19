@@ -82,11 +82,11 @@
                         </li>
             </template>
             <template v-if="type === 'title'">
-                <!--li>
+                <li>
                     <button class="styler-button" @click="updateOption('textColor')">
                         <VuseIcon name="palettes"></VuseIcon>
                     </button>
-                </li-->
+                </li>
                 <li>
                     <button class="styler-button" @click="updateOption('align')">
                         <VuseIcon name="align"></VuseIcon>
@@ -108,11 +108,11 @@
                 </li>
             </template>
             <template v-if="type === 'text'">
-                <!--li>
+                <li>
                     <button class="styler-button" @click="updateOption('textColor')">
                         <VuseIcon name="palettes"></VuseIcon>
                     </button>
-                </li-->
+                </li>
                 <li>
                     <button class="styler-button" @click="updateOption('align')">
                         <VuseIcon name="align"></VuseIcon>
@@ -177,13 +177,13 @@
 
                 <div v-if="backgroundSettingsShow.color === true" class="b-styler__bg_options_container">
                     <div class="b-styler__bg_options__item">
-                        <sketch-color-pecker v-model="backgroundColor"></sketch-color-pecker>
+                        <sketch-color-pecker @click.native="setBackgroundColor(backgroundColor)" v-model="backgroundColor"></sketch-color-pecker>
                     </div>
-                    <div style="text-align: center;">
+                    <!--div style="text-align: center;">
                         <button class="button" style="width: 120px;" @click="setBackgroundColor">
                             <VuseIcon name="check"></VuseIcon> Set color
                         </button>
-                    </div>
+                    </div-->
                 </div>
 
                 <div v-if="backgroundSettingsShow.link === true" class="b-styler__bg_options_container">
@@ -248,14 +248,14 @@
                     </div>
                 </div>
             </li>
-            <!--li v-if="currentOption === 'textColor'">
+            <li v-if="currentOption === 'textColor'">
                 <ul class="colorer">
                     <li v-for="(color, index) in colors">
                         <input type="radio" :id="`color${color.charAt(0).toUpperCase() + color.slice(1)}`"
                                name="colorer" :value="textColors[index]" v-model="textColor"/>
                     </li>
                 </ul>
-            </li-->
+            </li>
             <li v-if="currentOption === 'link'">
                 <div class="input-group is-rounded has-itemAfter is-primary">
                     <input class="input" type="text" placeholder="type your link" v-model="url"/>
@@ -300,7 +300,7 @@
                             <VuseIcon name="underline"></VuseIcon>
                         </button>
                     </li>
-                    <li>
+                    <li v-if="type !== 'title' && type !== 'text'">
                         <button class="styler-button" @click="showColorPeckerTextStyle">
                             <VuseIcon name="palettes"></VuseIcon>
                         </button>
@@ -308,13 +308,13 @@
                 </ul>
                 <div v-if="isTextSelectColor === true" class="b-styler__bg_options_container">
                     <div class="b-styler__bg_options__item">
-                        <sketch-color-pecker v-model="textSelectColor"></sketch-color-pecker>
+                        <sketch-color-pecker @click.native="setTextSelectColor(textSelectColor)" v-model="textSelectColor"></sketch-color-pecker>
                     </div>
-                    <div style="text-align: center;">
+                    <!--div style="text-align: center;">
                         <button class="button" style="width: 12rem;" @click="setTextSelectColor(textSelectColor)">
                             <VuseIcon name="check"></VuseIcon> Set color
                         </button>
-                    </div>
+                    </div-->
                 </div>
             </li>
             <li v-if="currentOption === 'columnWidth'">

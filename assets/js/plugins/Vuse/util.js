@@ -57,27 +57,27 @@ export function getTypeFromTagName(tagName) {
     tagName = tagName.toUpperCase();
     switch (tagName) {
         case 'H1':
-            return 'text';
+            return 'title';
         case 'H2':
-            return 'text';
+            return 'title';
         case 'H3':
-            return 'text';
+            return 'title';
         case 'H4':
-            return 'text';
+            return 'title';
         case 'H5':
-            return 'text';
+            return 'title';
         case 'H6':
-            return 'text';
+            return 'title';
         case 'P':
             return 'text';
         case 'B':
             return 'text';
         case 'SPAN':
-            return 'text';
+            return 'title';
         case 'BUTTON':
             return 'button';
         case 'A':
-            return 'link';
+            return 'button';
         case 'SECTION':
             return 'section';
         case 'HEADER':

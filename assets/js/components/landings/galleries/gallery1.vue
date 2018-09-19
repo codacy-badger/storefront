@@ -19,24 +19,26 @@
                           <div class="hero-tile__frame">
                               <img class="hero-tile__img" :src="item.preview" :alt="item.title">
                           </div>
-                          <a class="hero-tile__name"
-                               v-styler:index="`$sectionData.images[${index}].button`"
-                               v-html="$sectionData.images[index].button.text"
-                               :href="$sectionData.images[index].button.href"
-                               v-bind:style="$sectionData.images[index].button.styles"
+                          <span class="hero-tile__name"
+                               v-styler:index="`$sectionData.images[${index}].label`"
+                               v-html="$sectionData.images[index].label"
                                >
-                          </a>
+                          </span>
                       </div>
                   </div>
                   <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
                       <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
-                          <div class="hero-detail__name h1"
+                          <h2 class="hero-detail__name h1"
                                v-html="$sectionData.images[index].title"
                                v-styler:index="`$sectionData.images[${index}].title`">
-                          </div>
+                          </h2>
+                          <!-- upload image -->
                           <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
-                          <div class="hero-detail__bio" v-styler:index="`$sectionData.images[${index}].text`" v-html="$sectionData.images[index].text">
-                          </div>
+                          <!--/upload image -->
+                          <p class="hero-detail__bio"
+                             v-styler:index="`$sectionData.images[${index}].text`"
+                             v-html="$sectionData.images[index].text">
+                          </p>
                       </div>
                   </div>
               </div>
@@ -78,21 +80,21 @@
         images: [
             {
                 preview: [types.Image],
-                button: types.Button,
+                label: types.Title,
                 title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
             {
                 preview: [types.Image],
-                button: types.Button,
+                label: types.Title,
                 title: types.Title,
                 img: [types.Image],
                 text: types.Text,
             },
             {
                 preview: [types.Image],
-                button: types.Button,
+                label: types.Title,
                 title: types.Title,
                 img: [types.Image],
                 text: types.Text,
