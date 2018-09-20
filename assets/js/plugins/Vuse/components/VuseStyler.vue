@@ -300,7 +300,7 @@
                             <VuseIcon name="underline"></VuseIcon>
                         </button>
                     </li>
-                    <li>
+                    <li v-if="type === 'button'">
                         <button class="styler-button" @click="showFontSizer">
                             <VuseIcon name="fontSize"></VuseIcon>
                         </button>
@@ -322,7 +322,7 @@
                     </div-->
                 </div>
                 <div v-if="isShowFontSizer === true" class="b-styler__bg_options_container">
-                    <div class="b-styler__bg_options__item" style="text-align: center;">
+                    <div class="b-styler__bg_options__item flex flex_center">
                         <circle-slider @click.native=""
                                 v-model="fontSize"
                                 :step-size="0.5"
@@ -333,11 +333,12 @@
                                 :max="8"
                                 circle-color="#fff"
                                 progress-color="#fcff00"
-                                ></circle-slider>
-                        <input ref="inputFontSize" type="number" v-model="fontSize"/>
-                        <div>
+                                >
+                        </circle-slider>
+                        <div class="">
+                            <div class="b-font-size" v-model="fontSize" v-text="fontSize" v-bind:style="{ 'font-size': fontSize + 'rem'}"/>
                             <button class="button" style="width: 12rem;" @click="setFontSize(fontSize)">
-                                <VuseIcon name="check"></VuseIcon> Set font size
+                                Set
                             </button>
                         </div>
                     </div>
@@ -882,6 +883,7 @@
                 this.isShowFontSizer = true;
             },
             setFontSize: function(value) {
+                this.el.focus();
                 this.addStyle('font-size', value + 'rem');
             },
         }
@@ -1023,4 +1025,12 @@
 
     .b-styler__bg_options__item
         margin-bottom: 10px
+    .b-font-size
+        font-family: Helvetica Neue, Helvetica, Arial
+        color: #fff
+        width: 100%
+        height: 10rem
+        text-align: center
+        line-height: 10rem
+
 </style>
