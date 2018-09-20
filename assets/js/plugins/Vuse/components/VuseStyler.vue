@@ -257,11 +257,11 @@
                 </ul>
             </li>
             <li v-if="currentOption === 'link'">
-                <div class="input-group is-rounded has-itemAfter is-primary">
-                    <input class="input" type="text" placeholder="type your link" v-model="url"/>
-                    <button class="button" @click="addLink">
+                <div class="input-group is-rounded is-primary">
+                    <input class="input" type="text" @change="addLink" placeholder="type your link" v-model="url"/>
+                    <!--button class="button" @click="addLink">
                         <VuseIcon name="link"></VuseIcon>
-                    </button>
+                    </button-->
                 </div>
             </li>
             <li v-if="currentOption === 'align'">
@@ -357,7 +357,7 @@
                                        :progress-width-rel="15"
                                        :knob-radius-rel="8"
                                        :min="0"
-                                       :max="100"
+                                       :max="50"
                                        circle-color="#fff"
                                        progress-color="#fcff00"
                                 >
@@ -484,9 +484,9 @@
             isRequestProcess: false,
             isTextSelectColor: false,
             textSelectColor: '#000',
-            fontSize: '2',
+            fontSize: 2,
             isShowFontSizer: false,
-            borderRadius: '2',
+            borderRadius: 0,
             isShowBorderRadius: false,
         }),
         watch: {
@@ -513,6 +513,9 @@
             },
         },
         created() {
+            let fs = this.section.get(`${this.name}.styles['font-size']`);
+            let br = this.section.get(`${this.name}.styles['border-radius']`);
+
             if (this.type === 'button') {
                 this.url = this.section.get(`${this.name}.href`);
                 this.el.contentEditable = 'true';
@@ -525,6 +528,20 @@
             }
             if (this.type === 'link') {
                 this.el.contentEditable = 'true';
+                this.url = this.section.get(`${this.name}.href`);
+            }
+
+            console.log('fs: ' + fs);
+            console.log('this.name: ' + this.name);
+            console.log('this.url: ' + this.url);
+            console.log('this.type: ' + this.type);
+            console.log(`${this.name}`);
+
+            if (undefined !== fs) {
+                this.fontSize = fs;
+            }
+            if (undefined !== br) {
+                this.borderRadius = br;
             }
         },
         mounted() {
@@ -545,9 +562,16 @@
                 this.$nextTick(() => {
                     this.popper.update();
                 })
+                this.hideBlocks();
             },
             addLink() {
+                console.log('add link: ' + this.url);
                 this.section.set(`${this.name}.href`, this.url);
+            },
+            openLink() {
+                if (this.$builder.isEditing || this.url == '') return;
+
+                window.top.open(this.url);
             },
             changeColor() {
                 this.removeClass(`is-${this.oldColorerColor}`);
@@ -666,6 +690,7 @@
             execute(command, value = null) {
                 this.el.focus();
                 document.execCommand(command, false, value);
+                this.hideBlocks();
             },
             showStyler(event) {
                 event.stopPropagation();
@@ -867,11 +892,11 @@
                 this.showColorPeckerSettingsTextStyle();
             },
             showColorPeckerSettingsTextStyle: function (type) {
-                this.isTextSelectColor = true;
+                this.hideBlocks('isTextSelectColor');
             },
             setTextSelectColor: function(color) {
                 this.addStyle('color', color.hex);
-                this.isTextSelectColor = false;
+                this.hideBlocks();
             },
             choseGalleryItemPreview: function () {
                 this['$refs']['choseGalleryItemPreviewInput'].click();
@@ -910,19 +935,30 @@
                         });
             },
             showFontSizer: function() {
-                this.isShowFontSizer = true;
+                this.hideBlocks('isShowFontSizer');
             },
             setFontSize: function(value) {
                 this.el.focus();
                 this.addStyle('font-size', value + 'rem');
+                this.hideBlocks();
             },
             showBorderRadius: function() {
-                this.isShowBorderRadius = true;
+                this.hideBlocks('isShowBorderRadius');
             },
             setBorderRadius: function(value) {
                 this.el.focus();
                 this.addStyle('border-radius', value + '%');
+                this.hideBlocks();
             },
+            hideBlocks: function(target) {
+                this.isShowBorderRadius = false;
+                this.isShowFontSizer = false;
+                this.isTextSelectColor = false;
+
+                if (target && undefined !== this[target]) {
+                    this[target] = true;
+                }
+            }
         }
     };
 </script>

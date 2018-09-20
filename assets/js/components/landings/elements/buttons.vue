@@ -9,46 +9,46 @@
         <div class="pages__wrap flex flex_columns flex_center ie-height-fix">
             <div class="flex__item flex flex_center">
                 <div class="l-btn-lp1">
-                    <button class="b-btn-lp1" target="_blank"
+                    <a class="b-btn-lp1" target="_blank"
                        v-styler="$sectionData.buttons[0].button"
                        v-html="$sectionData.buttons[0].button.text"
                        :href="$sectionData.buttons[0].button.href"
                        v-bind:style="$sectionData.buttons[0].button.styles"
                        >
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="flex__item flex flex_center">
                 <div class="l-btn-lp2">
-                    <button class="b-btn-lp2" target="_blank"
+                    <a class="b-btn-lp2" target="_blank"
                        v-styler="$sectionData.buttons[1].button"
                        v-html="$sectionData.buttons[1].text"
                        :href="$sectionData.buttons[1].button.href"
                        v-bind:style="$sectionData.buttons[1].button.styles"
                        >
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="flex__item flex flex_center">
                 <div class="l-btn-lp1">
-                    <button class="b-btn-lp1 b-btn-lp1_circle" target="_blank"
+                    <a class="b-btn-lp1 b-btn-lp1_circle" target="_blank"
                        v-styler="$sectionData.buttons[2].button"
                        v-html="$sectionData.buttons[2].text"
                        :href="$sectionData.buttons[2].button.href"
                        v-bind:style="$sectionData.buttons[2].button.styles"
                        >
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="flex__item flex flex_center">
                 <div class="l-btn-lp2">
-                    <button class="b-btn-lp2 b-btn-lp2_bg-girls" target="_blank"
+                    <a class="b-btn-lp2 b-btn-lp2_bg-girls" target="_blank"
                        v-styler="$sectionData.buttons[3].button"
                        v-html="$sectionData.buttons[3].text"
-                       :href="$sectionData.buttons[3].href"
+                       :href="$sectionData.buttons[3].button.href"
                        v-bind:style="$sectionData.buttons[3].button.styles"
                             >
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -70,22 +70,18 @@
             buttons: [
                 {
                     text: 'Play Now',
-                    href: "#",
                     button: types.Button,
                 },
                 {
                     text: 'DOWNLOAD',
-                    href: "#",
                     button: types.Button,
                 },
                 {
                     text: 'Play Now',
-                    href: "#",
                     button: types.Button,
                 },
                 {
                     text: 'Play Free',
-                    href: "#",
                     button: types.Button,
                 },
             ]
