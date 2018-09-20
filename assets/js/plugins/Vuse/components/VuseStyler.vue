@@ -305,6 +305,11 @@
                             <VuseIcon name="fontSize"></VuseIcon>
                         </button>
                     </li>
+                    <li v-if="type === 'button'">
+                        <button class="styler-button" @click="showBorderRadius">
+                            <VuseIcon name="fillet"></VuseIcon>
+                        </button>
+                    </li>
                     <li v-if="type !== 'title' && type !== 'text'">
                         <button class="styler-button" @click="showColorPeckerTextStyle">
                             <VuseIcon name="palettes"></VuseIcon>
@@ -338,6 +343,28 @@
                         <div class="">
                             <div class="b-font-size" v-model="fontSize" v-text="fontSize" v-bind:style="{ 'font-size': fontSize + 'rem'}"/>
                             <button class="button" style="width: 12rem;" @click="setFontSize(fontSize)">
+                                Set
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="isShowBorderRadius === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item flex flex_center">
+                        <circle-slider @click.native=""
+                                       v-model="borderRadius"
+                                       :step-size="0.1"
+                                       :circle-width-rel="30"
+                                       :progress-width-rel="15"
+                                       :knob-radius-rel="8"
+                                       :min="0"
+                                       :max="100"
+                                       circle-color="#fff"
+                                       progress-color="#fcff00"
+                                >
+                        </circle-slider>
+                        <div class="">
+                            <div class="b-border-radius" v-model="borderRadius" v-bind:style="{ 'border-radius': borderRadius + '%'}"/>
+                            <button class="button" style="width: 12rem;" @click="setBorderRadius(borderRadius)">
                                 Set
                             </button>
                         </div>
@@ -459,6 +486,8 @@
             textSelectColor: '#000',
             fontSize: '2',
             isShowFontSizer: false,
+            borderRadius: '2',
+            isShowBorderRadius: false,
         }),
         watch: {
             colorerColor: function () {
@@ -886,6 +915,13 @@
                 this.el.focus();
                 this.addStyle('font-size', value + 'rem');
             },
+            showBorderRadius: function() {
+                this.isShowBorderRadius = true;
+            },
+            setBorderRadius: function(value) {
+                this.el.focus();
+                this.addStyle('border-radius', value + '%');
+            },
         }
     };
 </script>
@@ -1030,6 +1066,14 @@
         color: #fff
         width: 100%
         height: 10rem
+        text-align: center
+        line-height: 10rem
+    .b-border-radius
+        font-family: Helvetica Neue, Helvetica, Arial
+        background-color: #fff
+        width: 8rem
+        height: 8rem
+        margin: 1rem auto
         text-align: center
         line-height: 10rem
 
