@@ -24,6 +24,7 @@ import social4 from './components/landings/social/social4';
 import layout1 from './components/landings/layouts/layout1';
 import layout2 from './components/landings/layouts/layout2';
 import gallery1 from './components/landings/galleries/gallery1';
+import buttons from './components/landings/elements/buttons';
 
 import pwa from './plugins/Vuse/plugins/pwa';
 
@@ -49,6 +50,7 @@ Vuse.component(social4);
 Vuse.component(layout1);
 Vuse.component(layout2);
 Vuse.component(gallery1);
+Vuse.component(buttons);
 
 Vuse.use(pwa);
 
@@ -85,6 +87,10 @@ Vue.use(Vuse, {
         {
             name: 'Gallery 1',
             sections: [gallery1]
+        },
+        {
+            name: 'Buttons',
+            sections: [buttons]
         }
     ]
 });

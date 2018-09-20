@@ -1,0 +1,112 @@
+
+
+// btn-lp1
+.l-btn-lp1
+  width: 100%
+  min-height: 10rem
+  position: relative
+  margin: 2rem 0
+.b-btn-lp1
+  position: relative
+  font-size: 2.3rem
+  line-height: 1
+  min-width: 5rem
+  width: 20rem
+  padding: 2rem
+  color: #000
+  margin: 0 auto
+  background-color: #ffba00
+  border: transparent solid  0
+  border-color: #ffba00
+  text-transform: uppercase
+  user-select: none
+  cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
+  &:before
+    content: ''
+    position: absolute
+    display: block
+    border: transparent solid  0.2rem
+    border-color: inherit
+    top: -0.5rem
+    right: -0.5rem
+    bottom: -0.5rem
+    left: -0.5rem
+    pointer-events: none
+    transition: all 200ms
+    backface-visibility: hidden
+    z-index: -1
+  &_circle
+    border-radius: 50%
+    height: 20rem
+    color: #333
+    background-color: #555
+    &:before
+      display: none
+  &:hover
+    filter: brightness(120%)
+    &:before
+      border: inherit solid  1px
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+  &:active
+    filter: brightness(50%)
+  &.is-editable
+    resize: both
+    overflow: hidden
+@media only screen and (max-width: 768px)
+  &
+    font-size: 2rem
+
+// btn-lp2
+.l-btn-lp2
+  width: 100%
+  min-height: 10rem
+  position: relative
+  margin: 2rem 0
+.b-btn-lp2
+  position: relative
+  font-size: 2.3rem
+  line-height: 1
+  min-width: 5rem
+  width: 23.9rem
+  height: 6.6rem
+  padding: 2rem
+  color: #a6e1e1
+  margin: 0 auto
+  border: transparent solid  0
+  background-color: transparent
+  background-image: url(https://gn881.cdn.gamenet.ru/TY0Xv2riHu/6stmF/o_1lLdjP.png)
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: cover
+  text-transform: uppercase
+  user-select: none
+  cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
+  transition: all 200ms
+  &:hover
+    filter: brightness(120%)
+  &_bg-girls
+    color: #000
+    width: 55rem
+    height: 10rem
+    background-image: url(https://gn241.cdn.gamenet.ru/TY0Xv2riHu/6su7Z/o_hxR9B.png)
+  &:active
+    filter: brightness(50%)
+  &.is-editable
+    resize: both
+    overflow: hidden
+@media only screen and (max-width: 768px)
+  &
+    font-size: 2rem
+@media only screen and (max-width: 768px)
+  .b-btn-lp2_bg-girls
+    width: 27rem
+    height: 6rem

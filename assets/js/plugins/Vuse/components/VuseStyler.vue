@@ -762,6 +762,7 @@
                 this.backgroundSettingsShow.color =false;
 
                 this.addStyle('background-color', this.backgroundColor.hex8);
+                this.addStyle('border-color', this.backgroundColor.hex8);
             },
             identifyBackgroundSettingsSection: function() {
                 if (true === this.imageBgSelected) {

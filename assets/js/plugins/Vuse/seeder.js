@@ -38,9 +38,10 @@ const data = new Map([
             'background-size': false,
             'background-color': false,
             'background': false,
-            'color': '#000',
-            'font-size': '2rem',
-            'border-radius': '2%'
+            'color': false,
+            'border-color': false,
+            'font-size': false,
+            'border-radius': false,
         }
     }
     )],
