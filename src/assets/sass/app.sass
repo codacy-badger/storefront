@@ -1,0 +1,57 @@
+@import "variables"
+@import "iefix"
+@import "layout/layout"
+@import "sections"
+
+.b-landing-constructor__button
+  width: 100%
+  height: 100%
+  display: inline-block
+  font-weight: 400
+  text-align: center
+  white-space: nowrap
+  vertical-align: middle
+  border: 1px solid #545b62
+  border-radius: .25rem
+  transition: color .15s
+  background-color: #545b62
+  cursor: pointer
+  color: #ffffff
+
+.b-landing-constructor__video_type
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.controller-panel, .styler
+  z-index: 9999
+
+// Vuse
+.vuse-icon
+  display: block
+  width: 20px
+  height: 20px
+.floatHover
+  cursor: pointer
+  box-shadow: 0 14px 28px opacify($black, 0.125), 0 10px 10px opacify($black, 0.1)
+
+.uploader
+  position: relative
+  cursor: pointer
+  outline: none
+  &-input
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    width: 100%
+    opacity: 0
+    z-index: 100
+    cursor: pointer
+  >img
+    width: 100%
+    display: block
+  &:hover
+    box-shadow: 0 0 0 2px $gray
