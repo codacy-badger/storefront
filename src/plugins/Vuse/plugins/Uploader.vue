@@ -13,6 +13,9 @@
 </template>
 
 <script>
+import $ from 'jquery'
+import axios from 'axios'
+
 export default {
   name: 'Uploader',
   inject: ['$builder', '$section'],
@@ -42,7 +45,7 @@ export default {
       }
 
       let request = new FormData()
-      let $form = window.$(event.target).parent()
+      let $form = $(event.target).parent()
 
       request.append('file[]', file[0])
       request.append('method', 'storefront.upload')
@@ -50,7 +53,7 @@ export default {
 
       $form[0].reset()
 
-      window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+      axios.post('http://images.stg.gamenet.ru/restapi', request)
         .then(function (response) {
           if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response') ||
                     !response['data']['response'].hasOwnProperty('data') ||
