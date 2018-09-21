@@ -26,12 +26,12 @@
                             </ul>
                         </div>
                         <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
-                            <span class="b-layout-1__b-button" @click.prevent="onClick"
-                                  :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href"
-                                  v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button"
-                                    v-bind:style="$sectionData.buttons[0].button.styles">
+                            <a class="b-layout-1__b-button" @click.prevent="onClick"
+                                  :class="$sectionData.buttons[0].button.classes" :href="$sectionData.buttons[0].button.href"
+                                  v-html="$sectionData.buttons[0].button.text" v-styler="$sectionData.buttons[0].button"
+                                  :style="$sectionData.buttons[0].button.styles">
 
-                            </span>
+                            </a>
                         </div>
                         <div class="b-layout-1__panel__section">
                             <footer class="b-layout-1__footer">
@@ -47,11 +47,13 @@
                                       </span>
                                 </div>
                                 <div class="b-layout-1__footer__group b-layout-1__footer__group_light">
-                                      <span v-for="item in $sectionData.links">
+                                      <span v-for="(item, index) in $sectionData.links">
 
-                                          <a @click.prevent="openLink(item)" :class="item.classes"
+                                          <a @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
                                              class="b-layout-1__footer__el b-layout-1__footer__el_link"
-                                             :href="item.href" v-html="item.text" v-styler="item">
+                                             :href="item.href" v-html="item.text" v-styler:index="`$sectionData.links[${index}].button`"
+                                             :style="$sectionData.links[index].button.styles"
+                                          >
                                           </a>
                                       </span>
                                 </div>
@@ -127,17 +129,14 @@
             links: [
                 {
                     text: 'Catalog of games',
-                    href: '#',
                     button: types.Button,
                 },
                 {
                     text: 'Support',
-                    href: '#',
                     button: types.Button,
                 },
                 {
                     text: 'Rules',
-                    href: '#',
                     button: types.Button,
                 },
             ],

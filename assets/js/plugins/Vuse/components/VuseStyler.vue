@@ -513,10 +513,18 @@
             },
         },
         created() {
-            let fs = this.section.get(`${this.name}.styles['font-size']`);
-            let br = this.section.get(`${this.name}.styles['border-radius']`);
 
             if (this.type === 'button') {
+                let fs = this.section.get(`${this.name}.styles['font-size']`);
+                let br = this.section.get(`${this.name}.styles['border-radius']`);
+
+                if (undefined !== fs) {
+                    this.fontSize = fs;
+                }
+                if (undefined !== br) {
+                    this.borderRadius = br;
+                }
+
                 this.url = this.section.get(`${this.name}.href`);
                 this.el.contentEditable = 'true';
             }
@@ -529,19 +537,6 @@
             if (this.type === 'link') {
                 this.el.contentEditable = 'true';
                 this.url = this.section.get(`${this.name}.href`);
-            }
-
-            console.log('fs: ' + fs);
-            console.log('this.name: ' + this.name);
-            console.log('this.url: ' + this.url);
-            console.log('this.type: ' + this.type);
-            console.log(`${this.name}`);
-
-            if (undefined !== fs) {
-                this.fontSize = fs;
-            }
-            if (undefined !== br) {
-                this.borderRadius = br;
             }
         },
         mounted() {
