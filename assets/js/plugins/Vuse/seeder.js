@@ -38,7 +38,7 @@ const data = new Map([
             'background-size': false,
             'background-color': false,
             'background': false,
-            'color': false,
+            'color': '#000',
             'border-color': false,
             'font-size': false,
             'border-radius': false,

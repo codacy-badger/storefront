@@ -51,6 +51,28 @@
                     </a>
                 </div>
             </div>
+            <div class="flex__item flex flex_center">
+                <div class="l-btn-lp3">
+                    <a class="b-btn-lp3" target="_blank"
+                       v-styler="$sectionData.buttons[4].button"
+                       v-html="$sectionData.buttons[4].button.text"
+                       :href="$sectionData.buttons[4].button.href"
+                       v-bind:style="$sectionData.buttons[4].button.styles"
+                            >
+                    </a>
+                </div>
+            </div>
+            <div class="flex__item flex flex_center">
+                <div class="l-btn-lp1">
+                    <a class="b-btn-lp1 b-btn-lp1_anim" target="_blank"
+                       v-styler="$sectionData.buttons[5].button"
+                       v-html="$sectionData.buttons[5].button.text"
+                       :href="$sectionData.buttons[5].button.href"
+                       v-bind:style="$sectionData.buttons[5].button.styles"
+                       >
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 </template>
@@ -82,6 +104,14 @@
                 },
                 {
                     text: 'Play Free',
+                    button: types.Button,
+                },
+                {
+                    text: 'Play',
+                    button: types.Button,
+                },
+                {
+                    text: 'Click me please',
                     button: types.Button,
                 },
             ]
