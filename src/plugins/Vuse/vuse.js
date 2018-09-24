@@ -258,18 +258,30 @@ class Vuse {
     )
   }
 
+  getCss (fragment) {
+    let styles = ''
+    for (let node of fragment.querySelectorAll('style')) {
+      styles += node.innerHTML
+    }
+
+    return styles
+  }
+
   previewDevices () {
     const frag = this.outputFragment()
     const artboard = frag.querySelector('#artboard')
     const printPreview = window.open('about:blank', 'print_preview')
     const printDocument = printPreview.document
     cleanDOM(frag)
+    let styles = this.getCss(frag)
 
     let html = `<!DOCTYPE html>
         <html>
           <head>
-            <link href="${window.location.origin + '/' + this.assets.css}" rel="stylesheet">
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+              ${styles}
+            </style>
           </head>
           <body>
             ${artboard.innerHTML}
