@@ -29,11 +29,6 @@
                 </li>
             </template>
             <template v-if="type === 'button'">
-                <!--li>
-                    <button class="styler-button" @click="updateOption('textColor')">
-                        <VuseIcon name="palettes"></VuseIcon>
-                    </button>
-                </li-->
                 <li>
                     <button class="styler-button" @click="updateOption('align')">
                         <VuseIcon name="align"></VuseIcon>
@@ -78,6 +73,11 @@
 
                             <button class="styler-button" @click="choseGalleryItemPreview">
                                 <VuseIcon name="upload"></VuseIcon>
+                            </button>
+                        </li>
+                        <li v-if="type === 'link'">
+                            <button class="styler-button" @click="updateOption('link')">
+                                <VuseIcon name="link"></VuseIcon>
                             </button>
                         </li>
             </template>
@@ -190,6 +190,17 @@
                     <div class="b-styler__bg_options__item">
                         <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
                             <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
+                            <button class="button" @click="addBackgroundAsLink">
+                                <VuseIcon name="link"></VuseIcon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="galleryItem.link === true" class="b-styler__bg_options_container">
+                    <div class="b-styler__bg_options__item">
+                        <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
+                            <input class="input" type="text" placeholder="Link to full image or video" v-model="galleryItem.linkContentPopup"/>
                             <button class="button" @click="addBackgroundAsLink">
                                 <VuseIcon name="link"></VuseIcon>
                             </button>
@@ -459,7 +470,11 @@ export default {
     isTextSelectColor: false,
     textSelectColor: '#000',
     fontSize: '2',
-    isShowFontSizer: false
+    isShowFontSizer: false,
+    galleryItem: {
+      link: false,
+      linlContentPopup: false
+    }
   }),
   watch: {
     colorerColor: function () {
