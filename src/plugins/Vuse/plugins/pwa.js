@@ -88,15 +88,16 @@ function download (assets) {
 
   var promise = new Promise((resolve, reject) => {
     const assetsClient = new XMLHttpRequest()
-    assetsClient.open('GET', assets.js)
-    assetsClient.onload = function () {
-      resolve(this.response)
-    }
-    assetsClient.send(null)
-  }).then((content) => {
-    jsFolder.file('app.js', content)
-    return content
-  })
+      assetsClient.open('GET', assets.js)
+      assetsClient.onload = function () {
+        resolve(this.response)
+      }
+      assetsClient.send(null)
+    })
+    .then((content) => {
+      jsFolder.file('app.js', content)
+      return content
+    })
     .then(() => {
       return new Promise((resolve, reject) => {
         const assetsClient = new XMLHttpRequest()
@@ -109,14 +110,18 @@ function download (assets) {
         cssFolder.file('app.css', content)
         return content
       })
-    }).then(() => {
+    })
+    .then(() => {
       cleanDOM(frag)
+      let styles = this.getCss(frag)
       output.file('index.html',
         `<html>
           <head>
             <title>${title}</title>
-            <link href="assets/css/app.css" rel="stylesheet">
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+              ${styles}
+            </style>
           </head>
           <body>
             ${artboard.innerHTML}
