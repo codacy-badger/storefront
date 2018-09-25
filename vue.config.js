@@ -1,5 +1,10 @@
 const path = require('path')
 module.exports = {
+  configureWebpack: {
+    resolve: {
+      alias: require('./aliases.config').webpack
+    }
+  },
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'sass',
