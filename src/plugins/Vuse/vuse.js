@@ -253,6 +253,7 @@ class Vuse {
           <body>
             ${artboard.innerHTML}
             <script src="${this.assets.js}"></script>
+            <script src="/src/csripts/gallery2.js"></script>
           <body>
         </html>`
     )
@@ -287,6 +288,7 @@ class Vuse {
             ${artboard.innerHTML}
           <body>
             <script src="${window.location.origin + '/' + this.assets.js}"></script>
+            <script src="${window.location.origin}/js/cscripts/gallery2.js"></script>
         </html>`
 
     html = encodeURIComponent(html)

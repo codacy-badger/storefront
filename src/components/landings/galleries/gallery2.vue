@@ -12,7 +12,7 @@
             :data-index="index"
             :key="index"
           >
-            <a :data-href="$sectionData.images[index].button.href" class="p-video__link"
+            <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="p-video__link"
                v-styler:index="`$sectionData.images[${index}].button`"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
@@ -33,16 +33,15 @@
           </span>
         </div>
       </div>
-      <div class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
-          <div class="l-popup__close" @click.prevent="closePopup"></div>
-          <div class="l-popup__content flex flex_center" v-html="$sectionData.content" v-bind:style="{ height: $sectionData.heightFrame + 'px' }"></div>
+      <div gallery-two-popup="" class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
+          <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
+          <div gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content" v-bind:style="{ height: $sectionData.heightFrame + 'px' }"></div>
       </div>
   </section>
 </template>
 
 <script>
-import * as types from '@/plugins/Vuse/types'
-import { galleryPreviewClick } from '@/cscripts/gallery1'
+import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Gallery2',
@@ -99,18 +98,7 @@ export default {
       required: true
     }
   },
-  watch: {
-    $sectionData: {
-      handler: function () {
-        setTimeout(this.bindingClickPreview(), 2000)
-      },
-      deep: true
-    }
-  },
   methods: {
-    bindingClickPreview (index) {
-      galleryPreviewClick(index)
-    },
     onClick (el, index) {
       let content = ''
       let m = false
@@ -196,12 +184,18 @@ export default {
 .p-video__link
   position: absolute
   display: block
-  top: 50%
-  left: 50%
-  width: 10rem
-  height: 10rem
-  margin: -5rem 0 0 -5rem
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  margin: 0
   z-index: 100
+  &.is-editable
+    top: 50%
+    left: 50%
+    width: 10rem
+    height: 10rem
+    margin: -5rem 0 0 -5rem
 .p-video__link:before, .p-video__link:after
   content: ''
   position: absolute
@@ -279,6 +273,7 @@ export default {
       resize: both
       overflow: hidden
 .l-popup
+  display: none
   position: fixed
   justify-content: center
   align-items: center
