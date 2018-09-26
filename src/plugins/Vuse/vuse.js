@@ -38,8 +38,8 @@ class Vuse {
     this.themes = options.themes
     this.components = {}
     this.assets = {
-      css: options.css || 'css/app.css',
-      js: options.js || 'js/app.js'
+      css: options.css,
+      js: options.js || 'js/cjs.js'
     }
     this.installPlugins()
   }
@@ -253,7 +253,6 @@ class Vuse {
           <body>
             ${artboard.innerHTML}
             <script src="${this.assets.js}"></script>
-            <script src="/src/csripts/gallery2.js"></script>
           <body>
         </html>`
     )
@@ -287,8 +286,7 @@ class Vuse {
           <body>
             ${artboard.innerHTML}
           <body>
-            <script src="${window.location.origin + '/' + this.assets.js}"></script>
-            <script src="${window.location.origin}/js/cscripts/gallery2.js"></script>
+            <script src="${window.location.origin + '/js/cjs.js'}"></script>
         </html>`
 
     html = encodeURIComponent(html)

@@ -3,6 +3,7 @@ const path = require('path')
 const aliases = {
   '@': '.',
   '@src': 'src',
+  '@public': 'public',
   '@components': 'src/components',
   '@assets': 'src/assets',
   '@utils': 'src/utils',

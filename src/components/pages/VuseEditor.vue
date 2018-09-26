@@ -46,7 +46,7 @@ Vuse.use(pwa)
 
 Vue.use(Vuse, {
   css: 'css/app.css',
-  js: 'js/app.js',
+  js: 'js/cjs.js',
   themes: [
     {
       name: 'Layout 1',
