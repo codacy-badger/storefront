@@ -30,16 +30,18 @@ const data = new Map([
     {
       text: 'Click Me!',
       classes: [],
-      href: '',
+      href: 'https://github.com/ProtocolONE/storefront',
       styles: {
-        'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
+        'background-image': false,
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
         'background': false,
         'color': '#000',
-        'font-size': '2rem'
+        'border-color': false,
+        'font-size': false,
+        'border-radius': false,
       }
     }
   )],
