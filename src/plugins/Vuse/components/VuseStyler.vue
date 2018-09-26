@@ -282,37 +282,53 @@
       </li>
       <li v-if="currentOption === 'align'">
         <ul class="align">
-          <li>
+          <li v-if="type !== 'button'">
             <button class="styler-button" @click="execute('justifyleft')">
               <VuseIcon name="left"></VuseIcon>
             </button>
           </li>
-          <li>
+          <li v-if="type !== 'button'">
             <button class="styler-button" @click="execute('justifycenter')">
               <VuseIcon name="center"></VuseIcon>
             </button>
           </li>
-          <li>
+          <li v-if="type !== 'button'">
             <button class="styler-button" @click="execute('justifyright')">
               <VuseIcon name="right"></VuseIcon>
             </button>
           </li>
+            <li v-if="type === 'button'">
+                <button class="styler-button" @click="addTextStyle('justify-content','flex-start','center')">
+                    <VuseIcon name="left"></VuseIcon>
+                </button>
+            </li>
+            <li v-if="type === 'button'">
+                <button class="styler-button" @click="addTextStyle('justify-content','center','center')">
+                    <VuseIcon name="center"></VuseIcon>
+                </button>
+            </li>
+            <li v-if="type === 'button'">
+                <button class="styler-button" @click="addTextStyle('justify-content','flex-end','center')">
+                    <VuseIcon name="right"></VuseIcon>
+                </button>
+            </li>
         </ul>
       </li>
+
       <li v-if="currentOption === 'textStyle'">
         <ul class="align">
           <li>
-            <button class="styler-button" @click="execute('bold')">
+            <button class="styler-button" @click="addTextStyle('font-weight','bold','normal')">
               <VuseIcon name="bold"></VuseIcon>
             </button>
           </li>
           <li>
-            <button class="styler-button" @click="execute('italic')">
+            <button class="styler-button" @click="addTextStyle('font-style','italic','normal')">
               <VuseIcon name="italic"></VuseIcon>
             </button>
           </li>
           <li>
-            <button class="styler-button" @click="execute('underline')">
+            <button class="styler-button" @click="addTextStyle('text-decoration','underline','none')">
               <VuseIcon name="underline"></VuseIcon>
             </button>
           </li>
@@ -636,6 +652,20 @@ import axios from 'axios'
           value.styles[style] = sValue;
 
           $(self.el).find('div.b-video-bg').remove();
+        });
+      },
+      addTextStyle: function(style, sValue, def) {
+            let self = this;
+            this.section.set(this.name, (value) => {
+                if (!value || !value.hasOwnProperty('styles') || typeof value.styles !== 'object'
+                || !value.styles.hasOwnProperty(style)) {
+                return;
+            }
+            if (false === value.styles[style] || def === value.styles[style]) {
+                value.styles[style] = sValue
+            } else {
+                value.styles[style] = def
+            }
         });
       },
       addVideoBackground: function() {

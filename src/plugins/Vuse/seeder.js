@@ -42,6 +42,10 @@ const data = new Map([
         'border-color': false,
         'font-size': false,
         'border-radius': false,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'justify-content': false
       }
     }
   )],
