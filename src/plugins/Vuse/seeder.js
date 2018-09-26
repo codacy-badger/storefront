@@ -30,7 +30,7 @@ const data = new Map([
     {
       text: 'Click Me!',
       classes: [],
-      href: 'https://github.com/ProtocolONE/storefront',
+      href: '',
       styles: {
         'background-image': false,
         'background-position': false,
