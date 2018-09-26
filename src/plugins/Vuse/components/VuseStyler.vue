@@ -506,7 +506,11 @@ import axios from 'axios'
       fontSize: 2,
       isShowFontSizer: false,
       borderRadius: 0,
-      isShowBorderRadius: false
+      isShowBorderRadius: false,
+      galleryItem: {
+        link: false,
+        linlContentPopup: false
+      }
     }),
     watch: {
       colorerColor: function () {
