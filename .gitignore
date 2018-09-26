@@ -3,4 +3,7 @@
 /public/css/
 /node_modules/
 /package-lock.json
-/.dist/
+.dist/*
+.vscode/*
+.DS_Store
+*.log
