@@ -506,11 +506,7 @@ import axios from 'axios'
       fontSize: 2,
       isShowFontSizer: false,
       borderRadius: 0,
-      isShowBorderRadius: false,
-      galleryItem: {
-        link: false,
-        linlContentPopup: false
-      }
+      isShowBorderRadius: false
     }),
     watch: {
       colorerColor: function () {
@@ -1052,7 +1048,7 @@ import axios from 'axios'
         border: none
         padding: 0.5rem
         border-radius: 1rem
-.align
+  .align
     @extend .styler-list
     height: 42px
 
@@ -1125,6 +1121,7 @@ import axios from 'axios'
 
   .b-styler__bg_options__item
     margin-bottom: 10px
+
   .b-font-size
     font-family: Helvetica Neue, Helvetica, Arial
     color: #fff
@@ -1132,6 +1129,7 @@ import axios from 'axios'
     height: 10rem
     text-align: center
     line-height: 10rem
+
   .b-border-radius
     font-family: Helvetica Neue, Helvetica, Arial
     background-color: #fff
@@ -1141,4 +1139,11 @@ import axios from 'axios'
     text-align: center
     line-height: 10rem
 
+  .button
+    min-width: 10rem
+    cursor: pointer
+    background-color: #ffba00
+    transition: all 200ms
+    &:hover
+      filter: brightness(120%)
 </style>
