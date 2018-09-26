@@ -241,18 +241,21 @@ class Vuse {
     const printPreview = window.open('about:blank', 'print_preview')
     const printDocument = printPreview.document
     cleanDOM(frag)
+    let styles = this.getCss(frag)
     printDocument.open()
     printDocument.write(
       `<!DOCTYPE html>
         <html>
           <head>
             <title>${this.title}</title>
-            <link href="${this.assets.css}" rel="stylesheet">
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+              ${styles}
+            </style>
           </head>
           <body>
             ${artboard.innerHTML}
-            <script src="${this.assets.js}"></script>
+            <script src="${window.location.origin + '/js/cjs.js'}"></script>
           <body>
         </html>`
     )

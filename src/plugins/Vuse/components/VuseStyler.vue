@@ -965,7 +965,16 @@ export default {
         opacity: 1
     .input-group
         margin: 5px
-
+    input
+        border: none
+        padding: 0.75rem
+        display: inline-block
+        vertical-align: top
+        border-radius: 1rem
+    button
+        border: none
+        padding: 0.5rem
+        border-radius: 1rem
 .align
     @extend .styler-list
     height: 42px

@@ -18,6 +18,14 @@ export function galleryTwo() {
         };
     });
 
+    popupX.onclick = function(e) {
+      closePopup();
+    };
+
+    popup.onclick = function(e) {
+      closePopup();
+    };
+
     function clickLink (el) {
         var content = '';
         let m = false;
@@ -37,7 +45,7 @@ export function galleryTwo() {
         popup.style.display = "flex";
     }
 
-    function closePopup (c) {
+    function closePopup () {
         popupC.innerHTML = "";
         popup.style.display = "none";
     }

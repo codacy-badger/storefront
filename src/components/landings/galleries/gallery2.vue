@@ -5,7 +5,7 @@
         <div class="l-title">
           <h1 class="l-title__title" v-styler="$sectionData.slogan.type" v-text="$sectionData.slogan.text"></h1>
         </div>
-        <div class="p-video flex flex_center flex_wrap">
+        <div class="p-video flex flex_center">
           <div class="p-video__item-wrap"
             v-for="(item, index) in $sectionData.images"
             v-styler:galleryItem="$sectionData.images[index]"
@@ -153,6 +153,9 @@ export default {
   margin-right: -2rem
 .p-video__item-wrap
   width: 20%
+  height: 22rem
+  min-width: 5rem
+  min-height: 5rem
   margin: 1rem
   padding: 1rem
   cursor: pointer
