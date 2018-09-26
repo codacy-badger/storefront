@@ -1,11 +1,11 @@
 const routes = [
   {
     path: '/',
-    component: () => import('@components/Layout'),
+    component: () => import(/* webpackChunkName: "Layout" */'@components/Layout'),
     children: [
       {
         path: 'dashboard',
-        component: () => lazyLoadView(import('@components/pages/Dashboard')),
+        component: () => lazyLoadView(import(/* webpackChunkName: "Dashboard" */ '@components/pages/Dashboard')),
         name: 'Dashboard',
         alias: ''
       }
@@ -13,14 +13,14 @@ const routes = [
   },
   {
     path: '/editor',
-    component: () => import('@components/pages/VuseEditor'),
+    component: () => import(/* webpackChunkName: "VuseEditor" */ '@components/pages/VuseEditor'),
     name: 'VuseEditor',
     alias: ''
   },
   {
     path: '/404',
     name: '404',
-    component: lazyLoadView(import('@components/NotFound'))
+    component: lazyLoadView(import(/* webpackChunkName: "404" */ '@components/NotFound'))
   }
 ]
 

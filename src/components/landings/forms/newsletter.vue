@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     onSubmit () {
-      if (this.$builder.isEditing) return
+      /* if (this.$builder.isEditing) return
 
       const endpoint = this.$sectionData.action.href
-      console.log(`Pinging ${endpoint} with ${this.$sectionData.form.email}`)
+      console.info(`Pinging ${endpoint} with ${this.$sectionData.form.email}`) */
       // SEND DATA TO ENDPOINT
     }
   }

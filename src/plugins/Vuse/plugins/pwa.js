@@ -83,8 +83,7 @@ function download (assets) {
   const title = document.title
   const zip = new JSZip()
   const output = zip.folder('project')
-  const cssFolder = output.folder('assets/css')
-  const jsFolder = output.folder('assets/js')
+  const jsFolder = output.folder('js/')
 
   var promise = new Promise((resolve, reject) => {
     const assetsClient = new XMLHttpRequest()
@@ -95,21 +94,8 @@ function download (assets) {
       assetsClient.send(null)
     })
     .then((content) => {
-      jsFolder.file('app.js', content)
+      jsFolder.file('cjs.js', content)
       return content
-    })
-    .then(() => {
-      return new Promise((resolve, reject) => {
-        const assetsClient = new XMLHttpRequest()
-        assetsClient.open('GET', assets.css)
-        assetsClient.onload = function () {
-          resolve(this.response)
-        }
-        assetsClient.send(null)
-      }).then((content) => {
-        cssFolder.file('app.css', content)
-        return content
-      })
     })
     .then(() => {
       cleanDOM(frag)
@@ -125,7 +111,7 @@ function download (assets) {
           </head>
           <body>
             ${artboard.innerHTML}
-          <script src="assets/js/app.js"></script>
+          <script src="js/cjs.js"></script>
           </body>
         </html>`)
 

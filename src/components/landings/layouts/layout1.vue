@@ -147,10 +147,10 @@ export default {
   },
   methods: {
     onClick () {
-      if (this.$builder.isEditing) return
+      /* if (this.$builder.isEditing) return
 
       const endpoint = this.$sectionData.buttons[0].href
-      console.log(endpoint)
+      console.info(endpoint) */
     },
     openLink (el) {
       if (this.$builder.isEditing) return
