@@ -23,6 +23,7 @@ import gallery1 from '@components/landings/galleries/gallery1.vue'
 import gallery2 from '@components/landings/galleries/gallery2.vue'
 import button1 from '@components/landings/elements/button1.vue'
 import button2 from '@components/landings/elements/button2.vue'
+import buttons from '@components/landings/elements/buttons'
 
 Vuse.mix({
   components: {
@@ -43,6 +44,7 @@ Vuse.component(layout1)
 Vuse.component(layout2)
 Vuse.component(gallery1)
 Vuse.component(gallery2)
+Vuse.component(buttons)
 Vuse.component(button1)
 Vuse.component(button2)
 
@@ -67,6 +69,10 @@ Vue.use(Vuse, {
     {
       name: 'Gallery 2',
       sections: [gallery2]
+    },
+    {
+      name: 'Buttons',
+      sections: [buttons]
     },
     {
       name: 'Buttons',

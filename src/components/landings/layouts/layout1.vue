@@ -1,5 +1,8 @@
 <template>
-  <section class="b-layout-1" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-layout-1"
+           v-styler:section="$sectionData.mainStyle"
+           :class="$sectionData.mainStyle.classes"
+           v-bind:style="$sectionData.mainStyle.styles">
     <div class="b-layout-1__wrap">
       <div class="b-layout-1__content">
         <div class="b-layout-1__panel">
@@ -10,47 +13,49 @@
             </div>
             <div class="b-layout-1__panel__section">
               <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].text"
-                 v-text="$sectionData.slogan[0].title"></div>
+                   v-text="$sectionData.slogan[0].title"></div>
               <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].text"
-                 v-text="$sectionData.slogan[1].title"></div>
+                   v-text="$sectionData.slogan[1].title"></div>
             </div>
 
             <div class="b-layout-1__panel__section">
               <ul class="b-layout-1__panel__features">
                 <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" :key="index">
                   <span v-styler:index="`$sectionData.titles[${index}].title`">
-                    {{ $sectionData.titles[index].text }}
+                      {{ $sectionData.titles[index].text }}
                   </span>
                 </li>
               </ul>
             </div>
             <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
-              <span class="b-layout-1__b-button" @click.prevent="onClick"
-                :class="$sectionData.buttons[0].classes" :href="$sectionData.buttons[0].href"
-                v-html="$sectionData.buttons[0].text" v-styler="$sectionData.buttons[0].button"
-                  v-bind:style="$sectionData.buttons[0].button.styles">
+              <a class="b-layout-1__b-button" @click.prevent="onClick"
+                 :class="$sectionData.buttons[0].button.classes" :href="$sectionData.buttons[0].button.href"
+                 v-html="$sectionData.buttons[0].button.text" v-styler="$sectionData.buttons[0].button"
+                 :style="$sectionData.buttons[0].button.styles">
 
-              </span>
+              </a>
             </div>
             <div class="b-layout-1__panel__section">
               <footer class="b-layout-1__footer">
                 <div class="b-layout-1__footer__group">
                   <uploader class="b-layout-1__footer__el b-layout-1__footer__el_logo"
-                    path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt"
-                    :alt="$sectionData.logos[1].alt"></uploader>
+                            path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt"
+                            :alt="$sectionData.logos[1].alt"></uploader>
                   <span class="b-layout-1__footer__el">
                     <span v-text="$sectionData.copyright.title"
-                        v-styler="$sectionData.copyright.text">
+                          v-styler="$sectionData.copyright.text">
                       2018-2018 gamesite.com
                     </span>
                   </span>
                 </div>
                 <div class="b-layout-1__footer__group b-layout-1__footer__group_light">
                   <span v-for="(item, index) in $sectionData.links" :key="index">
-                    <a @click.prevent="openLink(item)" :class="item.classes"
-                       class="b-layout-1__footer__el b-layout-1__footer__el_link"
-                       :href="item.href" v-html="item.text" v-styler="item">
-                    </a>
+                      <a @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
+                         class="b-layout-1__footer__el b-layout-1__footer__el_link"
+                         :href="item.href" v-html="item.text"
+                         v-styler:index="`$sectionData.links[${index}].button`"
+                         :style="$sectionData.links[index].button.styles">
+                      </a>
                   </span>
                 </div>
               </footer>
@@ -63,7 +68,7 @@
 </template>
 
 <script>
-import * as types from './../../../plugins/Vuse/types'
+import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Layout1',
@@ -125,17 +130,14 @@ export default {
     links: [
       {
         text: 'Catalog of games',
-        href: '#',
         button: types.Button
       },
       {
         text: 'Support',
-        href: '#',
         button: types.Button
       },
       {
         text: 'Rules',
-        href: '#',
         button: types.Button
       }
     ]
