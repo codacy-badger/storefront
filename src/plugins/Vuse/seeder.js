@@ -10,7 +10,7 @@ const data = new Map([
   [types.Link, () => ({
     text: 'Click Me!',
     classes: [],
-    href: 'http://example.com' })
+    href: '' })
   ],
   [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.ClassList, () => []],
@@ -30,7 +30,7 @@ const data = new Map([
     {
       text: 'Click Me!',
       classes: [],
-      href: '#',
+      href: '',
       styles: {
         'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
         'background-position': false,
