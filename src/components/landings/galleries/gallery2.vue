@@ -122,11 +122,8 @@ export default {
     },
     setHeight () {
       let el = document.getElementById('content')
-      console.log(el)
       let actualWidth = el.clientWidth
-      console.log(actualWidth)
       let calcHeight = actualWidth * 0.5625
-      console.log(calcHeight)
       el.style.height = calcHeight + 'px'
     },
     closePopup () {
