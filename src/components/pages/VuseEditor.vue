@@ -4,6 +4,8 @@
 
 <script>
 import Vue from 'vue'
+import { mapActions, mapState } from 'vuex'
+
 import Vuse from '@plugins/Vuse'
 import pwa from '@plugins/Vuse/plugins/pwa'
 import Uploader from '@plugins/Vuse/plugins/Uploader.vue'
@@ -29,58 +31,49 @@ Vuse.mix({
   }
 })
 
-Vuse.component(section1)
-Vuse.component(section2)
-Vuse.component(newsletter)
-Vuse.component(hero1)
-Vuse.component(hero2)
-Vuse.component(social1)
-Vuse.component(social2)
-Vuse.component(social3)
-Vuse.component(social4)
-Vuse.component(layout1)
-Vuse.component(layout2)
-Vuse.component(gallery1)
-Vuse.component(gallery2)
-Vuse.component(buttons)
+Vuse.component('Section1', section1)
+Vuse.component('Section2', section2)
+Vuse.component('Newsletter', newsletter)
+Vuse.component('Hero1', hero1)
+Vuse.component('Hero2', hero2)
+Vuse.component('Social1', social1)
+Vuse.component('Social2', social2)
+Vuse.component('Social3', social3)
+Vuse.component('Social4', social4)
+Vuse.component('Layout1', layout1)
+Vuse.component('Layout2', layout2)
+Vuse.component('Gallery1', gallery1)
+Vuse.component('Gallery2', gallery2)
+Vuse.component('Buttons', buttons)
 
 Vuse.use(pwa)
 
-Vue.use(Vuse, {
-  css: 'css/app.css',
-  js: 'js/cjs.js',
-  themes: [
-    {
-      name: 'Layout 1',
-      sections: [layout1]
-    },
-    {
-      name: 'Layout 2',
-      sections: [layout2, gallery1]
-    },
-    {
-      name: 'Gallery 1',
-      sections: [gallery1]
-    },
-    {
-      name: 'Gallery 2',
-      sections: [gallery2]
-    },
-    {
-      name: 'Buttons',
-      sections: [buttons]
-    }
-  ]
-})
-
 export default {
   methods: {
+    ...mapActions([
+      'fetchLandings'
+    ]),
     onSave (builder) {
       builder.export('pwa')
     },
     onPreview: function (builder) {
       builder.export('preview-devices')
     }
+  },
+  created () {
+    if (!this.landings.length) this.fetchLandings()
+
+    const themes = this.landings.map((item) => item.theme)
+
+    Vue.use(Vuse, {
+      js: 'js/cjs.js',
+      themes: themes
+    })
+  },
+  computed: {
+    ...mapState([
+      'landings'
+    ])
   }
 }
 </script>

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import * as types from './../../../plugins/Vuse/types'
+import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Section1',

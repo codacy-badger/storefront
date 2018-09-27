@@ -49,6 +49,7 @@
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
+import { mapState } from 'vuex'
 
 export default {
   name: 'VuseBuilder',
@@ -91,6 +92,17 @@ export default {
     this.title = this.$builder.title
     this.themes = this.$builder.themes
     this.generateGroups()
+
+    // Open current landing/preset
+    if (this.$route.params.slug) {
+      const landing = this.landings.filter((item) => item.slug === this.$route.params.slug)[0]
+      if (landing !== undefined) this.addTheme(Object.assign(this.data, landing.theme))
+    }
+  },
+  computed: {
+    ...mapState([
+        'landings'
+    ])
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
