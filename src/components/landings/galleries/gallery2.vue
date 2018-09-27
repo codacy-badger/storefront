@@ -151,6 +151,9 @@ export default {
 .p-video
   margin-bottom: 1rem
   margin-right: -2rem
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
 .p-video__item-wrap
   width: 20%
   height: 22rem
@@ -242,12 +245,12 @@ export default {
   z-index: 50
 @media only screen and (max-width: 768px)
   .p-video__item-wrap
-    width: 50%
+    width: 40%
 @media only screen and (max-width: 460px)
   .p-video
     margin-right: 0
   .p-video__item-wrap
-    width: 40%
+    width: 100%
     padding: 0 0 2rem 0
 .btn-container
   text-align: center
@@ -270,6 +273,9 @@ export default {
     justify-content: center
     -webkit-transition: 100ms
     transition: 100ms
+    @media only screen and (max-width: 768px)
+      &
+        width: 20rem
     &:hover
       background-color: #fcff00
     &.is-editable
