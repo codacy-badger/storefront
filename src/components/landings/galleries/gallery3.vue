@@ -1,5 +1,5 @@
 <template>
-  <section id="gallery2" class="pages__page pages__page_videos" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section id="gallery3" class="pages__page pages__page_videos" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="pages__bg"></div>
       <div class="pages__wrap">
         <div class="l-title">
@@ -11,7 +11,7 @@
               v-styler:galleryItem="$sectionData.images[index]"
               :data-index="index"
               >
-              <a gallery-three-link="" :gallery-two-url="$sectionData.images[index].button.href" class="p-video__link"
+              <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="p-video__link"
                  v-styler:index="`$sectionData.images[${index}].button`"
                  v-bind:style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
@@ -51,7 +51,7 @@
               >
               Начать игру
             </span>
-      </div>
+          </div>
       </div>
   </section>
 </template>
