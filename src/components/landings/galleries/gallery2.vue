@@ -35,7 +35,7 @@
       </div>
       <div gallery-two-popup="" class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
           <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
-          <div gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content" v-bind:style="{ height: $sectionData.heightFrame + 'px' }"></div>
+          <div gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
       </div>
   </section>
 </template>
@@ -87,10 +87,10 @@ export default {
       }
     ],
     index: 0,
-    content: '',
     isShowPopup: false,
     heightFrame: '400',
-    url: 'https://www.youtube.com/embed/dqHeutdSSyM'
+    url: 'https://www.youtube.com/embed/dqHeutdSSyM',
+    content: ''
   },
   props: {
     id: {
@@ -100,27 +100,34 @@ export default {
   },
   methods: {
     onClick (el, index) {
-      let content = ''
       let m = false
       let href = el.button.href
       let url = href !== '' ? href : this.$sectionData.url
+      let c = ''
+      this.$sectionData.content = c
       m = this.matchYoutubeUrl(url)
       if (m) {
-        content = '<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+        c = '<iframe id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
       } else {
-        content = '<img width="100%"  height="100%" src="' + url + '"></img>'
+        c = '<img id="content" width="100%"  height="100%" src="' + url + '"></img>'
       }
-      this.$sectionData.content = content
-      this.openPopup(content)
+      this.$sectionData.content = c
+      this.openPopup(this.$sectionData.content)
     },
-    openPopup (content) {
+    openPopup () {
       this.$sectionData.isShowPopup = true
-      this.setHeight(content)
+      setTimeout(() => {
+        this.setHeight()
+      }, 500)
     },
-    setHeight (content) {
-      let actualWidth = content.clientWidth
+    setHeight () {
+      let el = document.getElementById('content')
+      console.log(el)
+      let actualWidth = el.clientWidth
+      console.log(actualWidth)
       let calcHeight = actualWidth * 0.5625
-      this.$sectionData.heightFrame = calcHeight
+      console.log(calcHeight)
+      el.style.height = calcHeight + 'px'
     },
     closePopup () {
       this.$sectionData.isShowPopup = false
@@ -172,7 +179,6 @@ export default {
   width: 20%
 .p-video__item-content
   position: relative
-  min-height: 20rem
   height: 100%
   background-color: #fff
   background-position: center
@@ -302,12 +308,11 @@ export default {
 .l-popup__content
   border: 5px solid #fcff00
   background-color: #000
-  min-width: 60%
   max-width: 90%
-  min-height: 60%
   max-height: 90%
   overflow: hidden
   cursor: auto
+  transition: all 200ms
 .l-popup__content iframe
   display: block
   width: 100%

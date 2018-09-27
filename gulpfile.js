@@ -25,3 +25,12 @@ gulp.task('cjs', function (callback) {
     callback()
   })
 })
+
+gulp.task('public-image', function () {
+  gulp.src([
+    './src/assets/img/**/*.jpg',
+    './src/assets/img/**/*.png',
+    './src/assets/img/**/*.gif',
+    './src/assets/img/**/*.svg'])
+    .pipe(gulp.dest('./public/img'))
+})
