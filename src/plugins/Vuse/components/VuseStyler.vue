@@ -801,7 +801,7 @@ import axios from 'axios'
         this.isRequestProcess = true;
 
         let request = new FormData();
-        let $form = window.$(event.target).parent();
+        let $form = $(event.target).parent();
 
         request.append('file[]', file[0]);
         request.append('method', 'storefront.upload');
@@ -809,7 +809,7 @@ import axios from 'axios'
 
         $form[0].reset();
 
-        window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+        axios.post('http://images.stg.gamenet.ru/restapi', request)
           .then(function (response) {
             if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
               || !response['data']['response'].hasOwnProperty('data')
@@ -959,7 +959,7 @@ import axios from 'axios'
         }
 
         let request = new FormData();
-        let $form = window.$(event.target).parent();
+        let $form = $(event.target).parent();
 
         request.append('file[]', file[0]);
         request.append('method', 'storefront.upload');
@@ -967,7 +967,7 @@ import axios from 'axios'
 
         $form[0].reset();
 
-        window.axios.post('http://images.stg.gamenet.ru/restapi', request)
+        axios.post('http://images.stg.gamenet.ru/restapi', request)
           .then(function (response) {
             if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response')
               || !response['data']['response'].hasOwnProperty('data')
