@@ -33,16 +33,20 @@ export function galleryTwo() {
         var url = href !== '' ? href : defUrl;
         m = matchYoutubeUrl(url);
         if (m) {
-            content = '<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+            content = '<iframe id="content"  width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
         } else {
-            content = '<img width="100%"  height="100%" src="' + url + '"></img>'
+            content = '<img id="content" width="100%"  height="100%" src="' + url + '"></img>'
         }
-        opepPopup (content);
+        setTimeout(opepPopup (content), 500);
     }
 
     function opepPopup (c) {
         popupC.innerHTML = c;
         popup.style.display = "flex";
+        var c = document.getElementById('content');
+        var actualWidth = c.clientWidth;
+        var calcHeight = actualWidth * 0.5625;
+        c.style.height =  calcHeight + 'px';
     }
 
     function closePopup () {
