@@ -173,6 +173,9 @@ export default {
 .p-video__item
   width: 20%
   overflow: hidden
+  &.is-editable
+    resize: both
+    overflow: hidden
 .p-video__item-wrap
   width: 100%
   height: 220px
