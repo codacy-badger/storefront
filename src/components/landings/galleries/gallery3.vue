@@ -6,11 +6,12 @@
           <h1 class="l-title__title" v-styler="$sectionData.slogan.type" v-text="$sectionData.slogan.text"></h1>
         </div>
         <div class="p-video flex flex_center">
-          <div class="p-video__item flex flex_center flex_columns" v-for="(item, index) in $sectionData.images" :key="index">
-            <div class="p-video__item-wrap"
-              v-styler:galleryItem="$sectionData.images[index]"
-              :data-index="index"
-              >
+          <div class="p-video__item flex flex_center flex_columns"
+               v-for="(item, index) in $sectionData.images" :key="index"
+               v-styler:galleryItem="$sectionData.images[index]"
+               :data-index="index"
+            >
+            <div class="p-video__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="p-video__link"
                  v-styler:index="`$sectionData.images[${index}].button`"
                  v-bind:style="$sectionData.images[index].button.styles"
@@ -32,9 +33,9 @@
         </div>
       </div>
       <div gallery-three-popup="" class="l-popup l-popup_flex flex_columns" v-show="true === $sectionData.isShowPopup">
-          <div gallery-three-popup-close="" class="l-popup__close" :class="{'l-popup__close_editing': this.$builder.isEditing}" @click.prevent="closePopup"></div>
+          <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
           <div class="l-popup__logo">
-            <div class="l-popup__logo-block" :class="{'l-popup__logo-block_editing': this.$builder.isEditing}">
+            <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}">
               <uploader class="l-popup__logo-img"
                 path="$sectionData.logos[0].path"
                 :title="$sectionData.logos[0].alt"
@@ -313,12 +314,11 @@ export default {
     width: 20rem
     height: auto
     margin: 0 auto
-    &_editing
+    &.is-editable
       resize: both
       overflow: hidden
       padding: 1rem
   &-img
-    height: 100%
     margin: 0 auto
 .l-popup
   display: none
@@ -358,7 +358,7 @@ export default {
   right: 1rem
   width: 5rem
   height: 5rem
-  &_editing
+  &.is-editable
     top: 10rem
 .l-popup__close:before, .l-popup__close:after
   content: ''

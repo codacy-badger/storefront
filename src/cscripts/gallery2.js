@@ -12,6 +12,10 @@ export function galleryTwo() {
   var popupX = document.querySelectorAll('['+ TARGET_POPUP_CLOSE +']')[0];
   var defUrl = 'https://www.youtube.com/embed/dqHeutdSSyM';
 
+  if (links.length === 0) {
+    return;
+  }
+
     [].forEach.call(links, function(el, i) {
         el.onclick = function(e) {
             clickLink(el);

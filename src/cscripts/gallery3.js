@@ -6,13 +6,17 @@ export function galleryThree() {
   const TARGET_GALLERY_THREE_POPUP_CONTENT = 'gallery-three-popup-content';
   const TARGET_GALLERY_THREE_POPUP_CLOSE = 'gallery-three-popup-close';
 
-  var linksG3 = document.querySelectorAll('['+ TARGET_GALLERY_THREE_LINK +']');
+  var links = document.querySelectorAll('['+ TARGET_GALLERY_THREE_LINK +']');
   var popup = document.querySelectorAll('['+ TARGET_GALLERY_THREE_POPUP +']')[0];
   var popupC = document.querySelectorAll('['+ TARGET_GALLERY_THREE_POPUP_CONTENT +']')[0];
   var popupX = document.querySelectorAll('['+ TARGET_GALLERY_THREE_POPUP_CLOSE +']')[0];
   var defUrl = 'https://www.youtube.com/embed/dqHeutdSSyM';
 
-    [].forEach.call(linksG3, function(el, i) {
+  if (links.length === 0) {
+    return;
+  }
+
+    [].forEach.call(links, function(el, i) {
         el.onclick = function(e) {
             clickLink(el);
         };
