@@ -298,7 +298,7 @@
             </button>
           </li>
             <li v-if="type === 'button'">
-                <button class="styler-button" @click="addTextStyle('justify-content','flex-start','center')">
+                <button class="styler-button" @click="addTextStyle('justify-content','flex-start','flex-start')">
                     <VuseIcon name="left"></VuseIcon>
                 </button>
             </li>
@@ -308,7 +308,7 @@
                 </button>
             </li>
             <li v-if="type === 'button'">
-                <button class="styler-button" @click="addTextStyle('justify-content','flex-end','center')">
+                <button class="styler-button" @click="addTextStyle('justify-content','flex-end','flex-end')">
                     <VuseIcon name="right"></VuseIcon>
                 </button>
             </li>
@@ -372,11 +372,10 @@
                            progress-color="#fcff00"
             >
             </circle-slider>
-            <input ref="inputFontSize" type="number" v-model="fontSize"/>
             <div class="">
               <div class="b-font-size" v-model="fontSize" v-text="fontSize" v-bind:style="{ 'font-size': fontSize + 'rem'}"/>
-              <button class="button" style="width: 12rem;" @click="setFontSize(fontSize)">
-                <VuseIcon name="check"></VuseIcon> Set font size
+              <button class="button" @click="setFontSize(fontSize)">
+                <VuseIcon name="check"></VuseIcon> Set
               </button>
             </div>
           </div>
@@ -398,7 +397,7 @@
             <div class="">
               <div class="b-border-radius" v-model="borderRadius" v-bind:style="{ 'border-radius': borderRadius + '%'}"/>
               <button class="button" style="width: 12rem;" @click="setBorderRadius(borderRadius)">
-                Set
+                <VuseIcon name="check"></VuseIcon> Set
               </button>
             </div>
           </div>
@@ -1178,6 +1177,8 @@ import axios from 'axios'
     cursor: pointer
     background-color: #ffba00
     transition: all 200ms
+    white-space: nowrap
+    font-size: 1.4rem
     &:hover
       filter: brightness(120%)
 </style>
