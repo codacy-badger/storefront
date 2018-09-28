@@ -56,7 +56,7 @@ const actions = {
         slug: 'Gallery3',
         theme: {
           name: 'Gallery 3',
-          sections: ['Gallery3']
+          sections: ['Title1', 'Title2', 'Gallery3', 'Button1']
         }
       },
       {
