@@ -40,8 +40,12 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': false,
-        'border-radius': false,
+        'font-size': '1.4',
+        'border-radius': 0,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'justify-content': false
       }
     }
   )],

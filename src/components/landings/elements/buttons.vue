@@ -252,7 +252,6 @@ export default {
     font-family: Georgia, "Times New Roman", Serif
     text-decoration: none
     font-size: 3rem
-    display: block
     background-color: #6eb979
     color: #fff
     text-transform: uppercase
@@ -263,6 +262,13 @@ export default {
     text-align: center
     margin: 0 auto
     transition: all 200ms
+    display: flex
+    align-items: center
+    justify-content: center
+    transition: all 200ms
+    &.is-editable
+      resize: both
+      overflow: hidden
 
   .b-btn-lp3::before,
   .b-btn-lp3::after

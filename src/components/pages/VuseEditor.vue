@@ -24,6 +24,8 @@ import layout2 from '@components/landings/layouts/layout2.vue'
 import gallery1 from '@components/landings/galleries/gallery1.vue'
 import gallery2 from '@components/landings/galleries/gallery2.vue'
 import gallery3 from '@components/landings/galleries/gallery3.vue'
+import button1 from '@components/landings/elements/button1'
+import button2 from '@components/landings/elements/button2'
 import buttons from '@components/landings/elements/buttons'
 
 Vuse.mix({
@@ -46,6 +48,8 @@ Vuse.component('Layout2', layout2)
 Vuse.component('Gallery1', gallery1)
 Vuse.component('Gallery2', gallery2)
 Vuse.component('Gallery3', gallery3)
+Vuse.component('Button1', button1)
+Vuse.component('Button2', button2)
 Vuse.component('Buttons', buttons)
 
 Vuse.use(pwa)
