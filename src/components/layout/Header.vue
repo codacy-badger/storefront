@@ -4,7 +4,7 @@
 
         <div style="margin: 1rem auto">
             <router-link to="/">Dashboard</router-link>
-            <router-link to="editor">Editor</router-link>
+            <router-link to="editor/new">Editor</router-link>
         </div>
     </header>
 </template>
