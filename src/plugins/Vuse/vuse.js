@@ -205,10 +205,11 @@ class Vuse {
     this.title = data.title !== undefined ? data.title : this.title
     if (data.sections && Array.isArray(data.sections)) {
       this.sections = data.sections.map(section => {
+        const component = this.components[section].options
         const sectionData = {
-          name: section.name,
-          schema: section.schema,
-          data: section.data
+          name: component.name,
+          schema: component.schema,
+          data: component.data
         }
         if (!sectionData.schema) {
           sectionData.schema = this.components[sectionData.name].options.$schema

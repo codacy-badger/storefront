@@ -12,7 +12,7 @@ const routes = [
     ]
   },
   {
-    path: '/editor',
+    path: '/editor/:slug',
     component: () => import(/* webpackChunkName: "VuseEditor" */ '@components/pages/VuseEditor'),
     name: 'VuseEditor',
     alias: ''
