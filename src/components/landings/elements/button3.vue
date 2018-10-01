@@ -55,7 +55,6 @@ export default {
   padding: 2rem
   color: #000
   background-color: #ffba00
-  margin: 0 auto
   text-transform: uppercase
   display: flex
   align-items: center

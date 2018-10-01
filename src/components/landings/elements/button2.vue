@@ -54,7 +54,6 @@ export default {
   height: 6.6rem
   padding: 2rem
   color: #a6e1e1
-  margin: 0 auto
   border: transparent solid  0
   background-color: transparent
   background-image: url(https://gn881.cdn.gamenet.ru/TY0Xv2riHu/6stmF/o_1lLdjP.png)

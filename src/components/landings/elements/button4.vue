@@ -51,7 +51,6 @@ export default {
   line-height: 1
   min-width: 5rem
   padding: 2rem
-  margin: 0 auto
   border: transparent solid  0
   background-color: transparent
   background-repeat: no-repeat

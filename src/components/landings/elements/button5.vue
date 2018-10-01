@@ -56,7 +56,6 @@ export default {
   cursor: pointer
   position: relative
   text-align: center
-  margin: 0 auto
   transition: all 200ms
   display: flex
   align-items: center

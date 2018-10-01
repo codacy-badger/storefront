@@ -57,7 +57,6 @@ export default {
   background-color: #ffba00
   border: transparent solid  0.2rem
   border-color: #ffba00
-  margin: 0 auto
   text-transform: uppercase
   display: flex
   align-items: center
