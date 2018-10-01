@@ -27,6 +27,10 @@ import gallery3 from '@components/landings/galleries/gallery3.vue'
 import button1 from '@components/landings/elements/button1'
 import button2 from '@components/landings/elements/button2'
 import buttons from '@components/landings/elements/buttons'
+import title1 from '@components/landings/titles/title1'
+import title2 from '@components/landings/titles/title2'
+import delimiter from '@components/landings/elements/delimiter'
+import logo from '@components/landings/elements/logo'
 
 Vuse.mix({
   components: {
@@ -51,6 +55,11 @@ Vuse.component('Gallery3', gallery3)
 Vuse.component('Button1', button1)
 Vuse.component('Button2', button2)
 Vuse.component('Buttons', buttons)
+Vuse.component('Title1', title1)
+Vuse.component('Title2', title2)
+Vuse.component('Title2', title2)
+Vuse.component('Delimiter', delimiter)
+Vuse.component('Logo', logo)
 
 Vuse.use(pwa)
 

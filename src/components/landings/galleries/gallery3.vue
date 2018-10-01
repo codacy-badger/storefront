@@ -1,29 +1,25 @@
 <template>
-  <section id="gallery3" class="pages__page pages__page_videos" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <div class="pages__bg"></div>
-      <div class="pages__wrap">
-        <div class="l-title">
-          <h1 class="l-title__title" v-styler="$sectionData.slogan.type" v-text="$sectionData.slogan.text"></h1>
-        </div>
-        <div class="p-video flex flex_center">
-          <div class="p-video__item flex flex_center flex_columns"
+  <section class="b-gallery-three" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <div class="b-gallery-three__wrap">
+        <div class="b-gallery-three-block flex flex_center">
+          <div class="b-gallery-three-block__item flex flex_center flex_columns"
                v-for="(item, index) in $sectionData.images" :key="index"
                v-styler:galleryItem="$sectionData.images[index]"
                :data-index="index"
             >
-            <div class="p-video__item-wrap">
-              <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="p-video__link"
+            <div class="b-gallery-three-block__item-wrap">
+              <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
                  v-styler:index="`$sectionData.images[${index}].button`"
                  v-bind:style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
               >
               </a>
-              <div class="p-video__item-content">
-                <img class="p-video__img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+              <div class="b-gallery-three-block__item-content">
+                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
               </div>
             </div>
             <div>
-              <span class="p-video__item-title"
+              <span class="b-gallery-three-block__item-title"
                 v-styler="`$sectionData.images[${index}].title`"
                 v-text="$sectionData.images[index].title"
                 >
@@ -44,8 +40,8 @@
             </div>
           </div>
           <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
-          <div class="btn-container">
-            <span class="btn-container__button"
+          <div class="b-gallery-three-btn-container">
+            <span class="b-gallery-three-btn-container__button"
                   v-styler="$sectionData.button"
                   v-text="$sectionData.button.text"
                   v-bind:style="$sectionData.button.styles"
@@ -67,10 +63,6 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     button: types.Button,
-    slogan: {
-      text: 'Title',
-      type: types.Title
-    },
     images: [
       {
         preview: [types.Image],
@@ -152,163 +144,158 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
-.l-title
-  text-align: center
-  margin-bottom: 2rem
-.l-title__title
-  margin-bottom: 0.25rem
-  font-size: 4rem
-.p-video__subtitle
-  margin-bottom: 0
-  font-weight: 400
-.p-video
-  margin-bottom: 1rem
-  margin-right: -2rem
-  @media only screen and (max-width: 768px)
-    &
-      flex-wrap: wrap
-  @media only screen and (max-width: 460px)
-    &
-      margin-right: 0
-.p-video__item
-  width: 20%
-  overflow: hidden
+.b-gallery-three
+  display: flex
+  align-items: center
   &.is-editable
-    resize: both
-    overflow: hidden
-.p-video__item-wrap
-  width: 100%
-  height: 220px
-  min-width: 5rem
-  min-height: 5rem
-  margin: 1rem
-  padding: 1rem
-  cursor: pointer
-  position: relative
-  &.is-editable
-    resize: both
-    overflow: hidden
-  @media only screen and (max-width: 768px)
-    &
-      width: 40%
-  @media only screen and (max-width: 460px)
-    &
-      width: 100%
-      padding: 0 0 2rem 0
-.p-video__item-wrap_size-big
-  width: 45%
-.p-video__item-wrap_size-small
-  width: 20%
-.p-video__item-content
-  position: relative
-  height: 100%
-  background-color: #fff
-  background-position: center
-  background-size: cover
-  overflow: hidden
-  pointer-events: none
-  background: -webkit-linear-gradient(315deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
-  background: linear-gradient(135deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
-.p-video__item-wrap:hover .p-video__item-content
-  background: linear-gradient(135deg, rgba(227, 223, 255, 0.3) 0%, rgba(23, 40, 125, 0.3) 100%)
-
-.p-video__item-wrap .p-video__item-content .p-video__text,
-.p-video__item-content:hover .p-video__text
-  opacity: 1
-.p-video__item-title
-  font-size: 1.6rem
-  line-height: 1.4
-  color: #000
-  padding: 0 2rem
-  display: block
-  &::selection, & ::selection
-    color: #ff0
-    background: #000
-.p-video__link
-  position: absolute
-  display: block
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  margin: 0
-  z-index: 100
-  &.is-editable
-    top: 50%
-    left: 50%
-    width: 10rem
-    height: 10rem
-    margin: -5rem 0 0 -5rem
-.p-video__link:before, .p-video__link:after
-  content: ''
-  position: absolute
-  top: 50%
-  left: 50%
-.p-video__link:before
-  margin: -43px 0 0 -43px
-  width: 86px
-  height: 86px
-  -webkit-transform: scale(0.9)
-  transform: scale(0.9)
-  -webkit-transition: all 200ms
-  transition: all 200ms
-  background-image: url(https://gn897.cdn.gamenet.ru/TY0Xv2riHu/6u2ah/o_o01QL.png)
-.p-video__link:after
-  margin: -14px 0 0 -14px
-  width: 28px
-  height: 28px
-  background-image: url(https://gn295.cdn.gamenet.ru/TY0Xv2riHu/6u2as/o_1MFnq3.png)
-.p-video__item-wrap:hover .p-video__link:before
-  transform: scale(1) rotate(-120deg)
-.p-video__text
-  position: absolute
-  bottom: 1.5rem
-  opacity: 0
-  width: 100%
-  text-align: center
-  -webkit-transition: 200ms opacity
-  transition: 200ms opacity
-  pointer-events: none
-  color: #000
-  z-index: 100
-.p-video__img
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  object-fit: cover
-  height: 100%
-  z-index: 50
-.btn-container
-  text-align: center
-  position: relative
-  z-index: 100
-  margin: 2rem 0
-  &__button
-    position: relative
-    padding: 2rem 4rem
-    font-size: 2rem
-    line-height: 2rem
-    background-color: #fff
-    color: #000
+   resize: vertical
+   overflow: hidden
+  &__wrap
     margin: 0 auto
-    border: 0
+    max-width: 160rem
+    min-width: 60%
+  &__subtitle
     margin-bottom: 0
-    display: flex
-    width: 30rem
-    min-width: 10rem
-    align-items: center
-    justify-content: center
-    -webkit-transition: 100ms
-    transition: 100ms
+    font-weight: 400
+
+  &-block
+    margin-bottom: 1rem
+    margin-right: -2rem
     @media only screen and (max-width: 768px)
       &
-        width: 20rem
-    &:hover
-      background-color: #fcff00
-    &.is-editable
-      resize: both
-      overflow: hidden
+        flex-wrap: wrap
+    @media only screen and (max-width: 460px)
+      &
+        margin-right: 0
+
+    &__item
+      width: 20%
+      &.is-editable
+       resize: both
+       overflow: hidden
+       &:active
+         border: dotted #333 1px
+      &-wrap
+        width: 100%
+        height: 220px
+        min-width: 5rem
+        min-height: 5rem
+        margin: 1rem
+        padding: 1rem
+        cursor: pointer
+        position: relative
+        &.is-editable
+          resize: both
+          overflow: hidden
+        @media only screen and (max-width: 768px)
+          &
+            width: 40%
+        @media only screen and (max-width: 460px)
+          &
+            width: 100%
+            padding: 0 0 2rem 0
+
+      &-content
+        position: relative
+        height: 100%
+        background-color: #fff
+        background-position: center
+        background-size: cover
+        overflow: hidden
+        pointer-events: none
+        background: -webkit-linear-gradient(315deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
+        background: linear-gradient(135deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
+
+      &-wrap:hover &-content
+        background: linear-gradient(135deg, rgba(227, 223, 255, 0.3) 0%, rgba(23, 40, 125, 0.3) 100%)
+
+      &-title
+        font-size: 1.6rem
+        line-height: 1.4
+        color: #000
+        padding: 0 2rem
+        display: block
+        &::selection, & ::selection
+          color: #ff0
+          background: #000
+
+      &-link
+        position: absolute
+        display: block
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        margin: 0
+        z-index: 100
+        &.is-editable
+          top: 50%
+          left: 50%
+          width: 10rem
+          height: 10rem
+          margin: -5rem 0 0 -5rem
+        &:before, &:after
+          content: ''
+          position: absolute
+          top: 50%
+          left: 50%
+        &:before
+          margin: -43px 0 0 -43px
+          width: 86px
+          height: 86px
+          -webkit-transform: scale(0.9)
+          transform: scale(0.9)
+          -webkit-transition: all 200ms
+          transition: all 200ms
+          background-image: url(https://gn897.cdn.gamenet.ru/TY0Xv2riHu/6u2ah/o_o01QL.png)
+        &:after
+          margin: -14px 0 0 -14px
+          width: 28px
+          height: 28px
+          background-image: url(https://gn295.cdn.gamenet.ru/TY0Xv2riHu/6u2as/o_1MFnq3.png)
+      &-wrap:hover &-link:before
+          transform: scale(1) rotate(-120deg)
+
+      &-img
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        object-fit: cover
+        height: 100%
+        z-index: 50
+
+  &-btn-container
+    text-align: center
+    position: relative
+    z-index: 100
+    margin: 2rem 0
+    &__button
+      position: relative
+      padding: 2rem 4rem
+      font-size: 2rem
+      line-height: 2rem
+      background-color: #fff
+      color: #000
+      margin: 0 auto
+      border: 0
+      margin-bottom: 0
+      display: flex
+      width: 30rem
+      min-width: 10rem
+      align-items: center
+      justify-content: center
+      -webkit-transition: 100ms
+      transition: 100ms
+      @media only screen and (max-width: 768px)
+        &
+          width: 20rem
+      &:hover
+        background-color: #fcff00
+      &.is-editable
+        resize: both
+        overflow: hidden
+
 .l-popup__logo
   margin: 2rem
   width: 80%
