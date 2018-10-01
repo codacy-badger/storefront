@@ -1,5 +1,5 @@
 <template>
-    <VuseBuilder @saved="onSave" @preview="onPreview" />
+    <VuseBuilder v-bind:show-intro="showIntro" @saved="onSave" @preview="onPreview" />
 </template>
 
 <script>
@@ -79,7 +79,11 @@ export default {
   computed: {
     ...mapState([
       'landings'
-    ])
+    ]),
+    // TODO: delete this when CRUD UI is complete
+    showIntro: function () {
+      return this.$route.params.slug === 'new'
+    }
   }
 }
 </script>

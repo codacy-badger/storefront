@@ -62,7 +62,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Gallery3',
-  cover: 'img/covers/gallery1.png',
+  cover: '/img/covers/gallery1.png',
   group: 'galleries',
   $schema: {
     mainStyle: types.StyleObject,

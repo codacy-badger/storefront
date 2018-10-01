@@ -13,6 +13,11 @@
                     </div>
                 </template>
             </div>
+
+            <div class="controller-intro" v-if="emptySections">
+              <h3>&larr; Choose layout from the menu</h3>
+            </div>
+
             <div class="controller-panel">
                 <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
                     <VuseIcon name="eye"></VuseIcon>
@@ -84,6 +89,11 @@ export default {
     title (value) {
       this.$builder.title = value
       document.title = value
+    },
+    emptySections (value) {
+      if (value) {
+        this.listShown = true
+      }
     }
   },
   created () {
@@ -102,7 +112,10 @@ export default {
   computed: {
     ...mapState([
         'landings'
-    ])
+    ]),
+    emptySections: function () {
+      return !this.showIntro && !this.$builder.sections.length
+    }
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
@@ -159,6 +172,7 @@ export default {
     },
     addSection (section, position) {
       this.$builder.add(section, position)
+      this.toggleListVisibility()
     },
     clearSections () {
       this.tempSections = this.$builder.clear()
