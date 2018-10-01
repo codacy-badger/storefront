@@ -65,6 +65,13 @@ const actions = {
           name: 'Buttons',
           sections: ['Buttons']
         }
+      },
+      {
+        slug: 'Footer',
+        theme: {
+          name: 'Footer',
+          sections: ['Footer']
+        }
       }
     ]
     return commit('updateLandings', presets)

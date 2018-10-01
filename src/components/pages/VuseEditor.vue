@@ -31,6 +31,7 @@ import title1 from '@components/landings/titles/title1'
 import title2 from '@components/landings/titles/title2'
 import delimiter from '@components/landings/elements/delimiter'
 import logo from '@components/landings/elements/logo'
+import footer from '@components/landings/elements/footer'
 
 Vuse.mix({
   components: {
@@ -55,6 +56,7 @@ Vuse.component('Gallery3', gallery3)
 Vuse.component('Button1', button1)
 Vuse.component('Button2', button2)
 Vuse.component('Buttons', buttons)
+Vuse.component('Footer', footer)
 Vuse.component('Title1', title1)
 Vuse.component('Title2', title2)
 Vuse.component('Title2', title2)

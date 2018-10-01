@@ -8,7 +8,7 @@ const data = new Map([
   [types.Avatar, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Logo, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Link, () => ({
-    text: 'Click Me!',
+    text: 'Link',
     classes: [],
     href: '' })
   ],
