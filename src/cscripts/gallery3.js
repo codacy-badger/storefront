@@ -10,7 +10,7 @@ export function galleryThree() {
   var popup = document.querySelectorAll('['+ TARGET_GALLERY_THREE_POPUP +']')[0];
   var popupC = document.querySelectorAll('['+ TARGET_GALLERY_THREE_POPUP_CONTENT +']')[0];
   var popupX = document.querySelectorAll('['+ TARGET_GALLERY_THREE_POPUP_CLOSE +']')[0];
-  var defUrl = 'https://www.youtube.com/embed/dqHeutdSSyM';
+  var defUrl = 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png';
 
   if (links.length === 0) {
     return;

@@ -76,7 +76,7 @@ export default {
     index: 0,
     isShowPopup: false,
     heightFrame: '400',
-    url: 'https://www.youtube.com/embed/dqHeutdSSyM',
+    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
     content: ''
   },
   props: {
@@ -139,6 +139,7 @@ export default {
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
+      height: auto !important
   &__wrap
     max-width: 160rem
     width: 60%

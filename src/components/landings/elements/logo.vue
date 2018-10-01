@@ -13,7 +13,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Logo',
-  cover: 'img/covers/layout1.png',
+  cover: './../img/covers/layout1.png',
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,

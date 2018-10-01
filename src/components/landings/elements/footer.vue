@@ -19,9 +19,9 @@
         </div>
       <div class="b-footer__group b-footer__group_3">
         <span v-for="(item, index) in $sectionData.buttons" :key="index">
-          <a @click.prevent="openLink(item)" :class="`$sectionData.buttons[${index}].button.classes`"
+          <a @click.prevent="openLink(item)" target="_blank" :class="`$sectionData.buttons[${index}].button.classes`"
             class="b-footer__link"
-            :href="item.href" v-html="item.text"
+            :href="$sectionData.buttons[index].button.href" v-html="item.text"
             v-styler:index="`$sectionData.buttons[${index}].button`"
             :style="$sectionData.buttons[index].button.styles">
           </a>
@@ -36,7 +36,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Footer',
-  cover: 'img/covers/layout1.png',
+  cover: './../img/covers/layout1.png',
   group: 'layouts',
   $schema: {
     mainStyle: types.StyleObject,
@@ -112,7 +112,7 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  @media only screen and (max-width: 540px)
+  @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
   &__group
@@ -120,7 +120,7 @@ export default {
     flex-wrap: wrap
     justify-content: center
     margin: 0 1rem 0.35rem 1rem
-    @media only screen and (max-width: 540px)
+    @media only screen and (max-width: 768px)
       &
         &_2
           order: 3
@@ -142,4 +142,5 @@ export default {
     line-height: 1.8rem
     padding: 0 0.5rem
     text-decoration: underline
+    cursor: pointer
 </style>

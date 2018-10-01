@@ -50,7 +50,7 @@
                 </div>
                 <div class="b-layout-1__footer__group b-layout-1__footer__group_light">
                   <span v-for="(item, index) in $sectionData.links" :key="index">
-                      <a @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
+                      <a target="_blank" @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
                          class="b-layout-1__footer__el b-layout-1__footer__el_link"
                          :href="item.href" v-html="item.text"
                          v-styler:index="`$sectionData.links[${index}].button`"

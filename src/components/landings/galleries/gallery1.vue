@@ -119,4 +119,7 @@ export default {
   &.is-editable
     resize: vertical
     overflow: hidden
+  @media only screen and (max-width: 768px)
+    &
+      height: auto !important
 </style>

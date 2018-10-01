@@ -89,7 +89,7 @@ export default {
     const themes = this.landings.map((item) => item.theme)
 
     Vue.use(Vuse, {
-      js: 'js/cjs.js',
+      js: './../js/cjs.js',
       themes: themes
     })
   },

@@ -39,7 +39,7 @@ class Vuse {
     this.components = {}
     this.assets = {
       css: options.css,
-      js: options.js || 'js/cjs.js'
+      js: options.js || './../js/cjs.js'
     }
     this.installPlugins()
   }
