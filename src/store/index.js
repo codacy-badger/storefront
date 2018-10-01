@@ -53,6 +53,13 @@ const actions = {
         }
       },
       {
+        slug: 'Gallery3',
+        theme: {
+          name: 'Gallery 3',
+          sections: ['Gallery3']
+        }
+      },
+      {
         slug: 'Buttons',
         theme: {
           name: 'Buttons',

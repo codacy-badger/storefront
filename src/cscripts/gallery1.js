@@ -6,6 +6,10 @@ export function galleryPreviewClick(num) {
   var previews = document.querySelectorAll('['+ TARGET_PREVIEW +']'),
     stages = document.querySelectorAll('['+ TARGET_STAGE +']');
 
+  if (previews.length === 0) {
+    return;
+  }
+
   function clickPreview(el) {
     var index = el.getAttribute('data-index'),
       target = el.getAttribute(TARGET_PREVIEW);

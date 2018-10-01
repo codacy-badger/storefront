@@ -16,8 +16,15 @@
 
     <target name="yarn:build" description="Build Frontend">
         <exec executable="yarn">
-            <arg value="run"/>
-            <arg value="dev"/>
+            <arg value="cjs"/>
+        </exec>
+
+        <exec executable="gulp">
+            <arg value="public-image"/>
+        </exec>
+
+        <exec executable="yarn">
+            <arg value="build"/>
         </exec>
     </target>
 
@@ -25,7 +32,7 @@
         <tar destfile="${basedir}/${deploy_archive_name}.tar"
              basedir="${basedir}"
              includes="**/*.*"
-             excludes="**/.git/**,**/.gitignore"
+             excludes="**/.git/**,**/.gitignore,**/public/**"
         />
 
         <gzip destfile="${basedir}/${deploy_archive_name}.tar.gz" src="${basedir}/${deploy_archive_name}.tar"/>

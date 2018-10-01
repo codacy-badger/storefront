@@ -1,41 +1,58 @@
 <template>
-  <section id="gallery2" class="pages__page pages__page_videos" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section id="gallery3" class="pages__page pages__page_videos" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="pages__bg"></div>
       <div class="pages__wrap">
         <div class="l-title">
           <h1 class="l-title__title" v-styler="$sectionData.slogan.type" v-text="$sectionData.slogan.text"></h1>
         </div>
         <div class="p-video flex flex_center">
-          <div class="p-video__item-wrap"
-            v-for="(item, index) in $sectionData.images"
-            v-styler:galleryItem="$sectionData.images[index]"
-            :data-index="index"
-            :key="index"
-          >
-            <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="p-video__link"
-               v-styler:index="`$sectionData.images[${index}].button`"
-               v-bind:style="$sectionData.images[index].button.styles"
-               @dblclick="onClick(item, index)"
+          <div class="p-video__item flex flex_center flex_columns"
+               v-for="(item, index) in $sectionData.images" :key="index"
+               v-styler:galleryItem="$sectionData.images[index]"
+               :data-index="index"
             >
-            </a>
-            <div class="p-video__item-content">
-              <img class="p-video__img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+            <div class="p-video__item-wrap">
+              <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="p-video__link"
+                 v-styler:index="`$sectionData.images[${index}].button`"
+                 v-bind:style="$sectionData.images[index].button.styles"
+                 @dblclick="onClick(item, index)"
+              >
+              </a>
+              <div class="p-video__item-content">
+                <img class="p-video__img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+              </div>
+            </div>
+            <div>
+              <span class="p-video__item-title"
+                v-styler="`$sectionData.images[${index}].title`"
+                v-text="$sectionData.images[index].title"
+                >
+              </span>
             </div>
           </div>
         </div>
-        <div class="btn-container">
-          <span class="btn-container__button"
-              v-styler:button="$sectionData.button"
-              v-text="$sectionData.button.text"
-              v-bind:style="$sectionData.button.styles"
-            >
-            Начать игру
-          </span>
-        </div>
       </div>
-      <div gallery-two-popup="" class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
-          <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
-          <div gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+      <div gallery-three-popup="" class="l-popup l-popup_flex flex_columns" v-show="true === $sectionData.isShowPopup">
+          <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
+          <div class="l-popup__logo">
+            <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}">
+              <uploader class="l-popup__logo-img"
+                path="$sectionData.logos[0].path"
+                :title="$sectionData.logos[0].alt"
+                :alt="$sectionData.logos[0].alt">
+              </uploader>
+            </div>
+          </div>
+          <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+          <div class="btn-container">
+            <span class="btn-container__button"
+                  v-styler="$sectionData.button"
+                  v-text="$sectionData.button.text"
+                  v-bind:style="$sectionData.button.styles"
+              >
+              Начать игру
+            </span>
+          </div>
       </div>
   </section>
 </template>
@@ -44,8 +61,8 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Gallery2',
-  cover: '/img/covers/gallery1.png',
+  name: 'Gallery3',
+  cover: 'img/covers/gallery1.png',
   group: 'galleries',
   $schema: {
     mainStyle: types.StyleObject,
@@ -57,33 +74,25 @@ export default {
     images: [
       {
         preview: [types.Image],
-        label: types.Title,
+        title: types.Title,
         button: types.Button
       },
       {
         preview: [types.Image],
-        label: types.Title,
+        title: types.Title,
         button: types.Button
       },
       {
         preview: [types.Image],
-        label: types.Title,
+        title: types.Title,
         button: types.Button
-      },
+      }
+    ],
+    logos: [
       {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
-      },
-      {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
-      },
-      {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
+        path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
+        alt: 'Default Logo',
+        logo: types.Logo
       }
     ],
     index: 0,
@@ -158,9 +167,18 @@ export default {
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
-.p-video__item-wrap
+  @media only screen and (max-width: 460px)
+    &
+      margin-right: 0
+.p-video__item
   width: 20%
-  height: 22rem
+  overflow: hidden
+  &.is-editable
+    resize: both
+    overflow: hidden
+.p-video__item-wrap
+  width: 100%
+  height: 220px
   min-width: 5rem
   min-height: 5rem
   margin: 1rem
@@ -170,6 +188,13 @@ export default {
   &.is-editable
     resize: both
     overflow: hidden
+  @media only screen and (max-width: 768px)
+    &
+      width: 40%
+  @media only screen and (max-width: 460px)
+    &
+      width: 100%
+      padding: 0 0 2rem 0
 .p-video__item-wrap_size-big
   width: 45%
 .p-video__item-wrap_size-small
@@ -190,6 +215,15 @@ export default {
 .p-video__item-wrap .p-video__item-content .p-video__text,
 .p-video__item-content:hover .p-video__text
   opacity: 1
+.p-video__item-title
+  font-size: 1.6rem
+  line-height: 1.4
+  color: #000
+  padding: 0 2rem
+  display: block
+  &::selection, & ::selection
+    color: #ff0
+    background: #000
 .p-video__link
   position: absolute
   display: block
@@ -242,23 +276,14 @@ export default {
   top: 0
   left: 0
   width: 100%
-  -o-object-fit: cover
   object-fit: cover
   height: 100%
   z-index: 50
-@media only screen and (max-width: 768px)
-  .p-video__item-wrap
-    width: 40%
-@media only screen and (max-width: 460px)
-  .p-video
-    margin-right: 0
-  .p-video__item-wrap
-    width: 100%
-    padding: 0 0 2rem 0
 .btn-container
   text-align: center
   position: relative
   z-index: 100
+  margin: 2rem 0
   &__button
     position: relative
     padding: 2rem 4rem
@@ -284,6 +309,20 @@ export default {
     &.is-editable
       resize: both
       overflow: hidden
+.l-popup__logo
+  margin: 2rem
+  width: 80%
+  &-block
+    min-width: 10rem
+    width: 20rem
+    height: auto
+    margin: 0 auto
+    &.is-editable
+      resize: both
+      overflow: hidden
+      padding: 1rem
+  &-img
+    margin: 0 auto
 .l-popup
   display: none
   position: fixed
@@ -296,12 +335,12 @@ export default {
   width: 100%
   height: 100%
   background-color: rgba(0, 0, 0, 0.8)
-  z-index: 99999
+  z-index: 1000
   cursor: pointer
-.l-popup_on
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
+  &_flex
+    display: -webkit-box
+    display: -ms-flexbox
+    display: flex
 .l-popup__content
   border: 5px solid #fcff00
   background-color: #000
@@ -318,11 +357,12 @@ export default {
   width: 70%
 .l-popup__close
   position: absolute
-  top: 10px
-  right: 10px
-  width: 50px
-  height: 50px
-  pointer-events: none
+  top: 1rem
+  right: 1rem
+  width: 5rem
+  height: 5rem
+  &.is-editable
+    top: 10rem
 .l-popup__close:before, .l-popup__close:after
   content: ''
   position: absolute
