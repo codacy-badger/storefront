@@ -54,6 +54,15 @@
             <VuseIcon name="pic"></VuseIcon>
           </button>
         </li>
+        <li>
+          <button class="styler-button" @click="removeButton">
+            <VuseIcon name="trash"></VuseIcon>
+          </button>
+        <li>
+          <button class="styler-button" @click="copyButton">
+            <VuseIcon name="plus"></VuseIcon>
+          </button>
+        </li>
       </template>
       <template v-if="type === 'galleryItem'">
         <li>
@@ -433,6 +442,7 @@ import { Sketch } from 'vue-color'
 import VueCircleSlider from 'vue-circle-slider'
 import $ from 'jquery'
 import axios from 'axios'
+import * as types from '@plugins/Vuse/types'
 
   const DEFAULT_BACKGROUND_REPEAT = 'no-repeat';
   const DEFAULT_BACKGROUND_POSITION = 'center center';
@@ -703,15 +713,27 @@ import axios from 'axios'
         return refElem.parentNode.parentNode.insertBefore(elem, refElem.nextSibling);
       },
       copyLink() {
-        let l = Object.assign({}, this.section.data.links[0]);
+        let newObj = JSON.parse(JSON.stringify(this.section.data.links[0]))
+        let l = Object.assign({}, newObj);
         this.section.data.links.push(l);
       },
       removeLink() {
         this.el.remove();
         this.$refs.styler.remove();
       },
+      copyButton() {
+        let newObj = JSON.parse(JSON.stringify(this.section.data.buttons[0]))
+        let l = Object.assign({}, newObj);
+        this.section.data.buttons.push(l);
+        this.section.schema.buttons.push(l);
+      },
+      removeButton() {
+        this.el.remove();
+        this.$refs.styler.remove();
+      },
       copyItemGallery() {
-        let l = Object.assign({}, this.section.data.images[0]);
+        let newObj = JSON.parse(JSON.stringify(this.section.data.images[0]))
+        let l = Object.assign({}, newObj);
         this.section.data.images.push(l);
         this.section.schema.images.push(l);
       },
@@ -720,7 +742,8 @@ import axios from 'axios'
         this.$refs.styler.remove();
       },
       copyTitle() {
-        let s = Object.assign({}, this.section.data.titles[0]);
+        let newObj = JSON.parse(JSON.stringify(this.section.data.titles[0]))
+        let s = Object.assign({}, newObj);
         this.section.data.titles.push(s);
         this.section.schema.titles.push(s);
       },
