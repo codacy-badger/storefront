@@ -1,10 +1,5 @@
 <template>
-  <section id="gallery1" class="pages__page pages__page_hero"  v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-    <div class="pages__wrap flex flex_columns ie-height-fix">
-      <div class="l-title flex__item">
-        <h1 class="l-title__title" v-styler="$sectionData.slogan[0].text" v-text="$sectionData.slogan[0].title"/>
-        <div class="l-title__subtitle" v-styler="$sectionData.slogan[1].text" v-text="$sectionData.slogan[1].title"/>
-      </div>
+  <section class="b-gallery-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="p-split flex__item flex flex__item_full flex_center">
         <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
           <div class="hero-tile"
@@ -39,16 +34,6 @@
             </p>
           </div>
         </div>
-      </div>
-      <div class="gallery1-btn-container flex__item">
-        <a class="gallery1-btn-container__button" target="_blank"
-           v-styler:button="$sectionData.button"
-           :href="$sectionData.button.href"
-           v-html="$sectionData.button.text"
-           v-bind:style="$sectionData.button.styles"
-           >
-        </a>
-      </div>
     </div>
   </section>
 
@@ -64,17 +49,6 @@ export default {
   group: 'galleries',
   $schema: {
     mainStyle: types.StyleObject,
-    button: types.Button,
-    slogan: [
-      {
-        title: 'Who are you in Your Game?',
-        text: types.Title
-      },
-      {
-        title: 'Choose your character. Choose carefully!',
-        text: types.Title
-      }
-    ],
     images: [
       {
         preview: [types.Image],
@@ -129,3 +103,20 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.b-gallery-one
+  font-family: Helvetica Neue, Helvetica, Arial
+  display: flex
+  align-items: center
+  position: relative
+  width: 100%
+  background-position: center
+  background-size: cover
+  color: #000
+  padding: 1rem
+  min-height: 63rem
+  &.is-editable
+    resize: vertical
+    overflow: hidden
+</style>

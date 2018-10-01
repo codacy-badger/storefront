@@ -443,7 +443,7 @@ a
         height: auto
 
 .hero-detail__bio
-  font-size: 2rem
+  font-size: 1.4rem
   line-height: 1.1
   max-width: 50rem
   margin: 1rem auto
