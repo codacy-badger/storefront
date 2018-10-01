@@ -7,7 +7,7 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Delemiter',
+  name: 'Delimiter',
   cover: 'img/covers/button.png',
   group: 'elements',
   $schema: {

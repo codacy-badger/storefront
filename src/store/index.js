@@ -35,7 +35,7 @@ const actions = {
         slug: 'Layout2',
         theme: {
           name: 'Layout 2',
-          sections: ['Layout2', 'Gallery1']
+          sections: ['Logo', 'Delimiter', 'Title1', 'Title2', 'Button1']
         }
       },
       {
