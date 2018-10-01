@@ -29,6 +29,7 @@ import button2 from '@components/landings/elements/button2'
 import buttons from '@components/landings/elements/buttons'
 import title1 from '@components/landings/titles/title1'
 import title2 from '@components/landings/titles/title2'
+import delimiter from '@components/landings/elements/delimiter'
 
 Vuse.mix({
   components: {
@@ -55,6 +56,8 @@ Vuse.component('Button2', button2)
 Vuse.component('Buttons', buttons)
 Vuse.component('Title1', title1)
 Vuse.component('Title2', title2)
+Vuse.component('Title2', title2)
+Vuse.component('Delimiter', delimiter)
 
 Vuse.use(pwa)
 
