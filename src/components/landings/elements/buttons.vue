@@ -82,7 +82,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Buttons',
-  cover: 'img/covers/social1.png',
+  cover: '/img/covers/social1.png',
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,

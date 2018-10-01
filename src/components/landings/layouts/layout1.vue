@@ -72,7 +72,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Layout1',
-  cover: 'img/covers/layout1.png',
+  cover: '/img/covers/layout1.png',
   group: 'layouts',
   $schema: {
     mainStyle: types.StyleObject,

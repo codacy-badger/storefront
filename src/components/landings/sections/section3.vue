@@ -24,7 +24,7 @@ import * as types from './../../../plugins/Vuse/types'
 
 export default {
   name: 'Section3',
-  cover: 'img/covers/section3.png',
+  cover: '/img/covers/section3.png',
   group: 'Layouts',
   $schema: {
     classes: types.ClassList,

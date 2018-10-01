@@ -60,7 +60,7 @@ import { galleryPreviewClick } from '@cscripts/gallery1'
 
 export default {
   name: 'Gallery1',
-  cover: 'img/covers/gallery1.png',
+  cover: '/img/covers/gallery1.png',
   group: 'galleries',
   $schema: {
     mainStyle: types.StyleObject,
