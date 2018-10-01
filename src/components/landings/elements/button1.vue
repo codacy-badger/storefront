@@ -1,10 +1,10 @@
 <template>
     <section id="buttonOne" class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a class="b-button-one" target="_blank"
-           v-styler="$sectionData.button.button"
-           v-html="$sectionData.button.button.text"
-           :href="$sectionData.button.button.href"
-           v-bind:style="$sectionData.button.button.styles"
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
+           v-styler:index="`$sectionData.buttons[${index}].button`"
+           v-html="$sectionData.buttons[index].button.text"
+           :href="$sectionData.buttons[index].button.href"
+           v-bind:style="$sectionData.buttons[index].button.styles"
           >
       </a>
     </section>
@@ -19,10 +19,10 @@ export default {
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
-    button: {
+    buttons: [{
       text: 'Play Now',
       button: types.Button
-    }
+    }]
   },
   props: {
     id: {

@@ -722,10 +722,11 @@ import * as types from '@plugins/Vuse/types'
         this.$refs.styler.remove();
       },
       copyButton() {
-        let newObj = JSON.parse(JSON.stringify(this.section.data.buttons[0]))
-        let l = Object.assign({}, newObj);
-        this.section.data.buttons.push(l);
-        this.section.schema.buttons.push(l);
+        let arr = `${this.name}`.split(".")[1].split("[");
+        let newObj = JSON.parse(JSON.stringify(eval('this.section.data.'+arr[0]+'[0]')));
+        let newEl = Object.assign({}, newObj);
+        eval('this.section.data.'+arr[0]+'.push(newEl)');
+        eval('this.section.schema.'+arr[0]+'.push(newEl)');
       },
       removeButton() {
         this.el.remove();
