@@ -1,5 +1,5 @@
 <template>
-    <VuseBuilder @saved="onSave" @preview="onPreview" />
+    <VuseBuilder @saved="onDownload" @preview="onPreview" @save="onSave" />
 </template>
 
 <script>
@@ -53,11 +53,14 @@ export default {
     ...mapActions([
       'fetchLandings'
     ]),
-    onSave (builder) {
+    onDownload (builder) {
       builder.export('pwa')
     },
     onPreview: function (builder) {
       builder.export('preview-devices')
+    },
+    onSave (builder) {
+      builder.export('json')
     }
   },
   created () {

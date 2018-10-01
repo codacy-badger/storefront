@@ -14,24 +14,27 @@
                 </template>
             </div>
             <div class="controller-panel">
-                <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
-                    <VuseIcon name="eye"></VuseIcon>
-                </button>
-                <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
-                    <VuseIcon name="download"></VuseIcon>
-                </button>
-                <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
-                    <VuseIcon name="trash"></VuseIcon>
-                </button>
-                <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
-                    <VuseIcon name="undo"></VuseIcon>
-                </button>
-                <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
-                    <VuseIcon name="sort"></VuseIcon>
-                </button>
-                <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
-                    <VuseIcon name="plus"></VuseIcon>
-                </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
+                <VuseIcon name="plus"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
+                  <VuseIcon name="eye"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
+                  <VuseIcon name="download"></VuseIcon>
+              </button>
+              <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
+                  <VuseIcon name="trash"></VuseIcon>
+              </button>
+              <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
+                  <VuseIcon name="undo"></VuseIcon>
+              </button>
+              <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
+                  <VuseIcon name="sort"></VuseIcon>
+              </button>
+              <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
+                  <VuseIcon name="plus"></VuseIcon>
+              </button>
             </div>
         </div>
         <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
@@ -200,6 +203,9 @@ export default {
       const element = e.target
       const group = element.closest('.menu-group')
       group.classList.toggle('is-visiable')
+    },
+    save () {
+      this.$emit('save', this.$builder)
     },
     submit () {
       this.$emit('saved', this.$builder)
