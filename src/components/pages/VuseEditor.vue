@@ -26,7 +26,10 @@ import gallery2 from '@components/landings/galleries/gallery2.vue'
 import gallery3 from '@components/landings/galleries/gallery3.vue'
 import button1 from '@components/landings/elements/button1'
 import button2 from '@components/landings/elements/button2'
-import buttons from '@components/landings/elements/buttons'
+import button3 from '@components/landings/elements/button3'
+import button4 from '@components/landings/elements/button4'
+import button5 from '@components/landings/elements/button5'
+import button6 from '@components/landings/elements/button6'
 import title1 from '@components/landings/titles/title1'
 import title2 from '@components/landings/titles/title2'
 import delimiter from '@components/landings/elements/delimiter'
@@ -55,7 +58,10 @@ Vuse.component('Gallery2', gallery2)
 Vuse.component('Gallery3', gallery3)
 Vuse.component('Button1', button1)
 Vuse.component('Button2', button2)
-Vuse.component('Buttons', buttons)
+Vuse.component('Button3', button3)
+Vuse.component('Button4', button4)
+Vuse.component('Button5', button5)
+Vuse.component('Button6', button6)
 Vuse.component('Footer', footer)
 Vuse.component('Title1', title1)
 Vuse.component('Title2', title2)

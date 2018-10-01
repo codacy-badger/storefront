@@ -60,13 +60,6 @@ const actions = {
         }
       },
       {
-        slug: 'Buttons',
-        theme: {
-          name: 'Buttons',
-          sections: ['Buttons']
-        }
-      },
-      {
         slug: 'Footer',
         theme: {
           name: 'Footer',

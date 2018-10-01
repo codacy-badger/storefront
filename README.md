@@ -5,5 +5,7 @@ This application allows generate last, fast and cross browser landing page for y
 ## Install
 
 ```bash
-yarn run prod
+npm run cjs
+gulp public-image
+npm run build
 ```
