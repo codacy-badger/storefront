@@ -152,8 +152,8 @@ export default {
    overflow: hidden
   &__wrap
     margin: 0 auto
-    max-width: 120rem
-    min-width: 40%
+    max-width: 160rem
+    min-width: 60%
   &__subtitle
     margin-bottom: 0
     font-weight: 400

@@ -42,14 +42,14 @@ const actions = {
         slug: 'Gallery1',
         theme: {
           name: 'Gallery 1',
-          sections: ['Gallery1']
+          sections: ['Title1', 'Title2', 'Gallery1', 'Button1']
         }
       },
       {
         slug: 'Gallery2',
         theme: {
           name: 'Gallery 2',
-          sections: ['Gallery2']
+          sections: ['Title1', 'Title2', 'Gallery2', 'Button1']
         }
       },
       {
