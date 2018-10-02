@@ -38,7 +38,7 @@ import * as types from './../../../plugins/Vuse/types'
 
 export default {
   name: 'Layout2',
-  cover: 'img/covers/page-1-bg-alt.jpg',
+  cover: '/img/covers/page-1-bg-alt.jpg',
   group: 'hero',
   $schema: {
     mainStyle: types.StyleObject,

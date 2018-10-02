@@ -15,7 +15,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Button5',
-  cover: './../img/covers/button5.png',
+  cover: '/img/covers/button5.png',
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
