@@ -1,6 +1,6 @@
 <template>
-    <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
+    <section class="l-button-fourth" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-fourth" target="_blank"
            v-styler:index="`$sectionData.buttons[${index}].button`"
            v-html="$sectionData.buttons[index].button.text"
            :href="$sectionData.buttons[index].button.href"
@@ -14,13 +14,13 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Button1',
-  cover: '/img/covers/button.png',
+  name: 'Button4',
+  cover: './../img/covers/button4.png',
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
     buttons: [{
-      text: 'Play Now',
+      text: 'Download',
       button: types.Button
     }]
   },
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.l-button-one
+.l-button-fourth
   width: 100%
   position: relative
   margin: 1rem 0
@@ -44,53 +44,39 @@ export default {
   &.is-editable
     resize: vertical
     overflow: hidden
-.b-button-one
+.b-button-fourth
   position: relative
   font-size: 2.3rem
   font-family: Helvetica, Arial, sans-serif
   line-height: 1
-  width: 20rem
-  min-width: 10rem
-  min-height: 5rem
+  min-width: 5rem
   padding: 2rem
-  color: #000
-  background-color: #ffba00
-  border: transparent solid  0.2rem
-  border-color: #ffba00
+  border: transparent solid  0
+  background-color: transparent
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: cover
   text-transform: uppercase
+  user-select: none
+  cursor: pointer
   display: flex
   align-items: center
   justify-content: center
-  user-select: none
-  cursor: pointer
-  &:before
-    content: ''
-    position: absolute
-    display: block
-    border: transparent solid  0.2rem
-    border-color: inherit
-    top: -0.7rem
-    right: -0.7rem
-    bottom: -0.7rem
-    left: -0.7rem
-    pointer-events: none
-    transition: all 200ms
-    backface-visibility: hidden
-    z-index: -1
+  transition: all 200ms
+  color: #000
+  width: 55rem
+  height: 10rem
+  background-image: url(https://gn241.cdn.gamenet.ru/TY0Xv2riHu/6su7Z/o_hxR9B.png)
   &:hover
-    filter: brightness(120%)
-    &:before
-      border: inherit solid  0.2rem
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
+    filter: brightness(140%)
   &:active
     filter: brightness(50%)
   &.is-editable
     resize: both
     overflow: hidden
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem
+@media only screen and (max-width: 768px)
+  &
+    font-size: 2rem
+    width: 27rem
+    height: 6rem
 </style>

@@ -28,11 +28,11 @@
               </ul>
             </div>
             <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
-              <a class="b-layout-1__b-button" @click.prevent="onClick"
-                 :class="$sectionData.buttons[0].button.classes" :href="$sectionData.buttons[0].button.href"
-                 v-html="$sectionData.buttons[0].button.text" v-styler="$sectionData.buttons[0].button"
-                 :style="$sectionData.buttons[0].button.styles">
-
+              <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-layout-1__b-button" @click.prevent="onClick"
+                 :href="$sectionData.buttons[index].button.href"
+                 v-html="$sectionData.buttons[index].button.text"
+                 v-styler:index="`$sectionData.buttons[${index}].button`"
+                 :style="$sectionData.buttons[index].button.styles">
               </a>
             </div>
             <div class="b-layout-1__panel__section">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="b-layout-1__footer__group b-layout-1__footer__group_light">
                   <span v-for="(item, index) in $sectionData.links" :key="index">
-                      <a @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
+                      <a target="_blank" @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
                          class="b-layout-1__footer__el b-layout-1__footer__el_link"
                          :href="item.href" v-html="item.text"
                          v-styler:index="`$sectionData.links[${index}].button`"
@@ -251,6 +251,7 @@ body
     display: flex
     align-items: center
     justify-content: center
+    margin: 1rem 0
     @media only screen and (max-width: 540px)
       &
         padding: 1rem

@@ -1,6 +1,6 @@
 <template>
-    <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
+    <section class="l-button-three" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-three b-button-three_circle" target="_blank"
            v-styler:index="`$sectionData.buttons[${index}].button`"
            v-html="$sectionData.buttons[index].button.text"
            :href="$sectionData.buttons[index].button.href"
@@ -14,8 +14,8 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Button1',
-  cover: '/img/covers/button.png',
+  name: 'Button3',
+  cover: './../img/covers/button3.png',
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.l-button-one
+.l-button-three
   width: 100%
   position: relative
   margin: 1rem 0
@@ -44,7 +44,7 @@ export default {
   &.is-editable
     resize: vertical
     overflow: hidden
-.b-button-one
+.b-button-three
   position: relative
   font-size: 2.3rem
   font-family: Helvetica, Arial, sans-serif
@@ -55,36 +55,21 @@ export default {
   padding: 2rem
   color: #000
   background-color: #ffba00
-  border: transparent solid  0.2rem
-  border-color: #ffba00
   text-transform: uppercase
   display: flex
   align-items: center
   justify-content: center
   user-select: none
   cursor: pointer
-  &:before
-    content: ''
-    position: absolute
-    display: block
-    border: transparent solid  0.2rem
-    border-color: inherit
-    top: -0.7rem
-    right: -0.7rem
-    bottom: -0.7rem
-    left: -0.7rem
-    pointer-events: none
-    transition: all 200ms
-    backface-visibility: hidden
-    z-index: -1
+  &_circle
+    border-radius: 50%
+    height: 20rem
+    color: #333
+    background-color: #555
+    &:before, &:after
+      display: none
   &:hover
     filter: brightness(120%)
-    &:before
-      border: inherit solid  0.2rem
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
   &:active
     filter: brightness(50%)
   &.is-editable

@@ -35,35 +35,35 @@ const actions = {
         slug: 'Layout2',
         theme: {
           name: 'Layout 2',
-          sections: ['Layout2', 'Gallery1']
+          sections: ['Logo', 'Delimiter', 'Title1', 'Title2', 'Button1']
         }
       },
       {
         slug: 'Gallery1',
         theme: {
           name: 'Gallery 1',
-          sections: ['Gallery1']
+          sections: ['Title1', 'Title2', 'Gallery1', 'Button1']
         }
       },
       {
         slug: 'Gallery2',
         theme: {
           name: 'Gallery 2',
-          sections: ['Gallery2']
+          sections: ['Title1', 'Title2', 'Gallery2', 'Button1']
         }
       },
       {
         slug: 'Gallery3',
         theme: {
           name: 'Gallery 3',
-          sections: ['Gallery3']
+          sections: ['Title1', 'Title2', 'Gallery3', 'Button1']
         }
       },
       {
-        slug: 'Buttons',
+        slug: 'Footer',
         theme: {
-          name: 'Buttons',
-          sections: ['Buttons']
+          name: 'Footer',
+          sections: ['Footer']
         }
       }
     ]

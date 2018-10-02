@@ -1,10 +1,10 @@
 <template>
-    <section id="buttonTwo" class="l-button-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a class="b-button-two" target="_blank"
-           v-styler="$sectionData.button.button"
-           v-html="$sectionData.button.button.text"
-           :href="$sectionData.button.button.href"
-           v-bind:style="$sectionData.button.button.styles"
+    <section class="l-button-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-two" target="_blank"
+           v-styler:index="`$sectionData.buttons[${index}].button`"
+           v-html="$sectionData.buttons[index].button.text"
+           :href="$sectionData.buttons[index].button.href"
+           v-bind:style="$sectionData.buttons[index].button.styles"
           >
       </a>
     </section>
@@ -19,10 +19,10 @@ export default {
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
-    button: {
+    buttons: [{
       text: 'Download',
       button: types.Button
-    }
+    }]
   },
   props: {
     id: {
@@ -54,7 +54,6 @@ export default {
   height: 6.6rem
   padding: 2rem
   color: #a6e1e1
-  margin: 0 auto
   border: transparent solid  0
   background-color: transparent
   background-image: url(https://gn881.cdn.gamenet.ru/TY0Xv2riHu/6stmF/o_1lLdjP.png)

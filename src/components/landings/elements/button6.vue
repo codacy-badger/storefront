@@ -1,6 +1,6 @@
 <template>
-    <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
+    <section class="l-button-sixth" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-sixth" target="_blank"
            v-styler:index="`$sectionData.buttons[${index}].button`"
            v-html="$sectionData.buttons[index].button.text"
            :href="$sectionData.buttons[index].button.href"
@@ -14,8 +14,8 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Button1',
-  cover: '/img/covers/button.png',
+  name: 'Button6',
+  cover: './../img/covers/button6.png',
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.l-button-one
+.l-button-sixth
   width: 100%
   position: relative
   margin: 1rem 0
@@ -44,7 +44,7 @@ export default {
   &.is-editable
     resize: vertical
     overflow: hidden
-.b-button-one
+.b-button-sixth
   position: relative
   font-size: 2.3rem
   font-family: Helvetica, Arial, sans-serif
@@ -63,6 +63,7 @@ export default {
   justify-content: center
   user-select: none
   cursor: pointer
+  animation: animation-button-sixth 1s linear infinite
   &:before
     content: ''
     position: absolute
@@ -93,4 +94,27 @@ export default {
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem
+
+@keyframes animation-button-sixth
+  0%
+    transform: scale(1)
+    filter: brightness(100%)
+  20%
+    transform: scale(1.2)
+    filter: brightness(120%)
+  40%
+    transform: scale(1.1)
+    filter: brightness(100%)
+  60%
+    transform: scale(1.2)
+    filter: brightness(150%)
+  80%
+    transform: scale(1.1)
+    filter: brightness(100%)
+  90%
+    transform: scale(1.4)
+    filter: brightness(120%)
+  90%
+    transform: scale(1)
+    filter: brightness(100%)
 </style>
