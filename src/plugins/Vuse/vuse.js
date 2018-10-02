@@ -9,6 +9,7 @@ import { cleanDOM } from './util'
 let PLUGINS = []
 let mixier = {}
 const BUILDER_OPTIONS = {
+  landing: '',
   title: '',
   intro: true,
   sections: [],
@@ -32,6 +33,7 @@ class Vuse {
     this.isSorting = false
     this.isRendered = false
     this.title = options.title
+    this.landing = options.landing
     this.intro = options.intro
     this.sections = options.sections
     this.columnsPrefix = options.columnsPrefix
@@ -224,13 +226,14 @@ class Vuse {
      * Outputs a JSON representation of the builder that can be used for rendering with the renderer component.
      */
   toJSON () {
-    return {
+    return JSON.stringify({
+      slug: this.landing,
       title: this.title,
       sections: this.sections.map(s => ({
         name: s.name,
         data: s.data
       }))
-    }
+    })
   }
 
   /**

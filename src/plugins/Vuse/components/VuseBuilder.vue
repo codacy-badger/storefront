@@ -52,7 +52,7 @@
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'VuseBuilder',
@@ -96,15 +96,21 @@ export default {
     this.themes = this.$builder.themes
     this.generateGroups()
 
-    // Open current landing/preset
-    if (this.$route.params.slug) {
-      const landing = this.landings.filter((item) => item.slug === this.$route.params.slug)[0]
-      if (landing !== undefined) this.addTheme(Object.assign(this.data, landing.theme))
+    if (this.$route.params.slug !== 'new') {
+      this.getLandingData(this.$route.params.slug).then(() => {
+        this.$builder.landing = this.$route.params.slug
+        // Open current landing/preset
+        if (this.currentLanding.sectionsData) {
+          this.addTheme(this.currentLanding.sectionsData)
+        } else {
+          this.addTheme(Object.assign(this.data, this.currentLanding.theme))
+        }
+      })
     }
   },
   computed: {
     ...mapState([
-        'landings'
+        'currentLanding'
     ])
   },
   mounted () {
@@ -152,6 +158,9 @@ export default {
     this.$builder.clear()
   },
   methods: {
+    ...mapActions([
+      'getLandingData'
+    ]),
     newSection () {
       // add the section immediatly if none are present.
       if (this.sections.length === 1) {
