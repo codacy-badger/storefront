@@ -257,8 +257,8 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-@import '../stylus/_app.styl'
+<style lang="sass">
+@import '../../../assets/sass/app.sass'
 
 .artboard
   transform-origin: top center
@@ -280,10 +280,10 @@ export default {
     margin: 20px 0
     border-radius: 40px
     width: 100%
-    font-size: 16px
+    font-size: 16pxa
     &:focus
       border-color: $blue
-      box-shadow: 0 0 0 2px alpha($blue, 50%)
+      box-shadow: 0 0 0 2px rgba($blue, 50%)
   &-button
     transition: 0.2s
     border: none
@@ -318,7 +318,7 @@ export default {
       &:hover
         background-color: darken($dark, 20%)
     &.is-gray
-      background-color: $gary
+      background-color: $gray
       &:hover
         background-color: darken($gray, 20%)
   &-intro
@@ -352,6 +352,7 @@ export default {
     &:hover
       border-color: $blue
 .menu
+  $self: &
   user-select: none
   -moz-user-select: none
   position: fixed
@@ -368,7 +369,7 @@ export default {
   overflow-y: auto
   list-style: none
   transition: 0.4s
-  box-shadow: 1px 0 10px alpha($dark, 20%)
+  box-shadow: 1px 0 10px rgba($dark, 20%)
   transform: translate3d(-100%, 0, 0)
   &.is-visiable
     transform: translate3d(0, 0, 0)
@@ -377,17 +378,17 @@ export default {
     padding: 0
     margin: 0
     list-style: none
-    ~/-group &
+    #{$self} &
       width: 90%
       margin: 10px auto
-    ~/-group.is-visiable &
+    #{$self}.is-visiable &
       display: block
   &-icon
     width: 24px
     height: 24px
     fill: $gray
     transition: 0.2s
-    ~/-group.is-visiable &
+    #{$self}.is-visiable &
       transform: rotate(180deg)
 
   &-element
@@ -414,12 +415,12 @@ export default {
     max-width: 100%
     pointer-events: none
     +
-      ~/-elementTitle
+      #{$self}-elementTitle
         position: absolute
         right: 0
         bottom: 0
         left: 0
-        text-shadow: 1px 1px 2px alpha($black, 80%)
+        text-shadow: 1px 1px 2px rgba($black, 80%)
         text-align: center
         padding: 5px
 
@@ -428,7 +429,7 @@ export default {
     justify-content: space-between
     align-items: center
     padding: 10px 5px
-    border-bottom: 1px solid alpha($black, 5%)
+    border-bottom: 1px solid rgba($black, 5%)
 
 .sortable-ghost
   opacity: 0.3
