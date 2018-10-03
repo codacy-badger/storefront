@@ -265,38 +265,38 @@ export default {
   &.is-editable .is-editable
     outline: none
     &:hover
-      box-shadow: inset 0 0 0 2px $gray
+      box-shadow: inset 0 0 0 0.2rem $gray
 .controller
   box-sizing: border-box
   &-panel
     position: fixed
     z-index: 200
-    bottom: 30px
-    right: 40px
+    bottom: 3rem
+    right: 4rem
   &-input
     outline: none
     border: 1px solid $gray
-    padding: 0.5em 1em
-    margin: 20px 0
-    border-radius: 40px
+    padding: 0.5rem 1rem
+    margin: 2rem 0
+    border-radius: 4rem
     width: 100%
-    font-size: 16pxa
+    font-size: 1.6rem
     &:focus
       border-color: $blue
-      box-shadow: 0 0 0 2px rgba($blue, 50%)
+      box-shadow: 0 0 0 0.2rem rgba($blue, 50%)
   &-button
     transition: 0.2s
     border: none
     outline: none
-    border-radius: 20px
-    padding: 5px
+    border-radius: 2rem
+    padding: 0.5rem
     color: $white
     fill: $white
-    font-size: 16px
+    font-size: 1.6rem
     svg
       transition: 0.2s
     &:not(:last-child)
-      margin-right: 20px
+      margin-right: 2rem
     &.is-rotated >svg
       transform: rotate(45deg)
     &:hover
@@ -323,15 +323,15 @@ export default {
         background-color: darken($gray, 20%)
   &-intro
     width: 100%
-    max-width: 500px
+    max-width: 50rem
     margin: auto
     display: flex
     justify-content: center
     align-items: center
     flex-direction: column
-    padding: 70px 50px
+    padding: 7rem 5rem
     text-align: center
-    font-size: 30px
+    font-size: 3rem
     color: $dark
 
   &-themes
@@ -342,13 +342,13 @@ export default {
   &-theme
     background-color: $white
     color: $dark
-    border: 1px solid $gray
-    margin: 5px
-    padding: 20px
-    border-radius: 4px
+    border: 0.1rem solid $gray
+    margin: 0.5rem
+    padding: 2rem
+    border-radius: 0.4rem
     width: 100%
     cursor: pointer
-    font-size: 16px
+    font-size: 1.6rem
     &:hover
       border-color: $blue
 .menu
@@ -361,15 +361,15 @@ export default {
   left: 0
   bottom: 0
   margin: 0
-  width: 250px
+  width: 25rem
   background: $white
-  padding: 20px 10px
+  padding: 2rem 1rem
   display: flex
   flex-direction: column
   overflow-y: auto
   list-style: none
   transition: 0.4s
-  box-shadow: 1px 0 10px rgba($dark, 20%)
+  box-shadow: 0.1rem 0 1rem rgba($dark, 20%)
   transform: translate3d(-100%, 0, 0)
   &.is-visiable
     transform: translate3d(0, 0, 0)
@@ -378,27 +378,27 @@ export default {
     padding: 0
     margin: 0
     list-style: none
-    #{$self} &
-      width: 90%
-      margin: 10px auto
-    #{$self}.is-visiable &
+    #{$self}-group &
+      width: 100%
+      margin: 0.5rem auto
+    #{$self}-group.is-visiable &
       display: block
   &-icon
-    width: 24px
-    height: 24px
+    width: 2rem
+    height: 2rem
     fill: $gray
     transition: 0.2s
-    #{$self}.is-visiable &
+    #{$self}-group.is-visiable &
       transform: rotate(180deg)
 
   &-element
     position: relative
-    display: flex
+    display: inline-flex
     justify-content: center
     align-items: center
-    width: 100%
-    min-height: 50px
-    border-radius: 5px
+    width: 45%
+    min-height: 5rem
+    margin: 0.5rem
     background: darken($gray, 10%)
     transition: 0.3s
     cursor: pointer
@@ -407,7 +407,7 @@ export default {
     user-select: none
     -moz-user-select: none
     &:not(:last-child)
-      margin-bottom: 10px
+      margin-bottom: 1rem
     &:hover
       @extends $floatHover
 
@@ -420,22 +420,26 @@ export default {
         right: 0
         bottom: 0
         left: 0
-        text-shadow: 1px 1px 2px rgba($black, 80%)
+        text-shadow: 0.1rem 0.1rem 0.2rem rgba($black, 80%)
         text-align: center
-        padding: 5px
+        padding: 0.5rem
+        display: none
+        #{$self}-element:hover &
+          display: inline-block
 
   &-header
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 10px 5px
-    border-bottom: 1px solid rgba($black, 5%)
+    padding: 1rem 0.5rem
+    border-bottom: 0.1rem solid rgba($gray, 5%)
+    cursor: pointer
 
 .sortable-ghost
   opacity: 0.3
-  box-shadow: 0 0 2px 1px $blue
+  box-shadow: 0 0 0.2rem 0.1rem $blue
 
 .is-editable
   &:hover
-    box-shadow: inset 0 0 0 2px $gray
+    box-shadow: inset 0 0 0 0.2rem $gray
 </style>

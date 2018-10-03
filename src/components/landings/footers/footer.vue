@@ -37,7 +37,7 @@ import * as types from '@plugins/Vuse/types'
 export default {
   name: 'Footer',
   cover: '/img/covers/layout1.png',
-  group: 'layouts',
+  group: 'footers',
   $schema: {
     mainStyle: types.StyleObject,
     copyright: {
