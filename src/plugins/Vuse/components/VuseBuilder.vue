@@ -15,7 +15,7 @@
             </div>
             <div class="controller-panel">
               <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
-                <VuseIcon name="floppy-disk"></VuseIcon>
+                <VuseIcon name="floppy"></VuseIcon>
               </button>
               <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
                   <VuseIcon name="eye"></VuseIcon>
