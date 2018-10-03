@@ -396,7 +396,7 @@ export default {
     display: inline-flex
     justify-content: center
     align-items: center
-    width: 45%
+    width: 100%
     min-height: 5rem
     margin: 0.5rem
     background: darken($gray, 10%)

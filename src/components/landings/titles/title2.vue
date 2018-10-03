@@ -9,7 +9,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Title2',
-  cover: '',
+  cover: '/img/covers/title1.png',
   group: 'titles',
   $schema: {
     mainStyle: types.StyleObject,

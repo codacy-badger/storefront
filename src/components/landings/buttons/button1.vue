@@ -14,7 +14,7 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Button1',
+  name: 'Simple',
   cover: '/img/covers/button1.png',
   group: 'buttons',
   $schema: {
@@ -54,9 +54,9 @@ export default {
   min-height: 5rem
   padding: 2rem
   color: #000
-  background-color: #ffba00
+  background-color: #a7a1a1
   border: transparent solid  0.2rem
-  border-color: #ffba00
+  border-color: #a7a1a1
   text-transform: uppercase
   display: flex
   align-items: center

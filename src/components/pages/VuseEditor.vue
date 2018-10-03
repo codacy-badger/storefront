@@ -15,9 +15,6 @@ import gallery1 from '@components/landings/galleries/gallery1.vue'
 import gallery2 from '@components/landings/galleries/gallery2.vue'
 import gallery3 from '@components/landings/galleries/gallery3.vue'
 import button1 from '@components/landings/buttons/button1'
-import button2 from '@components/landings/buttons/button2'
-import button3 from '@components/landings/buttons/button3'
-import button4 from '@components/landings/buttons/button4'
 import button5 from '@components/landings/buttons/button5'
 import button6 from '@components/landings/buttons/button6'
 import title1 from '@components/landings/titles/title1'
@@ -33,15 +30,12 @@ Vuse.mix({
 })
 
 Vuse.component('Layout1', layout1)
-Vuse.component('Gallery1', gallery1)
-Vuse.component('Gallery2', gallery2)
-Vuse.component('Gallery3', gallery3)
-Vuse.component('Button1', button1)
-Vuse.component('Button2', button2)
-Vuse.component('Button3', button3)
-Vuse.component('Button4', button4)
-Vuse.component('Button5', button5)
-Vuse.component('Button6', button6)
+Vuse.component('Content in the block on the right', gallery1)
+Vuse.component('Content in the popup', gallery2)
+Vuse.component('Content in the popup with button and logo', gallery3)
+Vuse.component('Simple', button1)
+Vuse.component('Hover with border', button5)
+Vuse.component('Animation', button6)
 Vuse.component('Footer', footer)
 Vuse.component('Title1', title1)
 Vuse.component('Title2', title2)

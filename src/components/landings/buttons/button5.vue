@@ -14,8 +14,8 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Button5',
-  cover: '/img/covers/button5.png',
+  name: 'Hover border',
+  cover: '/img/covers/button2.gif',
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
@@ -48,7 +48,7 @@ export default {
   font-family: Georgia, "Times New Roman", Serif
   text-decoration: none
   font-size: 3rem
-  background-color: #6eb979
+  background-color: #a7a1a1
   color: #fff
   text-transform: uppercase
   padding: 1.5rem 0 2rem 0

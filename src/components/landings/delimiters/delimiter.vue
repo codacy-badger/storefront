@@ -8,7 +8,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Delimiter',
-  cover: '/img/covers/button.png',
+  cover: '/img/covers/delimiter1.png',
   group: 'delimiters',
   $schema: {
     mainStyle: types.StyleObject
