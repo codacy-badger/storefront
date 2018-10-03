@@ -155,8 +155,8 @@ class Vuse {
   }
 
   /**
-     * Installs added plugins.
-     */
+   * Installs added plugins.
+   */
   installPlugins () {
     PLUGINS.forEach((ctx) => {
       ctx.plugin({ builder: this, Vue: _Vue }, ctx.options)
@@ -188,12 +188,12 @@ class Vuse {
   }
 
   /**
-     * The plugin to be installed with the builder. The function receives the installation context which
-     * contains the builder instance and the Vue prototype.
-     *
-     * @param {Function} plugin
-     * @param {Object} options
-     */
+   * The plugin to be installed with the builder. The function receives the installation context which
+   * contains the builder instance and the Vue prototype.
+   *
+   * @param {Function} plugin
+   * @param {Object} options
+   */
   static use (plugin, options = {}) {
     if (typeof plugin !== 'function') {
       return console.warn('Plugins must be a function')
@@ -207,14 +207,31 @@ class Vuse {
     this.title = data.title !== undefined ? data.title : this.title
     if (data.sections && Array.isArray(data.sections)) {
       this.sections = data.sections.map(section => {
-        const component = this.components[section].options
-        const sectionData = {
-          name: component.name,
-          schema: component.schema,
-          data: component.data
-        }
-        if (!sectionData.schema) {
-          sectionData.schema = this.components[sectionData.name].options.$schema
+        console.log(section)
+        let component
+        let sectionData
+
+        if (typeof section === "string") {
+          component = this.components[section].options
+          sectionData = {
+            name: component.name,
+            schema: component.schema,
+            data: component.data
+          }
+          if (!sectionData.schema) {
+            sectionData.schema = this.components[sectionData.name].options.$schema
+          }
+        } else {
+          // restore saved data
+          component = this.components[section.name].options
+          sectionData = {
+            name: component.name,
+            schema: component.schema,
+            data: section.data
+          }
+          if (!sectionData.schema) {
+            sectionData.schema = this.components[sectionData.name].options.$schema
+          }
         }
 
         return new Section(sectionData)
@@ -223,8 +240,8 @@ class Vuse {
   }
 
   /**
-     * Outputs a JSON representation of the builder that can be used for rendering with the renderer component.
-     */
+   * Outputs a JSON representation of the builder that can be used for rendering with the renderer component.
+   */
   toJSON () {
     return JSON.stringify({
       slug: this.landing,
@@ -237,8 +254,8 @@ class Vuse {
   }
 
   /**
-     * Previews the created page in a seperate tap/window.
-     */
+   * Previews the created page in a seperate tap/window.
+   */
   preview () {
     const frag = this.outputFragment()
     const artboard = frag.querySelector('#artboard')

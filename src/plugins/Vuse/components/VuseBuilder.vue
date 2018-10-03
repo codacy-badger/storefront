@@ -97,11 +97,11 @@ export default {
     this.generateGroups()
 
     if (this.$route.params.slug !== 'new') {
-      this.getLandingData(this.$route.params.slug).then(() => {
+      this.getLandingData(this.$route.params.slug).then((data) => {
         this.$builder.landing = this.$route.params.slug
         // Open current landing/preset
-        if (this.currentLanding.sectionsData) {
-          this.addTheme(this.currentLanding.sectionsData)
+        if (this.currentLanding.sections) {
+          this.addTheme(this.currentLanding)
         } else {
           this.addTheme(Object.assign(this.data, this.currentLanding.theme))
         }

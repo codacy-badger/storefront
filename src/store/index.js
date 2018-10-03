@@ -27,6 +27,7 @@ const actions = {
     return api.getLandingsList()
       .then((presets) => {
         commit('updateLandings', presets)
+        return presets
       })
   },
 
@@ -40,6 +41,7 @@ const actions = {
     return api.getLanding(slug)
       .then((landing) => {
         commit('updateCurrentLanding', landing)
+        return landing
       })
   },
 
@@ -50,10 +52,9 @@ const actions = {
    * @param data - JSON representation of the builder
    */
   saveLanding ({ state, commit }, data) {
-    console.log(data)
     return api.saveLanding(state.currentLanding.slug, data)
       .then(() => {
-        commit('updateCurrentLanding', Object.assign(state.currentLanding, { saved: true }))
+        return commit('updateCurrentLanding', Object.assign(state.currentLanding, { saved: true }))
       })
   }
 }

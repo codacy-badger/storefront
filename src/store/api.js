@@ -56,6 +56,7 @@ export default {
   getLanding (slug) {
     return new Promise((resolve) => {
       let landing = {}
+
       if (localStorage.getItem(slug) !== null) {
         landing = localStorage.getItem(slug)
         resolve(JSON.parse(landing))
