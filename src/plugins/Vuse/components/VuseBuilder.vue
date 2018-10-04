@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="artboard" id="artboard" ref="artboard" :class="{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing }">
+        <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing}, device]">
             <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
         </div>
         <div class="controller">
@@ -39,6 +39,20 @@
               </button>
               <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
                   <VuseIcon name="plus"></VuseIcon>
+              </button>
+            </div>
+            <div class="main-panel">
+              <button class="controller-button is-green" @click="setDevice('is-desktop')">
+                <VuseIcon name="monitor"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" @click="setDevice('is-laptop')">
+                <VuseIcon name="laptop"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" @click="setDevice('is-tablet')">
+                <VuseIcon name="tablet"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" @click="setDevice('is-mobile')">
+                <VuseIcon name="mobile"></VuseIcon>
               </button>
             </div>
         </div>
@@ -84,7 +98,8 @@ export default {
       tempSections: null,
       sections: this.getSections(),
       currentSection: '',
-      groups: {}
+      groups: {},
+      device: 'is-desktop'
     }
   },
 
@@ -267,6 +282,9 @@ export default {
         }
       })
       return sections
+    },
+    setDevice (device) {
+       this.device = device
     }
   }
 }
@@ -277,10 +295,22 @@ export default {
 
 .artboard
   transform-origin: top center
+  margin: 0 auto
+  transition: 0.2s
+  min-height: 100vh
+  background-color: $color-white
   &.is-editable .is-editable
     outline: none
     &:hover
       box-shadow: inset 0 0 0 0.2rem $gray
+  &.is-desktop
+    width: 100%
+  &.is-laptop
+    width: 1368px
+  &.is-tablet
+    width: 768px
+  &.is-mobile
+    width: 375px
 .controller
   box-sizing: border-box
   &-panel
@@ -403,6 +433,7 @@ export default {
     height: 2rem
     fill: $gray
     transition: 0.2s
+    cursor: pointer
     #{$self}-group.is-visiable &
       transform: rotate(180deg)
 
@@ -457,4 +488,10 @@ export default {
 .is-editable
   &:hover
     box-shadow: inset 0 0 0 0.2rem $gray
+
+.main-panel
+  position: fixed
+  z-index: 200
+  bottom: 3rem
+  left: 4rem
 </style>
