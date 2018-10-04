@@ -792,7 +792,9 @@ require('@public/js/any-resize-event.min');
         }
 
         document.addEventListener('click', this.hideStyler, true);
-        document.addEventListener('blur', this.hideStyler, true);
+        document.addEventListener('blur', (e) => {
+          console.log(e)
+        });
         this.currentOption = '';
       },
       hideStyler(event) {
