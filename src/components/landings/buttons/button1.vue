@@ -14,7 +14,7 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Simple',
+  name: 'Button1',
   cover: '/img/covers/button1.png',
   group: 'buttons',
   $schema: {

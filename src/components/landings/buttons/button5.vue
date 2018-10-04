@@ -14,7 +14,7 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Hover border',
+  name: 'Button5',
   cover: '/img/covers/button2.gif',
   group: 'buttons',
   $schema: {
