@@ -13,15 +13,15 @@
             </div>
             <div class="b-layout-1__panel__section">
               <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].text"
-                   v-text="$sectionData.slogan[0].title"></div>
+                   v-text="$sectionData.slogan[0].text"></div>
               <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].text"
-                   v-text="$sectionData.slogan[1].title"></div>
+                   v-text="$sectionData.slogan[1].text"></div>
             </div>
 
             <div class="b-layout-1__panel__section">
               <ul class="b-layout-1__panel__features">
                 <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" :key="index">
-                  <span v-styler:index="`$sectionData.titles[${index}].title`">
+                  <span v-styler:index="`$sectionData.titles[${index}].text`">
                       {{ $sectionData.titles[index].text }}
                   </span>
                 </li>
@@ -42,7 +42,7 @@
                             path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt"
                             :alt="$sectionData.logos[1].alt"></uploader>
                   <span class="b-layout-1__footer__el">
-                    <span v-text="$sectionData.copyright.title"
+                    <span v-text="$sectionData.copyright.text"
                           v-styler="$sectionData.copyright.text">
                       2018-2018 gamesite.com
                     </span>
@@ -108,11 +108,11 @@ export default {
     slogan: [
       {
         title: 'CaLL',
-        text: types.Text
+        text: types.Title
       },
       {
         title: 'to action!',
-        text: types.Text
+        text: types.Title
       }
     ],
     logos: [

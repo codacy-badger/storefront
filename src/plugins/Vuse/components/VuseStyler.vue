@@ -443,6 +443,9 @@ import VueCircleSlider from 'vue-circle-slider'
 import $ from 'jquery'
 import axios from 'axios'
 import * as types from '@plugins/Vuse/types'
+import * as _ from 'lodash-es'
+
+require('@public/js/any-resize-event.min');
 
   const DEFAULT_BACKGROUND_REPEAT = 'no-repeat';
   const DEFAULT_BACKGROUND_POSITION = 'center center';
@@ -561,7 +564,6 @@ import * as types from '@plugins/Vuse/types'
       },
     },
     created() {
-
       if (this.type === 'button') {
         let fs = this.section.get(`${this.name}.styles['font-size']`);
         let br = this.section.get(`${this.name}.styles['border-radius']`);
@@ -591,6 +593,18 @@ import * as types from '@plugins/Vuse/types'
       if (!this.$builder.isEditing) return;
 
       this.el.addEventListener('click', this.showStyler);
+      this.el.addEventListener('focus', this.showStyler)
+    },
+    updated() {
+      if (this.type === 'button') {
+        // listen resize event, add params to element
+        let handler = () => {
+          this.addStyle('width', `${this.el.offsetWidth}px`)
+          this.addStyle('height', `${this.el.offsetHeight}px`)
+        }
+
+        this.el.addEventListener('onresize', _.debounce(handler, 100))
+      }
     },
     beforeDestroy() {
       this.hideStyler();
@@ -778,6 +792,9 @@ import * as types from '@plugins/Vuse/types'
         }
 
         document.addEventListener('click', this.hideStyler, true);
+        document.addEventListener('blur', (e) => {
+          console.log(e)
+        });
         this.currentOption = '';
       },
       hideStyler(event) {
@@ -793,6 +810,7 @@ import * as types from '@plugins/Vuse/types'
         }
 
         document.removeEventListener('click', this.hideStyler, true);
+        document.removeEventListener('blur', this.hideStyler, true);
 
         if (this.type === 'section' || this.type === 'grid') {
           return;

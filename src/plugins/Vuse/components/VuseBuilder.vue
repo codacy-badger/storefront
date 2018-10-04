@@ -19,24 +19,27 @@
             </div>
 
             <div class="controller-panel">
-                <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
-                    <VuseIcon name="eye"></VuseIcon>
-                </button>
-                <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
-                    <VuseIcon name="download"></VuseIcon>
-                </button>
-                <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
-                    <VuseIcon name="trash"></VuseIcon>
-                </button>
-                <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
-                    <VuseIcon name="undo"></VuseIcon>
-                </button>
-                <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
-                    <VuseIcon name="sort"></VuseIcon>
-                </button>
-                <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
-                    <VuseIcon name="plus"></VuseIcon>
-                </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
+                <VuseIcon name="floppy"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
+                  <VuseIcon name="eye"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
+                  <VuseIcon name="download"></VuseIcon>
+              </button>
+              <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
+                  <VuseIcon name="trash"></VuseIcon>
+              </button>
+              <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
+                  <VuseIcon name="undo"></VuseIcon>
+              </button>
+              <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
+                  <VuseIcon name="sort"></VuseIcon>
+              </button>
+              <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
+                  <VuseIcon name="plus"></VuseIcon>
+              </button>
             </div>
         </div>
         <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
@@ -54,7 +57,7 @@
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'VuseBuilder',
@@ -103,15 +106,21 @@ export default {
     this.themes = this.$builder.themes
     this.generateGroups()
 
-    // Open current landing/preset
-    if (this.$route.params.slug) {
-      const landing = this.landings.filter((item) => item.slug === this.$route.params.slug)[0]
-      if (landing !== undefined) this.addTheme(Object.assign(this.data, landing.theme))
+    if (this.$route.params.slug !== 'new') {
+      this.getLandingData(this.$route.params.slug).then((data) => {
+        this.$builder.landing = this.$route.params.slug
+        // Open current landing/preset
+        if (this.currentLanding.sections) {
+          this.addTheme(this.currentLanding)
+        } else {
+          this.addTheme(Object.assign(this.data, this.currentLanding.theme))
+        }
+      })
     }
   },
   computed: {
     ...mapState([
-        'landings'
+        'currentLanding'
     ]),
     emptySections: function () {
       return !this.showIntro && !this.$builder.sections.length
@@ -162,6 +171,9 @@ export default {
     this.$builder.clear()
   },
   methods: {
+    ...mapActions([
+      'getLandingData'
+    ]),
     newSection () {
       // add the section immediatly if none are present.
       if (this.sections.length === 1) {
@@ -214,6 +226,9 @@ export default {
       const element = e.target
       const group = element.closest('.menu-group')
       group.classList.toggle('is-visiable')
+    },
+    save () {
+      this.$emit('save', this.$builder)
     },
     submit () {
       this.$emit('saved', this.$builder)

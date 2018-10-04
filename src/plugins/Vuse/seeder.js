@@ -45,7 +45,9 @@ const data = new Map([
         'font-weight': false,
         'font-style': false,
         'text-decoration': false,
-        'justify-content': false
+        'justify-content': false,
+        'width': '',
+        'height': ''
       }
     }
   )],

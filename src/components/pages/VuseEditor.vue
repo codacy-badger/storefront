@@ -1,11 +1,10 @@
 <template>
-    <VuseBuilder v-bind:show-intro="showIntro" @saved="onSave" @preview="onPreview" />
+    <VuseBuilder v-bind:show-intro="showIntro" @saved="onDownload" @preview="onPreview" @save="onSave" />
 </template>
 
 <script>
 import Vue from 'vue'
-import { mapActions, mapState } from 'vuex'
-
+import { mapState, mapActions } from 'vuex'
 import Vuse from '@plugins/Vuse'
 import pwa from '@plugins/Vuse/plugins/pwa'
 import Uploader from '@plugins/Vuse/plugins/Uploader.vue'
@@ -48,19 +47,20 @@ Vuse.use(pwa)
 export default {
   methods: {
     ...mapActions([
-      'fetchLandings'
+      'saveLanding'
     ]),
-    onSave (builder) {
+    onDownload (builder) {
       builder.export('pwa')
     },
     onPreview: function (builder) {
       builder.export('preview-devices')
+    },
+    onSave (builder) {
+      this.saveLanding(builder.export('json'))
     }
   },
   created () {
-    if (!this.landings.length) this.fetchLandings()
-
-    const themes = this.landings.map((item) => item.theme)
+    let themes = []
 
     Vue.use(Vuse, {
       js: './../js/cjs.js',
@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'landings'
+      'currentLanding'
     ]),
     // TODO: delete this when CRUD UI is complete
     showIntro: function () {

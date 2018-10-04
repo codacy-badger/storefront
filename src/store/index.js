@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import api from '@store/api'
 
 Vue.use(Vuex)
 
 const state = {
   storefrontPreview: false,
-  landings: []
+  landings: [],
+  currentLanding: {}
 }
 
 const getters = {
@@ -16,58 +18,44 @@ const getters = {
 
 const actions = {
   /**
-   * === Place fetch API method here ===
+   * Get a list of saved landings
    * @param state
    * @param commit
    * @returns {*}
    */
   fetchLandings ({ state, commit }) {
-    const presets = [
-      {
-        slug: 'Layout1',
-        theme: {
-          name: 'Layout 1',
-          title: 'Awesome title',
-          sections: ['Layout1']
-        }
-      },
-      {
-        slug: 'Layout2',
-        theme: {
-          name: 'Layout 2',
-          sections: ['Logo', 'Delimiter', 'Title1', 'Title2', 'Button1']
-        }
-      },
-      {
-        slug: 'Gallery1',
-        theme: {
-          name: 'Gallery 1',
-          sections: ['Title1', 'Title2', 'Gallery1', 'Button1']
-        }
-      },
-      {
-        slug: 'Gallery2',
-        theme: {
-          name: 'Gallery 2',
-          sections: ['Title1', 'Title2', 'Gallery2', 'Button1']
-        }
-      },
-      {
-        slug: 'Gallery3',
-        theme: {
-          name: 'Gallery 3',
-          sections: ['Title1', 'Title2', 'Gallery3', 'Button1']
-        }
-      },
-      {
-        slug: 'Footer',
-        theme: {
-          name: 'Footer',
-          sections: ['Footer']
-        }
-      }
-    ]
-    return commit('updateLandings', presets)
+    return api.getLandingsList()
+      .then((presets) => {
+        commit('updateLandings', presets)
+        return presets
+      })
+  },
+
+  /**
+   * Get current landing data
+   * @param state
+   * @param commit
+   * @param slug
+   */
+  getLandingData ({ state, commit }, slug) {
+    return api.getLanding(slug)
+      .then((landing) => {
+        commit('updateCurrentLanding', landing)
+        return landing
+      })
+  },
+
+  /**
+   * Save landing data
+   * @param state
+   * @param commit
+   * @param data - JSON representation of the builder
+   */
+  saveLanding ({ state, commit }, data) {
+    return api.saveLanding(state.currentLanding.slug, data)
+      .then(() => {
+        return commit('updateCurrentLanding', Object.assign(state.currentLanding, { saved: true }))
+      })
   }
 }
 
@@ -78,6 +66,10 @@ const mutations = {
 
   updateLandings (state, data) {
     state.landings = data
+  },
+
+  updateCurrentLanding (state, data) {
+    state.currentLanding = data
   }
 }
 
