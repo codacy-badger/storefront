@@ -54,6 +54,15 @@
             <VuseIcon name="pic"></VuseIcon>
           </button>
         </li>
+        <li>
+          <button class="styler-button" @click="removeButton">
+            <VuseIcon name="trash"></VuseIcon>
+          </button>
+        <li>
+          <button class="styler-button" @click="copyButton">
+            <VuseIcon name="plus"></VuseIcon>
+          </button>
+        </li>
       </template>
       <template v-if="type === 'galleryItem'">
         <li>
@@ -282,37 +291,53 @@
       </li>
       <li v-if="currentOption === 'align'">
         <ul class="align">
-          <li>
+          <li v-if="type !== 'button'">
             <button class="styler-button" @click="execute('justifyleft')">
               <VuseIcon name="left"></VuseIcon>
             </button>
           </li>
-          <li>
+          <li v-if="type !== 'button'">
             <button class="styler-button" @click="execute('justifycenter')">
               <VuseIcon name="center"></VuseIcon>
             </button>
           </li>
-          <li>
+          <li v-if="type !== 'button'">
             <button class="styler-button" @click="execute('justifyright')">
               <VuseIcon name="right"></VuseIcon>
             </button>
           </li>
+            <li v-if="type === 'button'">
+                <button class="styler-button" @click="addTextStyle('justify-content','flex-start','flex-start')">
+                    <VuseIcon name="left"></VuseIcon>
+                </button>
+            </li>
+            <li v-if="type === 'button'">
+                <button class="styler-button" @click="addTextStyle('justify-content','center','center')">
+                    <VuseIcon name="center"></VuseIcon>
+                </button>
+            </li>
+            <li v-if="type === 'button'">
+                <button class="styler-button" @click="addTextStyle('justify-content','flex-end','flex-end')">
+                    <VuseIcon name="right"></VuseIcon>
+                </button>
+            </li>
         </ul>
       </li>
+
       <li v-if="currentOption === 'textStyle'">
         <ul class="align">
           <li>
-            <button class="styler-button" @click="execute('bold')">
+            <button class="styler-button" @click="addTextStyle('font-weight','bold','normal')">
               <VuseIcon name="bold"></VuseIcon>
             </button>
           </li>
           <li>
-            <button class="styler-button" @click="execute('italic')">
+            <button class="styler-button" @click="addTextStyle('font-style','italic','normal')">
               <VuseIcon name="italic"></VuseIcon>
             </button>
           </li>
           <li>
-            <button class="styler-button" @click="execute('underline')">
+            <button class="styler-button" @click="addTextStyle('text-decoration','underline','none')">
               <VuseIcon name="underline"></VuseIcon>
             </button>
           </li>
@@ -356,11 +381,10 @@
                            progress-color="#fcff00"
             >
             </circle-slider>
-            <input ref="inputFontSize" type="number" v-model="fontSize"/>
             <div class="">
               <div class="b-font-size" v-model="fontSize" v-text="fontSize" v-bind:style="{ 'font-size': fontSize + 'rem'}"/>
-              <button class="button" style="width: 12rem;" @click="setFontSize(fontSize)">
-                <VuseIcon name="check"></VuseIcon> Set font size
+              <button class="button" @click="setFontSize(fontSize)">
+                <VuseIcon name="check"></VuseIcon> Set
               </button>
             </div>
           </div>
@@ -382,7 +406,7 @@
             <div class="">
               <div class="b-border-radius" v-model="borderRadius" v-bind:style="{ 'border-radius': borderRadius + '%'}"/>
               <button class="button" style="width: 12rem;" @click="setBorderRadius(borderRadius)">
-                Set
+                <VuseIcon name="check"></VuseIcon> Set
               </button>
             </div>
           </div>
@@ -418,6 +442,10 @@ import { Sketch } from 'vue-color'
 import VueCircleSlider from 'vue-circle-slider'
 import $ from 'jquery'
 import axios from 'axios'
+import * as types from '@plugins/Vuse/types'
+import * as _ from 'lodash-es'
+
+require('@public/js/any-resize-event.min');
 
   const DEFAULT_BACKGROUND_REPEAT = 'no-repeat';
   const DEFAULT_BACKGROUND_POSITION = 'center center';
@@ -536,7 +564,6 @@ import axios from 'axios'
       },
     },
     created() {
-
       if (this.type === 'button') {
         let fs = this.section.get(`${this.name}.styles['font-size']`);
         let br = this.section.get(`${this.name}.styles['border-radius']`);
@@ -566,6 +593,17 @@ import axios from 'axios'
       if (!this.$builder.isEditing) return;
 
       this.el.addEventListener('click', this.showStyler);
+    },
+    updated() {
+      if (this.type === 'button') {
+        // listen resize event, add params to element
+        let handler = () => {
+          this.addStyle('width', `${this.el.offsetWidth}px`)
+          this.addStyle('height', `${this.el.offsetHeight}px`)
+        }
+
+        this.el.addEventListener('onresize', _.debounce(handler, 100))
+      }
     },
     beforeDestroy() {
       this.hideStyler();
@@ -638,6 +676,20 @@ import axios from 'axios'
           $(self.el).find('div.b-video-bg').remove();
         });
       },
+      addTextStyle: function(style, sValue, def) {
+            let self = this;
+            this.section.set(this.name, (value) => {
+                if (!value || !value.hasOwnProperty('styles') || typeof value.styles !== 'object'
+                || !value.styles.hasOwnProperty(style)) {
+                return;
+            }
+            if (false === value.styles[style] || def === value.styles[style]) {
+                value.styles[style] = sValue
+            } else {
+                value.styles[style] = def
+            }
+        });
+      },
       addVideoBackground: function() {
         let el = $(this.el);
         let content = '<div class="b-video-bg">' +
@@ -674,15 +726,28 @@ import axios from 'axios'
         return refElem.parentNode.parentNode.insertBefore(elem, refElem.nextSibling);
       },
       copyLink() {
-        let l = Object.assign({}, this.section.data.links[0]);
+        let newObj = JSON.parse(JSON.stringify(this.section.data.links[0]))
+        let l = Object.assign({}, newObj);
         this.section.data.links.push(l);
       },
       removeLink() {
         this.el.remove();
         this.$refs.styler.remove();
       },
+      copyButton() {
+        let arr = `${this.name}`.split(".")[1].split("[");
+        let newObj = JSON.parse(JSON.stringify(eval('this.section.data.'+arr[0]+'[0]')));
+        let newEl = Object.assign({}, newObj);
+        eval('this.section.data.'+arr[0]+'.push(newEl)');
+        eval('this.section.schema.'+arr[0]+'.push(newEl)');
+      },
+      removeButton() {
+        this.el.remove();
+        this.$refs.styler.remove();
+      },
       copyItemGallery() {
-        let l = Object.assign({}, this.section.data.images[0]);
+        let newObj = JSON.parse(JSON.stringify(this.section.data.images[0]))
+        let l = Object.assign({}, newObj);
         this.section.data.images.push(l);
         this.section.schema.images.push(l);
       },
@@ -691,7 +756,8 @@ import axios from 'axios'
         this.$refs.styler.remove();
       },
       copyTitle() {
-        let s = Object.assign({}, this.section.data.titles[0]);
+        let newObj = JSON.parse(JSON.stringify(this.section.data.titles[0]))
+        let s = Object.assign({}, newObj);
         this.section.data.titles.push(s);
         this.section.schema.titles.push(s);
       },
@@ -1148,6 +1214,8 @@ import axios from 'axios'
     cursor: pointer
     background-color: #ffba00
     transition: all 200ms
+    white-space: nowrap
+    font-size: 1.4rem
     &:hover
       filter: brightness(120%)
 </style>

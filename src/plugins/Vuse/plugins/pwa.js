@@ -89,6 +89,8 @@ function download (assets) {
     const assetsClient = new XMLHttpRequest()
       assetsClient.open('GET', assets.js)
       assetsClient.onload = function () {
+        console.log(this)
+        console.log(this.response)
         resolve(this.response)
       }
       assetsClient.send(null)

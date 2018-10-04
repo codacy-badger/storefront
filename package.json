@@ -80,6 +80,7 @@
   "eslintIgnore": [
     "src/plugins/**/*.js",
     "src/plugins/**/*.vue",
-    "src/cscripts/*.js"
+    "src/cscripts/*.js",
+    "public/js/*.js"
   ]
 }

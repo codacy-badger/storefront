@@ -21,7 +21,7 @@ import * as types from './../../../plugins/Vuse/types'
 
 export default {
   name: 'Social1',
-  cover: 'img/covers/social1.png',
+  cover: '/img/covers/social1.png',
   group: 'social',
   $schema: {
     classes: types.ClassList,

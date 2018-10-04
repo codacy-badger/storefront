@@ -38,7 +38,7 @@ import * as types from './../../../plugins/Vuse/types'
 
 export default {
   name: 'Layout2',
-  cover: 'img/covers/page-1-bg-alt.jpg',
+  cover: '/img/covers/page-1-bg-alt.jpg',
   group: 'hero',
   $schema: {
     mainStyle: types.StyleObject,
@@ -443,7 +443,7 @@ a
         height: auto
 
 .hero-detail__bio
-  font-size: 2rem
+  font-size: 1.4rem
   line-height: 1.1
   max-width: 50rem
   margin: 1rem auto

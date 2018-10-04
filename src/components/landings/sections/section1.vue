@@ -20,7 +20,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Section1',
-  cover: 'img/covers/section1.png',
+  cover: '/img/covers/section1.png',
   group: 'sections',
   $schema: {
     classes: types.ClassList,

@@ -1,36 +1,23 @@
 <template>
-  <section id="gallery2" class="pages__page pages__page_videos" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <div class="pages__bg"></div>
-      <div class="pages__wrap">
-        <div class="l-title">
-          <h1 class="l-title__title" v-styler="$sectionData.slogan.type" v-text="$sectionData.slogan.text"></h1>
-        </div>
-        <div class="p-video flex flex_center">
-          <div class="p-video__item-wrap"
+  <section class="b-gallery-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <div class="b-gallery-two__wrap">
+        <div class="b-gallery-two flex flex_center">
+          <div class="b-gallery-two__item-wrap"
             v-for="(item, index) in $sectionData.images"
             v-styler:galleryItem="$sectionData.images[index]"
             :data-index="index"
             :key="index"
           >
-            <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="p-video__link"
+            <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
                v-styler:index="`$sectionData.images[${index}].button`"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
             >
             </a>
-            <div class="p-video__item-content">
-              <img class="p-video__img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+            <div class="b-gallery-two__item-content">
+              <img class="b-gallery-two__img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
             </div>
           </div>
-        </div>
-        <div class="btn-container">
-          <span class="btn-container__button"
-              v-styler:button="$sectionData.button"
-              v-text="$sectionData.button.text"
-              v-bind:style="$sectionData.button.styles"
-            >
-            Начать игру
-          </span>
         </div>
       </div>
       <div gallery-two-popup="" class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
@@ -45,7 +32,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Gallery2',
-  cover: 'img/covers/gallery1.png',
+  cover: '/img/covers/gallery1.png',
   group: 'galleries',
   $schema: {
     mainStyle: types.StyleObject,
@@ -89,7 +76,7 @@ export default {
     index: 0,
     isShowPopup: false,
     heightFrame: '400',
-    url: 'https://www.youtube.com/embed/dqHeutdSSyM',
+    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
     content: ''
   },
   props: {
@@ -143,22 +130,21 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
-.l-title
-  text-align: center
-  margin-bottom: 2rem
-.l-title__title
-  margin-bottom: 0.25rem
-  font-size: 4rem
-.p-video__subtitle
-  margin-bottom: 0
-  font-weight: 400
-.p-video
-  margin-bottom: 1rem
-  margin-right: -2rem
+.b-gallery-two
+  display: flex
+  align-items: center
+  &.is-editable
+    resize: vertical
+    overflow: hidden
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
-.p-video__item-wrap
+      height: auto !important
+  &__wrap
+    max-width: 160rem
+    width: 60%
+    margin: 0 auto
+.b-gallery-two__item-wrap
   width: 20%
   height: 22rem
   min-width: 5rem
@@ -170,11 +156,11 @@ export default {
   &.is-editable
     resize: both
     overflow: hidden
-.p-video__item-wrap_size-big
+.b-gallery-two__item-wrap_size-big
   width: 45%
-.p-video__item-wrap_size-small
+.b-gallery-two__item-wrap_size-small
   width: 20%
-.p-video__item-content
+.b-gallery-two__item-content
   position: relative
   height: 100%
   background-color: #fff
@@ -184,13 +170,13 @@ export default {
   pointer-events: none
   background: -webkit-linear-gradient(315deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
   background: linear-gradient(135deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
-.p-video__item-wrap:hover .p-video__item-content
+.b-gallery-two__item-wrap:hover .b-gallery-two__item-content
   background: linear-gradient(135deg, rgba(227, 223, 255, 0.3) 0%, rgba(23, 40, 125, 0.3) 100%)
 
-.p-video__item-wrap .p-video__item-content .p-video__text,
-.p-video__item-content:hover .p-video__text
+.b-gallery-two__item-wrap .b-gallery-two__item-content .b-gallery-two__text,
+.b-gallery-two__item-content:hover .b-gallery-two__text
   opacity: 1
-.p-video__link
+.b-gallery-two__link
   position: absolute
   display: block
   top: 0
@@ -205,12 +191,12 @@ export default {
     width: 10rem
     height: 10rem
     margin: -5rem 0 0 -5rem
-.p-video__link:before, .p-video__link:after
+.b-gallery-two__link:before, .b-gallery-two__link:after
   content: ''
   position: absolute
   top: 50%
   left: 50%
-.p-video__link:before
+.b-gallery-two__link:before
   margin: -43px 0 0 -43px
   width: 86px
   height: 86px
@@ -219,14 +205,14 @@ export default {
   -webkit-transition: all 200ms
   transition: all 200ms
   background-image: url(https://gn897.cdn.gamenet.ru/TY0Xv2riHu/6u2ah/o_o01QL.png)
-.p-video__link:after
+.b-gallery-two__link:after
   margin: -14px 0 0 -14px
   width: 28px
   height: 28px
   background-image: url(https://gn295.cdn.gamenet.ru/TY0Xv2riHu/6u2as/o_1MFnq3.png)
-.p-video__item-wrap:hover .p-video__link:before
+.b-gallery-two__item-wrap:hover .b-gallery-two__link:before
   transform: scale(1) rotate(-120deg)
-.p-video__text
+.b-gallery-two__text
   position: absolute
   bottom: 1.5rem
   opacity: 0
@@ -237,7 +223,7 @@ export default {
   pointer-events: none
   color: #000
   z-index: 100
-.p-video__img
+.b-gallery-two__img
   position: absolute
   top: 0
   left: 0
@@ -247,43 +233,15 @@ export default {
   height: 100%
   z-index: 50
 @media only screen and (max-width: 768px)
-  .p-video__item-wrap
+  .b-gallery-two__item-wrap
     width: 40%
 @media only screen and (max-width: 460px)
-  .p-video
+  .b-gallery-two
     margin-right: 0
-  .p-video__item-wrap
+  .b-gallery-two__item-wrap
     width: 100%
     padding: 0 0 2rem 0
-.btn-container
-  text-align: center
-  position: relative
-  z-index: 100
-  &__button
-    position: relative
-    padding: 2rem 4rem
-    font-size: 2rem
-    line-height: 2rem
-    background-color: #fff
-    color: #000
-    margin: 0 auto
-    border: 0
-    margin-bottom: 0
-    display: flex
-    width: 30rem
-    min-width: 10rem
-    align-items: center
-    justify-content: center
-    -webkit-transition: 100ms
-    transition: 100ms
-    @media only screen and (max-width: 768px)
-      &
-        width: 20rem
-    &:hover
-      background-color: #fcff00
-    &.is-editable
-      resize: both
-      overflow: hidden
+
 .l-popup
   display: none
   position: fixed

@@ -20,7 +20,7 @@ import * as types from './../../../plugins/Vuse/types'
 
 export default {
   name: 'Hero1',
-  cover: 'img/covers/hero1.png',
+  cover: '/img/covers/hero1.png',
   group: 'hero',
   $schema: {
     title: types.Title,

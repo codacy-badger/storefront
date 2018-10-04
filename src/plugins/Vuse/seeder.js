@@ -8,7 +8,7 @@ const data = new Map([
   [types.Avatar, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Logo, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Link, () => ({
-    text: 'Click Me!',
+    text: 'Link',
     classes: [],
     href: '' })
   ],
@@ -40,8 +40,14 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': false,
-        'border-radius': false,
+        'font-size': '1.4',
+        'border-radius': 0,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'justify-content': false,
+        'width': '',
+        'height': ''
       }
     }
   )],

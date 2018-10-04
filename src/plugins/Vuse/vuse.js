@@ -41,7 +41,7 @@ class Vuse {
     this.components = {}
     this.assets = {
       css: options.css,
-      js: options.js || 'js/cjs.js'
+      js: options.js || './../js/cjs.js'
     }
     this.installPlugins()
   }
@@ -207,7 +207,6 @@ class Vuse {
     this.title = data.title !== undefined ? data.title : this.title
     if (data.sections && Array.isArray(data.sections)) {
       this.sections = data.sections.map(section => {
-        console.log(section)
         let component
         let sectionData
 

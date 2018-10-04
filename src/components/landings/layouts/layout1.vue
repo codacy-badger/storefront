@@ -13,26 +13,26 @@
             </div>
             <div class="b-layout-1__panel__section">
               <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].text"
-                   v-text="$sectionData.slogan[0].title"></div>
+                   v-text="$sectionData.slogan[0].text"></div>
               <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].text"
-                   v-text="$sectionData.slogan[1].title"></div>
+                   v-text="$sectionData.slogan[1].text"></div>
             </div>
 
             <div class="b-layout-1__panel__section">
               <ul class="b-layout-1__panel__features">
                 <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" :key="index">
-                  <span v-styler:index="`$sectionData.titles[${index}].title`">
+                  <span v-styler:index="`$sectionData.titles[${index}].text`">
                       {{ $sectionData.titles[index].text }}
                   </span>
                 </li>
               </ul>
             </div>
             <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
-              <a class="b-layout-1__b-button" @click.prevent="onClick"
-                 :class="$sectionData.buttons[0].button.classes" :href="$sectionData.buttons[0].button.href"
-                 v-html="$sectionData.buttons[0].button.text" v-styler="$sectionData.buttons[0].button"
-                 :style="$sectionData.buttons[0].button.styles">
-
+              <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-layout-1__b-button" @click.prevent="onClick"
+                 :href="$sectionData.buttons[index].button.href"
+                 v-html="$sectionData.buttons[index].button.text"
+                 v-styler:index="`$sectionData.buttons[${index}].button`"
+                 :style="$sectionData.buttons[index].button.styles">
               </a>
             </div>
             <div class="b-layout-1__panel__section">
@@ -42,7 +42,7 @@
                             path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt"
                             :alt="$sectionData.logos[1].alt"></uploader>
                   <span class="b-layout-1__footer__el">
-                    <span v-text="$sectionData.copyright.title"
+                    <span v-text="$sectionData.copyright.text"
                           v-styler="$sectionData.copyright.text">
                       2018-2018 gamesite.com
                     </span>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="b-layout-1__footer__group b-layout-1__footer__group_light">
                   <span v-for="(item, index) in $sectionData.links" :key="index">
-                      <a @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
+                      <a target="_blank" @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
                          class="b-layout-1__footer__el b-layout-1__footer__el_link"
                          :href="item.href" v-html="item.text"
                          v-styler:index="`$sectionData.links[${index}].button`"
@@ -72,7 +72,7 @@ import * as types from '@plugins/Vuse/types'
 
 export default {
   name: 'Layout1',
-  cover: 'img/covers/layout1.png',
+  cover: '/img/covers/layout1.png',
   group: 'layouts',
   $schema: {
     mainStyle: types.StyleObject,
@@ -251,6 +251,7 @@ body
     display: flex
     align-items: center
     justify-content: center
+    margin: 1rem 0
     @media only screen and (max-width: 540px)
       &
         padding: 1rem

@@ -22,7 +22,7 @@ import * as types from './../../../plugins/Vuse/types'
 
 export default {
   name: 'Newsletter',
-  cover: 'img/covers/newsletter.png',
+  cover: '/img/covers/newsletter.png',
   group: 'forms',
   $schema: {
     classes: types.ClassList,
