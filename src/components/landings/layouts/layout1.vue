@@ -81,8 +81,8 @@ export default {
       text: types.Text
     },
     copyright: {
-      title: '2018-2018 gamesite.com',
-      text: types.Text
+      title: types.Title,
+      text: '2018-2018 gamesite.com'
     },
     buttons: [
       {
@@ -107,12 +107,12 @@ export default {
     ],
     slogan: [
       {
-        title: 'CaLL',
-        text: types.Text
+        title: types.Title,
+        text: 'CaLL'
       },
       {
-        title: 'to action!',
-        text: types.Text
+        title: types.Title,
+        text: 'to action!'
       }
     ],
     logos: [
