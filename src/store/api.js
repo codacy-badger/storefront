@@ -55,6 +55,7 @@ export default {
 
   saveLanding (slug, data) {
     return new Promise((resolve) => {
+      localStorage.removeItem(slug)
       localStorage.setItem(slug, data)
       resolve(true)
     })

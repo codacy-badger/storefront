@@ -593,6 +593,7 @@ require('@public/js/any-resize-event.min');
       if (!this.$builder.isEditing) return;
 
       this.el.addEventListener('click', this.showStyler);
+      this.el.addEventListener('focus', this.showStyler)
     },
     updated() {
       if (this.type === 'button') {
@@ -791,6 +792,7 @@ require('@public/js/any-resize-event.min');
         }
 
         document.addEventListener('click', this.hideStyler, true);
+        document.addEventListener('blur', this.hideStyler, true);
         this.currentOption = '';
       },
       hideStyler(event) {
@@ -806,6 +808,7 @@ require('@public/js/any-resize-event.min');
         }
 
         document.removeEventListener('click', this.hideStyler, true);
+        document.removeEventListener('blur', this.hideStyler, true);
 
         if (this.type === 'section' || this.type === 'grid') {
           return;
