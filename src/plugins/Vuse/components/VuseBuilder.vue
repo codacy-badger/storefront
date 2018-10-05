@@ -40,18 +40,21 @@
               <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
                   <VuseIcon name="plus"></VuseIcon>
               </button>
+              <button class="controller-button is-dark" tooltip-position="top" tooltip="Back to landings" @click="backToLandings">
+                <VuseIcon name="back"></VuseIcon>
+              </button>
             </div>
             <div class="main-panel">
-              <button class="controller-button is-green" @click="setDevice('is-desktop')">
+              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on monitor" @click="setDevice('is-desktop')">
                 <VuseIcon name="monitor"></VuseIcon>
               </button>
-              <button class="controller-button is-green" @click="setDevice('is-laptop')">
+              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on laptop" @click="setDevice('is-laptop')">
                 <VuseIcon name="laptop"></VuseIcon>
               </button>
-              <button class="controller-button is-green" @click="setDevice('is-tablet')">
+              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on tablet" @click="setDevice('is-tablet')">
                 <VuseIcon name="tablet"></VuseIcon>
               </button>
-              <button class="controller-button is-green" @click="setDevice('is-mobile')">
+              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on mobile" @click="setDevice('is-mobile')">
                 <VuseIcon name="mobile"></VuseIcon>
               </button>
             </div>
@@ -285,6 +288,10 @@ export default {
     },
     setDevice (device) {
        this.device = device
+    },
+    backToLandings () {
+      this.save()
+      this.$router.push({ path: `/dashboard` })
     }
   }
 }
