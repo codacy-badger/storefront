@@ -304,7 +304,6 @@ export default {
   transform-origin: top center
   margin: 0 auto
   transition: 0.2s
-  min-height: 100vh
   background-color: $color-white
   &.is-editable .is-editable
     outline: none
@@ -318,6 +317,7 @@ export default {
     width: 76rem
   &.is-mobile
     width: 37rem
+
 .controller
   box-sizing: border-box
   &-panel
@@ -384,7 +384,7 @@ export default {
     padding: 7rem 5rem
     text-align: center
     font-size: 3rem
-    color: $dark
+    color: $color-white
 
   &-themes
     display: flex
