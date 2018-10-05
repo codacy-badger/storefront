@@ -45,16 +45,16 @@
               </button>
             </div>
             <div class="main-panel">
-              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on monitor" @click="setDevice('is-desktop')">
+              <button class="controller-button" tooltip-position="top" tooltip="on desktop" :class="{ 'is-blue': device === 'is-desktop', 'is-green': device !== 'is-desktop' }" @click="setDevice('is-desktop')">
                 <VuseIcon name="monitor"></VuseIcon>
               </button>
-              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on laptop" @click="setDevice('is-laptop')">
+              <button class="controller-button" tooltip-position="top" tooltip="on laptop" :class="{ 'is-blue': device === 'is-laptop', 'is-green': device !== 'is-laptop' }" @click="setDevice('is-laptop')">
                 <VuseIcon name="laptop"></VuseIcon>
               </button>
-              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on tablet" @click="setDevice('is-tablet')">
+              <button class="controller-button" tooltip-position="top" tooltip="on tablet" :class="{ 'is-blue': device === 'is-tablet', 'is-green': device !== 'is-tablet' }" @click="setDevice('is-tablet')">
                 <VuseIcon name="tablet"></VuseIcon>
               </button>
-              <button class="controller-button is-green" tooltip-position="top" tooltip="View as on mobile" @click="setDevice('is-mobile')">
+              <button class="controller-button" tooltip-position="top" tooltip="on mobile" :class="{ 'is-blue': device === 'is-mobile', 'is-green': device !== 'is-mobile' }" @click="setDevice('is-mobile')">
                 <VuseIcon name="mobile"></VuseIcon>
               </button>
             </div>
