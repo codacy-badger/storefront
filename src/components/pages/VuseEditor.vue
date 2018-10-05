@@ -53,7 +53,7 @@ export default {
       builder.export('pwa')
     },
     onPreview: function (builder) {
-      builder.export('preview-devices')
+      builder.export('preview')
     },
     onSave (builder) {
       this.saveLanding(builder.export('json'))

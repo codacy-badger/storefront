@@ -302,15 +302,15 @@ export default {
   &.is-editable .is-editable
     outline: none
     &:hover
-      box-shadow: inset 0 0 0 0.2rem $gray
+      box-shadow: inset 0 0 0 0.1rem $color-green
   &.is-desktop
     width: 100%
   &.is-laptop
-    width: 1368px
+    width: 120rem
   &.is-tablet
-    width: 768px
+    width: 76rem
   &.is-mobile
-    width: 375px
+    width: 37rem
 .controller
   box-sizing: border-box
   &-panel
@@ -485,13 +485,46 @@ export default {
   opacity: 0.3
   box-shadow: 0 0 0.2rem 0.1rem $blue
 
-.is-editable
-  &:hover
-    box-shadow: inset 0 0 0 0.2rem $gray
-
 .main-panel
   position: fixed
   z-index: 200
   bottom: 3rem
   left: 4rem
+
+
+.b-landing-constructor__button
+  width: 100%
+  height: 100%
+  display: inline-block
+  font-weight: 400
+  text-align: center
+  white-space: nowrap
+  vertical-align: middle
+  border: 1px solid #545b62
+  border-radius: .25rem
+  transition: color .15s
+  background-color: #545b62
+  cursor: pointer
+  color: #ffffff
+
+.b-landing-constructor__video_type
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.controller-panel, .styler
+  z-index: 9999
+
+.vuse-icon
+  width: 2rem
+  height: 2rem
+  display: inline-block
+  vertical-align: middle
+  cursor: pointer
+
+.floatHover
+  cursor: pointer
+  box-shadow: 0 14px 28px opacify($black, 0.125), 0 10px 10px opacify($black, 0.1)
+
 </style>

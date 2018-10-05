@@ -37,7 +37,7 @@ export default {
 .l-button-sixth
   width: 100%
   position: relative
-  margin: 1rem 0
+  margin: 0
   display: flex
   align-items: center
   justify-content: center
@@ -52,7 +52,7 @@ export default {
   width: 20rem
   min-width: 10rem
   min-height: 5rem
-  padding: 2rem
+  margin: 2rem
   color: #000
   background-color: #a7a1a1
   border: transparent solid  0.2rem

@@ -144,12 +144,18 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../../assets/sass/_flex.sass'
+
 .b-gallery-three
   display: flex
   align-items: center
   &.is-editable
    resize: vertical
    overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
@@ -157,7 +163,7 @@ export default {
   &__wrap
     margin: 0 auto
     max-width: 160rem
-    min-width: 60%
+    min-width: 80%
   &__subtitle
     margin-bottom: 0
     font-weight: 400
@@ -165,6 +171,11 @@ export default {
   &-block
     margin-bottom: 1rem
     margin-right: -2rem
+    .is-tablet &,
+    .is-mobile &
+      flex-wrap: wrap
+    .is-mobile &
+      margin-right: 0
     @media only screen and (max-width: 768px)
       &
         flex-wrap: wrap
@@ -191,13 +202,18 @@ export default {
         &.is-editable
           resize: both
           overflow: hidden
-        @media only screen and (max-width: 768px)
-          &
-            width: 40%
-        @media only screen and (max-width: 460px)
-          &
-            width: 100%
-            padding: 0 0 2rem 0
+      .is-tablet &
+        width: 50%
+      .is-mobile &
+        width: 100%
+        padding: 0 0 2rem 0
+      @media only screen and (max-width: 768px)
+        &
+          width: 50%
+      @media only screen and (max-width: 460px)
+        &
+          width: 100%
+          padding: 0 0 2rem 0
 
       &-content
         position: relative
@@ -367,28 +383,5 @@ export default {
 .l-popup__close:after
   -webkit-transform: rotate(45deg)
   transform: rotate(45deg)
-.flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  position: relative
-  width: 100%
-.flex_center
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-.flex_columns
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
-.flex__item
-  -webkit-box-flex: 0
-  -ms-flex: 0 0 auto
-  flex: 0 0 auto
-.flex_wrap
-  flex-wrap: wrap
+
 </style>

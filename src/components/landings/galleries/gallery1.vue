@@ -105,6 +105,8 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../../assets/sass/_flex.sass'
+
 .b-gallery-one
   font-family: Helvetica Neue, Helvetica, Arial
   display: flex
@@ -194,49 +196,6 @@ a
   .pages__wrap
     padding-left: 1rem
     padding-right: 1rem
-
-// flex styles
-.flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  position: relative
-  width: 100%
-
-.flex_center
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-
-.flex_columns
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
-
-.flex__item
-  -webkit-box-flex: 0
-  -ms-flex: 0 0 auto
-  flex: 0 0 auto
-
-.flex__item_full
-  -webkit-box-flex: 1
-  -ms-flex-positive: 1
-  flex-grow: 1
-
-.flex__item_size-1
-  -webkit-box-flex: 1
-  -ms-flex: 1
-  flex: 1
-
-.flex__item_size-2
-  -webkit-box-flex: 2
-  -ms-flex: 2
-  flex: 2
-// end flex styles
 
 .loader__content
   -webkit-transition: all 200ms

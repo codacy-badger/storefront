@@ -37,7 +37,7 @@ export default {
 .l-button-fifth
   width: 100%
   position: relative
-  margin: 1rem 0
+  margin: 0
   display: flex
   align-items: center
   justify-content: center
@@ -45,14 +45,15 @@ export default {
     resize: vertical
     overflow: hidden
 .b-button-fifth
-  font-family: Georgia, "Times New Roman", Serif
+  font-family: Helvetica, Arial, sans-serif
   text-decoration: none
-  font-size: 3rem
+  font-size: 2.3rem
   background-color: #a7a1a1
   color: #fff
   text-transform: uppercase
   padding: 1.5rem 0 2rem 0
   width: 30rem
+  margin: 2rem
   cursor: pointer
   position: relative
   text-align: center

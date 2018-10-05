@@ -61,16 +61,6 @@ export default {
         preview: [types.Image],
         label: types.Title,
         button: types.Button
-      },
-      {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
-      },
-      {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
       }
     ],
     index: 0,
@@ -130,19 +120,25 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../../assets/sass/_flex.sass'
+
 .b-gallery-two
   display: flex
   align-items: center
   &.is-editable
     resize: vertical
     overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
       height: auto !important
   &__wrap
     max-width: 160rem
-    width: 60%
+    width: 80%
     margin: 0 auto
 .b-gallery-two__item-wrap
   width: 20%
@@ -232,9 +228,18 @@ export default {
   object-fit: cover
   height: 100%
   z-index: 50
-@media only screen and (max-width: 768px)
+
+.is-tablet,
+.is-mobile
   .b-gallery-two__item-wrap
     width: 40%
+.is-mobile
+  .b-gallery-two
+    margin-right: 0
+  .b-gallery-two__item-wrap
+    width: 100%
+    padding: 0 0 2rem 0
+
 @media only screen and (max-width: 460px)
   .b-gallery-two
     margin-right: 0
@@ -294,28 +299,4 @@ export default {
 .l-popup__close:after
   -webkit-transform: rotate(45deg)
   transform: rotate(45deg)
-.flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  position: relative
-  width: 100%
-.flex_center
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-.flex_columns
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
-.flex__item
-  -webkit-box-flex: 0
-  -ms-flex: 0 0 auto
-  flex: 0 0 auto
-.flex_wrap
-  flex-wrap: wrap
 </style>

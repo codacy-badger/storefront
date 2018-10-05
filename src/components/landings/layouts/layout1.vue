@@ -172,38 +172,7 @@ export default {
 </script>
 
 <style lang="sass">
-.b-layout-1
-  ::-moz-selection
-    background: #ffe421
-    color: #fff
 
-  ::selection
-    background: #ffe421
-    color: #fff
-
-  ::-moz-selection
-    background: #ffe421
-    color: #fff
-
-@media only screen and (max-width: 768px)
-  .g-hidden-tab
-    display: none
-
-@media only screen and (max-width: 540px)
-  .g-hidden-mobile
-    display: none
-
-body
-  line-height: 1
-  color: #000
-  background-color: #fff
-  font-size: 1rem
-  margin: 0
-  font-family: Georgia, serif
-  font-weight: normal
-  font-style: normal
-  -webkit-font-smoothing: subpixel-antialiased
-  -moz-osx-font-smoothing: auto
 .b-layout-1
   position: relative
   min-height: 100vh
@@ -223,8 +192,11 @@ body
     -webkit-box-direction: normal
     -ms-flex-direction: column
     flex-direction: column
+    .is-tablet &,
+    .is-mobile &
+      padding: 0 1rem
     @media only screen and (max-width: 768px)
-      &__wrap
+      &
         padding: 0 1rem
   &__content
     -webkit-box-flex: 1
@@ -251,7 +223,10 @@ body
     display: flex
     align-items: center
     justify-content: center
-    margin: 1rem 0
+    margin: 1rem auto
+    .is-tablet &,
+    .is-mobile &
+      padding: 1rem
     @media only screen and (max-width: 540px)
       &
         padding: 1rem
@@ -288,7 +263,9 @@ body
       flex-shrink: 0
       &_logo
         width: 11.6rem
-        margin-bottom: 0
+        margin-bottom: 0.5rem
+        .is-mobile &
+          width: 8rem
         @media only screen and (max-width: 540px)
           &
             width: 8rem
@@ -304,10 +281,6 @@ body
       &:last-child
         margin-right: 0
 
-      @media only screen and (max-width: 1600px)
-        &_logo
-          margin-bottom: 0.5rem
-
   &__panel
     height: 100vh
     background-color: rgba(96, 125, 139, 0.75)
@@ -315,6 +288,8 @@ body
     padding: 0 0.3rem
     color: #fff
     line-height: 1
+    .is-mobile &
+      width: 100%
     @media only screen and (max-width: 540px)
       &
         width: 100%
@@ -330,6 +305,8 @@ body
       height: 100%
       border-left: 1px dotted rgba(162, 143, 123, 0.5)
       border-right: 1px dotted rgba(162, 143, 123, 0.5)
+      .is-mobile &
+        padding: 1rem
       @media only screen and (max-width: 540px)
         &
           padding: 1rem
@@ -345,6 +322,8 @@ body
       display: block
       margin: 2rem auto 0
       max-width: 80%
+      .is-mobile &
+        margin: 1rem auto
       @media only screen and (max-width: 540px)
         &
           margin: 1rem auto
@@ -354,6 +333,8 @@ body
     &__title_big
       font-size: 3.5rem
       text-transform: uppercase
+      .is-mobile &
+        font-size: 2rem
       @media only screen and (max-width: 540px)
         &
           font-size: 2rem
@@ -362,6 +343,8 @@ body
       list-style: none
       padding-left: 3.5rem
       margin: 0 0 1rem 0
+      .is-mobile &
+        font-size: 1.4rem
       @media only screen and (max-width: 540px)
         &
           font-size: 1.4rem
