@@ -1,21 +1,47 @@
 import * as types from './types'
 import { isObject } from './util'
+import * as _ from 'lodash-es'
 
 const ASSETS_DIR = window.location.origin
+const DEFAULT_OPTIONS = {
+  text: '',
+  classes: [],
+  styles: {},
+  resizable: false,
+  hasLink: false,
+  removable: false,
+  aligned: false,
+  typography: false,
+  colorize: false,
+  box: false, // (colorer)
+  canCopy: false
+}
+
+/**
+ * Deprecated types:
+ * Logo, Avatar, Quote, Number, ClassList, Title
+ * @type {Map}
+ */
 const data = new Map([
-  [types.Title, 'Awesome title'],
-  [types.Text, 'We\'re creating the best place to go when starting a new business or company.With Baianat you can instantly search domain names, social media handles, and see your logo in beautiful logotypes.'],
-  [types.Avatar, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
-  [types.Logo, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
+  [types.Text, () => (_.merge(DEFAULT_OPTIONS, {
+    text: 'Lorem ipsum',
+    aligned: true,
+    typography: true,
+    removable: true,
+    colorize: true
+  }))],
+  [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Link, () => ({
     text: 'Link',
+    canCopy: true,
     classes: [],
     href: '' })
   ],
-  [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
-  [types.ClassList, () => []],
-  [types.StyleObject, () => (
+  [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
+      resizable: true,
+      removable: true,
       styles: {
         'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
         'background-position': false,
@@ -23,11 +49,17 @@ const data = new Map([
         'background-size': false,
         'background-color': false,
         'background': false
-      },
-      classes: []
-    })],
-  [types.Button, () => (
+      }
+    }))],
+  [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
+      canCopy: true,
+      resizable: true,
+      hasLink: true,
+      removable: true,
+      aligned: true,
+      typography: true,
       text: 'Click Me!',
       classes: [],
       href: '',
@@ -49,11 +81,9 @@ const data = new Map([
         'width': '',
         'height': ''
       }
-    }
+    })
   )],
-  [types.Quote, 'When you were made a leader, you weren\'t given a crown; you were given the responsibility to bring out the best in others.'],
   [types.Grid, () => ({ mobile: '', tablet: '', desktop: '', widescreen: '' })],
-  [Number, 100],
   [String, 'This is pretty neat'],
   [types.GalleryItem, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png']
 ])

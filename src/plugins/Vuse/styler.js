@@ -29,6 +29,7 @@ function installStyler ({ builder, Vue }) {
           el,
           section: section,
           type: (binding.arg !== 'index' && binding.arg) || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
+          options: binding.value || {},
           name: name
         }
       }).$mount(newNode))

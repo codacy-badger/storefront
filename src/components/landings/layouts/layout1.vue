@@ -12,27 +12,27 @@
                 :title="$sectionData.logos[0].alt" :alt="$sectionData.logos[0].alt"></uploader>
             </div>
             <div class="b-layout-1__panel__section">
-              <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].text"
+              <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].element"
                    v-text="$sectionData.slogan[0].text"></div>
-              <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].text"
+              <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].element"
                    v-text="$sectionData.slogan[1].text"></div>
             </div>
 
             <div class="b-layout-1__panel__section">
               <ul class="b-layout-1__panel__features">
-                <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles" :key="index">
-                  <span v-styler:index="`$sectionData.titles[${index}].text`">
-                      {{ $sectionData.titles[index].text }}
+                <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles.text" :key="index">
+                  <span v-styler="$sectionData.titles.element">
+                      {{ item }}
                   </span>
                 </li>
               </ul>
             </div>
             <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
-              <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-layout-1__b-button" @click.prevent="onClick"
-                 :href="$sectionData.buttons[index].button.href"
-                 v-html="$sectionData.buttons[index].button.text"
-                 v-styler:index="`$sectionData.buttons[${index}].button`"
-                 :style="$sectionData.buttons[index].button.styles">
+              <a v-for="(item, index) in $sectionData.buttons.items" :key="index" class="b-layout-1__b-button" @click.prevent="onClick"
+                 :href="item.href"
+                 v-html="item.text"
+                 v-styler="$sectionData.buttons.element"
+                 :style="$sectionData.buttons.element.styles">
               </a>
             </div>
             <div class="b-layout-1__panel__section">
@@ -41,20 +41,19 @@
                   <uploader class="b-layout-1__footer__el b-layout-1__footer__el_logo"
                             path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt"
                             :alt="$sectionData.logos[1].alt"></uploader>
-                  <span class="b-layout-1__footer__el">
+                  <span class="b-layout-1__footer__el 234234">
                     <span v-text="$sectionData.copyright.text"
-                          v-styler="$sectionData.copyright.text">
-                      2018-2018 gamesite.com
+                          v-styler="$sectionData.copyright.element">
                     </span>
                   </span>
                 </div>
                 <div class="b-layout-1__footer__group b-layout-1__footer__group_light">
-                  <span v-for="(item, index) in $sectionData.links" :key="index">
-                      <a target="_blank" @click.prevent="openLink(item)" :class="`$sectionData.links[${index}].button.classes`"
+                  <span v-for="(item, index) in $sectionData.links.text" :key="index">
+                      <a target="_blank" @click.prevent="openLink(item)" :class="$sectionData.links.element.classes"
                          class="b-layout-1__footer__el b-layout-1__footer__el_link"
-                         :href="item.href" v-html="item.text"
-                         v-styler:index="`$sectionData.links[${index}].button`"
-                         :style="$sectionData.links[index].button.styles">
+                         v-html="item"
+                         v-styler="$sectionData.links.element"
+                         :style="$sectionData.links.element.styles">
                       </a>
                   </span>
                 </div>
@@ -76,71 +75,57 @@ export default {
   group: 'layouts',
   $schema: {
     mainStyle: types.StyleObject,
-    age: {
-      title: '18+',
-      text: types.Text
-    },
     copyright: {
-      title: '2018-2018 gamesite.com',
-      text: types.Text
+      text: 'Copyright',
+      element: types.Text
     },
-    buttons: [
-      {
-        text: 'Play Now',
-        href: '#',
-        button: types.Button
-      }
-    ],
-    titles: [
-      {
-        text: 'Modern 3D graphics in the browser',
-        title: types.Title
-      },
-      {
-        text: 'Create multiple characters on the server',
-        title: types.Title
-      },
-      {
-        text: 'Wide opportunities for pumping the hero',
-        title: types.Title
-      }
-    ],
+    buttons: {
+      element: types.Button,
+      items: [
+        {
+          text: 'Play Now',
+          href: '#'
+        }
+      ]
+    },
+    titles: {
+      element: types.Text,
+      text: [
+        'Modern 3D graphics in the browser',
+        'Create multiple characters on the server',
+        'Wide opportunities for pumping the hero'
+      ]
+    },
     slogan: [
       {
-        title: 'CaLL',
-        text: types.Title
+        text: 'CaLL',
+        element: types.Text
       },
       {
-        title: 'to action!',
-        text: types.Title
+        text: 'to action!',
+        element: types.Text
       }
     ],
     logos: [
       {
         path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
         alt: 'Default Logo',
-        logo: types.Logo
+        logo: types.Image
       },
       {
         path: 'https://gn839.cdn.gamenet.ru/TY0Xv2riHu/6nOU5/o_21POBx.png',
         alt: 'Default Logo',
-        logo: types.Logo
+        logo: types.Image
       }
     ],
-    links: [
-      {
-        text: 'Catalog of games',
-        button: types.Button
-      },
-      {
-        text: 'Support',
-        button: types.Button
-      },
-      {
-        text: 'Rules',
-        button: types.Button
-      }
-    ]
+    links: {
+      element: types.Button,
+      text: [
+        'Catalog of games',
+        'Support',
+        'Rules'
+      ]
+    }
   },
   props: {
     id: {

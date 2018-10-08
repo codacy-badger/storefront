@@ -2,71 +2,40 @@
   <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
-      <li v-if="type === 'link' || type === 'section'">
-        <button class="styler-button" @click="updateOption('colorer')">
-          <VuseIcon name="bar"></VuseIcon>
+      <li v-if="options.colorize">
+        <button class="styler-button" @click="updateOption('textColor')" title="Color">
+          <VuseIcon name="palettes"></VuseIcon>
         </button>
       </li>
-      <li v-if="type === 'link'">
-        <button class="styler-button" @click="updateOption('link')">
-          <VuseIcon name="link"></VuseIcon>
+      <li v-if="options.aligned">
+        <button class="styler-button" @click="updateOption('align')" title="Text align">
+          <VuseIcon name="align"></VuseIcon>
         </button>
       </li>
-      <li v-if="type === 'header' || type === 'section'">
-        <button class="styler-button" @click="removeSection">
+      <li v-if="options.typography">
+        <button class="styler-button" @click="updateOption('textStyle')" title="Text style">
+          <VuseIcon name="textStyle"></VuseIcon>
+        </button>
+      </li>
+      <li v-if="options.removable">
+        <button class="styler-button" @click="removeElement" title="Delete">
           <VuseIcon name="trash"></VuseIcon>
         </button>
       </li>
-      <template v-if="type === 'link'">
-        <li>
-          <button class="styler-button" @click="removeLink">
-            <VuseIcon name="trash"></VuseIcon>
-          </button>
-        <li>
-          <button class="styler-button" @click="copyLink">
-            <VuseIcon name="plus"></VuseIcon>
-          </button>
-        </li>
-      </template>
-      <template v-if="type === 'button'">
-        <!--li>
-            <button class="styler-button" @click="updateOption('textColor')">
-                <VuseIcon name="palettes"></VuseIcon>
-            </button>
-        </li-->
-        <li>
-          <button class="styler-button" @click="updateOption('align')">
-            <VuseIcon name="align"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('textStyle')">
-            <VuseIcon name="textStyle"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('link')">
-            <VuseIcon name="link"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('colorer')">
-            <VuseIcon name="pic"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="removeButton">
-            <VuseIcon name="trash"></VuseIcon>
-          </button>
-        <li>
-          <button class="styler-button" @click="copyButton">
-            <VuseIcon name="plus"></VuseIcon>
-          </button>
-        </li>
-      </template>
+      <li v-if="options.box">
+        <button class="styler-button" @click="updateOption('colorer')" title="Background">
+          <VuseIcon name="pic"></VuseIcon>
+        </button>
+      </li>
+      <li v-if="options.hasLink">
+        <button class="styler-button" @click="updateOption('link')" title="Link">
+          <VuseIcon name="link"></VuseIcon>
+        </button>
+      </li>
+
       <template v-if="type === 'galleryItem'">
         <li>
-          <button class="styler-button" @click="removeItemGallery">
+          <button class="styler-button" @click="removeElement">
             <VuseIcon name="trash"></VuseIcon>
           </button>
         <li>
@@ -92,49 +61,6 @@
         <li v-if="type === 'link'">
           <button class="styler-button" @click="updateOption('link')">
             <VuseIcon name="link"></VuseIcon>
-          </button>
-        </li>
-      </template>
-      <template v-if="type === 'title'">
-        <li>
-          <button class="styler-button" @click="updateOption('textColor')">
-            <VuseIcon name="palettes"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('align')">
-            <VuseIcon name="align"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('textStyle')">
-            <VuseIcon name="textStyle"></VuseIcon>
-          </button>
-        </li>
-        <li v-if="Array.isArray(this.section.data.titles)">
-          <button class="styler-button" @click="removeTitle">
-            <VuseIcon name="trash"></VuseIcon>
-          </button>
-        <li v-if="Array.isArray(this.section.data.titles)">
-          <button class="styler-button" @click="copyTitle">
-            <VuseIcon name="plus"></VuseIcon>
-          </button>
-        </li>
-      </template>
-      <template v-if="type === 'text'">
-        <li>
-          <button class="styler-button" @click="updateOption('textColor')">
-            <VuseIcon name="palettes"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('align')">
-            <VuseIcon name="align"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="updateOption('textStyle')">
-            <VuseIcon name="textStyle"></VuseIcon>
           </button>
         </li>
       </template>
@@ -284,133 +210,15 @@
       <li v-if="currentOption === 'link'">
         <div class="input-group is-rounded is-primary">
           <input class="input" type="text" @change="addLink" placeholder="type your link" v-model="url"/>
-          <!--button class="button" @click="addLink">
-              <VuseIcon name="link"></VuseIcon>
-          </button-->
         </div>
       </li>
+      <!-- Text align -->
       <li v-if="currentOption === 'align'">
-        <ul class="align">
-          <li v-if="type !== 'button'">
-            <button class="styler-button" @click="execute('justifyleft')">
-              <VuseIcon name="left"></VuseIcon>
-            </button>
-          </li>
-          <li v-if="type !== 'button'">
-            <button class="styler-button" @click="execute('justifycenter')">
-              <VuseIcon name="center"></VuseIcon>
-            </button>
-          </li>
-          <li v-if="type !== 'button'">
-            <button class="styler-button" @click="execute('justifyright')">
-              <VuseIcon name="right"></VuseIcon>
-            </button>
-          </li>
-            <li v-if="type === 'button'">
-                <button class="styler-button" @click="addTextStyle('justify-content','flex-start','flex-start')">
-                    <VuseIcon name="left"></VuseIcon>
-                </button>
-            </li>
-            <li v-if="type === 'button'">
-                <button class="styler-button" @click="addTextStyle('justify-content','center','center')">
-                    <VuseIcon name="center"></VuseIcon>
-                </button>
-            </li>
-            <li v-if="type === 'button'">
-                <button class="styler-button" @click="addTextStyle('justify-content','flex-end','flex-end')">
-                    <VuseIcon name="right"></VuseIcon>
-                </button>
-            </li>
-        </ul>
+        <ControlAlign v-bind:isBox="options.box" @boxAligned="onBoxAligned" @textAligned="onTextAligned"></ControlAlign>
       </li>
 
       <li v-if="currentOption === 'textStyle'">
-        <ul class="align">
-          <li>
-            <button class="styler-button" @click="addTextStyle('font-weight','bold','normal')">
-              <VuseIcon name="bold"></VuseIcon>
-            </button>
-          </li>
-          <li>
-            <button class="styler-button" @click="addTextStyle('font-style','italic','normal')">
-              <VuseIcon name="italic"></VuseIcon>
-            </button>
-          </li>
-          <li>
-            <button class="styler-button" @click="addTextStyle('text-decoration','underline','none')">
-              <VuseIcon name="underline"></VuseIcon>
-            </button>
-          </li>
-          <li v-if="type === 'button'">
-            <button class="styler-button" @click="showFontSizer">
-              <VuseIcon name="fontSize"></VuseIcon>
-            </button>
-          </li>
-          <li v-if="type === 'button'">
-            <button class="styler-button" @click="showBorderRadius">
-              <VuseIcon name="fillet"></VuseIcon>
-            </button>
-          </li>
-          <li v-if="type !== 'title' && type !== 'text'">
-            <button class="styler-button" @click="showColorPeckerTextStyle">
-              <VuseIcon name="palettes"></VuseIcon>
-            </button>
-          </li>
-        </ul>
-        <div v-if="isTextSelectColor === true" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="setTextSelectColor(textSelectColor)" v-model="textSelectColor"></sketch-color-pecker>
-          </div>
-          <!--div style="text-align: center;">
-              <button class="button" style="width: 12rem;" @click="setTextSelectColor(textSelectColor)">
-                  <VuseIcon name="check"></VuseIcon> Set color
-              </button>
-          </div-->
-        </div>
-        <div v-if="isShowFontSizer === true" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item flex flex_center">
-            <circle-slider @click.native=""
-                           v-model="fontSize"
-                           :step-size="0.5"
-                           :circle-width-rel="30"
-                           :progress-width-rel="15"
-                           :knob-radius-rel="8"
-                           :min="1"
-                           :max="8"
-                           circle-color="#fff"
-                           progress-color="#fcff00"
-            >
-            </circle-slider>
-            <div class="">
-              <div class="b-font-size" v-model="fontSize" v-text="fontSize" v-bind:style="{ 'font-size': fontSize + 'rem'}"/>
-              <button class="button" @click="setFontSize(fontSize)">
-                <VuseIcon name="check"></VuseIcon> Set
-              </button>
-            </div>
-          </div>
-        </div>
-        <div v-if="isShowBorderRadius === true" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item flex flex_center">
-            <circle-slider @click.native=""
-                           v-model="borderRadius"
-                           :step-size="0.1"
-                           :circle-width-rel="30"
-                           :progress-width-rel="15"
-                           :knob-radius-rel="8"
-                           :min="0"
-                           :max="50"
-                           circle-color="#fff"
-                           progress-color="#fcff00"
-            >
-            </circle-slider>
-            <div class="">
-              <div class="b-border-radius" v-model="borderRadius" v-bind:style="{ 'border-radius': borderRadius + '%'}"/>
-              <button class="button" style="width: 12rem;" @click="setBorderRadius(borderRadius)">
-                <VuseIcon name="check"></VuseIcon> Set
-              </button>
-            </div>
-          </div>
-        </div>
+        <ControlStyleText v-bind:isBox="options.box" @styled="onBoxAligned" @boxStyled="onBoxStyled"></ControlStyleText>
       </li>
       <li v-if="currentOption === 'columnWidth'">
         <ul class="align">
@@ -436,10 +244,11 @@
 <script>
 import Popper from 'popper.js'
 import VuseIcon from './VuseIcon'
+import ControlAlign from './controls/TheControlAlign.vue'
+import ControlStyleText from './controls/TheControlStyleText.vue'
 import { isParentTo } from './../util'
 import _clone from 'lodash-es/clone'
 import { Sketch } from 'vue-color'
-import VueCircleSlider from 'vue-circle-slider'
 import $ from 'jquery'
 import axios from 'axios'
 import * as types from '@plugins/Vuse/types'
@@ -458,7 +267,8 @@ require('@public/js/any-resize-event.min');
     name: 'Styler',
     components: {
       VuseIcon,
-      VueCircleSlider,
+      ControlAlign,
+      ControlStyleText,
       SketchColorPecker: Sketch
     },
     props: {
@@ -481,6 +291,10 @@ require('@public/js/any-resize-event.min');
         required: true
       },
       section: {
+        type: Object,
+        required: true
+      },
+      options: {
         type: Object,
         required: true
       }
@@ -529,12 +343,9 @@ require('@public/js/any-resize-event.min');
       isVideoBackgroundPoster: false,
       videoBackgroundPosterSource: '',
       isRequestProcess: false,
-      isTextSelectColor: false,
       textSelectColor: '#000',
       fontSize: 2,
-      isShowFontSizer: false,
       borderRadius: 0,
-      isShowBorderRadius: false,
       galleryItem: {
         link: false,
         linlContentPopup: false
@@ -588,6 +399,7 @@ require('@public/js/any-resize-event.min');
         this.el.contentEditable = 'true';
         this.url = this.section.get(`${this.name}.href`);
       }
+      console.log(this.options)
     },
     mounted() {
       if (!this.$builder.isEditing) return;
@@ -614,6 +426,20 @@ require('@public/js/any-resize-event.min');
       document.removeEventListener('click', this.hideStyler, true);
     },
     methods: {
+      onBoxAligned (value) {
+        this.addTextStyle(value[0], value[1], value[2])
+      },
+      onTextAligned (value) {
+        this.execute(value)
+      },
+      /**
+       * Add styles to 'box' element (e.g. button)
+       * @param styles
+       */
+      onBoxStyled (styles) {
+        this.el.focus()
+        this.addStyle(styles.type, `${styles.value}${styles.unit}`)
+      },
       updateOption(option) {
         this.currentOption = option;
         this.$nextTick(() => {
@@ -720,57 +546,19 @@ require('@public/js/any-resize-event.min');
           value.styles['background-color'] = 'transparent';
         });
       },
-      removeSection() {
-        this.$builder.remove(this.section);
-      },
-      insertAfter(elem, refElem) {
-        return refElem.parentNode.parentNode.insertBefore(elem, refElem.nextSibling);
-      },
-      copyLink() {
-        let newObj = JSON.parse(JSON.stringify(this.section.data.links[0]))
-        let l = Object.assign({}, newObj);
-        this.section.data.links.push(l);
-      },
-      removeLink() {
-        this.el.remove();
-        this.$refs.styler.remove();
-      },
-      copyButton() {
-        let arr = `${this.name}`.split(".")[1].split("[");
-        let newObj = JSON.parse(JSON.stringify(eval('this.section.data.'+arr[0]+'[0]')));
-        let newEl = Object.assign({}, newObj);
-        eval('this.section.data.'+arr[0]+'.push(newEl)');
-        eval('this.section.schema.'+arr[0]+'.push(newEl)');
-      },
-      removeButton() {
-        this.el.remove();
-        this.$refs.styler.remove();
+      removeElement () {
+        if (this.type === 'section' || this.type === 'header') {
+          this.$builder.remove(this.section);
+        } else {
+          this.el.remove();
+          this.$refs.styler.remove();
+        }
       },
       copyItemGallery() {
         let newObj = JSON.parse(JSON.stringify(this.section.data.images[0]))
         let l = Object.assign({}, newObj);
         this.section.data.images.push(l);
         this.section.schema.images.push(l);
-      },
-      removeItemGallery() {
-        this.el.remove();
-        this.$refs.styler.remove();
-      },
-      copyTitle() {
-        let newObj = JSON.parse(JSON.stringify(this.section.data.titles[0]))
-        let s = Object.assign({}, newObj);
-        this.section.data.titles.push(s);
-        this.section.schema.titles.push(s);
-      },
-      removeTitle() {
-        let index;
-
-        if ($(this.el).data('index')) {
-          index = $(this.el).data('index');
-        }
-        this.$refs.styler.remove();
-        this.el.remove();
-        this.section.schema.titles.splice(index, 1);
       },
       execute(command, value = null) {
         this.el.focus();
@@ -975,17 +763,6 @@ require('@public/js/any-resize-event.min');
 
         this.backgroundSettingsShow[type] = true;
       },
-      showColorPeckerTextStyle: function() {
-        /*$(this.$refs['styler']).css('transform', 'translate3d(20px, 5px, 0px)');*/
-        this.showColorPeckerSettingsTextStyle();
-      },
-      showColorPeckerSettingsTextStyle: function (type) {
-        this.hideBlocks('isTextSelectColor');
-      },
-      setTextSelectColor: function(color) {
-        this.addStyle('color', color.hex);
-        this.hideBlocks();
-      },
       choseGalleryItemPreview: function () {
         this['$refs']['choseGalleryItemPreviewInput'].click();
       },
@@ -1021,31 +798,6 @@ require('@public/js/any-resize-event.min');
           }).catch(function (e) {
           console.warn(e);
         });
-      },
-      showFontSizer: function() {
-        this.hideBlocks('isShowFontSizer');
-      },
-      setFontSize: function(value) {
-        this.el.focus();
-        this.addStyle('font-size', value + 'rem');
-        this.hideBlocks();
-      },
-      showBorderRadius: function() {
-        this.hideBlocks('isShowBorderRadius');
-      },
-      setBorderRadius: function(value) {
-        this.el.focus();
-        this.addStyle('border-radius', value + '%');
-        this.hideBlocks();
-      },
-      hideBlocks: function(target) {
-        this.isShowBorderRadius = false;
-        this.isShowFontSizer = false;
-        this.isTextSelectColor = false;
-
-        if (target && undefined !== this[target]) {
-          this[target] = true;
-        }
       }
     }
   };

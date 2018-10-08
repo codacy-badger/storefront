@@ -21,7 +21,7 @@ export default {
       {
         path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
         alt: 'Default Logo',
-        logo: types.Logo
+        logo: types.Image
       }
     ]
   },
