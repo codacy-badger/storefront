@@ -139,17 +139,17 @@
         </li>
       </template>
       <template v-if="type === 'grid'">
-        <li>
-          <button class="styler-button" @click="selectDevice('mobile')">
-            <VuseIcon name="mobile"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" @click="selectDevice('desktop')">
-            <VuseIcon name="laptop"></VuseIcon>
-          </button>
-        </li>
-      </template>
+      <li>
+        <button class="styler-button" @click="selectDevice('mobile')">
+          <VuseIcon name="mobile"></VuseIcon>
+        </button>
+      </li>
+      <li>
+        <button class="styler-button" @click="selectDevice('desktop')">
+          <VuseIcon name="laptop"></VuseIcon>
+        </button>
+      </li>
+    </template>
     </ul>
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
@@ -792,9 +792,8 @@ require('@public/js/any-resize-event.min');
         }
 
         document.addEventListener('click', this.hideStyler, true);
-        document.addEventListener('blur', (e) => {
-          console.log(e)
-        });
+        // TODO: this work incorrectly
+        // document.addEventListener('blur', this.hideStyler);
         this.currentOption = '';
       },
       hideStyler(event) {
