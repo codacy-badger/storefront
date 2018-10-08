@@ -19,7 +19,7 @@ export default {
     mainStyle: types.StyleObject,
     logos: [
       {
-        path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
+        path: 'https://gn518.cdn.gamenet.ru/TY0Xv2riHu/6zP7H/o_wZ8FT.png',
         alt: 'Default Logo',
         logo: types.Logo
       }

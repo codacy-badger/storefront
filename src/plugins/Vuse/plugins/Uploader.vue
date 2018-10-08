@@ -92,6 +92,7 @@ export default {
   > img
     width: auto
     display: block
+    height: 100%
     .is-mobile &
        height: auto
     @media only screen and (max-width: 540px)

@@ -2,6 +2,9 @@
     <div>
         <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing}, device]">
             <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
+            <div class="controller-intro" v-if="emptySections">
+              <h3>&larr; Choose layout from the menu</h3>
+            </div>
         </div>
         <div class="controller">
             <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
@@ -12,10 +15,6 @@
                         <button class="controller-theme" v-for="theme in themes" @click="addTheme(theme)">{{ theme.name }}</button>
                     </div>
                 </template>
-            </div>
-
-            <div class="controller-intro" v-if="emptySections">
-              <h3>&larr; Choose layout from the menu</h3>
             </div>
 
             <div class="controller-panel">
@@ -305,6 +304,7 @@ export default {
   margin: 0 auto
   transition: 0.2s
   background-color: $color-white
+  min-height: 100vh
   &.is-editable .is-editable
     outline: none
     &:hover
@@ -384,7 +384,7 @@ export default {
     padding: 7rem 5rem
     text-align: center
     font-size: 3rem
-    color: $color-white
+    color: $dark
 
   &-themes
     display: flex

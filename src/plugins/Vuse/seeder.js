@@ -4,9 +4,9 @@ import { isObject } from './util'
 const ASSETS_DIR = window.location.origin
 const data = new Map([
   [types.Title, 'Awesome title'],
-  [types.Text, 'We\'re creating the best place to go when starting a new business or company.With Baianat you can instantly search domain names, social media handles, and see your logo in beautiful logotypes.'],
+  [types.Text, 'Awesome text'],
   [types.Avatar, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
-  [types.Logo, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
+  [types.Logo, 'https://gn518.cdn.gamenet.ru/TY0Xv2riHu/6zP7H/o_wZ8FT.png'],
   [types.Link, () => ({
     text: 'Link',
     classes: [],
