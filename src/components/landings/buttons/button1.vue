@@ -1,11 +1,10 @@
 <template>
     <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
-           v-styler:index="`$sectionData.buttons[${index}].button`"
-           v-html="$sectionData.buttons[index].button.text"
-           :href="$sectionData.buttons[index].button.href"
-           v-bind:style="$sectionData.buttons[index].button.styles"
-          >
+      <a v-for="(item, index) in $sectionData.buttons.items" :key="index" class="b-button-one" @click.prevent="onClick"
+         :href="item.href"
+         v-html="item.text"
+         v-styler="$sectionData.buttons.element"
+         :style="$sectionData.buttons.element.styles">
       </a>
     </section>
 </template>
@@ -19,15 +18,25 @@ export default {
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
-    buttons: [{
-      text: 'Play Now',
-      button: types.Button
-    }]
+    buttons: {
+      element: types.Button,
+      items: [
+        {
+          text: 'Play Now',
+          href: '#'
+        }
+      ]
+    }
   },
   props: {
     id: {
       type: Number,
       required: true
+    }
+  },
+  methods: {
+    onClick () {
+      /**/
     }
   }
 }
@@ -47,7 +56,7 @@ export default {
 .b-button-one
   position: relative
   font-size: 2.3rem
-  font-family: Helvetica, Arial, sans-serif
+  font-family: "alice-regular"
   line-height: 1
   width: 20rem
   min-width: 10rem

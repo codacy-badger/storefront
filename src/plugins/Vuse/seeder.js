@@ -76,6 +76,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
+        'font-family': "opensans-regular",
         'text-decoration': false,
         'justify-content': false,
         'width': '',
