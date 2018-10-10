@@ -1,6 +1,10 @@
 <template>
     <section class="b-title-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <h1 class="b-title-one__title" v-styler="$sectionData.title" v-html="$sectionData.title.text"></h1>
+      <h1 class="b-title-one__title" v-for="(item, index) in $sectionData.titles" :key="index"
+          v-styler:for="{ el: $sectionData.titles[index].element, path: `$sectionData.titles[${index}].element` }"
+          v-text="$sectionData.titles[index].element.text"
+          :style="$sectionData.titles[index].element.styles"
+        ></h1>
     </section>
 </template>
 
@@ -13,7 +17,9 @@ export default {
   group: 'titles',
   $schema: {
     mainStyle: types.StyleObject,
-    title: types.Text
+    titles: [{
+      element: types.Text
+    }]
   },
   props: {
     id: {

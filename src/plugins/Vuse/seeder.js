@@ -24,17 +24,19 @@ const DEFAULT_OPTIONS = {
  */
 const data = new Map([
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
+    box: true,
     text: 'Lorem ipsum',
     aligned: true,
     typography: true,
     removable: true,
     colorize: true,
     styles: {
-      'text-align': false,
+      'font-family': "Open Sans",
+      'font-size': false,
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
-      'font-size': false,
+      'text-align': false,
       'color': false,
     }
   }))],
@@ -85,7 +87,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': "opensans-regular",
+        'font-family': "Open Sans",
         'text-decoration': false,
         'justify-content': false,
         'width': '',

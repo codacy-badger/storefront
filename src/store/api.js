@@ -11,35 +11,35 @@ export default {
           theme: {
             name: 'Layout 1',
             title: 'Awesome title',
-            sections: ['Logo', 'Delimiter', 'Title1', 'Title2', 'Button1', 'Delimiter', 'Title1', 'Title2', 'Gallery1', 'Button1', 'Delimiter', 'Title1', 'Gallery2', 'Button1', 'Footer']
+            sections: ['Logo', 'Delimiter', 'Title1', 'Title1', 'Button1', 'Delimiter', 'Title1', 'Title1', 'Gallery1', 'Button1', 'Delimiter', 'Title1', 'Gallery2', 'Button1', 'Footer']
           }
         },
         {
           slug: 'Layout2',
           theme: {
             name: 'Layout 2',
-            sections: ['Logo', 'Delimiter', 'Title1', 'Title2', 'Button1']
+            sections: ['Logo', 'Delimiter', 'Title1', 'Title1', 'Button1']
           }
         },
         {
           slug: 'Gallery1',
           theme: {
             name: 'Gallery 1',
-            sections: ['Title1', 'Title2', 'Gallery1', 'Button1']
+            sections: ['Title1', 'Title1', 'Gallery1', 'Button1']
           }
         },
         {
           slug: 'Gallery2',
           theme: {
             name: 'Gallery 2',
-            sections: ['Title1', 'Title2', 'Gallery2', 'Button1']
+            sections: ['Title1', 'Title1', 'Gallery2', 'Button1']
           }
         },
         {
           slug: 'Gallery3',
           theme: {
             name: 'Gallery 3',
-            sections: ['Title1', 'Title2', 'Gallery3', 'Button1']
+            sections: ['Title1', 'Title1', 'Gallery3', 'Button1']
           }
         },
         {
