@@ -61,16 +61,6 @@ export default {
         preview: [types.Image],
         label: types.Title,
         button: types.Button
-      },
-      {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
-      },
-      {
-        preview: [types.Image],
-        label: types.Title,
-        button: types.Button
       }
     ],
     index: 0,
@@ -130,19 +120,25 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../../assets/sass/_flex.sass'
+
 .b-gallery-two
   display: flex
   align-items: center
   &.is-editable
     resize: vertical
     overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
       height: auto !important
   &__wrap
     max-width: 160rem
-    width: 60%
+    width: 80%
     margin: 0 auto
 .b-gallery-two__item-wrap
   width: 20%
@@ -168,10 +164,9 @@ export default {
   background-size: cover
   overflow: hidden
   pointer-events: none
-  background: -webkit-linear-gradient(315deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
-  background: linear-gradient(135deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
+  background: linear-gradient(135deg, rgba(204, 204, 204, 0.4) 0%, rgba(161, 161, 161, 0.4) 100%)
 .b-gallery-two__item-wrap:hover .b-gallery-two__item-content
-  background: linear-gradient(135deg, rgba(227, 223, 255, 0.3) 0%, rgba(23, 40, 125, 0.3) 100%)
+  background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
 
 .b-gallery-two__item-wrap .b-gallery-two__item-content .b-gallery-two__text,
 .b-gallery-two__item-content:hover .b-gallery-two__text
@@ -181,8 +176,8 @@ export default {
   display: block
   top: 0
   left: 0
-  width: 100%
-  height: 100%
+  width: 10rem
+  height: 10rem
   margin: 0
   z-index: 100
   &.is-editable
@@ -232,9 +227,18 @@ export default {
   object-fit: cover
   height: 100%
   z-index: 50
-@media only screen and (max-width: 768px)
+
+.is-tablet,
+.is-mobile
   .b-gallery-two__item-wrap
     width: 40%
+.is-mobile
+  .b-gallery-two
+    margin-right: 0
+  .b-gallery-two__item-wrap
+    width: 100%
+    padding: 0 0 2rem 0
+
 @media only screen and (max-width: 460px)
   .b-gallery-two
     margin-right: 0
@@ -294,28 +298,4 @@ export default {
 .l-popup__close:after
   -webkit-transform: rotate(45deg)
   transform: rotate(45deg)
-.flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  position: relative
-  width: 100%
-.flex_center
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-.flex_columns
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
-.flex__item
-  -webkit-box-flex: 0
-  -ms-flex: 0 0 auto
-  flex: 0 0 auto
-.flex_wrap
-  flex-wrap: wrap
 </style>

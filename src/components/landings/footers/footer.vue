@@ -93,6 +93,7 @@ export default {
 </script>
 
 <style lang="sass">
+
 .l-footer
   display: flex
   align-items: center
@@ -112,6 +113,9 @@ export default {
   display: flex
   align-items: center
   justify-content: center
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
@@ -120,6 +124,12 @@ export default {
     flex-wrap: wrap
     justify-content: center
     margin: 0 1rem 0.35rem 1rem
+    .is-mobile &
+      &_2
+       order: 3
+        margin: 2rem 0 0
+      &_3
+       order: 2
     @media only screen and (max-width: 768px)
       &
         &_2

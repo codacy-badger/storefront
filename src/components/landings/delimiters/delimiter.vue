@@ -30,7 +30,7 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  min-height: 1rem
+  min-height: 2rem
   &.is-editable
     resize: vertical
     overflow: hidden

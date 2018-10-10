@@ -11,7 +11,7 @@ export default {
           theme: {
             name: 'Layout 1',
             title: 'Awesome title',
-            sections: ['Layout1']
+            sections: ['Logo', 'Delimiter', 'Title1', 'Title2', 'Button1', 'Delimiter', 'Title1', 'Title2', 'Gallery1', 'Button1', 'Delimiter', 'Title1', 'Gallery2', 'Button1', 'Footer']
           }
         },
         {

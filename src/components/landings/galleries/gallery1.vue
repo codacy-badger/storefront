@@ -105,6 +105,8 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../../assets/sass/_flex.sass'
+
 .b-gallery-one
   font-family: Helvetica Neue, Helvetica, Arial
   display: flex
@@ -119,6 +121,9 @@ export default {
   &.is-editable
     resize: vertical
     overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -182,53 +187,15 @@ a
   padding: 2rem 0
   z-index: 500
 
+.is-tablet,
+.is-mobile
+  .pages__wrap
+    padding-left: 1rem
+    padding-right: 1rem
 @media only screen and (max-width: 1308px)
   .pages__wrap
     padding-left: 1rem
     padding-right: 1rem
-
-// flex styles
-.flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  position: relative
-  width: 100%
-
-.flex_center
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-
-.flex_columns
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
-
-.flex__item
-  -webkit-box-flex: 0
-  -ms-flex: 0 0 auto
-  flex: 0 0 auto
-
-.flex__item_full
-  -webkit-box-flex: 1
-  -ms-flex-positive: 1
-  flex-grow: 1
-
-.flex__item_size-1
-  -webkit-box-flex: 1
-  -ms-flex: 1
-  flex: 1
-
-.flex__item_size-2
-  -webkit-box-flex: 2
-  -ms-flex: 2
-  flex: 2
-// end flex styles
 
 .loader__content
   -webkit-transition: all 200ms
@@ -271,6 +238,11 @@ a
   .b-layout2-btn
     font-size: 2rem
 
+.is-tablet,
+.is-mobile
+  .b-layout2-btn
+    font-size: 2rem
+
 .gallery1-btn-container
   text-align: center
   position: relative
@@ -293,6 +265,9 @@ a
     display: flex
     align-items: center
     justify-content: center
+    .is-tablet &,
+    .is-mobile &
+      font-size: 2rem
     @media only screen and (max-width: 768px)
       &
         font-size: 2rem
@@ -390,6 +365,9 @@ a
   -webkit-transition: all 200ms
   transition: all 200ms
   max-width: 13rem
+  .is-tablet &,
+  .is-mobile &
+    max-width: 6.5rem
   @media only screen and (max-width: 768px)
     &
       max-width: 6.5rem
@@ -407,6 +385,28 @@ a
 
 .hero-tile:hover .hero-tile__frame
   border-color: #a7a1a1
+
+.is-tablet,
+.is-mobile
+  .hero-tile:nth-child(6)
+    clear: left
+  .hero-tile__frame
+    width: 6.5rem
+    height: 7.5rem
+    -webkit-transform: skewX(-14.92584deg) translateX(10px)
+    transform: skewX(-14.92584deg) translateX(10px)
+  .hero-tile__img
+    left: -1rem
+    width: 8.5rem
+    -webkit-transform: skewX(14.92584deg)
+    transform: skewX(14.92584deg)
+  .hero-tile_active
+    .hero-tile__frame
+      -webkit-transform: skewX(-14.92584deg) translateX(10px) scale(1.1)
+      transform: skewX(-14.92584deg) translateX(10px) scale(1.1)
+    .hero-tile__name
+      -webkit-transform: translateY(-7px)
+      transform: translateY(-7px)
 
 @media only screen and (max-width: 768px)
   .hero-tile:nth-child(6)
@@ -429,6 +429,19 @@ a
       -webkit-transform: translateY(-7px)
       transform: translateY(-7px)
 
+.is-tablet,
+.is-mobile
+  .hero-tile
+    &:nth-child(6)
+      clear: none
+    &:nth-child(5), &:nth-child(9)
+      clear: left
+.p-split__tiles
+  margin: 1rem
+  text-align: center
+.p-split__detail
+  text-align: center
+
 @media only screen and (max-width: 600px)
   .hero-tile
     &:nth-child(6)
@@ -440,6 +453,18 @@ a
   text-align: center
 .p-split__detail
   text-align: center
+
+.is-tablet,
+.is-mobile
+  .p-split
+    -webkit-box-orient: vertical
+    -webkit-box-direction: normal
+    -ms-flex-direction: column
+    flex-direction: column
+    .flex__item_size-2, .flex__item_size-1
+      -webkit-box-flex: 0
+      -ms-flex: 0 0 auto
+      flex: 0 0 auto
 
 @media only screen and (max-width: 768px)
   .p-split
@@ -463,6 +488,12 @@ a
   background-position: center
   background-size: contain
   height: 43rem
+  .is-tablet &,
+  .is-mobile &
+    width: 70%
+    max-height: none
+    height: auto
+    margin: 0.5rem auto
   @media only screen and (max-width: 768px)
     &
       width: 70%
@@ -473,6 +504,10 @@ a
     height: 100%
     width: auto !important
     margin: 0 auto
+    .is-tablet &,
+    .is-mobile &
+      width: 100%
+      height: auto
     @media only screen and (max-width: 768px)
       &
         width: 100%
@@ -484,11 +519,14 @@ a
   max-width: 50rem
   margin: 1rem auto
 
-@media only screen and (max-width: 768px)
+.is-tablet,
+.is-mobile
   .hero-detail
     margin-bottom: 1rem
 
-//
+@media only screen and (max-width: 768px)
+  .hero-detail
+    margin-bottom: 1rem
 
 .l-title
   &__title,

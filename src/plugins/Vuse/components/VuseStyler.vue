@@ -197,7 +197,7 @@
       <li v-if="currentOption === 'textColor'">
         <ul class="colorer">
           <li v-for="(color, index) in colors">
-            <input type="radio" :id="`color${color.charAt(0).toUpperCase() + color.slice(1)}`"
+            <input type="radio" :class="`is-${color}`"
                    name="colorer" :value="textColors[index]" v-model="textColor"/>
           </li>
         </ul>
@@ -798,175 +798,176 @@ require('@public/js/any-resize-event.min');
   };
 </script>
 
-<style lang="stylus">
-  @import '~@baianat/base.framework/src/stylus/util/colors';
+<style lang="sass">
+@import '../../../assets/sass/app.sass'
 
-  .styler
-    position: absolute
-    top: 0
-    z-index: 200
-    visibility: hidden
-    opacity: 0
-    margin: 10px 0
-    padding: 5px
-    background: $dark
-    border-radius: 26px
+.styler
+  position: absolute
+  top: 0
+  z-index: 200
+  visibility: hidden
+  opacity: 0
+  margin: 10px 0
+  padding: 5px
+  background: $dark
+  border-radius: 26px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  &-list
     display: flex
-    flex-direction: column
     justify-content: center
     align-items: center
-    &-list
-      display: flex
-      justify-content: center
-      align-items: center
-      list-style: none
-      margin: 0
-      padding: 0
-    &-input
-      background: $white
-      color: $dark
-      border: 0
-      outline: 0
-      width: 3rem
-      height: 3rem
-      border-radius: 3rem
-      margin: 0 5px 0 0
-      text-align: center
-      -webkit-appearance: none
-      -moz-appearance: textfield
-      appearance: none
-    &-button
-      display: flex
-      justify-content: center
-      align-items: center
-      outline: 0
-      background: $dark
-      border: 0
-      fill: $white
-      color: $white
-      width: 3rem
-      height: 3rem
-      border-radius: 3rem
-      margin: 0 5px 0 0
-      &:hover
-        background: darken($dark, 20%)
-      &:first-child
-        margin-left: 5px
-    &-selector
-      margin: 0 5px
-    &.is-visible
-      visibility: visible
-      opacity: 1
-    .input-group
-        margin: 5px
-    input
-        border: none
-        padding: 0.75rem
-        display: inline-block
-        vertical-align: top
-        border-radius: 1rem
-    button
-        border: none
-        padding: 0.5rem
-        border-radius: 1rem
-  .align
-    @extend .styler-list
-    height: 42px
+    list-style: none
+    margin: 0
+    padding: 0
+  &-input
+    background: $white
+    color: $dark
+    border: 0
+    outline: 0
+    width: 3rem
+    height: 3rem
+    border-radius: 3rem
+    margin: 0 5px 0 0
+    text-align: center
+    -webkit-appearance: none
+    -moz-appearance: textfield
+    appearance: none
+  &-button
+    display: flex
+    justify-content: center
+    align-items: center
+    outline: 0
+    background: $dark
+    border: 0
+    fill: $white
+    color: $white
+    width: 3rem
+    height: 3rem
+    border-radius: 3rem
+    margin: 0 5px 0 0
+    &:hover
+      background: darken($dark, 20%)
+    &:first-child
+      margin-left: 5px
+  &-selector
+    margin: 0 5px
+  &.is-visible
+    visibility: visible
+    opacity: 1
+  .input-group
+    margin: 5px
+  input
+    border: none
+    padding: 0.75rem
+    display: inline-block
+    vertical-align: top
+    border-radius: 1rem
+  button
+    border: none
+    padding: 0.5rem
+    border-radius: 1rem
 
-  .colorer
-    @extend .styler-list
-    height: 42px
-    li > input
+.align
+  @extend .styler-list
+  height: 42px
+
+.colorer
+  @extend .styler-list
+  height: 42px
+  li
+    input
       -webkit-appearance: none
       -moz-appearance: textfield
       appearance: none
-      width: 30px
-      height: 30px
-      border-radius: 40px
-      border: 4px solid darken($dark, 20%)
+      width: 2rem
+      height: 2rem
+      border-radius: 2rem
+      border: 0.2rem solid darken($dark, 20%)
       margin: 0 5px
       outline: none
       &:checked
         border-color: lighten($dark, 20%)
       &:hover
         border-color: lighten($dark, 20%)
-      &#colorRed
-        background $red
-      &#colorBlue
-        background $blue
-      &#colorGreen
-        background $green
-      &#colorBlack
-        background $black
-      &#colorWhite
-        background $white
+      &.is-red
+        background: $red
+      &.is-blue
+        background: $blue
+      &.is-green
+        background: $green
+      &.is-black
+        background: $black
+      &.is-white
+        background: $white
 
-  .is-hidden
-    display: none
+.is-hidden
+  display: none
 
-  input[type=number]::-webkit-inner-spin-button
-  input[type=number]::-webkit-outer-spin-button
-    -webkit-appearance: none
-    margin: 0
+input[type=number]::-webkit-inner-spin-button
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
 
-  label
-    display: inline-block
-    max-width: 100%
-    margin-bottom: 5px
-    font-weight: 400
+label
+  display: inline-block
+  max-width: 100%
+  margin-bottom: 5px
+  font-weight: 400
 
-  .form-control
-    display: block
-    width: 100%
-    height: 34px
-    //padding: 6px 12px
-    font-size: 14px
-    line-height: 1.42857143
-    color: #555
-    background-color: #fff
-    background-image: none
-    border: 1px solid #ccc
-    border-radius: 4px
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+.form-control
+  display: block
+  width: 100%
+  height: 34px
+  font-size: 14px
+  line-height: 1.42857143
+  color: #555
+  background-color: #fff
+  background-image: none
+  border: 1px solid #ccc
+  border-radius: 4px
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
 
-  .b-styler__bg_options_container
-    margin-top: 10px
-    padding: 15px 5px
-    border-top: 1px solid #ffffff
-    display: flex
-    flex-direction: column
+.b-styler__bg_options_container
+  margin-top: 10px
+  padding: 15px 5px
+  border-top: 1px solid #ffffff
+  display: flex
+  flex-direction: column
 
-  .b-styler__bg_options__item
-    margin-bottom: 10px
+.b-styler__bg_options__item
+  margin-bottom: 10px
 
-  .b-font-size
-    font-family: Helvetica Neue, Helvetica, Arial
-    color: #fff
-    width: 100%
-    height: 10rem
-    text-align: center
-    line-height: 10rem
+.b-font-size
+  font-family: Helvetica Neue, Helvetica, Arial
+  color: #fff
+  width: 100%
+  height: 10rem
+  text-align: center
+  line-height: 10rem
 
-  .b-border-radius
-    font-family: Helvetica Neue, Helvetica, Arial
-    background-color: #fff
-    width: 8rem
-    height: 8rem
-    margin: 1rem auto
-    text-align: center
-    line-height: 10rem
+.b-border-radius
+  font-family: Helvetica Neue, Helvetica, Arial
+  background-color: #fff
+  width: 8rem
+  height: 8rem
+  margin: 1rem auto
+  text-align: center
+  line-height: 10rem
 
-  .button
-    min-width: 10rem
-    cursor: pointer
-    background-color: #ffba00
-    transition: all 200ms
-    white-space: nowrap
-    font-size: 1.4rem
-    &:hover
-      filter: brightness(120%)
+.button
+  min-width: 10rem
+  cursor: pointer
+  background-color: #ffba00
+  transition: all 200ms
+  white-space: nowrap
+  font-size: 1.4rem
+  &:hover
+    filter: brightness(120%)
 </style>
