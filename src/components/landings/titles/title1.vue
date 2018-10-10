@@ -1,6 +1,6 @@
 <template>
     <section class="b-title-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <h1 class="b-title-one__title" v-styler="$sectionData.title" v-html="$sectionData.title.text"></h1>
+      <h1 class="b-title-one__title" v-styler="$sectionData.title" v-html="$sectionData.title.text" :style="$sectionData.title.styles"></h1>
     </section>
 </template>
 
