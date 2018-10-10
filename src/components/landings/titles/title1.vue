@@ -2,7 +2,7 @@
     <section class="b-title-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <h1 class="b-title-one__title" v-for="(item, index) in $sectionData.titles" :key="index"
           v-styler:for="{ el: $sectionData.titles[index].element, path: `$sectionData.titles[${index}].element` }"
-          v-text="$sectionData.titles[index].element.text"
+          v-html="$sectionData.titles[index].element.text"
           :style="$sectionData.titles[index].element.styles"
         ></h1>
     </section>
@@ -12,7 +12,7 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Title1',
+  name: 'Title',
   cover: '/img/covers/title1.png',
   group: 'titles',
   $schema: {
