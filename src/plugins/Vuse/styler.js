@@ -20,6 +20,8 @@ function installStyler ({ builder, Vue }) {
 
       if (binding.arg === 'index') {
         name = binding.value
+      } else if (binding.arg === 'for') {
+        name = binding.value.path
       } else {
         name = binding.expression
       }
@@ -28,8 +30,8 @@ function installStyler ({ builder, Vue }) {
         propsData: {
           el,
           section: section,
-          type: (binding.arg !== 'index' && binding.arg) || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
-          options: binding.value || {},
+          type: (binding.arg !== 'index' && binding.arg !== 'for' && binding.arg) || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
+          options: binding.arg === 'for' ? binding.value.el : binding.value,
           name: name
         }
       }).$mount(newNode))

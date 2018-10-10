@@ -23,12 +23,20 @@ const DEFAULT_OPTIONS = {
  * @type {Map}
  */
 const data = new Map([
-  [types.Text, () => (_.merge(DEFAULT_OPTIONS, {
+  [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Lorem ipsum',
     aligned: true,
     typography: true,
     removable: true,
-    colorize: true
+    colorize: true,
+    styles: {
+      'text-align': false,
+      'font-weight': false,
+      'font-style': false,
+      'text-decoration': false,
+      'font-size': false,
+      'color': false,
+    }
   }))],
   [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Link, () => ({
@@ -50,7 +58,8 @@ const data = new Map([
         'background-color': false,
         'background': false
       }
-    }))],
+    })
+  )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,

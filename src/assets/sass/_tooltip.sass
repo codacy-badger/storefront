@@ -1,0 +1,78 @@
+[tooltip]
+  position: relative
+
+[tooltip]:hover:after,
+[tooltip]:hover:before
+  opacity: 1
+  visibility: visible
+
+[tooltip]:before
+  content: ""
+  top: -13px
+  width: 0;
+  height: 0;
+  border-style: solid
+  border-width: 7px 7px 0 7px
+  border-color: #323c47 transparent transparent transparent
+
+[tooltip]:after,
+[tooltip]:before
+  position:  absolute
+  display: block
+  left: 50%
+  -webkit-transform: translate(-50%)
+  transform: translate(-50%)
+  transition: .4s
+  opacity: 0
+  visibility: hidden
+  z-index: 99999
+
+[tooltip]:after
+  content: attr(tooltip)
+  top: -44px
+  background-color: #323c47
+  padding: 10px
+  white-space: nowrap
+  border-radius: 6px
+  font-size: 12px
+  line-height: 12px
+
+[tooltip-position=bottom]:before
+  top: auto
+  bottom: -13px
+  border-width: 0 7px 7px 7px
+  border-color: transparent transparent #323c47 transparent
+
+[tooltip-position=bottom]:after
+  top: auto
+  bottom: -44px
+
+[tooltip-position=left]:before
+  top: 50%
+  left: -13px
+  -webkit-transform: translateY(-50%)
+  transform: translateY(-50%)
+  border-width: 7px 0 7px 7px
+  border-color: transparent transparent transparent #323c47
+
+[tooltip-position=left]:after
+  top: 50%
+  -webkit-transform: translate(-100%, -50%)
+  transform: translate(-100%, -50%)
+  left: -12px
+
+[tooltip-position=right]:before
+  top: 50%
+  left: auto
+  right: -13px
+  -webkit-transform: translateY(-50%)
+  transform: translateY(-50%)
+  border-width: 7px 7px 7px 0
+  border-color: transparent #323c47 transparent transparent
+
+[tooltip-position=right]:after
+  top: 50%
+  -webkit-transform: translate(100%, -50%)
+  transform: translate(100%, -50%)
+  left: auto
+  right: -12px

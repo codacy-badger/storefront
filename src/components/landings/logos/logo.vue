@@ -19,7 +19,7 @@ export default {
     mainStyle: types.StyleObject,
     logos: [
       {
-        path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
+        path: 'https://gn518.cdn.gamenet.ru/TY0Xv2riHu/6zP7H/o_wZ8FT.png',
         alt: 'Default Logo',
         logo: types.Image
       }
@@ -48,9 +48,18 @@ export default {
     overflow: hidden
 .b-logo
   display: block
-  margin: 2rem auto 0
+  margin: 1rem auto
   max-width: 80%
+  height: 100%
+  .is-mobile &
+    margin: 1rem auto
+    height: auto
   @media only screen and (max-width: 540px)
     &
       margin: 1rem auto
+      height: auto
+  &.is-editable
+    img
+      resize: vertical
+      overflow: hidden
 </style>

@@ -1,10 +1,10 @@
 <template>
     <section class="l-button-sixth" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-sixth" target="_blank"
-           v-styler:index="`$sectionData.buttons[${index}].button`"
-           v-html="$sectionData.buttons[index].button.text"
-           :href="$sectionData.buttons[index].button.href"
-           v-bind:style="$sectionData.buttons[index].button.styles"
+           v-styler:for="{ el: $sectionData.buttons[index].element ,path:`$sectionData.buttons[${index}].element`}"
+           v-html="$sectionData.buttons[index].element.text"
+           :href="$sectionData.buttons[index].element.href"
+           v-bind:style="$sectionData.buttons[index].element.styles"
           >
       </a>
     </section>
@@ -20,8 +20,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     buttons: [{
-      text: 'Play Now',
-      button: types.Button
+      element: types.Button
     }]
   },
   props: {
@@ -37,7 +36,7 @@ export default {
 .l-button-sixth
   width: 100%
   position: relative
-  margin: 1rem 0
+  margin: 0
   display: flex
   align-items: center
   justify-content: center
@@ -52,7 +51,7 @@ export default {
   width: 20rem
   min-width: 10rem
   min-height: 5rem
-  padding: 2rem
+  margin: 2rem
   color: #000
   background-color: #a7a1a1
   border: transparent solid  0.2rem
@@ -91,6 +90,9 @@ export default {
   &.is-editable
     resize: both
     overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    font-size: 2rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem

@@ -18,9 +18,9 @@ export default {
       right: ['justify-content','flex-end','flex-end']
     },
     text: {
-      left: 'justifyleft',
-      center: 'justifycenter',
-      right: 'justifyright'
+      left: ['text-align','left','left'],
+      center: ['text-align','center','center'],
+      right: ['text-align','right','right']
     }
   }),
   methods: {

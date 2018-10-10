@@ -1,10 +1,11 @@
 <template>
     <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons.items" :key="index" class="b-button-one" @click.prevent="onClick"
-         :href="item.href"
-         v-html="item.text"
-         v-styler="$sectionData.buttons.element"
-         :style="$sectionData.buttons.element.styles">
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
+           v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
+           v-html="$sectionData.buttons[index].element.text"
+           :href="$sectionData.buttons[index].element.href"
+           v-bind:style="$sectionData.buttons[index].element.styles"
+          >
       </a>
     </section>
 </template>
@@ -18,25 +19,14 @@ export default {
   group: 'buttons',
   $schema: {
     mainStyle: types.StyleObject,
-    buttons: {
-      element: types.Button,
-      items: [
-        {
-          text: 'Play Now',
-          href: '#'
-        }
-      ]
-    }
+    buttons: [{
+      element: types.Button
+    }]
   },
   props: {
     id: {
       type: Number,
       required: true
-    }
-  },
-  methods: {
-    onClick () {
-      /**/
     }
   }
 }
@@ -46,7 +36,7 @@ export default {
 .l-button-one
   width: 100%
   position: relative
-  margin: 1rem 0
+  margin: 0
   display: flex
   align-items: center
   justify-content: center
@@ -56,12 +46,12 @@ export default {
 .b-button-one
   position: relative
   font-size: 2.3rem
-  font-family: "alice-regular"
+  font-family: Helvetica, Arial, sans-serif
   line-height: 1
   width: 20rem
   min-width: 10rem
   min-height: 5rem
-  padding: 2rem
+  margin: 2rem
   color: #000
   background-color: #a7a1a1
   border: transparent solid  0.2rem
@@ -99,6 +89,9 @@ export default {
   &.is-editable
     resize: both
     overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    font-size: 2rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem

@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div class="artboard" id="artboard" ref="artboard" :class="{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing }">
+        <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing}, device]">
             <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
+            <div class="controller-intro" v-if="emptySections">
+              <h3>&larr; Choose layout from the menu</h3>
+            </div>
         </div>
         <div class="controller">
             <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
@@ -12,10 +15,6 @@
                         <button class="controller-theme" v-for="theme in themes" @click="addTheme(theme)">{{ theme.name }}</button>
                     </div>
                 </template>
-            </div>
-
-            <div class="controller-intro" v-if="emptySections">
-              <h3>&larr; Choose layout from the menu</h3>
             </div>
 
             <div class="controller-panel">
@@ -39,6 +38,23 @@
               </button>
               <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
                   <VuseIcon name="plus"></VuseIcon>
+              </button>
+              <button class="controller-button is-dark" tooltip-position="top" tooltip="Back to landings" @click="backToLandings">
+                <VuseIcon name="back"></VuseIcon>
+              </button>
+            </div>
+            <div class="main-panel">
+              <button class="controller-button" tooltip-position="top" tooltip="on desktop" :class="{ 'is-blue': device === 'is-desktop', 'is-green': device !== 'is-desktop' }" @click="setDevice('is-desktop')">
+                <VuseIcon name="monitor"></VuseIcon>
+              </button>
+              <button class="controller-button" tooltip-position="top" tooltip="on laptop" :class="{ 'is-blue': device === 'is-laptop', 'is-green': device !== 'is-laptop' }" @click="setDevice('is-laptop')">
+                <VuseIcon name="laptop"></VuseIcon>
+              </button>
+              <button class="controller-button" tooltip-position="top" tooltip="on tablet" :class="{ 'is-blue': device === 'is-tablet', 'is-green': device !== 'is-tablet' }" @click="setDevice('is-tablet')">
+                <VuseIcon name="tablet"></VuseIcon>
+              </button>
+              <button class="controller-button" tooltip-position="top" tooltip="on mobile" :class="{ 'is-blue': device === 'is-mobile', 'is-green': device !== 'is-mobile' }" @click="setDevice('is-mobile')">
+                <VuseIcon name="mobile"></VuseIcon>
               </button>
             </div>
         </div>
@@ -84,7 +100,8 @@ export default {
       tempSections: null,
       sections: this.getSections(),
       currentSection: '',
-      groups: {}
+      groups: {},
+      device: 'is-desktop'
     }
   },
 
@@ -267,6 +284,13 @@ export default {
         }
       })
       return sections
+    },
+    setDevice (device) {
+       this.device = device
+    },
+    backToLandings () {
+      this.save()
+      this.$router.push({ path: `/dashboard` })
     }
   }
 }
@@ -277,10 +301,23 @@ export default {
 
 .artboard
   transform-origin: top center
+  margin: 0 auto
+  transition: 0.2s
+  background-color: $color-white
+  min-height: 100vh
   &.is-editable .is-editable
     outline: none
     &:hover
-      box-shadow: inset 0 0 0 0.2rem $gray
+      box-shadow: inset 0 0 0 0.1rem $color-green
+  &.is-desktop
+    width: 100%
+  &.is-laptop
+    width: 120rem
+  &.is-tablet
+    width: 76rem
+  &.is-mobile
+    width: 37rem
+
 .controller
   box-sizing: border-box
   &-panel
@@ -403,6 +440,7 @@ export default {
     height: 2rem
     fill: $gray
     transition: 0.2s
+    cursor: pointer
     #{$self}-group.is-visiable &
       transform: rotate(180deg)
 
@@ -454,7 +492,46 @@ export default {
   opacity: 0.3
   box-shadow: 0 0 0.2rem 0.1rem $blue
 
-.is-editable
-  &:hover
-    box-shadow: inset 0 0 0 0.2rem $gray
+.main-panel
+  position: fixed
+  z-index: 200
+  bottom: 3rem
+  left: 4rem
+
+
+.b-landing-constructor__button
+  width: 100%
+  height: 100%
+  display: inline-block
+  font-weight: 400
+  text-align: center
+  white-space: nowrap
+  vertical-align: middle
+  border: 1px solid #545b62
+  border-radius: .25rem
+  transition: color .15s
+  background-color: #545b62
+  cursor: pointer
+  color: #ffffff
+
+.b-landing-constructor__video_type
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.controller-panel, .styler
+  z-index: 9999
+
+.vuse-icon
+  width: 2rem
+  height: 2rem
+  display: inline-block
+  vertical-align: middle
+  cursor: pointer
+
+.floatHover
+  cursor: pointer
+  box-shadow: 0 14px 28px opacify($black, 0.125), 0 10px 10px opacify($black, 0.1)
+
 </style>

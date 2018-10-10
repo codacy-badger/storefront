@@ -1,10 +1,10 @@
 <template>
     <section class="l-button-fifth" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-fifth" target="_blank"
-           v-styler:index="`$sectionData.buttons[${index}].button`"
-           v-html="$sectionData.buttons[index].button.text"
-           :href="$sectionData.buttons[index].button.href"
-           v-bind:style="$sectionData.buttons[index].button.styles"
+           v-styler:for="{ el: $sectionData.buttons[index].element, path:`$sectionData.buttons[${index}].element` }"
+           v-html="$sectionData.buttons[index].element.text"
+           :href="$sectionData.buttons[index].element.href"
+           v-bind:style="$sectionData.buttons[index].element.styles"
           >
       </a>
     </section>
@@ -20,8 +20,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     buttons: [{
-      text: 'Play Now',
-      button: types.Button
+      element: types.Button
     }]
   },
   props: {
@@ -37,7 +36,7 @@ export default {
 .l-button-fifth
   width: 100%
   position: relative
-  margin: 1rem 0
+  margin: 0
   display: flex
   align-items: center
   justify-content: center
@@ -45,14 +44,15 @@ export default {
     resize: vertical
     overflow: hidden
 .b-button-fifth
-  font-family: Georgia, "Times New Roman", Serif
+  font-family: Helvetica, Arial, sans-serif
   text-decoration: none
-  font-size: 3rem
+  font-size: 2.3rem
   background-color: #a7a1a1
   color: #fff
   text-transform: uppercase
   padding: 1.5rem 0 2rem 0
   width: 30rem
+  margin: 2rem
   cursor: pointer
   position: relative
   text-align: center

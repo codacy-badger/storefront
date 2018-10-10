@@ -9,19 +9,19 @@
             >
             <div class="b-gallery-three-block__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
-                 v-styler:index="`$sectionData.images[${index}].button`"
+                 v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
                  v-bind:style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
               >
               </a>
               <div class="b-gallery-three-block__item-content">
-                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title.text">
               </div>
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
                 v-styler="`$sectionData.images[${index}].title`"
-                v-text="$sectionData.images[index].title"
+                v-text="$sectionData.images[index].title.text"
                 >
               </span>
             </div>
@@ -66,23 +66,23 @@ export default {
     images: [
       {
         preview: [types.Image],
-        title: types.Title,
+        title: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        title: types.Title,
+        title: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        title: types.Title,
+        title: types.Text,
         button: types.Button
       }
     ],
     logos: [
       {
-        path: 'https://gn616.cdn.gamenet.ru/TY0Xv2riHu/6nOTs/o_1My2mo.png',
+        path: 'https://gn518.cdn.gamenet.ru/TY0Xv2riHu/6zP7H/o_wZ8FT.png',
         alt: 'Default Logo',
         logo: types.Image
       }
@@ -144,12 +144,18 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../../assets/sass/_flex.sass'
+
 .b-gallery-three
   display: flex
   align-items: center
   &.is-editable
    resize: vertical
    overflow: hidden
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
@@ -157,7 +163,7 @@ export default {
   &__wrap
     margin: 0 auto
     max-width: 160rem
-    min-width: 60%
+    min-width: 80%
   &__subtitle
     margin-bottom: 0
     font-weight: 400
@@ -165,6 +171,11 @@ export default {
   &-block
     margin-bottom: 1rem
     margin-right: -2rem
+    .is-tablet &,
+    .is-mobile &
+      flex-wrap: wrap
+    .is-mobile &
+      margin-right: 0
     @media only screen and (max-width: 768px)
       &
         flex-wrap: wrap
@@ -174,6 +185,7 @@ export default {
 
     &__item
       width: 20%
+      margin: 1rem
       &.is-editable
        resize: both
        overflow: hidden
@@ -181,37 +193,44 @@ export default {
          border: dotted #333 1px
       &-wrap
         width: 100%
-        height: 220px
+        height: 100%
         min-width: 5rem
-        min-height: 5rem
-        margin: 1rem
+        min-height: 17rem
         padding: 1rem
         cursor: pointer
         position: relative
         &.is-editable
           resize: both
           overflow: hidden
-        @media only screen and (max-width: 768px)
-          &
-            width: 40%
-        @media only screen and (max-width: 460px)
-          &
-            width: 100%
-            padding: 0 0 2rem 0
+      .is-tablet &
+        width: 50%
+      .is-mobile &
+        width: 100%
+        padding: 0 0 2rem 0
+      @media only screen and (max-width: 768px)
+        &
+          width: 50%
+      @media only screen and (max-width: 460px)
+        &
+          width: 100%
+          padding: 0 0 2rem 0
 
       &-content
-        position: relative
-        height: 100%
+        position: absolute
+        z-index: 0
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        min-height: 10rem
         background-color: #fff
         background-position: center
         background-size: cover
         overflow: hidden
         pointer-events: none
-        background: -webkit-linear-gradient(315deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
-        background: linear-gradient(135deg, rgba(65, 63, 82, 0.4) 0%, rgba(28, 13, 142, 0.4) 100%)
-
+        background: linear-gradient(135deg, rgba(204, 204, 204, 0.4) 0%, rgba(161, 161, 161, 0.4) 100%)
       &-wrap:hover &-content
-        background: linear-gradient(135deg, rgba(227, 223, 255, 0.3) 0%, rgba(23, 40, 125, 0.3) 100%)
+        background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
 
       &-title
         font-size: 1.6rem
@@ -230,6 +249,8 @@ export default {
         left: 0
         width: 100%
         height: 100%
+        min-width: 100%
+        min-height: 100%
         margin: 0
         z-index: 100
         &.is-editable
@@ -237,6 +258,8 @@ export default {
           left: 50%
           width: 10rem
           height: 10rem
+          min-width: auto
+          min-height: auto
           margin: -5rem 0 0 -5rem
         &:before, &:after
           content: ''
@@ -303,9 +326,9 @@ export default {
 .l-popup__logo
   margin: 2rem
   width: 80%
+  text-align: center
   &-block
     min-width: 10rem
-    width: 20rem
     height: auto
     margin: 0 auto
     &.is-editable
@@ -314,6 +337,8 @@ export default {
       padding: 1rem
   &-img
     margin: 0 auto
+    height: 100%
+    display: inline-block
 .l-popup
   display: none
   position: fixed
@@ -367,28 +392,5 @@ export default {
 .l-popup__close:after
   -webkit-transform: rotate(45deg)
   transform: rotate(45deg)
-.flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  position: relative
-  width: 100%
-.flex_center
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-.flex_columns
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
-.flex__item
-  -webkit-box-flex: 0
-  -ms-flex: 0 0 auto
-  flex: 0 0 auto
-.flex_wrap
-  flex-wrap: wrap
+
 </style>

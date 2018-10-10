@@ -1,13 +1,13 @@
 <template>
-    <section class="l-button-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-two" target="_blank"
-           v-styler:index="`$sectionData.buttons[${index}].button`"
-           v-html="$sectionData.buttons[index].button.text"
-           :href="$sectionData.buttons[index].button.href"
-           v-bind:style="$sectionData.buttons[index].button.styles"
-          >
-      </a>
-    </section>
+  <section class="l-button-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+    <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-two" target="_blank"
+       v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
+       v-html="$sectionData.buttons[index].element.text"
+       :href="$sectionData.buttons[index].element.href"
+       v-bind:style="$sectionData.buttons[index].element.styles"
+    >
+    </a>
+  </section>
 </template>
 
 <script>
@@ -20,8 +20,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     buttons: [{
-      text: 'Download',
-      button: types.Button
+      element: types.Button
     }]
   },
   props: {
@@ -74,8 +73,11 @@ export default {
   &.is-editable
     resize: both
     overflow: hidden
-@media only screen and (max-width: 768px)
-  &
+  .is-tablet &,
+  .is-mobile &
     font-size: 2rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 2rem
 
 </style>
