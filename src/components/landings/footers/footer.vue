@@ -12,8 +12,7 @@
       </div>
       <div class="b-footer__group b-footer__group_2">
           <span class="b-layout-1__footer__el">
-            <span v-text="$sectionData.copyright.title" v-styler="$sectionData.copyright.text">
-              2018-2018 gamesite.com
+            <span v-text="$sectionData.copyright.element.text" v-styler="$sectionData.copyright.element">
             </span>
           </span>
         </div>
@@ -21,9 +20,9 @@
         <span v-for="(item, index) in $sectionData.buttons" :key="index">
           <a @click.prevent="openLink(item)" target="_blank" :class="`$sectionData.buttons[${index}].button.classes`"
             class="b-footer__link"
-            :href="$sectionData.buttons[index].button.href" v-html="item.text"
-            v-styler:index="`$sectionData.buttons[${index}].button`"
-            :style="$sectionData.buttons[index].button.styles">
+            :href="$sectionData.buttons[index].element.href" v-html="$sectionData.buttons[index].element.text"
+            v-styler:for="{ el:$sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element`}"
+            :style="$sectionData.buttons[index].element.styles">
           </a>
         </span>
       </div>
@@ -41,8 +40,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     copyright: {
-      title: '2018-2018 gamesite.com',
-      text: types.Text
+      element: types.Text
     },
     images: [
       {
@@ -56,16 +54,13 @@ export default {
     ],
     buttons: [
       {
-        text: 'First link',
-        button: types.Button
+        element: types.Button
       },
       {
-        text: 'Second',
-        button: types.Button
+        element: types.Button
       },
       {
-        text: 'Third',
-        button: types.Button
+        element: types.Button
       }
     ]
   },

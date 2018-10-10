@@ -9,19 +9,19 @@
             >
             <div class="b-gallery-three-block__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
-                 v-styler:index="`$sectionData.images[${index}].button`"
+                 v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
                  v-bind:style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
               >
               </a>
               <div class="b-gallery-three-block__item-content">
-                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title.text">
               </div>
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
                 v-styler="`$sectionData.images[${index}].title`"
-                v-text="$sectionData.images[index].title"
+                v-text="$sectionData.images[index].title.text"
                 >
               </span>
             </div>
@@ -66,17 +66,17 @@ export default {
     images: [
       {
         preview: [types.Image],
-        title: types.Title,
+        title: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        title: types.Title,
+        title: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        title: types.Title,
+        title: types.Text,
         button: types.Button
       }
     ],

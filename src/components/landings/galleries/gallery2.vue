@@ -9,7 +9,7 @@
             :key="index"
           >
             <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
-               v-styler:index="`$sectionData.images[${index}].button`"
+               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
             >
@@ -39,27 +39,27 @@ export default {
     button: types.Button,
     slogan: {
       text: 'Title',
-      type: types.Title
+      type: types.Text
     },
     images: [
       {
         preview: [types.Image],
-        label: types.Title,
+        label: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        label: types.Title,
+        label: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        label: types.Title,
+        label: types.Text,
         button: types.Button
       },
       {
         preview: [types.Image],
-        label: types.Title,
+        label: types.Text,
         button: types.Button
       }
     ],

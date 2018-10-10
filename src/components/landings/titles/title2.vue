@@ -1,6 +1,6 @@
 <template>
     <section class="b-title-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <h2 class="b-title-two__title" v-styler="$sectionData.title" v-html="$sectionData.title"></h2>
+      <h2 class="b-title-two__title" v-styler="$sectionData.title" v-html="$sectionData.title.text"></h2>
     </section>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   group: 'titles',
   $schema: {
     mainStyle: types.StyleObject,
-    title: types.Title
+    title: types.Text
   },
   props: {
     id: {
