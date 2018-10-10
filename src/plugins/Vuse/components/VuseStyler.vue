@@ -119,11 +119,6 @@
           <div class="b-styler__bg_options__item">
             <sketch-color-pecker @click.native="setBackgroundColor(backgroundColor)" v-model="backgroundColor"></sketch-color-pecker>
           </div>
-          <!--div style="text-align: center;">
-              <button class="button" style="width: 120px;" @click="setBackgroundColor">
-                  <VuseIcon name="check"></VuseIcon> Set color
-              </button>
-          </div-->
         </div>
 
         <div v-if="backgroundSettingsShow.link === true" class="b-styler__bg_options_container">
@@ -399,7 +394,6 @@ require('@public/js/any-resize-event.min');
         this.el.contentEditable = 'true';
         this.url = this.section.get(`${this.name}.href`);
       }
-      console.log(this.options)
     },
     mounted() {
       if (!this.$builder.isEditing) return;
@@ -430,7 +424,8 @@ require('@public/js/any-resize-event.min');
         this.addTextStyle(value[0], value[1], value[2])
       },
       onTextAligned (value) {
-        this.execute(value)
+        this.addTextStyle(value[0], value[1], value[2])
+        //this.execute(value)
       },
       /**
        * Add styles to 'box' element (e.g. button)
@@ -445,7 +440,6 @@ require('@public/js/any-resize-event.min');
         this.$nextTick(() => {
           this.popper.update();
         })
-        this.hideBlocks();
       },
       addLink() {
         console.log('add link: ' + this.url);
@@ -504,17 +498,20 @@ require('@public/js/any-resize-event.min');
         });
       },
       addTextStyle: function(style, sValue, def) {
-            let self = this;
-            this.section.set(this.name, (value) => {
-                if (!value || !value.hasOwnProperty('styles') || typeof value.styles !== 'object'
-                || !value.styles.hasOwnProperty(style)) {
-                return;
-            }
-            if (false === value.styles[style] || def === value.styles[style]) {
-                value.styles[style] = sValue
-            } else {
-                value.styles[style] = def
-            }
+        let self = this;
+        this.section.set(this.name, (value) => {
+          if (!value
+            || !value.hasOwnProperty('styles')
+            || typeof value.styles !== 'object'
+            || !value.styles.hasOwnProperty(style)) {
+            return;
+          }
+
+          if (false === value.styles[style] || def === value.styles[style]) {
+            value.styles[style] = sValue
+          } else {
+            value.styles[style] = def
+          }
         });
       },
       addVideoBackground: function() {
@@ -563,16 +560,12 @@ require('@public/js/any-resize-event.min');
       execute(command, value = null) {
         this.el.focus();
         document.execCommand(command, false, value);
-        this.hideBlocks();
       },
       showStyler(event) {
-        event.stopPropagation();
+        event.stopPropagation()
 
-        if (this.isVisible) {
-          return;
-        }
-
-        this.isVisible = true;
+        if (this.isVisible) return
+        this.isVisible = true
 
         if (!this.popper) {
           const position = this.$props.type === 'section' ? 'left-start' : 'top';
@@ -586,14 +579,14 @@ require('@public/js/any-resize-event.min');
       },
       hideStyler(event) {
         if (event && isParentTo(event.target, this.$el)) {
-          return;
+          return
         }
 
-        this.isVisible = false;
+        this.isVisible = false
 
         if (this.popper) {
-          this.popper.destroy();
-          this.popper = null;
+          this.popper.destroy()
+          this.popper = null
         }
 
         document.removeEventListener('click', this.hideStyler, true);
@@ -603,12 +596,14 @@ require('@public/js/any-resize-event.min');
           return;
         }
 
-        if (this.type === 'button') {
+        this.section.set(`${this.name}.text`, this.el.innerHTML);
+
+        /* if (this.type === 'button') {
           this.section.set(`${this.name}.text`, this.el.innerHTML);
           return;
         }
 
-        this.section.set(this.name, this.el.innerHTML);
+        this.section.set(this.name, this.el.innerHTML); */
       },
       choseBackground: function () {
         this.backgroundUrl = '';

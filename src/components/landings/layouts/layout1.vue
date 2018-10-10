@@ -12,7 +12,9 @@
                 :title="$sectionData.logos[0].alt" :alt="$sectionData.logos[0].alt"></uploader>
             </div>
             <div class="b-layout-1__panel__section">
-              <div class="b-layout-1__panel__title" v-styler="$sectionData.slogan[0].element"
+              <div class="b-layout-1__panel__title"
+                   :style="$sectionData.slogan[0].element.styles"
+                   v-styler="$sectionData.slogan[0].element"
                    v-text="$sectionData.slogan[0].text"></div>
               <div class="b-layout-1__panel__title panel__title_big" v-styler="$sectionData.slogan[1].element"
                    v-text="$sectionData.slogan[1].text"></div>
@@ -20,19 +22,22 @@
 
             <div class="b-layout-1__panel__section">
               <ul class="b-layout-1__panel__features">
-                <li class="b-layout-1__panel__feature" v-for="(item, index) in $sectionData.titles.text" :key="index">
-                  <span v-styler="$sectionData.titles.element">
-                      {{ item }}
+                <li class="b-layout-1__panel__feature"
+                    v-for="(item, index) in $sectionData.titles"
+                    :key="index"
+                    :style="$sectionData.titles[index].element.styles">
+                  <span v-styler:for="{ el: $sectionData.titles[index].element, path: `$sectionData.titles[${index}].element` }"
+                        v-text="$sectionData.titles[index].element.text">
                   </span>
                 </li>
               </ul>
             </div>
             <div class="b-layout-1__panel__section b-layout-1__panel__section_grow">
-              <a v-for="(item, index) in $sectionData.buttons.items" :key="index" class="b-layout-1__b-button" @click.prevent="onClick"
-                 :href="item.href"
-                 v-html="item.text"
-                 v-styler="$sectionData.buttons.element"
-                 :style="$sectionData.buttons.element.styles">
+              <a class="b-layout-1__b-button" @click.prevent="onClick"
+                 :href="$sectionData.button.element.href"
+                 v-html="$sectionData.button.element.text"
+                 v-styler="$sectionData.button.element"
+                 :style="$sectionData.button.element.styles">
               </a>
             </div>
             <div class="b-layout-1__panel__section">
@@ -42,7 +47,7 @@
                             path="$sectionData.logos[1].path" :title="$sectionData.logos[1].alt"
                             :alt="$sectionData.logos[1].alt"></uploader>
                   <span class="b-layout-1__footer__el 234234">
-                    <span v-text="$sectionData.copyright.text"
+                    <span v-html="$sectionData.copyright.element.text"
                           v-styler="$sectionData.copyright.element">
                     </span>
                   </span>
@@ -76,26 +81,16 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     copyright: {
-      text: 'Copyright',
       element: types.Text
     },
-    buttons: {
-      element: types.Button,
-      items: [
-        {
-          text: 'Play Now',
-          href: '#'
-        }
-      ]
+    button: {
+      element: types.Button
     },
-    titles: {
-      element: types.Text,
-      text: [
-        'Modern 3D graphics in the browser',
-        'Create multiple characters on the server',
-        'Wide opportunities for pumping the hero'
-      ]
-    },
+    titles: [
+      { element: types.Text },
+      { element: types.Text },
+      { element: types.Text }
+    ],
     slogan: [
       {
         text: 'CaLL',
@@ -129,7 +124,8 @@ export default {
   },
   props: {
     id: {
-      type: Number, required: true
+      type: Number,
+      required: true
     }
   },
   methods: {
