@@ -221,10 +221,6 @@
         <ControlStyleText v-bind:isBox="options.box" @styled="onBoxAligned" @boxStyled="onBoxStyled"></ControlStyleText>
       </li>
 
-      <li v-if="currentOption === 'textStyle'">
-        <ControlFontName v-bind:isBox="options.box" @boxStyled="onBoxStyled"></ControlFontName>
-      </li>
-
       <li v-if="currentOption === 'columnWidth'">
         <ul class="align">
           <li>
@@ -251,7 +247,6 @@ import Popper from 'popper.js'
 import VuseIcon from './VuseIcon'
 import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
-import ControlFontName from './controls/TheControlFontName.vue'
 import { isParentTo } from './../util'
 import _clone from 'lodash-es/clone'
 import { Sketch } from 'vue-color'
@@ -275,7 +270,6 @@ require('@public/js/any-resize-event.min');
       VuseIcon,
       ControlAlign,
       ControlStyleText,
-      ControlFontName,
       SketchColorPecker: Sketch
     },
     props: {

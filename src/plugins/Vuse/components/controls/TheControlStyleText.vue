@@ -3,6 +3,21 @@ import VuseIcon from '../VuseIcon'
 import { Sketch } from 'vue-color'
 import VueCircleSlider from 'vue-circle-slider'
 
+const LIST_FONTS = [
+  'Open Sans',
+  'Roboto',
+  'Oswald',
+  'Kodchasan',
+  'Anton',
+  'Helvetica',
+  'Arial',
+  'Tahoma',
+  'Verdana',
+  'Cambria',
+  'Georgia',
+  'Times New Roman'
+]
+
 export default {
   components: {
     VuseIcon,
@@ -24,13 +39,17 @@ export default {
     isShowFontSizer: false,
     isShowBorderRadius: false,
     isTextSelectColor: false,
+    isShowFontFamily: false,
     textSelectColor: '#000',
     fontSize: 2,
-    borderRadius: 0
+    borderRadius: 0,
+    listFonts: LIST_FONTS,
+    fontName: ''
   }),
   methods: {
     stylize (value) {
       this.$emit('styled', this.style[value])
+      this.showBlocks()
     },
     /**
      * Modify box styles
@@ -39,10 +58,19 @@ export default {
      * @param unit {string} values: %, rem, ''
      */
     boxMode (type, value, unit) {
+      this.$emit('boxStyled', { type, value, unit })
+    },
+    showBlocks (block) {
       this.isShowFontSizer = false
       this.isShowBorderRadius = false
       this.isTextSelectColor = false
-      this.$emit('boxStyled', { type, value, unit })
+      this.isShowFontFamily = false
+
+      if (undefined === block) {
+        return
+      }
+
+      this[block] = !this[block]
     }
   }
 }
@@ -68,18 +96,23 @@ export default {
       </li>
       <template v-if="isBox">
         <li>
-          <button class="styler-button" @click="isShowFontSizer = !isShowFontSizer" title="Font size">
+          <button class="styler-button" title="Font size" @click="showBlocks('isShowFontSizer')">
             <VuseIcon name="fontSize"></VuseIcon>
           </button>
         </li>
         <li>
-          <button class="styler-button" @click="isShowBorderRadius = !isShowBorderRadius" title="Border radius">
+          <button class="styler-button" title="Border radius" @click="showBlocks('isShowBorderRadius')">
             <VuseIcon name="fillet"></VuseIcon>
           </button>
         </li>
         <li>
-          <button class="styler-button" @click="isTextSelectColor = !isTextSelectColor" title="Text color">
+          <button class="styler-button" title="Text color" @click="showBlocks('isTextSelectColor')">
             <VuseIcon name="palettes"></VuseIcon>
+          </button>
+        </li>
+        <li>
+          <button class="styler-button"  title="Font name" @click="showBlocks('isShowFontFamily')">
+            <VuseIcon name="font"></VuseIcon>
           </button>
         </li>
       </template>
@@ -136,5 +169,34 @@ export default {
         </div>
       </div>
     </div>
+
+    <div v-if="isShowFontFamily" class="">
+      <div class="">
+        <select class="b-select-font-name" v-model="fontName" @change="boxMode('font-family', fontName, '')">
+          <option class="" value="" hidden disabled selected>Choose font</option>
+          <option v-for="font in listFonts" v-bind:value="font">{{font}}</option>
+        </select>
+      </div>
+    </div>
+
   </div>
 </template>
+
+<style lang="sass">
+.b-select-font-name
+  background: $white
+  color: $dark
+  border: 0
+  outline: 0
+  width: auto
+  height: 3rem
+  border-radius: 3rem
+  font-size: 1.4rem
+  margin: 1rem auto
+  padding: 0.5rem
+  width: 20rem
+  display: block
+  & option:checked
+    background-color: #333
+    color: #fff
+</style>
