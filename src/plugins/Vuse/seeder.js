@@ -14,7 +14,9 @@ const DEFAULT_OPTIONS = {
   typography: false,
   colorize: false,
   box: false, // (colorer)
-  canCopy: false
+  canCopy: false,
+  background: false,
+  shape: false,
 }
 
 /**
@@ -29,7 +31,6 @@ const data = new Map([
     aligned: true,
     typography: true,
     removable: true,
-    colorize: true,
     styles: {
       'font-family': "Open Sans",
       'font-size': false,
@@ -38,6 +39,13 @@ const data = new Map([
       'text-decoration': false,
       'text-align': false,
       'color': false,
+      'background-image': false,
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': false,
+      'justify-content': false
     }
   }))],
   [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
@@ -71,6 +79,7 @@ const data = new Map([
       removable: true,
       aligned: true,
       typography: true,
+      shape: true,
       text: 'Click Me!',
       classes: [],
       href: '',

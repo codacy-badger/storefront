@@ -42,7 +42,6 @@ export default {
     isShowFontFamily: false,
     textSelectColor: '#000',
     fontSize: 2,
-    borderRadius: 0,
     listFonts: LIST_FONTS,
     fontName: ''
   }),
@@ -62,7 +61,6 @@ export default {
     },
     showBlocks (block) {
       this.isShowFontSizer = false
-      this.isShowBorderRadius = false
       this.isTextSelectColor = false
       this.isShowFontFamily = false
 
@@ -98,11 +96,6 @@ export default {
         <li>
           <button class="styler-button" title="Font size" @click="showBlocks('isShowFontSizer')">
             <VuseIcon name="fontSize"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" title="Border radius" @click="showBlocks('isShowBorderRadius')">
-            <VuseIcon name="fillet"></VuseIcon>
           </button>
         </li>
         <li>

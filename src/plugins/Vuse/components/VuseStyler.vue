@@ -2,34 +2,40 @@
   <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
+      <!-- color-->
       <li v-if="options.colorize">
         <button class="styler-button" @click="updateOption('textColor')" title="Color">
           <VuseIcon name="palettes"></VuseIcon>
         </button>
       </li>
+      <!-- aligned -->
       <li v-if="options.aligned">
         <button class="styler-button" @click="updateOption('align')" title="Text align">
           <VuseIcon name="align"></VuseIcon>
         </button>
       </li>
+      <!-- font and him styles-->
       <li v-if="options.typography">
         <button class="styler-button" @click="updateOption('textStyle')" title="Text style">
           <VuseIcon name="textStyle"></VuseIcon>
         </button>
       </li>
-      <li v-if="options.removable">
-        <button class="styler-button" @click="removeElement" title="Delete">
-          <VuseIcon name="trash"></VuseIcon>
-        </button>
-      </li>
-      <li v-if="options.box">
+      <!-- background -->
+      <li v-if="options.background">
         <button class="styler-button" @click="updateOption('colorer')" title="Background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
       </li>
+      <!-- link -->
       <li v-if="options.hasLink">
         <button class="styler-button" @click="updateOption('link')" title="Link">
           <VuseIcon name="link"></VuseIcon>
+        </button>
+      </li>
+      <!-- shape -->
+      <li v-if="options.shape">
+        <button class="styler-button" @click="updateOption('shape')" title="Change shape">
+          <VuseIcon name="fillet"></VuseIcon>
         </button>
       </li>
 
@@ -64,18 +70,26 @@
           </button>
         </li>
       </template>
+
       <template v-if="type === 'grid'">
-      <li>
-        <button class="styler-button" @click="selectDevice('mobile')">
-          <VuseIcon name="mobile"></VuseIcon>
+        <li>
+          <button class="styler-button" @click="selectDevice('mobile')">
+            <VuseIcon name="mobile"></VuseIcon>
+          </button>
+        </li>
+        <li>
+          <button class="styler-button" @click="selectDevice('desktop')">
+            <VuseIcon name="laptop"></VuseIcon>
+          </button>
+        </li>
+       </template>
+
+      <li v-if="options.removable">
+        <button class="styler-button" @click="removeElement" title="Delete">
+          <VuseIcon name="trash"></VuseIcon>
         </button>
       </li>
-      <li>
-        <button class="styler-button" @click="selectDevice('desktop')">
-          <VuseIcon name="laptop"></VuseIcon>
-        </button>
-      </li>
-    </template>
+
     </ul>
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
@@ -216,6 +230,11 @@
         <ControlStyleText v-bind:isBox="options.box" @styled="onBoxAligned" @boxStyled="onBoxStyled"></ControlStyleText>
       </li>
 
+      <!-- shape -->
+      <li v-if="currentOption === 'shape'">
+        <ControlShape v-bind:isBox="options.box" @boxStyled="onBoxStyled"></ControlShape>
+      </li>
+
       <li v-if="currentOption === 'columnWidth'">
         <ul class="align">
           <li>
@@ -242,6 +261,7 @@ import Popper from 'popper.js'
 import VuseIcon from './VuseIcon'
 import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
+import ControlShape from './controls/TheControlShape.vue'
 import { isParentTo } from './../util'
 import _clone from 'lodash-es/clone'
 import { Sketch } from 'vue-color'
@@ -265,6 +285,7 @@ require('@public/js/any-resize-event.min');
       VuseIcon,
       ControlAlign,
       ControlStyleText,
+      ControlShape,
       SketchColorPecker: Sketch
     },
     props: {
@@ -435,7 +456,6 @@ require('@public/js/any-resize-event.min');
       onBoxStyled (styles) {
         this.el.focus()
         this.addStyle(styles.type, `${styles.value}${styles.unit}`)
-        console.log(123)
       },
       updateOption(option) {
         this.currentOption = option;
