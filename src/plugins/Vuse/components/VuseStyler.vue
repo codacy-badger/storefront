@@ -2,12 +2,6 @@
   <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
-      <!-- color-->
-      <li v-if="options.colorize">
-        <button class="styler-button" @click="updateOption('textColor')" title="Color">
-          <VuseIcon name="palettes"></VuseIcon>
-        </button>
-      </li>
       <!-- aligned -->
       <li v-if="options.aligned">
         <button class="styler-button" @click="updateOption('align')" title="Text align">
@@ -84,13 +78,15 @@
         </li>
        </template>
 
+      <!-- remove -->
       <li v-if="options.removable">
         <button class="styler-button" @click="removeElement" title="Delete">
           <VuseIcon name="trash"></VuseIcon>
         </button>
       </li>
 
-    </ul>
+    </ul><!--/.styler-list-->
+
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
@@ -208,19 +204,17 @@
           </div>
         </div>
       </li>
-      <li v-if="currentOption === 'textColor'">
-        <ul class="colorer">
-          <li v-for="(color, index) in colors">
-            <input type="radio" :class="`is-${color}`"
-                   name="colorer" :value="textColors[index]" v-model="textColor"/>
-          </li>
-        </ul>
-      </li>
+
+      <!-- Set link -->
       <li v-if="currentOption === 'link'">
-        <div class="input-group is-rounded is-primary">
-          <input class="input" type="text" @change="addLink" placeholder="type your link" v-model="url"/>
-        </div>
+        <ControlSetUrl
+          v-bind:url="options.href"
+          v-bind:target="options.target"
+          v-bind:isBox="options.box"
+          @setUrl="addLink">
+        </ControlSetUrl>
       </li>
+
       <!-- Text align -->
       <li v-if="currentOption === 'align'">
         <ControlAlign
@@ -247,6 +241,7 @@
         </ControlShape>
       </li>
 
+      <!-- -->
       <li v-if="currentOption === 'columnWidth'">
         <ul class="align">
           <li>
@@ -264,7 +259,8 @@
           </li>
         </ul>
       </li>
-    </ul>
+
+    </ul><!--/.styler-list-->
   </div>
 </template>
 
@@ -274,6 +270,7 @@ import VuseIcon from './VuseIcon'
 import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
+import ControlSetUrl from './controls/TheControlSetUrl.vue'
 import { isParentTo } from './../util'
 import _clone from 'lodash-es/clone'
 import { Sketch } from 'vue-color'
@@ -298,6 +295,7 @@ require('@public/js/any-resize-event.min');
       ControlAlign,
       ControlStyleText,
       ControlShape,
+      ControlSetUrl,
       SketchColorPecker: Sketch
     },
     props: {
@@ -329,9 +327,6 @@ require('@public/js/any-resize-event.min');
       }
     },
     data: () => ({
-      colors: ['blue', 'green', 'red', 'black', 'white'],
-      textColors: ['#4da1ff', '#38E4B7', '#EA4F52', '#000000', '#FFFFFF'],
-      textColor: '',
       oldColorerColor: '',
       colorerColor: '',
       mouseTarget: '',
@@ -384,9 +379,6 @@ require('@public/js/any-resize-event.min');
       colorerColor: function () {
         this.changeColor();
       },
-      textColor: function () {
-        this.execute('forecolor', this.textColor)
-      },
       gridValue: function () {
         this.gridValue = Math.min(Math.max(this.gridValue, 0), 12);
         this.section.set(this.name, (grid) => {
@@ -410,9 +402,6 @@ require('@public/js/any-resize-event.min');
         if (undefined !== br) {
           this.borderRadius = parseFloat(br)
         }
-
-        this.url = this.section.get(`${this.name}.href`);
-        this.el.contentEditable = 'true';
       }
       if (this.type === 'text' || this.type === 'button') {
         let fs = this.section.get(`${this.name}.styles['font-size']`);
@@ -427,7 +416,7 @@ require('@public/js/any-resize-event.min');
       if (this.type === 'title') {
         this.el.contentEditable = 'true';
       }
-      if (this.type === 'link') {
+      if (this.type === 'link' || this.type === 'button') {
         this.el.contentEditable = 'true';
         this.url = this.section.get(`${this.name}.href`);
       }
@@ -495,9 +484,10 @@ require('@public/js/any-resize-event.min');
           this.popper.update();
         })
       },
-      addLink() {
-        console.log('add link: ' + this.url);
-        this.section.set(`${this.name}.href`, this.url);
+      addLink(options) {
+        console.log(options)
+        this.section.set(`${this.name}.href`, options.u);
+        this.section.set(`${this.name}.target`, options.t);
       },
       openLink() {
         if (this.$builder.isEditing || this.url == '') return;
@@ -996,7 +986,7 @@ label
   flex-direction: column
 
 .b-styler__bg_options__item
-  margin-bottom: 10px
+  margin-bottom: 0.2rem
 
 .b-font-size
   font-family: Helvetica Neue, Helvetica, Arial
