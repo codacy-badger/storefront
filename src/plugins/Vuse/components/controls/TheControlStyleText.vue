@@ -133,31 +133,8 @@ export default {
           progress-color="#fcff00">
         </circle-slider>
         <div class="">
-          <div class="b-font-size" v-model="fs" v-text="fs" v-bind:style="{ 'font-size': fs + 'rem'}"/>
+          <div class="b-font-size" v-model="fs" v-html="fs" v-bind:style="{ 'font-size': fs + 'rem'}"/>
           <button class="button" @click="boxMode('font-size', fs, 'rem')">
-            <VuseIcon name="check"></VuseIcon> Set
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="isShowBorderRadius" class="b-styler__bg_options_container">
-      <div class="b-styler__bg_options__item flex flex_center">
-        <circle-slider
-          @click.native=""
-          v-model="br"
-          :step-size="0.1"
-          :circle-width-rel="30"
-          :progress-width-rel="15"
-          :knob-radius-rel="8"
-          :min="0"
-          :max="50"
-          circle-color="#fff"
-          progress-color="#fcff00">
-        </circle-slider>
-        <div class="">
-          <div class="b-border-radius" v-model="br" v-bind:style="{ 'border-radius': br + '%'}"/>
-          <button class="button" style="width: 12rem;" @click="boxMode('border-radius', br, '%')">
             <VuseIcon name="check"></VuseIcon> Set
           </button>
         </div>

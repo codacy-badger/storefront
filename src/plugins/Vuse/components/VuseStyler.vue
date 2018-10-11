@@ -408,7 +408,7 @@ require('@public/js/any-resize-event.min');
         let br = this.section.get(`${this.name}.styles['border-radius']`);
 
         if (undefined !== br) {
-          this.borderRadius = parseInt(br);
+          this.borderRadius = parseFloat(br)
         }
 
         this.url = this.section.get(`${this.name}.href`);
@@ -418,7 +418,7 @@ require('@public/js/any-resize-event.min');
         let fs = this.section.get(`${this.name}.styles['font-size']`);
 
         if (undefined !== fs) {
-          this.fontSize = parseInt(fs);
+          this.fontSize = parseFloat(fs)
         }
       }
       if (this.type === 'text') {
@@ -445,7 +445,7 @@ require('@public/js/any-resize-event.min');
         let br = this.section.get(`${this.name}.styles['border-radius']`);
 
         if (undefined !== br) {
-          this.borderRadius = parseInt(br);
+          this.borderRadius = parseFloat(br)
         }
 
         // listen resize event, add params to element
@@ -461,7 +461,7 @@ require('@public/js/any-resize-event.min');
         let fs = this.section.get(`${this.name}.styles['font-size']`);
 
         if (undefined !== fs) {
-          this.fontSize = parseInt(fs);
+          this.fontSize = parseFloat(fs)
         }
       }
     },
@@ -487,6 +487,7 @@ require('@public/js/any-resize-event.min');
       onBoxStyled (styles) {
         this.el.focus()
         this.addStyle(styles.type, `${styles.value}${styles.unit}`)
+        console.log(`${styles.value}`)
       },
       updateOption(option) {
         this.currentOption = option;
