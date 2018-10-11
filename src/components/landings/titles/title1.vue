@@ -1,6 +1,5 @@
 <template>
     <section class="b-title-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <h1 class="b-title-one__title" v-styler="$sectionData.title" v-html="$sectionData.title.text" :style="$sectionData.title.styles"></h1>
       <h1 class="b-title-one__title" v-for="(item, index) in $sectionData.titles" :key="index"
           v-styler:for="{ el: $sectionData.titles[index].element, path: `$sectionData.titles[${index}].element` }"
           v-html="$sectionData.titles[index].element.text"

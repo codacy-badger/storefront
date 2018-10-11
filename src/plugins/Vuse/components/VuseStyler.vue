@@ -223,21 +223,27 @@
       </li>
       <!-- Text align -->
       <li v-if="currentOption === 'align'">
-        <ControlAlign v-bind:isBox="options.box" @boxAligned="onBoxAligned" @textAligned="onTextAligned"></ControlAlign>
+        <ControlAlign
+          v-bind:isBox="options.box"
+          @boxAligned="onBoxAligned"
+          @textAligned="onTextAligned">
+        </ControlAlign>
       </li>
 
+      <!-- Text style -->
       <li v-if="currentOption === 'textStyle'">
         <ControlStyleText
-          v-bind:isBox="options.box"
           v-bind:fontSize="fontSize"
-          v-bind:borderRadius="borderRadius"
-          @styled="onBoxAligned"
-          @boxStyled="onBoxStyled"></ControlStyleText>
+          @boxStyled="onBoxStyled">
+        </ControlStyleText>
       </li>
 
       <!-- shape -->
       <li v-if="currentOption === 'shape'">
-        <ControlShape v-bind:isBox="options.box" @boxStyled="onBoxStyled"></ControlShape>
+        <ControlShape
+          v-bind:borderRadius="borderRadius"
+          @boxStyled="onBoxStyled">
+        </ControlShape>
       </li>
 
       <li v-if="currentOption === 'columnWidth'">
@@ -398,18 +404,21 @@ require('@public/js/any-resize-event.min');
     },
     created() {
       if (this.type === 'button') {
-        let fs = this.section.get(`${this.name}.styles['font-size']`);
         let br = this.section.get(`${this.name}.styles['border-radius']`);
 
-        if (undefined !== fs) {
-          this.fontSize = parseInt(fs);
-        }
         if (undefined !== br) {
           this.borderRadius = parseInt(br);
         }
 
         this.url = this.section.get(`${this.name}.href`);
         this.el.contentEditable = 'true';
+      }
+      if (this.type === 'text' || this.type === 'button') {
+        let fs = this.section.get(`${this.name}.styles['font-size']`);
+
+        if (undefined !== fs) {
+          this.fontSize = parseInt(fs);
+        }
       }
       if (this.type === 'text') {
         this.el.contentEditable = 'true';
@@ -430,6 +439,14 @@ require('@public/js/any-resize-event.min');
     },
     updated() {
       if (this.type === 'button') {
+
+        // listen event change border-radius
+        let br = this.section.get(`${this.name}.styles['border-radius']`);
+
+        if (undefined !== br) {
+          this.borderRadius = parseInt(br);
+        }
+
         // listen resize event, add params to element
         let handler = () => {
           this.addStyle('width', `${this.el.offsetWidth}px`)
@@ -437,6 +454,14 @@ require('@public/js/any-resize-event.min');
         }
 
         this.el.addEventListener('onresize', _.debounce(handler, 100))
+      }
+      if (this.type === 'text' || this.type === 'button') {
+        // listen event change font-size
+        let fs = this.section.get(`${this.name}.styles['font-size']`);
+
+        if (undefined !== fs) {
+          this.fontSize = parseInt(fs);
+        }
       }
     },
     beforeDestroy() {

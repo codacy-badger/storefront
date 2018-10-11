@@ -8,15 +8,17 @@ export default {
     VueCircleSlider
   },
   props: {
-    isBox: {
-      type: Boolean,
-      required: true
+    borderRadius: {
+      type: Number,
+        required: true
     }
   },
   data: () => ({
-    isShowBorderRadius: false,
-    borderRadius: 0,
+    br: null
   }),
+  created () {
+    this.br = this.borderRadius
+  },
   methods: {
     /**
      * Modify box styles
@@ -32,12 +34,12 @@ export default {
 </script>
 
 <template>
-  <div v-if="isBox">
-    <div v-if="isShowBorderRadius" class="b-styler__bg_options_container">
+  <div>
+    <div class="b-styler__bg_options_container">
       <div class="b-styler__bg_options__item flex flex_center">
         <circle-slider
           @click.native=""
-          v-model="borderRadius"
+          v-model="br"
           :step-size="0.1"
           :circle-width-rel="30"
           :progress-width-rel="15"
@@ -47,9 +49,9 @@ export default {
           circle-color="#fff"
           progress-color="#fcff00">
         </circle-slider>
-        <div>
-          <div class="b-border-radius" v-model="borderRadius" v-bind:style="{ 'border-radius': borderRadius + '%'}"/>
-          <button class="button" style="width: 12rem;" @click="boxMode('border-radius', borderRadius, '%')">
+        <div class="">
+          <div class="b-border-radius" v-model="br" v-bind:style="{ 'border-radius': br + '%'}"/>
+          <button class="button" style="width: 12rem;" @click="boxMode('border-radius', br, '%')">
             <VuseIcon name="check"></VuseIcon> Set
           </button>
         </div>

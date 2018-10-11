@@ -25,15 +25,7 @@ export default {
     VueCircleSlider
   },
   props: {
-    isBox: {
-      type: Boolean,
-      required: true
-    },
     fontSize: {
-      type: Number,
-      required: true
-    },
-    borderRadius: {
       type: Number,
       required: true
     }
@@ -45,19 +37,16 @@ export default {
       underline: ['text-decoration','underline','none']
     },
     fs: null,
-    br: null,
     isShowFontSizer: false,
     isShowBorderRadius: false,
     isTextSelectColor: false,
     isShowFontFamily: false,
-    fontSize: 2,
     listFonts: LIST_FONTS,
-    fontName: ''
+    fontName: '',
     textSelectColor: '#000'
   }),
   created () {
     this.fs = this.fontSize
-    this.br = this.borderRadius
   },
   methods: {
     stylize (value) {
@@ -106,23 +95,21 @@ export default {
           <VuseIcon name="underline"></VuseIcon>
         </button>
       </li>
-      <template v-if="isBox">
-        <li>
-          <button class="styler-button" title="Font size" @click="showBlocks('isShowFontSizer')">
-            <VuseIcon name="fontSize"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button" title="Text color" @click="showBlocks('isTextSelectColor')">
-            <VuseIcon name="palettes"></VuseIcon>
-          </button>
-        </li>
-        <li>
-          <button class="styler-button"  title="Font name" @click="showBlocks('isShowFontFamily')">
-            <VuseIcon name="font"></VuseIcon>
-          </button>
-        </li>
-      </template>
+      <li>
+        <button class="styler-button" title="Font size" @click="showBlocks('isShowFontSizer')">
+          <VuseIcon name="fontSize"></VuseIcon>
+        </button>
+      </li>
+      <li>
+        <button class="styler-button" title="Text color" @click="showBlocks('isTextSelectColor')">
+          <VuseIcon name="palettes"></VuseIcon>
+        </button>
+      </li>
+      <li>
+        <button class="styler-button"  title="Font name" @click="showBlocks('isShowFontFamily')">
+          <VuseIcon name="font"></VuseIcon>
+        </button>
+      </li>
     </ul>
 
     <div v-if="isTextSelectColor" class="b-styler__bg_options_container">
@@ -147,7 +134,7 @@ export default {
         </circle-slider>
         <div class="">
           <div class="b-font-size" v-model="fs" v-text="fs" v-bind:style="{ 'font-size': fs + 'rem'}"/>
-          <button class="button" @click="boxMode('font-size',fs, 'rem')">
+          <button class="button" @click="boxMode('font-size', fs, 'rem')">
             <VuseIcon name="check"></VuseIcon> Set
           </button>
         </div>
