@@ -485,9 +485,8 @@ require('@public/js/any-resize-event.min');
         })
       },
       addLink(options) {
-        console.log(options)
-        this.section.set(`${this.name}.href`, options.u);
-        this.section.set(`${this.name}.target`, options.t);
+        this.section.set(`${this.name}.href`, options.url);
+        this.section.set(`${this.name}.target`, options.target);
       },
       openLink() {
         if (this.$builder.isEditing || this.url == '') return;

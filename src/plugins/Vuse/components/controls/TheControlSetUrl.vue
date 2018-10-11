@@ -29,16 +29,15 @@ export default {
   },
   methods: {
     /**
-     * Set link
-     * @param value {string}
+     * Set link and target
+     * @param url {string}
+     * @param target {string} _blank, _top
     */
     setUrl () {
       let s
 
       s = this.setTarget(this.t)
-      this.$emit('setUrl', { u: this.u, t: s })
-
-      console.log('setLink')
+      this.$emit('setUrl', { url: this.u, target: s })
     },
     getTarget (target) {
       return target === '_blank' ? true : false
