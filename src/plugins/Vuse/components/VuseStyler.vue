@@ -213,7 +213,12 @@
       </li>
 
       <li v-if="currentOption === 'textStyle'">
-        <ControlStyleText v-bind:isBox="options.box" @styled="onBoxAligned" @boxStyled="onBoxStyled"></ControlStyleText>
+        <ControlStyleText
+          v-bind:isBox="options.box"
+          v-bind:fontSize="fontSize"
+          v-bind:borderRadius="borderRadius"
+          @styled="onBoxAligned"
+          @boxStyled="onBoxStyled"></ControlStyleText>
       </li>
       <li v-if="currentOption === 'columnWidth'">
         <ul class="align">
@@ -375,10 +380,10 @@ require('@public/js/any-resize-event.min');
         let br = this.section.get(`${this.name}.styles['border-radius']`);
 
         if (undefined !== fs) {
-          this.fontSize = fs;
+          this.fontSize = parseInt(fs);
         }
         if (undefined !== br) {
-          this.borderRadius = br;
+          this.borderRadius = parseInt(br);
         }
 
         this.url = this.section.get(`${this.name}.href`);
