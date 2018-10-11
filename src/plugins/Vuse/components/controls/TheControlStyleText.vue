@@ -55,7 +55,7 @@ export default {
     },
     /**
      * Modify box styles
-     * @param type {string} values: color, font-size, border-radius
+     * @param type {string} values: color, font-size, font-family
      * @param value {string}
      * @param unit {string} values: %, rem, ''
      */

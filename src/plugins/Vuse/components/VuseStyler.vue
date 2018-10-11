@@ -234,6 +234,7 @@
       <li v-if="currentOption === 'textStyle'">
         <ControlStyleText
           v-bind:fontSize="fontSize"
+          @styled="onBoxAligned"
           @boxStyled="onBoxStyled">
         </ControlStyleText>
       </li>
