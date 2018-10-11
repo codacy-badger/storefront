@@ -1,5 +1,5 @@
 <template>
-  <section class="b-gallery-two" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-two" v-on:resize="closePopup" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="b-gallery-two__wrap">
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"
@@ -21,8 +21,10 @@
         </div>
       </div>
       <div gallery-two-popup="" class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
+        <div gallery-two-popup-padd="" class="l-popup__padd" v-bind:style="$sectionData.popupStyles">
           <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
           <div gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+        </div>
       </div>
   </section>
 </template>
@@ -65,7 +67,7 @@ export default {
     ],
     index: 0,
     isShowPopup: false,
-    heightFrame: '400',
+    popupStyles: { width: 'auto', margin: '0' },
     url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
     content: ''
   },
@@ -92,16 +94,26 @@ export default {
       this.openPopup(this.$sectionData.content)
     },
     openPopup () {
-      this.$sectionData.isShowPopup = true
       setTimeout(() => {
         this.setHeight()
-      }, 500)
+      }, 100)
     },
     setHeight () {
+      this.$sectionData.isShowPopup = true
+
       let el = document.getElementById('content')
-      let actualWidth = el.clientWidth
-      let calcHeight = actualWidth * 0.5625
+      let ab = document.getElementById('artboard')
+      let actualWidth = null
+      let calcHeight = null
+      let calcMargin = null
+
+      actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
+      calcHeight = actualWidth * 0.5625
+      calcMargin = (document.body.clientWidth - actualWidth) / 2
       el.style.height = calcHeight + 'px'
+
+      this.$sectionData.popupStyles['width'] = actualWidth + 'px'
+      this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
     },
     closePopup () {
       this.$sectionData.isShowPopup = false
@@ -174,11 +186,11 @@ export default {
 .b-gallery-two__link
   position: absolute
   display: block
-  top: 0
-  left: 0
+  top: 50%
+  left: 50%
   width: 10rem
   height: 10rem
-  margin: 0
+  margin: -5rem 0 0 -5rem
   z-index: 100
   &.is-editable
     top: 50%
@@ -260,42 +272,50 @@ export default {
   background-color: rgba(0, 0, 0, 0.8)
   z-index: 99999
   cursor: pointer
-.l-popup_on
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-.l-popup__content
-  border: 5px solid #fcff00
-  background-color: #000
-  max-width: 90%
-  max-height: 90%
-  overflow: hidden
-  cursor: auto
-  transition: all 200ms
-.l-popup__content iframe
-  display: block
-  width: 100%
-  height: 100%
-.l-popup__content_video
-  width: 70%
-.l-popup__close
-  position: absolute
-  top: 10px
-  right: 10px
-  width: 50px
-  height: 50px
-  pointer-events: none
-.l-popup__close:before, .l-popup__close:after
-  content: ''
-  position: absolute
-  top: 23px
-  width: 50px
-  height: 3px
-  background-color: #fcff00
-.l-popup__close:before
-  -webkit-transform: rotate(-45deg)
-  transform: rotate(-45deg)
-.l-popup__close:after
-  -webkit-transform: rotate(45deg)
-  transform: rotate(45deg)
+  &_on
+    display: -webkit-box
+    display: -ms-flexbox
+    display: flex
+  &__padd
+    position: relative
+    height: 100%
+    display: -webkit-box
+    display: -ms-flexbox
+    display: flex
+    justify-content: center
+    align-items: center
+  &__content
+    border: 5px solid #fcff00
+    background-color: #000
+    max-width: 90%
+    max-height: 90%
+    overflow: hidden
+    cursor: auto
+    transition: all 200ms
+  &__content iframe
+    display: block
+    width: 100%
+    height: 100%
+  &__content_video
+    width: 70%
+  &__close
+    position: absolute
+    top: 10px
+    right: 10px
+    width: 50px
+    height: 50px
+    pointer-events: none
+  &__close:before,   &__close:after
+    content: ''
+    position: absolute
+    top: 23px
+    width: 50px
+    height: 3px
+    background-color: #fcff00
+  &__close:before
+    -webkit-transform: rotate(-45deg)
+    transform: rotate(-45deg)
+  &__close:after
+    -webkit-transform: rotate(45deg)
+    transform: rotate(45deg)
 </style>

@@ -3,11 +3,13 @@ export function galleryTwo() {
   const TARGET_LINK = 'gallery-two-link';
   const TARGET_URl = 'gallery-two-url';
   const TARGET_POPUP = 'gallery-two-popup';
+  const TARGET_POPUP_PADD = 'gallery-two-popup-padd';
   const TARGET_POPUP_CONTENT = 'gallery-two-popup-content';
   const TARGET_POPUP_CLOSE = 'gallery-two-popup-close';
 
   var links = document.querySelectorAll('['+ TARGET_LINK +']');
   var popup = document.querySelectorAll('['+ TARGET_POPUP +']')[0];
+  var popupP = document.querySelectorAll('['+ TARGET_POPUP_PADD +']')[0];
   var popupC = document.querySelectorAll('['+ TARGET_POPUP_CONTENT +']')[0];
   var popupX = document.querySelectorAll('['+ TARGET_POPUP_CLOSE +']')[0];
   var defUrl = 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png';
@@ -41,7 +43,10 @@ export function galleryTwo() {
         } else {
             content = '<img id="content" width="100%"  height="100%" src="' + url + '"></img>'
         }
-        setTimeout(opepPopup (content), 500);
+        popupP.style.width = "100%"
+        popupP.style.height = "100%"
+        popupP.style.margin = "0 auto"
+        setTimeout(opepPopup (content), 100);
     }
 
     function opepPopup (c) {
