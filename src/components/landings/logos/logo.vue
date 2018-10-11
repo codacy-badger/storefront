@@ -3,7 +3,7 @@
            v-styler:section="$sectionData.mainStyle"
            :class="$sectionData.mainStyle.classes"
            v-bind:style="$sectionData.mainStyle.styles">
-    <uploader class="b-logo" path="$sectionData.logos[0].path"
+    <uploader class="b-logo" path="$sectionData.logos[0].logo"
               :title="$sectionData.logos[0].alt" :alt="$sectionData.logos[0].alt"></uploader>
   </section>
 </template>

@@ -4,7 +4,7 @@
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"
             v-for="(item, index) in $sectionData.images"
-            v-styler:galleryItem="$sectionData.images[index]"
+            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
             :data-index="index"
             :key="index"
           >
@@ -15,7 +15,7 @@
             >
             </a>
             <div class="b-gallery-two__item-content">
-              <img class="b-gallery-two__img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title">
+              <img class="b-gallery-two__img ie-object-fit" :src="$sectionData.images[index].preview.url" :alt="$sectionData.images[index].preview.text">
             </div>
           </div>
         </div>
@@ -43,22 +43,22 @@ export default {
     },
     images: [
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         button: types.Button
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         button: types.Button
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         button: types.Button
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         button: types.Button
       }

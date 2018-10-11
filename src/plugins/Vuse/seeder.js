@@ -38,7 +38,17 @@ const data = new Map([
       'color': false,
     }
   }))],
-  [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
+  //[types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
+  [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
+    removable: true,
+    resizable: true,
+    alt: 'Default image',
+    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    styles: {
+      'width': '',
+      'height': ''
+    }
+  }))],
   [types.Link, () => ({
     text: 'Link',
     canCopy: true,

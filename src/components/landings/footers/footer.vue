@@ -3,16 +3,17 @@
     <footer class="b-footer">
       <div class="b-footer__group b-footer__group_1">
         <div class="b-footer__logo" v-for="(item, index) in $sectionData.images"
-             v-styler:galleryItem="$sectionData.images[index]"
+             v-styler:galleryItem="{el: $sectionData.images[index], path: `$sectionData.images[${index}]`}"
              :data-index="index"
              :key="index"
+             :style="$sectionData.images[index].styles"
           >
-          <img class="b-footer__logo-img" :src="$sectionData.images[index].preview" />
+          <img class="b-footer__logo-img" :src="$sectionData.images[index].url" />
         </div>
       </div>
       <div class="b-footer__group b-footer__group_2">
           <span class="b-layout-1__footer__el">
-            <span v-text="$sectionData.copyright.element.text" v-styler="$sectionData.copyright.element">
+            <span v-text="$sectionData.copyright.element.text" v-styler="$sectionData.copyright.element" :style="$sectionData.copyright.element.styles">
             </span>
           </span>
         </div>
@@ -43,14 +44,7 @@ export default {
       element: types.Text
     },
     images: [
-      {
-        preview: [types.Image],
-        alt: 'Default Logo'
-      },
-      {
-        preview: [types.Image],
-        alt: 'Default Logo'
-      }
+      types.Image, types.Image
     ],
     buttons: [
       {

@@ -4,13 +4,13 @@
         <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
           <div class="hero-tile"
               v-for="(item, index) in $sectionData.images"
-              v-styler:galleryItem="$sectionData.images[index]"
+              v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
               :data-index="index"
               :key="index"
               :gallery-one-preview="'loader__content_show'"
               @click="onFocus(index)" >
             <div class="hero-tile__frame">
-              <img class="hero-tile__img" :src="item.preview" :alt="item.title">
+              <img class="hero-tile__img" :src="$sectionData.images[index].preview.url" :alt="item.title.text">
             </div>
             <span class="hero-tile__name"
                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label` }"
@@ -26,7 +26,7 @@
                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`} ">
             </h2>
             <!-- upload image -->
-            <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img[0]'" />
+            <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img'" />
             <!--/upload image -->
             <p class="hero-detail__bio"
              v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`}"
@@ -51,24 +51,24 @@ export default {
     mainStyle: types.StyleObject,
     images: [
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         title: types.Text,
-        img: [types.Image],
+        img: types.Image,
         text: types.Text
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         title: types.Text,
-        img: [types.Image],
+        img: types.Image,
         text: types.Text
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         label: types.Text,
         title: types.Text,
-        img: [types.Image],
+        img: types.Image,
         text: types.Text
       }
     ],

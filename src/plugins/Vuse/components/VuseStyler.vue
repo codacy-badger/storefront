@@ -405,9 +405,8 @@ require('@public/js/any-resize-event.min');
 
       this.el.addEventListener('click', this.showStyler);
       this.el.addEventListener('focus', this.showStyler)
-    },
-    updated() {
-      if (this.type === 'button') {
+
+      if (this.options.resizable) {
         // listen resize event, add params to element
         let handler = () => {
           this.addStyle('width', `${this.el.offsetWidth}px`)
@@ -416,6 +415,8 @@ require('@public/js/any-resize-event.min');
 
         this.el.addEventListener('onresize', _.debounce(handler, 100))
       }
+    },
+    updated() {
     },
     beforeDestroy() {
       this.hideStyler();
@@ -794,7 +795,7 @@ require('@public/js/any-resize-event.min');
 
             const data = response['data']['response']['data'][0];
 
-            self.section.data.images[index].preview = data['src'];
+            self.section.data.images[index].preview.url = data.src;
           }).catch(function (e) {
           console.warn(e);
         });

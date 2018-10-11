@@ -30,10 +30,12 @@ export default {
     }
   },
   data: () => ({
-    src: ''
+    src: '',
+    section: {}
   }),
   created () {
-    this.src = this.$section.get(this.path)
+    this.section = this.$section.get(this.path)
+    this.src = this.section.url
   },
   methods: {
     uploadImg: function (event) {
@@ -63,8 +65,9 @@ export default {
 
           const data = response['data']['response']['data'][0]
 
-          self.$section.set(self.path, data['src'])
-          self.src = data['src']
+          self.src = self.section.url = data.src
+
+          self.$section.set(self.path, self.section)
         }).catch(function (e) {
           console.warn(e)
         })

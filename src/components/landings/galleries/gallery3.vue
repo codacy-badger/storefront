@@ -4,7 +4,7 @@
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"
                v-for="(item, index) in $sectionData.images" :key="index"
-               v-styler:galleryItem="$sectionData.images[index]"
+               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
                :data-index="index"
             >
             <div class="b-gallery-three-block__item-wrap">
@@ -15,12 +15,12 @@
               >
               </a>
               <div class="b-gallery-three-block__item-content">
-                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview" :alt="$sectionData.images[index].title.text">
+                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview.url" :alt="$sectionData.images[index].title.text">
               </div>
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
-                v-styler="`$sectionData.images[${index}].title`"
+                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title` }"
                 v-text="$sectionData.images[index].title.text"
                 >
               </span>
@@ -31,9 +31,9 @@
       <div gallery-three-popup="" class="l-popup l-popup_flex flex_columns" v-show="true === $sectionData.isShowPopup">
           <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
           <div class="l-popup__logo">
-            <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}">
+            <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}" :style="$sectionData.logos[0].logo">
               <uploader class="l-popup__logo-img"
-                path="$sectionData.logos[0].path"
+                path="$sectionData.logos[0].logo"
                 :title="$sectionData.logos[0].alt"
                 :alt="$sectionData.logos[0].alt">
               </uploader>
@@ -65,17 +65,17 @@ export default {
     button: types.Button,
     images: [
       {
-        preview: [types.Image],
+        preview: types.Image,
         title: types.Text,
         button: types.Button
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         title: types.Text,
         button: types.Button
       },
       {
-        preview: [types.Image],
+        preview: types.Image,
         title: types.Text,
         button: types.Button
       }
