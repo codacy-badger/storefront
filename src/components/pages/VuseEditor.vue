@@ -5,9 +5,9 @@
 <script>
 import Vue from 'vue'
 import { mapState, mapActions } from 'vuex'
-import Vuse from '@plugins/Vuse'
-import pwa from '@plugins/Vuse/plugins/pwa'
-import Uploader from '@plugins/Vuse/plugins/Uploader.vue'
+import Vuse from '@editor/vuse'
+import pwa from '@editor/plugins/pwa'
+import Uploader from '@editor/plugins/Uploader.vue'
 
 import gallery1 from '@components/landings/galleries/gallery1.vue'
 import gallery2 from '@components/landings/galleries/gallery2.vue'

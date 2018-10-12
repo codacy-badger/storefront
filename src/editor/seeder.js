@@ -2,7 +2,6 @@ import * as types from './types'
 import { isObject } from './util'
 import * as _ from 'lodash-es'
 
-const ASSETS_DIR = window.location.origin
 const DEFAULT_OPTIONS = {
   text: '',
   classes: [],
@@ -16,7 +15,7 @@ const DEFAULT_OPTIONS = {
   box: false, // (colorer)
   canCopy: false,
   background: false,
-  shape: false,
+  shape: false
 }
 
 /**
@@ -31,7 +30,7 @@ const data = new Map([
     typography: true,
     removable: true,
     styles: {
-      'font-family': "Open Sans",
+      'font-family': 'Open Sans',
       'font-size': '2',
       'font-weight': false,
       'font-style': false,
@@ -47,7 +46,7 @@ const data = new Map([
       'justify-content': false
     }
   }))],
-  //[types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
+  // [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
     resizable: true,
@@ -59,25 +58,25 @@ const data = new Map([
     }
   }))],
   [types.Link, () => (_.merge({}, DEFAULT_OPTIONS, {
-      canCopy: true,
-      hasLink: true,
-      removable: true,
-      typography: true,
-      text: 'Click Me!',
-      classes: [],
-      href: '',
-      target: '_blank',
-      styles: {
-        'color': '#000',
-        'border-color': false,
-        'font-size': '2',
-        'font-weight': false,
-        'font-style': false,
-        'font-family': "Open Sans",
-        'text-decoration': false,
-        'justify-content': false,
-      }
-    })
+    canCopy: true,
+    hasLink: true,
+    removable: true,
+    typography: true,
+    text: 'Click Me!',
+    classes: [],
+    href: '',
+    target: '_blank',
+    styles: {
+      'color': '#000',
+      'border-color': false,
+      'font-size': '2',
+      'font-weight': false,
+      'font-style': false,
+      'font-family': 'Open Sans',
+      'text-decoration': false,
+      'justify-content': false
+    }
+  })
   )],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
@@ -121,7 +120,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': "Open Sans",
+        'font-family': 'Open Sans',
         'text-decoration': false,
         'justify-content': false,
         'width': '',

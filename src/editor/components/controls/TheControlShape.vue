@@ -10,7 +10,7 @@ export default {
   props: {
     borderRadius: {
       type: Number,
-        required: true
+      required: true
     }
   },
   data: () => ({
@@ -38,7 +38,6 @@ export default {
     <div class="b-styler__bg_options_container">
       <div class="b-styler__bg_options__item flex flex_center">
         <circle-slider
-          @click.native=""
           v-model="br"
           :step-size="0.1"
           :circle-width-rel="30"
@@ -50,7 +49,7 @@ export default {
           progress-color="#fcff00">
         </circle-slider>
         <div class="">
-          <div class="b-border-radius" v-model="br" v-bind:style="{ 'border-radius': br + '%'}"/>
+          <div class="b-border-radius" v-bind:style="{ 'border-radius': br + '%'}"/>
           <button class="button" style="width: 12rem;" @click="boxMode('border-radius', br, '%')">
             <VuseIcon name="check"></VuseIcon> Set
           </button>

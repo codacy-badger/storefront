@@ -32,9 +32,9 @@ export default {
   },
   data: () => ({
     style: {
-      bold: ['font-weight','bold','normal'],
-      italic: ['font-style','italic','normal'],
-      underline: ['text-decoration','underline','none']
+      bold: ['font-weight', 'bold', 'normal'],
+      italic: ['font-style', 'italic', 'normal'],
+      underline: ['text-decoration', 'underline', 'none']
     },
     fs: null,
     isShowFontSizer: false,
@@ -121,7 +121,6 @@ export default {
     <div v-if="isShowFontSizer" class="b-styler__bg_options_container">
       <div class="b-styler__bg_options__item flex flex_center">
         <circle-slider
-          @click.native=""
           v-model="fs"
           :step-size="0.5"
           :circle-width-rel="30"
@@ -133,7 +132,7 @@ export default {
           progress-color="#fcff00">
         </circle-slider>
         <div class="">
-          <div class="b-font-size" v-model="fs" v-html="fs" v-bind:style="{ 'font-size': fs + 'rem'}"/>
+          <div class="b-font-size" v-html="fs" v-bind:style="{ 'font-size': fs + 'rem'}"/>
           <button class="button" @click="boxMode('font-size', fs, 'rem')">
             <VuseIcon name="check"></VuseIcon> Set
           </button>
@@ -145,7 +144,7 @@ export default {
       <div class="">
         <select class="b-select-font-name" v-model="fontName" @change="boxMode('font-family', fontName, '')">
           <option class="" value="" hidden disabled selected>Choose font</option>
-          <option v-for="font in listFonts" v-bind:value="font">{{font}}</option>
+          <option v-for="(font, index) in listFonts" v-bind:key="index" v-bind:value="font">{{font}}</option>
         </select>
       </div>
     </div>

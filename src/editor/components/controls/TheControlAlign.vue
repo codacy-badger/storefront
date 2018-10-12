@@ -13,14 +13,14 @@ export default {
   },
   data: () => ({
     flex: {
-      left: ['justify-content','flex-start','flex-start'],
-      center: ['justify-content','center','center'],
-      right: ['justify-content','flex-end','flex-end']
+      left: ['justify-content', 'flex-start', 'flex-start'],
+      center: ['justify-content', 'center', 'center'],
+      right: ['justify-content', 'flex-end', 'flex-end']
     },
     text: {
-      left: ['text-align','left','left'],
-      center: ['text-align','center','center'],
-      right: ['text-align','right','right']
+      left: ['text-align', 'left', 'left'],
+      center: ['text-align', 'center', 'center'],
+      right: ['text-align', 'right', 'right']
     }
   }),
   methods: {

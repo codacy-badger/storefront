@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import * as types from '@plugins/Vuse/types'
+import * as types from '@editor/types'
 import { galleryPreviewClick } from '@cscripts/gallery1'
 
 export default {

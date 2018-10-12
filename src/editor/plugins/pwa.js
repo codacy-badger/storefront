@@ -1,6 +1,6 @@
 import JSZip from 'jszip'
 import saveAs from 'save-as'
-import { getImageBlob, cleanDOM } from './../util'
+import { getImageBlob, cleanDOM } from '../util'
 
 /**
  * Adds a service worker that caches the static assets.
@@ -87,14 +87,14 @@ function download (assets) {
 
   var promise = new Promise((resolve, reject) => {
     const assetsClient = new XMLHttpRequest()
-      assetsClient.open('GET', assets.js)
-      assetsClient.onload = function () {
-        console.log(this)
-        console.log(this.response)
-        resolve(this.response)
-      }
-      assetsClient.send(null)
-    })
+    assetsClient.open('GET', assets.js)
+    assetsClient.onload = function () {
+      console.log(this)
+      console.log(this.response)
+      resolve(this.response)
+    }
+    assetsClient.send(null)
+  })
     .then((content) => {
       jsFolder.file('cjs.js', content)
       return content

@@ -26,7 +26,7 @@ export default class Section {
     path.shift()
     const obj = path.length === 0 ? this.data : getPath(this.data, path)
 
-    if (typeof obj === "undefined") {
+    if (typeof obj === 'undefined') {
       console.warn('Wrong path', path)
       return
     }
@@ -45,7 +45,7 @@ export default class Section {
     path.shift()
     const obj = path.length === 0 ? this.data : getPath(this.data, path)
 
-    if (typeof obj === "undefined") {
+    if (typeof obj === 'undefined') {
       console.warn('Wrong path', path)
       return
     }

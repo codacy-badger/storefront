@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import * as types from '@plugins/Vuse/types'
+import * as types from '@editor/types'
 
 export default {
   name: 'Gallery2',

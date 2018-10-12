@@ -12,7 +12,7 @@
                 <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
                 <template v-if="themes">
                     <div class="controller-themes">
-                        <button class="controller-theme" v-for="theme in themes" @click="addTheme(theme)">{{ theme.name }}</button>
+                        <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
                     </div>
                 </template>
             </div>
@@ -59,11 +59,11 @@
             </div>
         </div>
         <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
-            <li class="menu-group" v-for="(group, name) in groups" v-if="group.length">
+            <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
                 <div class="menu-header" @click="toggleGroupVisibility"><span class="menu-title">{{ name }}</span><span class="menu-icon">
           <VuseIcon name="arrowDown"></VuseIcon></span></div>
                 <div class="menu-body">
-                    <template v-for="section in group"><a class="menu-element" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
+                    <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
                 </div>
             </li>
         </ul>
@@ -137,7 +137,7 @@ export default {
   },
   computed: {
     ...mapState([
-        'currentLanding'
+      'currentLanding'
     ]),
     emptySections: function () {
       return !this.showIntro && !this.$builder.sections.length
@@ -286,7 +286,7 @@ export default {
       return sections
     },
     setDevice (device) {
-       this.device = device
+      this.device = device
     },
     backToLandings () {
       this.save()
@@ -297,7 +297,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../../assets/sass/app.sass'
+@import '../../assets/sass/app'
 
 .artboard
   transform-origin: top center
@@ -497,7 +497,6 @@ export default {
   z-index: 200
   bottom: 3rem
   left: 4rem
-
 
 .b-landing-constructor__button
   width: 100%

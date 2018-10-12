@@ -24,7 +24,7 @@ export default {
     t: true
   }),
   created () {
-    this.u = this.url,
+    this.u = this.url
     this.t = this.getTarget(this.target)
   },
   methods: {
@@ -40,7 +40,7 @@ export default {
       this.$emit('setUrl', { url: this.u, target: s })
     },
     getTarget (target) {
-      return target === '_blank' ? true : false
+      return target === '_blank'
     },
     setTarget (target) {
       return target ? '_blank' : '_top'
@@ -72,7 +72,7 @@ export default {
 </template>
 
 <style lang="sass">
-@import '../../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/colors'
 
 .b-control-set-url
   &__label

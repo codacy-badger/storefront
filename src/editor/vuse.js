@@ -210,7 +210,7 @@ class Vuse {
         let component
         let sectionData
 
-        if (typeof section === "string") {
+        if (typeof section === 'string') {
           component = this.components[section].options
           sectionData = {
             name: component.name,

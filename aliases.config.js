@@ -9,6 +9,7 @@ const aliases = {
   '@utils': 'src/utils',
   '@store': 'src/store',
   '@plugins': 'src/plugins',
+  '@editor': 'src/editor',
   '@cscripts': 'src/cscripts'
 }
 
