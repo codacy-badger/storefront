@@ -424,7 +424,6 @@ require('@public/js/any-resize-event.min');
       this.el.addEventListener('focus', this.showStyler)
 
       if (this.options.resizable) {
-
         // listen event change border-radius
         let br = this.section.get(`${this.name}.styles['border-radius']`);
 

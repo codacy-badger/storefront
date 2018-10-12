@@ -12,7 +12,7 @@
 import * as types from '@plugins/Vuse/types'
 
 export default {
-  name: 'Title',
+  name: 'Title1',
   cover: '/img/covers/title1.png',
   group: 'titles',
   $schema: {

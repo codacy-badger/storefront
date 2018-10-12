@@ -90,7 +90,8 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
-        'background': false
+        'background': false,
+        'height': ''
       }
     })
   )],
