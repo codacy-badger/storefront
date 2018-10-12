@@ -16,7 +16,6 @@ import button1 from '@components/landings/buttons/button1'
 import button5 from '@components/landings/buttons/button5'
 import button6 from '@components/landings/buttons/button6'
 import title1 from '@components/landings/titles/title1'
-import title2 from '@components/landings/titles/title2'
 import delimiter from '@components/landings/delimiters/delimiter'
 import logo from '@components/landings/logos/logo'
 import footer from '@components/landings/footers/footer'
@@ -35,8 +34,6 @@ Vuse.component('Button5', button5)
 Vuse.component('Button6', button6)
 Vuse.component('Footer', footer)
 Vuse.component('Title1', title1)
-Vuse.component('Title2', title2)
-Vuse.component('Title2', title2)
 Vuse.component('Delimiter', delimiter)
 Vuse.component('Logo', logo)
 

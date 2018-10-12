@@ -28,26 +28,28 @@
           </div>
         </div>
       </div>
-      <div gallery-three-popup="" class="l-popup l-popup_flex flex_columns" v-show="true === $sectionData.isShowPopup">
-          <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
-          <div class="l-popup__logo">
-            <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}" :style="$sectionData.logos[0].logo">
-              <uploader class="l-popup__logo-img"
-                path="$sectionData.logos[0].logo"
-                :title="$sectionData.logos[0].alt"
-                :alt="$sectionData.logos[0].alt">
-              </uploader>
-            </div>
-          </div>
-          <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
-          <div class="b-gallery-three-btn-container">
-            <span class="b-gallery-three-btn-container__button"
-                  v-styler="$sectionData.button"
-                  v-text="$sectionData.button.text"
-                  v-bind:style="$sectionData.button.styles"
-              >
-              Начать игру
-            </span>
+      <div gallery-three-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
+          <div gallery-three-popup-padd="" v-bind:style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
+              <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
+              <div class="l-popup__logo">
+                <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}" :style="$sectionData.logos[0].logo">
+                  <uploader class="l-popup__logo-img"
+                    path="$sectionData.logos[0].logo"
+                    :title="$sectionData.logos[0].alt"
+                    :alt="$sectionData.logos[0].alt">
+                  </uploader>
+                </div>
+              </div>
+              <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+              <div class="b-gallery-three-btn-container">
+                <span class="b-gallery-three-btn-container__button"
+                      v-styler="$sectionData.button"
+                      v-text="$sectionData.button.text"
+                      v-bind:style="$sectionData.button.styles"
+                  >
+                  Начать игру
+                </span>
+              </div>
           </div>
       </div>
   </section>
@@ -89,7 +91,7 @@ export default {
     ],
     index: 0,
     isShowPopup: false,
-    heightFrame: '400',
+    popupStyles: { width: 'auto', margin: '0' },
     url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
     content: ''
   },
@@ -116,16 +118,28 @@ export default {
       this.openPopup(this.$sectionData.content)
     },
     openPopup () {
-      this.$sectionData.isShowPopup = true
       setTimeout(() => {
         this.setHeight()
-      }, 500)
+      }, 100)
     },
     setHeight () {
+      this.$sectionData.isShowPopup = true
+
       let el = document.getElementById('content')
-      let actualWidth = el.clientWidth
-      let calcHeight = actualWidth * 0.5625
+      let ab = document.getElementById('artboard')
+      let actualWidth = null
+      let calcHeight = null
+      let calcMargin = null
+
+      actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
+      calcHeight = actualWidth * 0.5625
+      calcMargin = (document.body.clientWidth - actualWidth) / 2
       el.style.height = calcHeight + 'px'
+
+      if (undefined !== this.$sectionData.popupStyles) {
+        this.$sectionData.popupStyles['width'] = actualWidth + 'px'
+        this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
+      }
     },
     closePopup () {
       this.$sectionData.isShowPopup = false
@@ -357,6 +371,11 @@ export default {
     display: -webkit-box
     display: -ms-flexbox
     display: flex
+  &__padd
+    position: relative
+    height: 100%
+    justify-content: center
+    align-items: center
 .l-popup__content
   border: 5px solid #fcff00
   background-color: #000

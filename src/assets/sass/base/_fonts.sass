@@ -1,0 +1,18 @@
+// Fonts
+@mixin font-face($name, $style, $path, $w: normal, $s: normal)
+  @font-face
+    font-family: $name + '-' + $style
+    src: url($path + $name + '-' + $style + '.eot')
+    src: url($path + $name + '-' + $style + '.eot?#iefix') format("embedded-opentype"), url($path + $name + '-' + $style +  '.woff') format("woff"), url($path + $name + '-' + $style + '.ttf') format("truetype"), url($path + $name + '-' + $style + '.svg#' + str-replace($name, ' ')) format("svg")
+    font-weight: $w
+    font-style: $s
+
+
+@include font-face('alice','regular', $path-fonts + 'alice/')
+@include font-face('opensans', 'regular', $path-fonts + 'opensans/')
+@include font-face('opensans', 'light', $path-fonts + 'opensans/')
+@include font-face('opensans', 'bold', $path-fonts + 'opensans/')
+@include font-face('opensans', 'semibold', $path-fonts + 'opensans/')
+
+
+

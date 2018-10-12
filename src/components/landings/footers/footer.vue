@@ -12,18 +12,23 @@
         </div>
       </div>
       <div class="b-footer__group b-footer__group_2">
-          <span class="b-layout-1__footer__el">
-            <span v-text="$sectionData.copyright.element.text" v-styler="$sectionData.copyright.element" :style="$sectionData.copyright.element.styles">
+          <span class="b-footer__group-el" v-for="(item, index) in $sectionData.copyrights" :key="index">
+            <span class="b-footer__group-el-text"
+              v-html="$sectionData.copyrights[index].element.text"
+              v-styler:for="{ el:$sectionData.copyrights[index].element, path: `$sectionData.copyrights[${index}].element`}"
+              :style="$sectionData.copyrights[index].element.styles"
+              >
             </span>
           </span>
         </div>
       <div class="b-footer__group b-footer__group_3">
-        <span v-for="(item, index) in $sectionData.buttons" :key="index">
-          <a @click.prevent="openLink(item)" target="_blank" :class="`$sectionData.buttons[${index}].button.classes`"
-            class="b-footer__link"
-            :href="$sectionData.buttons[index].element.href" v-html="$sectionData.buttons[index].element.text"
-            v-styler:for="{ el:$sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element`}"
-            :style="$sectionData.buttons[index].element.styles">
+        <span v-for="(item, index) in $sectionData.links" :key="index">
+          <a @click.prevent="openLink(item)" :target="$sectionData.links[index].element.target" class="b-footer__link"
+            :class="`$sectionData.links[${index}].button.classes`"
+            :href="$sectionData.links[index].element.href"
+            v-html="$sectionData.links[index].element.text"
+            v-styler:for="{ el:$sectionData.links[index].element, path: `$sectionData.links[${index}].element`}"
+            :style="$sectionData.links[index].element.styles">
           </a>
         </span>
       </div>
@@ -40,21 +45,21 @@ export default {
   group: 'footers',
   $schema: {
     mainStyle: types.StyleObject,
-    copyright: {
+    copyrights: [{
       element: types.Text
-    },
+    }],
     images: [
       types.Image, types.Image
     ],
-    buttons: [
+    links: [
       {
-        element: types.Button
+        element: types.Link
       },
       {
-        element: types.Button
+        element: types.Link
       },
       {
-        element: types.Button
+        element: types.Link
       }
     ]
   },
@@ -126,6 +131,10 @@ export default {
           margin: 2rem 0 0
         &_3
           order: 2
+    &-el
+      display: block
+      &-text
+        display: block
   &__logo
     width: 8rem
     height: 8rem

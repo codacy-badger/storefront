@@ -14,7 +14,9 @@ const DEFAULT_OPTIONS = {
   typography: false,
   colorize: false,
   box: false, // (colorer)
-  canCopy: false
+  canCopy: false,
+  background: false,
+  shape: false,
 }
 
 /**
@@ -28,14 +30,21 @@ const data = new Map([
     aligned: true,
     typography: true,
     removable: true,
-    colorize: true,
     styles: {
-      'text-align': false,
+      'font-family': "Open Sans",
+      'font-size': '2',
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
-      'font-size': false,
+      'text-align': false,
       'color': false,
+      'background-image': false,
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': false,
+      'justify-content': false
     }
   }))],
   //[types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
@@ -49,12 +58,27 @@ const data = new Map([
       'height': ''
     }
   }))],
-  [types.Link, () => ({
-    text: 'Link',
-    canCopy: true,
-    classes: [],
-    href: '' })
-  ],
+  [types.Link, () => (_.merge({}, DEFAULT_OPTIONS, {
+      canCopy: true,
+      hasLink: true,
+      removable: true,
+      typography: true,
+      text: 'Click Me!',
+      classes: [],
+      href: '',
+      target: '_blank',
+      styles: {
+        'color': '#000',
+        'border-color': false,
+        'font-size': '2',
+        'font-weight': false,
+        'font-style': false,
+        'font-family': "Open Sans",
+        'text-decoration': false,
+        'justify-content': false,
+      }
+    })
+  )],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
@@ -79,6 +103,7 @@ const data = new Map([
       removable: true,
       aligned: true,
       typography: true,
+      shape: true,
       text: 'Click Me!',
       classes: [],
       href: '',
@@ -91,10 +116,11 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': '1.4',
+        'font-size': '2',
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
+        'font-family': "Open Sans",
         'text-decoration': false,
         'justify-content': false,
         'width': '',

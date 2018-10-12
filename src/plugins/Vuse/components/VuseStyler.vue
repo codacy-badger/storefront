@@ -2,34 +2,34 @@
   <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
-      <li v-if="options.colorize">
-        <button class="styler-button" @click="updateOption('textColor')" title="Color">
-          <VuseIcon name="palettes"></VuseIcon>
-        </button>
-      </li>
+      <!-- aligned -->
       <li v-if="options.aligned">
         <button class="styler-button" @click="updateOption('align')" title="Text align">
           <VuseIcon name="align"></VuseIcon>
         </button>
       </li>
+      <!-- font and him styles-->
       <li v-if="options.typography">
         <button class="styler-button" @click="updateOption('textStyle')" title="Text style">
           <VuseIcon name="textStyle"></VuseIcon>
         </button>
       </li>
-      <li v-if="options.removable">
-        <button class="styler-button" @click="removeElement" title="Delete">
-          <VuseIcon name="trash"></VuseIcon>
-        </button>
-      </li>
-      <li v-if="options.box">
+      <!-- background -->
+      <li v-if="options.background">
         <button class="styler-button" @click="updateOption('colorer')" title="Background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
       </li>
+      <!-- link -->
       <li v-if="options.hasLink">
         <button class="styler-button" @click="updateOption('link')" title="Link">
           <VuseIcon name="link"></VuseIcon>
+        </button>
+      </li>
+      <!-- shape -->
+      <li v-if="options.shape">
+        <button class="styler-button" @click="updateOption('shape')" title="Change shape">
+          <VuseIcon name="fillet"></VuseIcon>
         </button>
       </li>
 
@@ -60,19 +60,29 @@
           </button>
         </li>
       </template>
+
       <template v-if="type === 'grid'">
-      <li>
-        <button class="styler-button" @click="selectDevice('mobile')">
-          <VuseIcon name="mobile"></VuseIcon>
+        <li>
+          <button class="styler-button" @click="selectDevice('mobile')">
+            <VuseIcon name="mobile"></VuseIcon>
+          </button>
+        </li>
+        <li>
+          <button class="styler-button" @click="selectDevice('desktop')">
+            <VuseIcon name="laptop"></VuseIcon>
+          </button>
+        </li>
+       </template>
+
+      <!-- remove -->
+      <li v-if="options.removable">
+        <button class="styler-button" @click="removeElement" title="Delete">
+          <VuseIcon name="trash"></VuseIcon>
         </button>
       </li>
-      <li>
-        <button class="styler-button" @click="selectDevice('desktop')">
-          <VuseIcon name="laptop"></VuseIcon>
-        </button>
-      </li>
-    </template>
-    </ul>
+
+    </ul><!--/.styler-list-->
+
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
@@ -190,32 +200,44 @@
           </div>
         </div>
       </li>
-      <li v-if="currentOption === 'textColor'">
-        <ul class="colorer">
-          <li v-for="(color, index) in colors">
-            <input type="radio" :class="`is-${color}`"
-                   name="colorer" :value="textColors[index]" v-model="textColor"/>
-          </li>
-        </ul>
-      </li>
+
+      <!-- Set link -->
       <li v-if="currentOption === 'link'">
-        <div class="input-group is-rounded is-primary">
-          <input class="input" type="text" @change="addLink" placeholder="type your link" v-model="url"/>
-        </div>
-      </li>
-      <!-- Text align -->
-      <li v-if="currentOption === 'align'">
-        <ControlAlign v-bind:isBox="options.box" @boxAligned="onBoxAligned" @textAligned="onTextAligned"></ControlAlign>
+        <ControlSetUrl
+          v-bind:url="options.href"
+          v-bind:target="options.target"
+          v-bind:isBox="options.box"
+          @setUrl="addLink">
+        </ControlSetUrl>
       </li>
 
+      <!-- Text align -->
+      <li v-if="currentOption === 'align'">
+        <ControlAlign
+          v-bind:isBox="options.box"
+          @boxAligned="onBoxAligned"
+          @textAligned="onTextAligned">
+        </ControlAlign>
+      </li>
+
+      <!-- Text style -->
       <li v-if="currentOption === 'textStyle'">
         <ControlStyleText
-          v-bind:isBox="options.box"
           v-bind:fontSize="fontSize"
-          v-bind:borderRadius="borderRadius"
           @styled="onBoxAligned"
-          @boxStyled="onBoxStyled"></ControlStyleText>
+          @boxStyled="onBoxStyled">
+        </ControlStyleText>
       </li>
+
+      <!-- shape -->
+      <li v-if="currentOption === 'shape'">
+        <ControlShape
+          v-bind:borderRadius="borderRadius"
+          @boxStyled="onBoxStyled">
+        </ControlShape>
+      </li>
+
+      <!-- -->
       <li v-if="currentOption === 'columnWidth'">
         <ul class="align">
           <li>
@@ -233,7 +255,8 @@
           </li>
         </ul>
       </li>
-    </ul>
+
+    </ul><!--/.styler-list-->
   </div>
 </template>
 
@@ -242,6 +265,8 @@ import Popper from 'popper.js'
 import VuseIcon from './VuseIcon'
 import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
+import ControlShape from './controls/TheControlShape.vue'
+import ControlSetUrl from './controls/TheControlSetUrl.vue'
 import { isParentTo } from './../util'
 import _clone from 'lodash-es/clone'
 import { Sketch } from 'vue-color'
@@ -265,6 +290,8 @@ require('@public/js/any-resize-event.min');
       VuseIcon,
       ControlAlign,
       ControlStyleText,
+      ControlShape,
+      ControlSetUrl,
       SketchColorPecker: Sketch
     },
     props: {
@@ -296,9 +323,6 @@ require('@public/js/any-resize-event.min');
       }
     },
     data: () => ({
-      colors: ['blue', 'green', 'red', 'black', 'white'],
-      textColors: ['#4da1ff', '#38E4B7', '#EA4F52', '#000000', '#FFFFFF'],
-      textColor: '',
       oldColorerColor: '',
       colorerColor: '',
       mouseTarget: '',
@@ -351,9 +375,6 @@ require('@public/js/any-resize-event.min');
       colorerColor: function () {
         this.changeColor();
       },
-      textColor: function () {
-        this.execute('forecolor', this.textColor)
-      },
       gridValue: function () {
         this.gridValue = Math.min(Math.max(this.gridValue, 0), 12);
         this.section.set(this.name, (grid) => {
@@ -372,18 +393,18 @@ require('@public/js/any-resize-event.min');
     },
     created() {
       if (this.type === 'button') {
-        let fs = this.section.get(`${this.name}.styles['font-size']`);
         let br = this.section.get(`${this.name}.styles['border-radius']`);
 
-        if (undefined !== fs) {
-          this.fontSize = parseInt(fs);
-        }
         if (undefined !== br) {
-          this.borderRadius = parseInt(br);
+          this.borderRadius = parseFloat(br)
         }
+      }
+      if (this.type === 'text' || this.type === 'button') {
+        let fs = this.section.get(`${this.name}.styles['font-size']`);
 
-        this.url = this.section.get(`${this.name}.href`);
-        this.el.contentEditable = 'true';
+        if (undefined !== fs) {
+          this.fontSize = parseFloat(fs)
+        }
       }
       if (this.type === 'text') {
         this.el.contentEditable = 'true';
@@ -391,7 +412,7 @@ require('@public/js/any-resize-event.min');
       if (this.type === 'title') {
         this.el.contentEditable = 'true';
       }
-      if (this.type === 'link') {
+      if (this.type === 'link' || this.type === 'button') {
         this.el.contentEditable = 'true';
         this.url = this.section.get(`${this.name}.href`);
       }
@@ -403,6 +424,13 @@ require('@public/js/any-resize-event.min');
       this.el.addEventListener('focus', this.showStyler)
 
       if (this.options.resizable) {
+
+        // listen event change border-radius
+        let br = this.section.get(`${this.name}.styles['border-radius']`);
+
+        if (undefined !== br) {
+          this.borderRadius = parseFloat(br)
+        }
         // listen resize event, add params to element
         let handler = () => {
           this.addStyle('width', `${this.el.offsetWidth}px`)
@@ -410,6 +438,14 @@ require('@public/js/any-resize-event.min');
         }
 
         this.el.addEventListener('onresize', _.debounce(handler, 100))
+      }
+      if (this.type === 'text' || this.type === 'button') {
+        // listen event change font-size
+        let fs = this.section.get(`${this.name}.styles['font-size']`);
+
+        if (undefined !== fs) {
+          this.fontSize = parseFloat(fs)
+        }
       }
     },
     updated() {
@@ -436,6 +472,7 @@ require('@public/js/any-resize-event.min');
       onBoxStyled (styles) {
         this.el.focus()
         this.addStyle(styles.type, `${styles.value}${styles.unit}`)
+        console.log(`${styles.value}`)
       },
       updateOption(option) {
         this.currentOption = option;
@@ -443,9 +480,9 @@ require('@public/js/any-resize-event.min');
           this.popper.update();
         })
       },
-      addLink() {
-        console.log('add link: ' + this.url);
-        this.section.set(`${this.name}.href`, this.url);
+      addLink(options) {
+        this.section.set(`${this.name}.href`, options.url);
+        this.section.set(`${this.name}.target`, options.target);
       },
       openLink() {
         if (this.$builder.isEditing || this.url == '') return;
@@ -944,7 +981,7 @@ label
   flex-direction: column
 
 .b-styler__bg_options__item
-  margin-bottom: 10px
+  margin-bottom: 0.2rem
 
 .b-font-size
   font-family: Helvetica Neue, Helvetica, Arial
