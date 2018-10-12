@@ -15,6 +15,7 @@
             <span class="hero-tile__name"
                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label` }"
                v-html="$sectionData.images[index].label.text"
+               :style="$sectionData.images[index].label.styles"
                >
             </span>
           </div>
@@ -23,6 +24,7 @@
           <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
             <h2 class="hero-detail__name h1"
                v-html="$sectionData.images[index].title.text"
+               :style="$sectionData.images[index].title.styles"
                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`} ">
             </h2>
             <!-- upload image -->
@@ -30,6 +32,7 @@
             <!--/upload image -->
             <p class="hero-detail__bio"
              v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`}"
+             :style="$sectionData.images[index].text.styles"
              v-html="$sectionData.images[index].text.text">
             </p>
           </div>

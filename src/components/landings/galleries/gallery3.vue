@@ -21,7 +21,8 @@
             <div>
               <span class="b-gallery-three-block__item-title"
                 v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title` }"
-                v-text="$sectionData.images[index].title.text"
+                v-html="$sectionData.images[index].title.text"
+                :style="$sectionData.images[index].title.styles"
                 >
               </span>
             </div>
