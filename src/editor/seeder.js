@@ -31,7 +31,7 @@ const data = new Map([
     removable: true,
     styles: {
       'font-family': 'Open Sans',
-      'font-size': '2',
+      'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -69,7 +69,7 @@ const data = new Map([
     styles: {
       'color': '#000',
       'border-color': false,
-      'font-size': '2',
+      'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
       'font-family': 'Open Sans',
@@ -116,7 +116,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': '2',
+        'font-size': 1.4,
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,

@@ -224,6 +224,7 @@
       <li v-if="currentOption === 'textStyle'">
         <ControlStyleText
           v-bind:fontSize="fontSize"
+          v-bind:fontFamily="fontFamily"
           @styled="onBoxAligned"
           @boxStyled="onBoxStyled">
         </ControlStyleText>
@@ -362,7 +363,8 @@ export default {
     videoBackgroundPosterSource: '',
     isRequestProcess: false,
     textSelectColor: '#000',
-    fontSize: 2,
+    fontSize: null,
+    fontFamily: null,
     borderRadius: 0,
     galleryItem: {
       link: false,
@@ -390,29 +392,11 @@ export default {
     }
   },
   created () {
-    if (this.type === 'button') {
-      let br = this.section.get(`${this.name}.styles['border-radius']`)
-
-      if (undefined !== br) {
-        this.borderRadius = parseFloat(br)
-      }
-    }
-    if (this.type === 'text' || this.type === 'button') {
-      let fs = this.section.get(`${this.name}.styles['font-size']`)
-
-      if (undefined !== fs) {
-        this.fontSize = parseFloat(fs)
-      }
-    }
     if (this.type === 'text') {
       this.el.contentEditable = 'true'
     }
     if (this.type === 'title') {
       this.el.contentEditable = 'true'
-    }
-    if (this.type === 'link' || this.type === 'button') {
-      this.el.contentEditable = 'true'
-      this.url = this.section.get(`${this.name}.href`)
     }
   },
   mounted () {
@@ -421,31 +405,10 @@ export default {
     this.el.addEventListener('click', this.showStyler)
     this.el.addEventListener('focus', this.showStyler)
 
-    if (this.options.resizable) {
-      // listen event change border-radius
-      let br = this.section.get(`${this.name}.styles['border-radius']`)
-
-      if (undefined !== br) {
-        this.borderRadius = parseFloat(br)
-      }
-      // listen resize event, add params to element
-      let handler = () => {
-        this.addStyle('width', `${this.el.offsetWidth}px`)
-        this.addStyle('height', `${this.el.offsetHeight}px`)
-      }
-
-      this.el.addEventListener('onresize', _.debounce(handler, 100))
-    }
-    if (this.type === 'text' || this.type === 'button') {
-      // listen event change font-size
-      let fs = this.section.get(`${this.name}.styles['font-size']`)
-
-      if (undefined !== fs) {
-        this.fontSize = parseFloat(fs)
-      }
-    }
+    this.setInitialValue()
   },
   updated () {
+    this.setInitialValue()
   },
   beforeDestroy () {
     this.hideStyler()
@@ -455,6 +418,35 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
+    setInitialValue () {
+      // listen resize event, add params to element
+      let handler = () => {
+        this.addStyle('width', `${this.el.offsetWidth}px`)
+        this.addStyle('height', `${this.el.offsetHeight}px`)
+      }
+      this.el.addEventListener('onresize', _.debounce(handler, 100))
+
+      if (this.type === 'button') {
+        // listen event change border-radius
+        let br = this.section.get(`${this.name}.styles['border-radius']`)
+        if (undefined !== br) {
+          this.borderRadius = parseFloat(br)
+        }
+      }
+      if (this.type === 'text' || this.type === 'button') {
+        // listen event change font-size
+        let fs = this.section.get(`${this.name}.styles['font-size']`)
+        if (undefined !== fs) {
+          this.fontSize = parseFloat(fs)
+        }
+
+        // listen event change font-family
+        let ff = this.section.get(`${this.name}.styles['font-family']`)
+        if (undefined !== ff) {
+          this.fontFamily = ff
+        }
+      }
+    },
     onBoxAligned (value) {
       this.addTextStyle(value[0], value[1], value[2])
     },
@@ -469,7 +461,6 @@ export default {
     onBoxStyled (styles) {
       this.el.focus()
       this.addStyle(styles.type, `${styles.value}${styles.unit}`)
-      console.log(`${styles.value}`)
     },
     updateOption (option) {
       this.currentOption = option

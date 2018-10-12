@@ -1,6 +1,7 @@
 <template>
     <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one" target="_blank"
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one"
+           @click.prevent="openLink(item)" :target="$sectionData.buttons[index].element.target"
            v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
            v-html="$sectionData.buttons[index].element.text"
            :href="$sectionData.buttons[index].element.href"
@@ -27,6 +28,21 @@ export default {
     id: {
       type: Number,
       required: true
+    }
+  },
+  methods: {
+    openLink (el) {
+      if (this.$builder.isEditing) return
+
+      if (!el) {
+        return
+      }
+
+      const href = el.href
+
+      if (el && undefined !== href) {
+        window.open(href)
+      }
     }
   }
 }

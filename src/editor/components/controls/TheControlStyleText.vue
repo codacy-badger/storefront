@@ -28,6 +28,10 @@ export default {
     fontSize: {
       type: Number,
       required: true
+    },
+    fontFamily: {
+      type: String,
+      required: true
     }
   },
   data: () => ({
@@ -47,6 +51,7 @@ export default {
   }),
   created () {
     this.fs = this.fontSize
+    this.fontName = this.fontFamily
   },
   methods: {
     stylize (value) {
