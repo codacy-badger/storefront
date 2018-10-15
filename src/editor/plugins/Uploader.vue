@@ -84,8 +84,8 @@ export default {
   &-input
     position: absolute
     top: 0
-    right: 0
-    bottom: 0
+    right: 1rem
+    bottom: 1rem
     left: 0
     width: 100%
     opacity: 0
@@ -93,9 +93,9 @@ export default {
     cursor: pointer
 
   > img
-    width: auto
-    display: block
-    height: 100%
+    width: 100%
+    display: inline-block
+    max-height: 100%
     .is-mobile &
        height: auto
     @media only screen and (max-width: 540px)

@@ -60,12 +60,11 @@ export default {
     resize: vertical
     overflow: hidden
 .b-button-fifth
-  font-family: Helvetica, Arial, sans-serif
+  font-family: 'Open Sans'
   text-decoration: none
-  font-size: 2.3rem
+  font-size: 3rem
   background-color: #a7a1a1
   color: #fff
-  text-transform: uppercase
   padding: 1.5rem 0 2rem 0
   width: 30rem
   margin: 2rem
@@ -76,6 +75,7 @@ export default {
   display: flex
   align-items: center
   justify-content: center
+  flex-direction: column
   transition: all 200ms
   &.is-editable
     resize: both

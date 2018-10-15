@@ -61,8 +61,8 @@ export default {
     overflow: hidden
 .b-button-sixth
   position: relative
-  font-size: 2.3rem
-  font-family: Helvetica, Arial, sans-serif
+  font-size: 3rem
+  font-family: 'Open Sans'
   line-height: 1
   width: 20rem
   min-width: 10rem
@@ -72,10 +72,10 @@ export default {
   background-color: #a7a1a1
   border: transparent solid  0.2rem
   border-color: #a7a1a1
-  text-transform: uppercase
   display: flex
   align-items: center
   justify-content: center
+  flex-direction: column
   user-select: none
   cursor: pointer
   animation: animation-button-sixth 1s linear infinite
@@ -106,12 +106,6 @@ export default {
   &.is-editable
     resize: both
     overflow: hidden
-  .is-tablet &,
-  .is-mobile &
-    font-size: 2rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem
 
 @keyframes animation-button-sixth
   0%

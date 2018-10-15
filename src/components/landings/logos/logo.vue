@@ -1,10 +1,14 @@
 <template>
   <section class="l-logo"
-           v-styler:section="$sectionData.mainStyle"
-           :class="$sectionData.mainStyle.classes"
-           v-bind:style="$sectionData.mainStyle.styles">
-    <uploader class="b-logo" path="$sectionData.logos[0].logo"
-              :title="$sectionData.logos[0].alt" :alt="$sectionData.logos[0].alt"></uploader>
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    v-bind:style="$sectionData.mainStyle.styles">
+      <div v-for="(logo, index) in $sectionData.images" :key="index" class="b-logo">
+        <uploader class="b-logo__img" :path="`$sectionData.images[${index}].element`"
+          v-styler:for="{ el: $sectionData.images[index].element, path: `$sectionData.images[${index}].element` }"
+          v-bind:style="$sectionData.images[index].element.styles"
+          ></uploader>
+      </div>
   </section>
 </template>
 
@@ -17,12 +21,8 @@ export default {
   group: 'logos',
   $schema: {
     mainStyle: types.StyleObject,
-    logos: [
-      {
-        path: 'https://gn518.cdn.gamenet.ru/TY0Xv2riHu/6zP7H/o_wZ8FT.png',
-        alt: 'Default Logo',
-        logo: types.Image
-      }
+    images: [
+      { element: types.Image }
     ]
   },
   props: {
@@ -47,19 +47,21 @@ export default {
     resize: vertical
     overflow: hidden
 .b-logo
-  display: block
+  display: inline-block
   margin: 1rem auto
-  max-width: 80%
-  height: 100%
-  .is-mobile &
-    margin: 1rem auto
-    height: auto
-  @media only screen and (max-width: 540px)
-    &
+  text-align: center
+  &__img
+    min-width: 5rem
+    height: 100%
+    padding: 1rem
+    .is-editable &
+      resize: both
+      overflow: hidden
+    .is-mobile &
       margin: 1rem auto
       height: auto
-  &.is-editable
-    img
-      resize: vertical
-      overflow: hidden
+    @media only screen and (max-width: 540px)
+      &
+        margin: 1rem auto
+        height: auto
 </style>

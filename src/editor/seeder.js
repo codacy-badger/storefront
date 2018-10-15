@@ -53,7 +53,7 @@ const data = new Map([
     alt: 'Default image',
     url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
     styles: {
-      'width': '',
+      'width': '15rem',
       'height': ''
     }
   }))],
@@ -63,17 +63,22 @@ const data = new Map([
     removable: true,
     typography: true,
     text: 'Click Me!',
-    classes: [],
     href: '',
     target: '_blank',
     styles: {
-      'color': '#000',
-      'border-color': false,
+      'font-family': 'Open Sans',
       'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
-      'font-family': 'Open Sans',
       'text-decoration': false,
+      'text-align': false,
+      'color': false,
+      'background-image': false,
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': false,
       'justify-content': false
     }
   })
@@ -116,7 +121,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': 1.4,
+        'font-size': 3,
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,

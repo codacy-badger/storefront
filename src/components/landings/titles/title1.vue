@@ -45,7 +45,7 @@ export default {
     overflow: hidden
   &__title
     width: 100%
-    font-size: 4rem
+    font-size: 1.5rem
     display: block
   &::selection, & ::selection
     color: #ff0

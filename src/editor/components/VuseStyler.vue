@@ -398,6 +398,12 @@ export default {
     if (this.type === 'title') {
       this.el.contentEditable = 'true'
     }
+    if (this.type === 'link') {
+      this.el.contentEditable = 'true'
+    }
+    if (this.type === 'button') {
+      this.el.contentEditable = 'true'
+    }
   },
   mounted () {
     if (!this.$builder.isEditing) return
@@ -433,7 +439,7 @@ export default {
           this.borderRadius = parseFloat(br)
         }
       }
-      if (this.type === 'text' || this.type === 'button') {
+      if (this.type === 'text' || this.type === 'button' || this.type === 'link') {
         // listen event change font-size
         let fs = this.section.get(`${this.name}.styles['font-size']`)
         if (undefined !== fs) {

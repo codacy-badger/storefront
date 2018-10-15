@@ -32,14 +32,13 @@
       <div gallery-three-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
           <div gallery-three-popup-padd="" v-bind:style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
               <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
-              <div class="l-popup__logo">
-                <div class="l-popup__logo-block" v-bind:class="{'is-editable': $builder.isEditing}" :style="$sectionData.logos[0].logo">
-                  <uploader class="l-popup__logo-img"
-                    path="$sectionData.logos[0].logo"
-                    :title="$sectionData.logos[0].alt"
-                    :alt="$sectionData.logos[0].alt">
-                  </uploader>
-                </div>
+              <div class="l-popup__logos">
+                  <div v-for="(logo, index) in $sectionData.logos" v-bind:class="{'is-editable': $builder.isEditing}" :key="index" class="b-logo">
+                    <uploader class="b-logo__img" :path="`$sectionData.logos[${index}].element`"
+                      v-styler:for="{ el: $sectionData.logos[index].element, path: `$sectionData.logos[${index}].element` }"
+                      :style="$sectionData.logos[index].element.styles"
+                      ></uploader>
+                  </div>
               </div>
               <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
               <div class="b-gallery-three-btn-container">
@@ -85,9 +84,7 @@ export default {
     ],
     logos: [
       {
-        path: 'https://gn518.cdn.gamenet.ru/TY0Xv2riHu/6zP7H/o_wZ8FT.png',
-        alt: 'Default Logo',
-        logo: types.Image
+        element: types.Image
       }
     ],
     index: 0,
@@ -338,22 +335,10 @@ export default {
         resize: both
         overflow: hidden
 
-.l-popup__logo
-  margin: 2rem
-  width: 80%
+.l-popup__logos
+  margin: 2rem 0
+  width: 100%
   text-align: center
-  &-block
-    min-width: 10rem
-    height: auto
-    margin: 0 auto
-    &.is-editable
-      resize: both
-      overflow: hidden
-      padding: 1rem
-  &-img
-    margin: 0 auto
-    height: 100%
-    display: inline-block
 .l-popup
   display: none
   position: fixed
