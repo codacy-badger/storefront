@@ -80,7 +80,7 @@ function createPWA (output, payload) {
 function download (assets) {
   const frag = this.outputFragment()
   const artboard = frag.querySelector('#artboard')
-  const title = document.title
+  const title = this.settings.title
   const zip = new JSZip()
   const output = zip.folder('project')
   const jsFolder = output.folder('js/')
@@ -102,6 +102,7 @@ function download (assets) {
     .then(() => {
       cleanDOM(frag)
       let styles = this.getCss(frag)
+      let bodyStyles = this.getBodyStyles()
       output.file('index.html',
         `<html>
           <head>
@@ -113,7 +114,7 @@ function download (assets) {
               ${styles}
             </style>
           </head>
-          <body>
+          <body style="${bodyStyles} height: 100%">
             ${artboard.innerHTML}
           <script src="js/cjs.js"></script>
           </body>

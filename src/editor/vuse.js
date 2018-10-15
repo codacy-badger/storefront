@@ -5,6 +5,7 @@ import VuseRenderer from './components/VuseRenderer.vue'
 import styler from './styler'
 import mixin from './mixin'
 import { cleanDOM } from './util'
+import * as _ from 'lodash-es'
 
 let PLUGINS = []
 let mixier = {}
@@ -262,12 +263,13 @@ class Vuse {
     const printDocument = printPreview.document
     cleanDOM(frag)
     let styles = this.getCss(frag)
+    let bodyStyles = this.getBodyStyles()
     printDocument.open()
     printDocument.write(
       `<!DOCTYPE html>
         <html>
           <head>
-            <title>${this.title}</title>
+            <title>${this.settings.title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto" rel="stylesheet">
@@ -275,7 +277,7 @@ class Vuse {
               ${styles}
             </style>
           </head>
-          <body class="b-body_preview">
+          <body class="b-body_preview" style="${bodyStyles} height: 100%">
             ${artboard.innerHTML}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
           <body>
@@ -290,6 +292,25 @@ class Vuse {
     }
 
     return styles
+  }
+
+  /**
+   * get inline body styles
+   * @returns {string}
+   */
+  getBodyStyles () {
+    if (!!this.settings.styles) {
+      let styles = ''
+      Object.keys(this.settings.styles).forEach((i) => {
+        if (this.settings.styles[i] && i !== 'backgroundImage')
+          styles =  styles + `${_.kebabCase(i)}: ${this.settings.styles[i]};`
+        if (this.settings.styles[i] && i === 'backgroundImage')
+          styles =  styles + `${_.kebabCase(i)}: url(${this.settings.styles[i]});`
+      })
+      return styles
+    } else {
+      return ''
+    }
   }
 
   /**

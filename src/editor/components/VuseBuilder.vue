@@ -1,73 +1,108 @@
 <template>
-    <div>
-        <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing}, device]">
-            <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
-            <div class="controller-intro" v-if="emptySections">
-              <h3>&larr; Choose layout from the menu</h3>
-            </div>
-        </div>
-        <div class="controller">
-            <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
-                <label for="projectName">Hello, start your project</label>
-                <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
-                <template v-if="themes">
-                    <div class="controller-themes">
-                        <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
-                    </div>
-                </template>
-            </div>
-
-            <div class="controller-panel">
-              <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
-                <VuseIcon name="floppy"></VuseIcon>
-              </button>
-              <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
-                  <VuseIcon name="eye"></VuseIcon>
-              </button>
-              <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
-                  <VuseIcon name="download"></VuseIcon>
-              </button>
-              <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
-                  <VuseIcon name="trash"></VuseIcon>
-              </button>
-              <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
-                  <VuseIcon name="undo"></VuseIcon>
-              </button>
-              <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
-                  <VuseIcon name="sort"></VuseIcon>
-              </button>
-              <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
-                  <VuseIcon name="plus"></VuseIcon>
-              </button>
-              <button class="controller-button is-dark" tooltip-position="top" tooltip="Back to landings" @click="backToLandings">
-                <VuseIcon name="back"></VuseIcon>
-              </button>
-            </div>
-            <div class="main-panel">
-              <button class="controller-button" tooltip-position="top" tooltip="on desktop" :class="{ 'is-blue': device === 'is-desktop', 'is-green': device !== 'is-desktop' }" @click="setDevice('is-desktop')">
-                <VuseIcon name="monitor"></VuseIcon>
-              </button>
-              <button class="controller-button" tooltip-position="top" tooltip="on laptop" :class="{ 'is-blue': device === 'is-laptop', 'is-green': device !== 'is-laptop' }" @click="setDevice('is-laptop')">
-                <VuseIcon name="laptop"></VuseIcon>
-              </button>
-              <button class="controller-button" tooltip-position="top" tooltip="on tablet" :class="{ 'is-blue': device === 'is-tablet', 'is-green': device !== 'is-tablet' }" @click="setDevice('is-tablet')">
-                <VuseIcon name="tablet"></VuseIcon>
-              </button>
-              <button class="controller-button" tooltip-position="top" tooltip="on mobile" :class="{ 'is-blue': device === 'is-mobile', 'is-green': device !== 'is-mobile' }" @click="setDevice('is-mobile')">
-                <VuseIcon name="mobile"></VuseIcon>
-              </button>
-            </div>
-        </div>
-        <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
-            <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
-                <div class="menu-header" @click="toggleGroupVisibility"><span class="menu-title">{{ name }}</span><span class="menu-icon">
-          <VuseIcon name="arrowDown"></VuseIcon></span></div>
-                <div class="menu-body">
-                    <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
-                </div>
-            </li>
-        </ul>
+  <div>
+    <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing}, device]">
+      <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
+      <div class="controller-intro" v-if="emptySections">
+        <h3>&larr; Choose layout from the menu</h3>
+      </div>
     </div>
+    <div class="controller">
+        <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
+            <label for="projectName">Hello, start your project</label>
+            <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
+            <template v-if="themes">
+                <div class="controller-themes">
+                    <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
+                </div>
+            </template>
+        </div>
+
+        <div class="controller-panel">
+          <button class="controller-button is-green" tooltip-position="top" tooltip="Page settings" @click="showSettings = true">
+            <VuseIcon name="floppy"></VuseIcon>
+          </button>
+          <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
+            <VuseIcon name="floppy"></VuseIcon>
+          </button>
+          <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
+              <VuseIcon name="eye"></VuseIcon>
+          </button>
+          <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
+              <VuseIcon name="download"></VuseIcon>
+          </button>
+          <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
+              <VuseIcon name="trash"></VuseIcon>
+          </button>
+          <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
+              <VuseIcon name="undo"></VuseIcon>
+          </button>
+          <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
+              <VuseIcon name="sort"></VuseIcon>
+          </button>
+          <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
+              <VuseIcon name="plus"></VuseIcon>
+          </button>
+          <button class="controller-button is-dark" tooltip-position="top" tooltip="Back to landings" @click="backToLandings">
+            <VuseIcon name="back"></VuseIcon>
+          </button>
+        </div>
+        <div class="main-panel">
+          <button class="controller-button" tooltip-position="top" tooltip="on desktop" :class="{ 'is-blue': device === 'is-desktop', 'is-green': device !== 'is-desktop' }" @click="setDevice('is-desktop')">
+            <VuseIcon name="monitor"></VuseIcon>
+          </button>
+          <button class="controller-button" tooltip-position="top" tooltip="on laptop" :class="{ 'is-blue': device === 'is-laptop', 'is-green': device !== 'is-laptop' }" @click="setDevice('is-laptop')">
+            <VuseIcon name="laptop"></VuseIcon>
+          </button>
+          <button class="controller-button" tooltip-position="top" tooltip="on tablet" :class="{ 'is-blue': device === 'is-tablet', 'is-green': device !== 'is-tablet' }" @click="setDevice('is-tablet')">
+            <VuseIcon name="tablet"></VuseIcon>
+          </button>
+          <button class="controller-button" tooltip-position="top" tooltip="on mobile" :class="{ 'is-blue': device === 'is-mobile', 'is-green': device !== 'is-mobile' }" @click="setDevice('is-mobile')">
+            <VuseIcon name="mobile"></VuseIcon>
+          </button>
+        </div>
+    </div>
+    <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
+        <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
+            <div class="menu-header" @click="toggleGroupVisibility"><span class="menu-title">{{ name }}</span><span class="menu-icon">
+      <VuseIcon name="arrowDown"></VuseIcon></span></div>
+            <div class="menu-body">
+                <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
+            </div>
+        </li>
+    </ul>
+    <aside class="page-settings" :class="{ 'is-visiable': showSettings }">
+      <form v-on:submit.prevent="applySettings">
+        <fieldset>
+          <legend>Page title</legend>
+          <input type="text" v-model="pageTitle" placeholder="type awesome title">
+        </fieldset>
+        <fieldset>
+          <legend>Page background</legend>
+          <div><input type="text" v-model="pageBackgroundUrl" placeholder="background url"></div>
+          <div><input type="text" v-model="pageBackgroundColor" placeholder="background color (#000000)"></div>
+          <div>
+            <span class="page-settings__label">Background size</span>
+            <select name="background-size" id="" v-model="bgSize">
+              <option value="cover">cover</option>
+              <option value="contain">contain</option>
+            </select>
+          </div>
+          <div>
+            <input type="checkbox" v-model="bgRepeat" true-value="repeat" false-value="no-repeat" name="bgrepeat" id="bgrepeat">
+            <label for="bgrepeat">Background repeat</label>
+          </div>
+          <div>
+            <input type="checkbox" v-model="bgAttachment" true-value="fixed" false-value="scroll" name="bgfix" id="bgfix">
+            <label for="bgfix">Fix background</label>
+          </div>
+        </fieldset>
+        <div class="page-settings__controls">
+          <input type="submit" value="Save" class="page-settings__save">
+          <button class="page-settings__cancel">Cancel</button>
+        </div>
+      </form>
+    </aside>
+  </div>
 </template>
 
 <script>
@@ -101,7 +136,15 @@ export default {
       sections: this.getSections(),
       currentSection: '',
       groups: {},
-      device: 'is-desktop'
+      device: 'is-desktop',
+      showSettings: false,
+      pageTitle: '',
+      pageBackgroundUrl: '',
+      pageBackgroundColor: '',
+      bgSize: '',
+      bgAttachment: '',
+      bgRepeat: '',
+      ogTags: {}
     }
   },
 
@@ -145,6 +188,7 @@ export default {
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
+    this.$builder.settings = {}
     const groups = this.$refs.menu.querySelectorAll('.menu-body')
     const _self = this
     groups.forEach((group) => {
@@ -291,6 +335,29 @@ export default {
     backToLandings () {
       this.save()
       this.$router.push({ path: `/dashboard` })
+    },
+    applySettings () {
+      const data = {
+        title: this.pageTitle || false,
+        styles: {
+          backgroundImage: this.pageBackgroundUrl || false,
+          backgroundColor: this.pageBackgroundColor || false,
+          backgroundAttachment: this.bgAttachment,
+          backgroundRepeat: this.bgRepeat,
+          backgroundSize: this.bgSize
+        }
+      }
+
+      this.styleArtboard(data.styles)
+      this.$builder.settings = data
+
+      this.showSettings = false
+    },
+    styleArtboard (styles) {
+      Object.keys(styles).forEach((style) => {
+        if (styles[style] && style !== 'backgroundImage') this.$builder.rootEl.style[style] = styles[style]
+        if (styles[style] && style === 'backgroundImage') this.$builder.rootEl.style[style] = `url(${styles[style]})`
+      })
     }
   }
 }
@@ -532,5 +599,64 @@ export default {
 .floatHover
   cursor: pointer
   box-shadow: 0 14px 28px opacify($black, 0.125), 0 10px 10px opacify($black, 0.1)
+
+.page-settings
+  user-select: none
+  -moz-user-select: none
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  margin: 0
+  width: 45rem
+  background: #fff
+  padding: 2rem 1rem
+  display: flex
+  flex-direction: column
+  overflow-y: auto
+  list-style: none
+  transition: 0.4s
+  box-shadow: 0.1rem 0 1rem #323c47
+  transform: translate3d(100%, 0, 0)
+  &.is-visiable
+    transform: translate3d(0, 0, 0)
+  &__label
+    display: block
+    margin-bottom: 5px
+  &__controls
+    padding: 0 21px
+  &__save, &__cancel
+    border: none
+    font-size: 14px
+    border-radius: 3px
+    color: #fff
+    padding: 5px 10px
+    margin-right: 8px
+    cursor: pointer
+    &:active
+      position: relative
+      top: 1px
+  &__save
+    background: $green
+    &:hover
+      background: lighten($green, 10%)
+  &__cancel
+    background: $dark
+    &:hover
+      background: lighten($dark, 10%)
+  fieldset
+    border: 1px solid #e7e8eb
+    border-radius: 3px
+    padding: 15px 20px
+    margin-bottom: 20px
+  legend
+    font-size: 18px
+  input[type="text"], select
+    border: 1px solid #e7e8eb
+    border-radius: 3px
+    padding: 5px 10px
+    font-size: 14px
+    width: 100%
+    margin-bottom: 10px
 
 </style>
