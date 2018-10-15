@@ -246,6 +246,7 @@ class Vuse {
     return JSON.stringify({
       slug: this.landing,
       title: this.title,
+      settings: this.settings,
       sections: this.sections.map(s => ({
         name: s.name,
         data: s.data

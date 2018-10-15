@@ -18,7 +18,7 @@
         </div>
 
         <div class="controller-panel">
-          <button class="controller-button is-green" tooltip-position="top" tooltip="Page settings" @click="showSettings = true">
+          <button class="controller-button is-green" tooltip-position="top" tooltip="Page settings" @click="showSettings = !showSettings">
             <VuseIcon name="floppy"></VuseIcon>
           </button>
           <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
@@ -162,6 +162,7 @@ export default {
   created () {
     // sets the initial data.
     this.$builder.set(this.data)
+    this.$builder.settings = {}
     this.title = this.$builder.title
     this.themes = this.$builder.themes
     this.generateGroups()
@@ -175,6 +176,9 @@ export default {
         } else {
           this.addTheme(Object.assign(this.data, this.currentLanding.theme))
         }
+
+        this.$builder.settings = data.settings
+        this.styleArtboard(this.$builder.settings.styles)
       })
     }
   },
@@ -188,7 +192,6 @@ export default {
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
-    this.$builder.settings = {}
     const groups = this.$refs.menu.querySelectorAll('.menu-body')
     const _self = this
     groups.forEach((group) => {
