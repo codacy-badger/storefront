@@ -528,6 +528,8 @@ export default {
   display: inline-block
   vertical-align: middle
   cursor: pointer
+  &_trash
+    fill: red
 
 .floatHover
   cursor: pointer

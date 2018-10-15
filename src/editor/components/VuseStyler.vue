@@ -77,7 +77,7 @@
       <!-- remove -->
       <li v-if="options.removable">
         <button class="styler-button" @click="removeElement" title="Delete">
-          <VuseIcon name="trash"></VuseIcon>
+          <VuseIcon name="trash" class="vuse-icon_trash"></VuseIcon>
         </button>
       </li>
 
@@ -600,7 +600,7 @@ export default {
       this.isVisible = true
 
       if (!this.popper) {
-        const position = this.$props.type === 'section' ? 'left-start' : 'top'
+        const position = this.$props.type === 'section' ? 'left-start' : 'bottom'
         this.popper = new Popper(this.el, this.$refs.styler, { placement: position })
       }
 
@@ -764,7 +764,6 @@ export default {
       }
     },
     showColorPeckerSection: function () {
-      /* $(this.$refs['styler']).css('transform', 'translate3d(20px, 5px, 0px)'); */
       this.showBackgroundSettingsSection('color')
     },
     showBackgroundSettingsSection: function (type) {
@@ -779,14 +778,6 @@ export default {
       if (!this.backgroundSettingsShow.hasOwnProperty(type)) {
         return
       }
-
-      /* let position = '899px'
-
-      if (type === 'link') {
-        position = '969px'
-      }
-
-      $(this.$refs['styler']).css('transform', 'translate3d(' + position + ', 5px, 0px)'); */
 
       this.backgroundSettingsShow[type] = true
     },
