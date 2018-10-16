@@ -323,6 +323,19 @@ class Vuse {
   }
 
   /**
+   * Return open graph meta tags
+   * @param tags
+   * @returns {string}
+   */
+  getOgMetaTags (tags) {
+    let og = ''
+    tags.forEach((i) => {
+      og = og + `<meta property="${i.property}" content="${i.content}">`
+    })
+    return og
+  }
+
+  /**
      * Exports the builder instance to a specified output. default is json.
      *
      * @param {String} method

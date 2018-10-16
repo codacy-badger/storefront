@@ -105,6 +105,22 @@
         </fieldset>
         <fieldset>
           <legend>OpenGraph</legend>
+          <div v-for="(item, index) in ogTags" :key="index" class="og-tag">
+            <select v-model="item.property" class="og-input">
+              <option value="og:title" selected>og:title</option>
+              <option value="og:description">og:description</option>
+              <option value="og:image">og:image</option>
+              <option value="og:type">og:type</option>
+              <option value="og:url">og:url</option>
+              <option value="og:locale">og:locale</option>
+              <option value="og:locale:alternate">og:locale:alternate</option>
+              <option value="og:video">og:video</option>
+            </select>
+            <input type="text" v-model="item.content" placeholder="content" class="og-input">
+            <button class="controller-button is-green" tooltip-position="top" tooltip="add tag" @click.prevent="addTag" v-if="index === ogTags.length-1 ">
+              <VuseIcon name="plus"></VuseIcon>
+            </button>
+          </div>
         </fieldset>
         <div class="page-settings__controls">
           <input type="submit" value="Save" class="page-settings__save">
@@ -155,7 +171,7 @@ export default {
       bgAttachment: '',
       bgRepeat: '',
       bgVideo: '',
-      ogTags: {}
+      ogTags: [ { property: '', content: '' } ]
     }
   },
 
@@ -356,6 +372,7 @@ export default {
       const data = {
         title: this.pageTitle || false,
         video: this.bgVideo || false,
+        ogTags: this.ogTags,
         styles: {
           backgroundImage: this.pageBackgroundUrl || false,
           backgroundColor: this.pageBackgroundColor || false,
@@ -389,6 +406,9 @@ export default {
       node.setAttribute('muted', true)
       node.innerHTML = `<source src="${video}" type="video/mp4"></source>`
       document.body.appendChild(node)
+    },
+    addTag () {
+      this.ogTags.push({ property: '', content: '' })
     }
   }
 }
@@ -691,5 +711,13 @@ export default {
   input[type="checkbox"]
     position: relative
     top: 1px
+  .og-input
+    width: 87% !important
+  .og-tag
+    position: relative
+    button
+      position: absolute
+      right: 0
+      top: 10px
 
 </style>
