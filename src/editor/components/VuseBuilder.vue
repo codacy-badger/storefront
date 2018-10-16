@@ -117,6 +117,9 @@
               <option value="og:video">og:video</option>
             </select>
             <input type="text" v-model="item.content" placeholder="content" class="og-input">
+            <button class="controller-button" @click.prevent="deleteTag(index)" v-if="index !== ogTags.length-1 ">
+              <VuseIcon name="trash"></VuseIcon>
+            </button>
             <button class="controller-button is-green" tooltip-position="top" tooltip="add tag" @click.prevent="addTag" v-if="index === ogTags.length-1 ">
               <VuseIcon name="plus"></VuseIcon>
             </button>
@@ -409,6 +412,9 @@ export default {
     },
     addTag () {
       this.ogTags.push({ property: '', content: '' })
+    },
+    deleteTag (index) {
+      this.ogTags.splice(index, 1)
     }
   }
 }
@@ -660,7 +666,7 @@ export default {
   margin: 0
   width: 45rem
   background: #fff
-  padding: 2rem 1rem
+  padding: 2rem 1rem 8rem
   display: flex
   flex-direction: column
   overflow-y: auto
@@ -715,9 +721,9 @@ export default {
     width: 87% !important
   .og-tag
     position: relative
-    button
+    .controller-button
       position: absolute
       right: 0
-      top: 10px
+      top: 20px
 
 </style>
