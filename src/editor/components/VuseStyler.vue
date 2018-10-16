@@ -600,7 +600,7 @@ export default {
       this.isVisible = true
 
       if (!this.popper) {
-        const position = this.$props.type === 'section' ? 'bottom-end' : 'bottom'
+        const position = this.$props.type === 'section' ? 'top-end' : 'bottom'
         this.popper = new Popper(this.el, this.$refs.styler, { placement: position })
       }
 
