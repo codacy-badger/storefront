@@ -265,6 +265,7 @@ class Vuse {
     cleanDOM(frag)
     let styles = this.getCss(frag)
     let bodyStyles = this.getBodyStyles()
+    let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
     printDocument.open()
     printDocument.write(
       `<!DOCTYPE html>
@@ -279,6 +280,7 @@ class Vuse {
             </style>
           </head>
           <body class="b-body_preview" style="${bodyStyles} height: 100%">
+            ${video}
             ${artboard.innerHTML}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
           <body>
@@ -312,6 +314,12 @@ class Vuse {
     } else {
       return ''
     }
+  }
+
+  getVideoBg (video) {
+    return `<video id="video_bg" autoplay="autoplay" loop="loop" muted="muted">
+              <source src="${video}" type="video/mp4"></source>
+            </video>`
   }
 
   /**

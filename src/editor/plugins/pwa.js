@@ -89,8 +89,6 @@ function download (assets) {
     const assetsClient = new XMLHttpRequest()
     assetsClient.open('GET', assets.js)
     assetsClient.onload = function () {
-      console.log(this)
-      console.log(this.response)
       resolve(this.response)
     }
     assetsClient.send(null)
@@ -103,6 +101,7 @@ function download (assets) {
       cleanDOM(frag)
       let styles = this.getCss(frag)
       let bodyStyles = this.getBodyStyles()
+      let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
       output.file('index.html',
         `<html>
           <head>
@@ -115,6 +114,7 @@ function download (assets) {
             </style>
           </head>
           <body style="${bodyStyles} height: 100%">
+            ${video}
             ${artboard.innerHTML}
           <script src="js/cjs.js"></script>
           </body>

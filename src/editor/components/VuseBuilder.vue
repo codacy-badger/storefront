@@ -19,7 +19,7 @@
 
         <div class="controller-panel">
           <button class="controller-button is-green" tooltip-position="top" tooltip="Page settings" @click="showSettings = !showSettings">
-            <VuseIcon name="floppy"></VuseIcon>
+            <VuseIcon name="cog"></VuseIcon>
           </button>
           <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
             <VuseIcon name="floppy"></VuseIcon>
@@ -95,6 +95,16 @@
             <input type="checkbox" v-model="bgAttachment" true-value="fixed" false-value="scroll" name="bgfix" id="bgfix">
             <label for="bgfix">Fix background</label>
           </div>
+          <br><br>
+          <div>
+            <span class="page-settings__label">
+              Video background
+            </span>
+            <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>OpenGraph</legend>
         </fieldset>
         <div class="page-settings__controls">
           <input type="submit" value="Save" class="page-settings__save">
@@ -144,6 +154,7 @@ export default {
       bgSize: '',
       bgAttachment: '',
       bgRepeat: '',
+      bgVideo: '',
       ogTags: {}
     }
   },
@@ -177,8 +188,10 @@ export default {
           this.addTheme(Object.assign(this.data, this.currentLanding.theme))
         }
 
-        this.$builder.settings = data.settings
-        this.styleArtboard(this.$builder.settings.styles)
+        if (data.settings) {
+          this.$builder.settings = data.settings
+          this.styleArtboard(this.$builder.settings.styles)
+        }
       })
     }
   },
@@ -342,6 +355,7 @@ export default {
     applySettings () {
       const data = {
         title: this.pageTitle || false,
+        video: this.bgVideo || false,
         styles: {
           backgroundImage: this.pageBackgroundUrl || false,
           backgroundColor: this.pageBackgroundColor || false,
@@ -352,15 +366,29 @@ export default {
       }
 
       this.styleArtboard(data.styles)
+      if (data.video) this.insertVideo(data.video)
       this.$builder.settings = data
 
       this.showSettings = false
     },
     styleArtboard (styles) {
       Object.keys(styles).forEach((style) => {
-        if (styles[style] && style !== 'backgroundImage') this.$builder.rootEl.style[style] = styles[style]
-        if (styles[style] && style === 'backgroundImage') this.$builder.rootEl.style[style] = `url(${styles[style]})`
+        if (styles[style] && style !== 'backgroundImage') document.body.style[style] = styles[style]
+        if (styles[style] && style === 'backgroundImage') document.body.style[style] = `url(${styles[style]})`
       })
+    },
+    insertVideo (video) {
+      if (document.getElementById('video_bg')) {
+        document.getElementById('video_bg').remove() // rm old video if exist
+      }
+
+      let node = document.createElement('video')
+      node.id = 'video_bg'
+      node.setAttribute('autoplay', 'autoplay')
+      node.setAttribute('loop', 'loop')
+      node.setAttribute('muted', true)
+      node.innerHTML = `<source src="${video}" type="video/mp4"></source>`
+      document.body.appendChild(node)
     }
   }
 }
@@ -373,7 +401,6 @@ export default {
   transform-origin: top center
   margin: 0 auto
   transition: 0.2s
-  background-color: $color-white
   min-height: 100vh
   &.is-editable .is-editable
     outline: none
@@ -661,5 +688,8 @@ export default {
     font-size: 14px
     width: 100%
     margin-bottom: 10px
+  input[type="checkbox"]
+    position: relative
+    top: 1px
 
 </style>
