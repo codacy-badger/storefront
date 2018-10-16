@@ -400,8 +400,8 @@ export default {
     },
     styleArtboard (styles) {
       Object.keys(styles).forEach((style) => {
-        if (styles[style] && style !== 'backgroundImage') document.body.style[style] = styles[style]
-        if (styles[style] && style === 'backgroundImage') document.body.style[style] = `url(${styles[style]})`
+        if (styles[style] && style !== 'backgroundImage') this.$refs.artboard.style[style] = styles[style]
+        if (styles[style] && style === 'backgroundImage') this.$refs.artboard.style[style] = `url(${styles[style]})`
       })
     },
     insertVideo (video) {
@@ -416,7 +416,7 @@ export default {
       node.setAttribute('muted', true)
       if (this.bgVideoFix.length > 0) node.classList.add(this.bgVideoFix)
       node.innerHTML = `<source src="${video}" type="video/mp4"></source>`
-      document.body.appendChild(node)
+      this.$refs.artboard.appendChild(node)
     },
     addTag () {
       this.ogTags.push({ property: '', content: '' })
@@ -436,6 +436,8 @@ export default {
   margin: 0 auto
   transition: 0.2s
   min-height: 100vh
+  position: relative
+  overflow: hidden
   &.is-editable .is-editable
     outline: none
     &:hover

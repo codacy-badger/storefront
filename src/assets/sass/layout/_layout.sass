@@ -32,6 +32,8 @@ body
 .b-body
   &_preview
     background-color: $color-white
+    position: relative
+    overflow-x: hidden
 
 .b-page
   min-height: 100vh
@@ -85,17 +87,34 @@ body
   object-fit: cover
 
 section
-  background: $light
+  z-index: 1
+  background: rgba($light, 0.8)
 section:nth-child(2n + 2)
-  background: $white
+  background: rgba($white, 0.8)
 
 #video_bg
+  position: absolute
   top: 0
-  left: 0
-  z-index: -1000
-  min-width: 100%
-  min-height: 100%
-  width: auto
+  left: 50%
+  right: 0
+  z-index: 0
+  width: 120%
+  margin: 0 0 0 -60%
   height: auto
   &.fixed
     position: fixed
+  .is-tablet &,
+  .is-mobile &
+    position: absolute
+    width: 100%
+    margin: 0
+    left: 0
+    min-height: 10rem
+  @media only screen and (max-width: 768px)
+    &
+      position: absolute
+      width: 100%
+      margin: 0
+      left: 0
+      min-height: 10rem
+
