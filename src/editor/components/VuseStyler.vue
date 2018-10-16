@@ -600,8 +600,29 @@ export default {
       this.isVisible = true
 
       if (!this.popper) {
-        const position = this.$props.type === 'section' ? 'top-end' : 'bottom'
-        this.popper = new Popper(this.el, this.$refs.styler, { placement: position })
+        let position = ''
+        let inner = ''
+
+        if (this.$props.type === 'section') {
+          position = 'right-start'
+          inner = true
+        } else {
+          position = 'bottom'
+          inner = false
+        }
+
+        this.popper = new Popper(
+          this.el,
+          this.$refs.styler,
+          {
+            modifiers: {
+              inner: {
+                enabled: inner
+              }
+            },
+            placement: position
+          }
+        )
       }
 
       document.addEventListener('click', this.hideStyler, true)
