@@ -674,6 +674,7 @@ export default {
   transition: 0.4s
   box-shadow: 0.1rem 0 1rem #323c47
   transform: translate3d(100%, 0, 0)
+  z-index: 999
   &.is-visiable
     transform: translate3d(0, 0, 0)
   &__label
