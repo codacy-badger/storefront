@@ -210,6 +210,7 @@ export default {
         if (data.settings) {
           this.$builder.settings = data.settings
           this.styleArtboard(this.$builder.settings.styles)
+          this.ogTags = data.settings.ogTags
         }
       })
     }
