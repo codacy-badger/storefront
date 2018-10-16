@@ -89,11 +89,11 @@
           </div>
           <div>
             <input type="checkbox" v-model="bgRepeat" true-value="repeat" false-value="no-repeat" name="bgrepeat" id="bgrepeat">
-            <label for="bgrepeat">Background repeat</label>
+            <label for="bgrepeat">Repeat</label>
           </div>
           <div>
             <input type="checkbox" v-model="bgAttachment" true-value="fixed" false-value="scroll" name="bgfix" id="bgfix">
-            <label for="bgfix">Fix background</label>
+            <label for="bgfix">Fixed</label>
           </div>
           <br><br>
           <div>
@@ -101,6 +101,10 @@
               Video background
             </span>
             <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
+          </div>
+          <div>
+            <input type="checkbox" v-model="bgVideoFix" true-value="fixed" false-value="" name="bgvidfix" id="bgvidfix">
+            <label for="bgvidfix">Fixed</label>
           </div>
         </fieldset>
         <fieldset>
@@ -174,6 +178,7 @@ export default {
       bgAttachment: '',
       bgRepeat: '',
       bgVideo: '',
+      bgVideoFix: '',
       ogTags: [ { property: '', content: '' } ]
     }
   },
@@ -376,6 +381,7 @@ export default {
       const data = {
         title: this.pageTitle || false,
         video: this.bgVideo || false,
+        videoPosition: this.bgVideoFix,
         ogTags: this.ogTags,
         styles: {
           backgroundImage: this.pageBackgroundUrl || false,
@@ -408,6 +414,7 @@ export default {
       node.setAttribute('autoplay', 'autoplay')
       node.setAttribute('loop', 'loop')
       node.setAttribute('muted', true)
+      if (this.bgVideoFix.length > 0) node.classList.add(this.bgVideoFix)
       node.innerHTML = `<source src="${video}" type="video/mp4"></source>`
       document.body.appendChild(node)
     },
