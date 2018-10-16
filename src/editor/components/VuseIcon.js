@@ -94,7 +94,6 @@ export default {
   render (h, { props }) {
     let dAttr = icons[props.name]
     let viewBoxAttr = '0 0 24 24'
-    let addClass = ''
 
     if (typeof icons[props.name] === 'object') {
       if (icons[props.name].hasOwnProperty('content')) {
@@ -104,8 +103,6 @@ export default {
       if (icons[props.name].hasOwnProperty('sizes')) {
         viewBoxAttr = icons[props.name]['sizes']
       }
-
-      addClass = props.name
     }
 
     const path = h('path', {
@@ -120,7 +117,7 @@ export default {
         attrs: {
           version: '1.1',
           xmlns: 'http://www.w3.org/2000/svg',
-          class: 'vuse-icon' + ' vuse-icon_'+ addClass,
+          class: 'vuse-icon' + ' vuse-icon_'+ props.name,
           viewBox: viewBoxAttr
         }
       },

@@ -529,7 +529,6 @@ export default {
   vertical-align: middle
   cursor: pointer
   &_trash
-    fill: red
 
 .floatHover
   cursor: pointer

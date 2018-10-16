@@ -77,7 +77,7 @@
       <!-- remove -->
       <li v-if="options.removable">
         <button class="styler-button" @click="removeElement" title="Delete">
-          <VuseIcon name="trash" class="vuse-icon_trash"></VuseIcon>
+          <VuseIcon name="trash" class="vuse-icon"></VuseIcon>
         </button>
       </li>
 
@@ -600,7 +600,7 @@ export default {
       this.isVisible = true
 
       if (!this.popper) {
-        const position = this.$props.type === 'section' ? 'left-start' : 'bottom'
+        const position = this.$props.type === 'section' ? 'bottom-end' : 'bottom'
         this.popper = new Popper(this.el, this.$refs.styler, { placement: position })
       }
 
