@@ -64,4 +64,12 @@ export default {
       &
         margin: 1rem auto
         height: auto
+    > img
+      width: 100%
+      display: inline-block
+      max-height: 100%
+      @media only screen and (max-width: 540px)
+        &
+          height: auto
+
 </style>
