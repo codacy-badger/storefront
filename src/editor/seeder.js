@@ -108,6 +108,7 @@ const data = new Map([
       removable: true,
       aligned: true,
       typography: true,
+      background: true,
       shape: true,
       text: 'Click Me!',
       classes: [],
