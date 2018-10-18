@@ -15,7 +15,7 @@
         </button>
       </li>
       <!-- background -->
-      <li v-if="options.background">
+      <li v-if="type === 'section'">
         <button class="styler-button" @click="updateOption('colorer')" title="Background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
@@ -604,8 +604,8 @@ export default {
         let inner = ''
 
         if (this.$props.type === 'section') {
-          position = 'right-start'
-          inner = true
+          position = 'bottom'
+          inner = false
         } else {
           position = 'bottom'
           inner = false
