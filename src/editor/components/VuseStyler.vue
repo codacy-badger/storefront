@@ -77,7 +77,7 @@
       <!-- remove -->
       <li v-if="options.removable">
         <button class="styler-button" @click="removeElement" title="Delete">
-          <VuseIcon name="trash"></VuseIcon>
+          <VuseIcon name="trash" class="vuse-icon"></VuseIcon>
         </button>
       </li>
 
@@ -398,6 +398,12 @@ export default {
     if (this.type === 'title') {
       this.el.contentEditable = 'true'
     }
+    if (this.type === 'link') {
+      this.el.contentEditable = 'true'
+    }
+    if (this.type === 'button') {
+      this.el.contentEditable = 'true'
+    }
   },
   mounted () {
     if (!this.$builder.isEditing) return
@@ -433,7 +439,7 @@ export default {
           this.borderRadius = parseFloat(br)
         }
       }
-      if (this.type === 'text' || this.type === 'button') {
+      if (this.type === 'text' || this.type === 'button' || this.type === 'link') {
         // listen event change font-size
         let fs = this.section.get(`${this.name}.styles['font-size']`)
         if (undefined !== fs) {
@@ -594,8 +600,29 @@ export default {
       this.isVisible = true
 
       if (!this.popper) {
-        const position = this.$props.type === 'section' ? 'left-start' : 'top'
-        this.popper = new Popper(this.el, this.$refs.styler, { placement: position })
+        let position = ''
+        let inner = ''
+
+        if (this.$props.type === 'section') {
+          position = 'right-start'
+          inner = true
+        } else {
+          position = 'bottom'
+          inner = false
+        }
+
+        this.popper = new Popper(
+          this.el,
+          this.$refs.styler,
+          {
+            modifiers: {
+              inner: {
+                enabled: inner
+              }
+            },
+            placement: position
+          }
+        )
       }
 
       document.addEventListener('click', this.hideStyler, true)
@@ -758,7 +785,6 @@ export default {
       }
     },
     showColorPeckerSection: function () {
-      /* $(this.$refs['styler']).css('transform', 'translate3d(20px, 5px, 0px)'); */
       this.showBackgroundSettingsSection('color')
     },
     showBackgroundSettingsSection: function (type) {
@@ -773,14 +799,6 @@ export default {
       if (!this.backgroundSettingsShow.hasOwnProperty(type)) {
         return
       }
-
-      /* let position = '899px'
-
-      if (type === 'link') {
-        position = '969px'
-      }
-
-      $(this.$refs['styler']).css('transform', 'translate3d(' + position + ', 5px, 0px)'); */
 
       this.backgroundSettingsShow[type] = true
     },

@@ -726,6 +726,7 @@ export default {
   display: inline-block
   vertical-align: middle
   cursor: pointer
+  &_trash
 
 .floatHover
   cursor: pointer

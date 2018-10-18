@@ -117,7 +117,7 @@ export default {
         attrs: {
           version: '1.1',
           xmlns: 'http://www.w3.org/2000/svg',
-          class: 'vuse-icon',
+          class: 'vuse-icon' + ' vuse-icon_'+ props.name,
           viewBox: viewBoxAttr
         }
       },

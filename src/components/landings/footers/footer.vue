@@ -3,12 +3,12 @@
     <footer class="b-footer">
       <div class="b-footer__group b-footer__group_1">
         <div class="b-footer__logo" v-for="(item, index) in $sectionData.images"
-             v-styler:galleryItem="{el: $sectionData.images[index], path: `$sectionData.images[${index}]`}"
+             v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
              :data-index="index"
              :key="index"
-             :style="$sectionData.images[index].styles"
+             :style="$sectionData.images[index].preview.styles"
           >
-          <img class="b-footer__logo-img" :src="$sectionData.images[index].url" />
+          <img class="b-footer__logo-img" :src="$sectionData.images[index].preview.url" />
         </div>
       </div>
       <div class="b-footer__group b-footer__group_2">
@@ -23,8 +23,8 @@
         </div>
       <div class="b-footer__group b-footer__group_3">
         <span v-for="(item, index) in $sectionData.links" :key="index">
-          <a @click.prevent="openLink(item)" :target="$sectionData.links[index].element.target" class="b-footer__link"
-            :class="`$sectionData.links[${index}].button.classes`"
+          <a @click.prevent="openLink(item)" class="b-footer__link"
+            :target="$sectionData.links[index].element.target"
             :href="$sectionData.links[index].element.href"
             v-html="$sectionData.links[index].element.text"
             v-styler:for="{ el:$sectionData.links[index].element, path: `$sectionData.links[${index}].element`}"
@@ -49,7 +49,12 @@ export default {
       element: types.Text
     }],
     images: [
-      types.Image, types.Image
+      {
+        preview: types.Image
+      },
+      {
+        preview: types.Image
+      }
     ],
     links: [
       {
@@ -139,6 +144,7 @@ export default {
     width: 8rem
     height: 8rem
     margin: 0 0.5rem
+    padding: 1rem
     display: flex
     align-items: center
     justify-content: center
