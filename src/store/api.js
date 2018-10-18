@@ -1,6 +1,7 @@
 /**
  * Mock for API
  */
+import axios from 'axios'
 
 export default {
   getLandingsList () {
@@ -74,5 +75,24 @@ export default {
         })
       }
     })
+  },
+
+  /**
+   * upload image to gamenet cdn
+   * @param request FormData
+   * @returns {Promise.<TResult>|Promise<any>}
+   */
+  uploadFile (request) {
+    return axios.post('http://images.stg.gamenet.ru/restapi', request)
+      .then(function (response) {
+        if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response') ||
+          !response['data']['response'].hasOwnProperty('data') ||
+          !Array.isArray(response['data']['response']['data'])) {
+          return
+        }
+
+        return response['data']['response']['data'][0]
+      })
   }
+
 }

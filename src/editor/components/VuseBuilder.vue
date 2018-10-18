@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing}, device]">
+    <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
@@ -78,7 +78,18 @@
         </fieldset>
         <fieldset>
           <legend>Page background</legend>
-          <div><input type="text" v-model="pageBackgroundUrl" placeholder="background url"></div>
+          <div class="page-settings__upload">
+            <input type="text" v-model="pageBackgroundUrl" placeholder="background url">
+            <input
+              style="display: none;"
+              type="file"
+              accept="image/*,video/mp4,video/x-m4v,video/*"
+              v-bind:ref="'choseBackgroundContentInput'"
+              @change="onChooseBackground"/>
+            <button class="styler-button" @click.prevent="choseBackground" title="Upload image">
+              <VuseIcon name="upload"></VuseIcon>
+            </button>
+          </div>
           <div><input type="text" v-model="pageBackgroundColor" placeholder="background color (#000000)"></div>
           <div>
             <span class="page-settings__label">Background size</span>
@@ -100,12 +111,28 @@
             <span class="page-settings__label">
               Video background
             </span>
-            <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
+            <div class="page-settings__upload">
+              <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
+              <input
+                style="display: none;"
+                type="file"
+                accept="image/*,video/mp4,video/x-m4v,video/*"
+                v-bind:ref="'choseVideoBackgroundContentInput'"
+                @change="onChooseVideoBackground"/>
+              <button class="styler-button" @click.prevent="choseVideoBackground" title="Upload image">
+                <VuseIcon name="upload"></VuseIcon>
+              </button>
+            </div>
           </div>
           <div>
             <input type="checkbox" v-model="bgVideoFix" true-value="fixed" false-value="" name="bgvidfix" id="bgvidfix">
             <label for="bgvidfix">Fixed</label>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>Full page scroll</legend>
+          <input type="checkbox" id="fpscroll" v-model="fullPageScroll" true-value="yes" false-value="no">
+          <label for="fpscroll">Enabled</label>
         </fieldset>
         <fieldset>
           <legend>OpenGraph</legend>
@@ -142,6 +169,7 @@
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
 import { mapState, mapActions } from 'vuex'
+import api from '@store/api'
 
 export default {
   name: 'VuseBuilder',
@@ -176,9 +204,10 @@ export default {
       pageBackgroundColor: '',
       bgSize: '',
       bgAttachment: '',
-      bgRepeat: '',
+      bgRepeat: 'no-repeat',
       bgVideo: '',
       bgVideoFix: '',
+      fullPageScroll: 'no',
       ogTags: [ { property: '', content: '' } ]
     }
   },
@@ -383,6 +412,7 @@ export default {
         video: this.bgVideo || false,
         videoPosition: this.bgVideoFix,
         ogTags: this.ogTags,
+        fullPageScroll: this.fullPageScroll,
         styles: {
           backgroundImage: this.pageBackgroundUrl || false,
           backgroundColor: this.pageBackgroundColor || false,
@@ -423,6 +453,39 @@ export default {
     },
     deleteTag (index) {
       this.ogTags.splice(index, 1)
+    },
+    choseBackground: function () {
+      this.backgroundUrl = ''
+      this['$refs']['choseBackgroundContentInput'].click()
+    },
+    onChooseBackground (event) {
+      this.uploadFile(event)
+        .then((data) => { this.pageBackgroundUrl = data.src })
+        .catch((error) => console.warn(error))
+    },
+    choseVideoBackground: function () {
+      this.backgroundUrl = ''
+      this['$refs']['choseVideoBackgroundContentInput'].click()
+    },
+    onChooseVideoBackground (event) {
+      this.uploadFile(event)
+        .then((data) => { this.bgVideo = data.src })
+        .catch((error) => console.warn(error))
+    },
+    uploadFile (event) {
+      let file = event.target.files || event.dataTransfer.files
+
+      if (!file.length) {
+        return
+      }
+
+      let request = new FormData()
+
+      request.append('file[]', file[0])
+      request.append('method', 'storefront.upload')
+      request.append('format', 'json')
+
+      return api.uploadFile(request)
     }
   }
 }
@@ -450,6 +513,8 @@ export default {
     width: 76rem
   &.is-mobile
     width: 37rem
+  &.fp-scroll section
+    height: 100vh
 
 .controller
   box-sizing: border-box
@@ -541,7 +606,7 @@ export default {
   user-select: none
   -moz-user-select: none
   position: fixed
-  z-index 1000
+  z-index: 1000
   top: 0
   left: 0
   bottom: 0
@@ -687,6 +752,11 @@ export default {
   z-index: 999
   &.is-visiable
     transform: translate3d(0, 0, 0)
+  &__upload
+    display: flex
+    justify-content: space-between
+    input[type="text"]
+      width: 87% !important
   &__label
     display: block
     margin-bottom: 5px

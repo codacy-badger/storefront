@@ -103,6 +103,7 @@ function download (assets) {
       let bodyStyles = this.getBodyStyles()
       let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
       let og = this.getOgMetaTags(this.settings.ogTags)
+      let scrollSetup = this.getScrollSetup()
       output.file('index.html',
         `<html>
           <head>
@@ -110,6 +111,7 @@ function download (assets) {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto" rel="stylesheet">
+            ${scrollSetup.style}
             ${og}
             <style>
               ${styles}
@@ -119,6 +121,7 @@ function download (assets) {
             ${video}
             ${artboard.innerHTML}
           <script src="js/cjs.js"></script>
+          ${scrollSetup.setup}
           </body>
         </html>`)
 

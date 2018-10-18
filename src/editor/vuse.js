@@ -266,6 +266,7 @@ class Vuse {
     let styles = this.getCss(frag)
     let bodyStyles = this.getBodyStyles()
     let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
+    let scrollSetup = this.getScrollSetup()
     printDocument.open()
     printDocument.write(
       `<!DOCTYPE html>
@@ -275,14 +276,18 @@ class Vuse {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto" rel="stylesheet">
+            ${scrollSetup.style}
             <style>
               ${styles}
             </style>
           </head>
           <body class="b-body_preview" style="${bodyStyles} height: 100%">
             ${video}
-            ${artboard.innerHTML}
+            <div class="main">
+              ${artboard.innerHTML}
+            </div>
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
+            ${scrollSetup.setup}
           <body>
         </html>`
     )
@@ -320,6 +325,25 @@ class Vuse {
     return `<video id="video_bg" class="${this.settings.videoPosition}" autoplay="autoplay" loop="loop" muted="muted">
               <source src="${video}" type="video/mp4"></source>
             </video>`
+  }
+
+  getScrollSetup () {
+    let scroll = {
+      style: '',
+      setup: ''
+    }
+
+    console.log(this.settings)
+
+    if (this.settings.fullPageScroll === 'yes') {
+      scroll.style = `
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
+          <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">`
+      scroll.setup = `<script>$(".main").onepage_scroll();</script>`
+    }
+
+    return scroll
   }
 
   /**
