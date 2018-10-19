@@ -102,7 +102,7 @@ function download (assets) {
       let styles = this.getCss(frag)
       let bodyStyles = this.getBodyStyles()
       let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
-      let og = this.getOgMetaTags(this.settings.ogTags)
+      let og = this.settings.ogTags ? this.getOgMetaTags(this.settings.ogTags) : ''
       let scrollSetup = this.getScrollSetup()
       output.file('index.html',
         `<html>

@@ -7,6 +7,7 @@
             v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
             :data-index="index"
             :key="index"
+            :style="$sectionData.images[index].preview.styles"
           >
             <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
                v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"

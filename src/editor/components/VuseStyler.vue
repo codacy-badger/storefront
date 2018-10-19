@@ -575,10 +575,22 @@ export default {
         value.styles['background-color'] = 'transparent'
       })
     },
+    /**
+     * Remove from editor
+     */
     removeElement () {
       if (this.type === 'section' || this.type === 'header') {
         this.$builder.remove(this.section)
       } else {
+        let path = _.split(this.name, '.')[1] // find path to element
+        if (this.name.indexOf('[') > 0) { // if array element
+          path = _.toPath(path)
+          this.section.data[path[0]].splice(parseInt(path[1]), 1)
+        } else {
+          this.section.data[path].text = ''
+          this.section.data[path].url = ''
+          Object.assign(this.section.data[path].styles, { 'display': 'none' })
+        }
         this.el.remove()
         this.$refs.styler.remove()
       }

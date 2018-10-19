@@ -243,7 +243,7 @@ export default {
 
         if (data.settings) {
           this.$builder.settings = data.settings
-          this.styleArtboard(this.$builder.settings.styles)
+          if (this.$builder.settings.styles !== undefined) this.styleArtboard(this.$builder.settings.styles)
           this.ogTags = data.settings.ogTags
         }
       })
@@ -421,7 +421,6 @@ export default {
           backgroundSize: this.bgSize
         }
       }
-
       this.styleArtboard(data.styles)
       if (data.video) this.insertVideo(data.video)
       this.$builder.settings = data

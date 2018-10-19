@@ -6,6 +6,7 @@
                v-for="(item, index) in $sectionData.images" :key="index"
                v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
                :data-index="index"
+               :style="$sectionData.images[index].preview.styles"
             >
             <div class="b-gallery-three-block__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
@@ -205,7 +206,7 @@ export default {
          border: dotted #333 1px
       &-wrap
         width: 100%
-        height: 100%
+        // height: 100% // #5 in https://jira.protocol.one/browse/SFC-53?focusedCommentId=10186&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-10186
         min-width: 5rem
         min-height: 17rem
         padding: 1rem
@@ -351,7 +352,7 @@ export default {
   width: 100%
   height: 100%
   background-color: rgba(0, 0, 0, 0.8)
-  z-index: 1000
+  z-index: 199
   cursor: pointer
   &_flex
     display: -webkit-box
