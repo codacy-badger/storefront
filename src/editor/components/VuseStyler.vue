@@ -604,8 +604,8 @@ export default {
         let inner = ''
 
         if (this.$props.type === 'section') {
-          position = 'bottom'
-          inner = false
+          position = 'right-start'
+          inner = true
         } else {
           position = 'bottom'
           inner = false
