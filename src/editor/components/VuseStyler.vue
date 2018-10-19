@@ -273,8 +273,7 @@ import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
 import * as _ from 'lodash-es'
-
-require('@public/js/any-resize-event.min')
+import ResizeObserver from 'resize-observer-polyfill'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
@@ -411,6 +410,17 @@ export default {
     this.el.addEventListener('click', this.showStyler)
     this.el.addEventListener('focus', this.showStyler)
 
+    if (this.options.resizable) {
+      // listen resize event, add params to element
+      let handler = () => {
+        this.addStyle('width', `${this.el.offsetWidth}px`)
+        this.addStyle('height', `${this.el.offsetHeight}px`)
+      }
+
+      let ro = new ResizeObserver(handler)
+      ro.observe(this.el)
+    }
+
     this.setInitialValue()
   },
   updated () {
@@ -425,13 +435,6 @@ export default {
   },
   methods: {
     setInitialValue () {
-      // listen resize event, add params to element
-      let handler = () => {
-        this.addStyle('width', `${this.el.offsetWidth}px`)
-        this.addStyle('height', `${this.el.offsetHeight}px`)
-      }
-      this.el.addEventListener('onresize', _.debounce(handler, 100))
-
       if (this.type === 'button') {
         // listen event change border-radius
         let br = this.section.get(`${this.name}.styles['border-radius']`)

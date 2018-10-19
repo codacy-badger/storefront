@@ -15,7 +15,7 @@
 import * as types from '@editor/types'
 
 export default {
-  name: 'Animation',
+  name: 'Button6',
   cover: '/img/covers/button3.gif',
   group: 'buttons',
   $schema: {
