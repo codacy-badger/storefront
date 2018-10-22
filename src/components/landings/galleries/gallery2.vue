@@ -144,6 +144,7 @@ export default {
   .is-tablet &,
   .is-mobile &
     flex-wrap: wrap
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap

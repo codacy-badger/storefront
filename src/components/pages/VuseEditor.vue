@@ -20,6 +20,7 @@ import delimiter from '@components/landings/delimiters/delimiter'
 import logo from '@components/landings/logos/logo'
 import footer from '@components/landings/footers/footer'
 import system from '@components/landings/elements/system'
+import social from '@components/landings/elements/social'
 
 Vuse.mix({
   components: {
@@ -38,6 +39,7 @@ Vuse.component('Title1', title1)
 Vuse.component('Delimiter', delimiter)
 Vuse.component('Logo', logo)
 Vuse.component('System', system)
+Vuse.component('Social', social)
 
 Vuse.use(pwa)
 

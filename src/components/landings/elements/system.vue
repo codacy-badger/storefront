@@ -1,15 +1,17 @@
 <template>
   <section class="l-system flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
     <div class="b-system">
-      <h2 class="b-system-chapter">
-        <span class="b-system-chapter__text"
-          v-html="$sectionData.h2.element.text"
-          v-styler:for="{ el: $sectionData.h2.element, path: `$sectionData.h2.element`}"
-          :style="$sectionData.h2.element.styles
-          ">
-          Enter your text
-        </span>
-      </h2>
+      <div>
+        <h2 class="b-system-chapter">
+          <span class="b-system-chapter__text"
+            v-html="$sectionData.h2.element.text"
+            v-styler:for="{ el: $sectionData.h2.element, path: `$sectionData.h2.element`}"
+            :style="$sectionData.h2.element.styles
+            ">
+            Enter your text
+          </span>
+        </h2>
+      </div>
       <div class="b-system-platforms flex flex_center">
         <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
              :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.isPlatform }">

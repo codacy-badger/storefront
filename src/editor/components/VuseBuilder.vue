@@ -523,7 +523,7 @@ export default {
   &.is-editable .is-editable
     outline: none
     &:hover
-      box-shadow: inset 0.2rem 0 0.5rem 0.2rem $color-green
+      box-shadow: inset 0 0 0.5rem 0.2rem $color-green
   &.is-desktop
     width: 100%
   &.is-laptop

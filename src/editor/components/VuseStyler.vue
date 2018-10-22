@@ -20,6 +20,12 @@
           <VuseIcon name="pic"></VuseIcon>
         </button>
       </li>
+      <!-- colorFill -->
+      <li v-if="options.colorFill">
+        <button class="styler-button" @click="updateOption('colorFill')" title="Change fill color icon">
+          <VuseIcon name="fill"></VuseIcon>
+        </button>
+      </li>
       <!-- link -->
       <li v-if="options.hasLink">
         <button class="styler-button" @click="updateOption('link')" title="Link">
@@ -201,6 +207,13 @@
         </div>
       </li>
 
+      <!-- Set color fill-->
+      <li v-if="currentOption === 'colorFill'">
+        <ControlColorFill
+          @boxStyled="onBoxStyled">
+        </ControlColorFill>
+      </li>
+
       <!-- Set link -->
       <li v-if="currentOption === 'link'">
         <ControlSetUrl
@@ -268,6 +281,7 @@ import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
+import ControlColorFill from './controls/TheControlColorFill.vue'
 import { isParentTo } from '../util'
 import { Sketch } from 'vue-color'
 import $ from 'jquery'
@@ -290,6 +304,7 @@ export default {
     ControlStyleText,
     ControlShape,
     ControlSetUrl,
+    ControlColorFill,
     SketchColorPecker: Sketch
   },
   props: {
