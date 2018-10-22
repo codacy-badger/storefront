@@ -227,17 +227,17 @@ export default {
        text-overflow: ellipsis
        white-space: nowrap
        overflow: hidden
+       .is-mobile &
+         max-width: 12rem
+       @media only screen and (max-width: 540px)
+         &
+           max-width: 12rem
        & .vuse-icon
          position: relative
          top: -0.1rem
          left: -0.2rem
      &:hover, &_active
        border: dotted #333 0.1rem
-       .is-mobile &
-         max-width: 12rem
-       @media only screen and (max-width: 540px)
-         &
-           max-width: 12rem
      &__btn
        position: absolute
        top: -2rem
