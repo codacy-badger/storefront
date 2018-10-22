@@ -264,6 +264,8 @@ export default {
           this.bgRepeat = data.settings.styles.backgroundRepeat
           this.bgSize = data.settings.styles.backgroundSize
         }
+
+        if (this.bgVideo.length) this.insertVideo(this.bgVideo)
       })
     }
   },
