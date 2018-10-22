@@ -15,7 +15,7 @@
         </button>
       </li>
       <!-- background -->
-      <li v-if="type === 'section'">
+      <li v-if="options.background || type === 'section'">
         <button class="styler-button" @click="updateOption('colorer')" title="Background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
