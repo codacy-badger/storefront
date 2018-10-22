@@ -104,9 +104,11 @@ function download (assets) {
       let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
       let og = this.settings.ogTags ? this.getOgMetaTags(this.settings.ogTags) : ''
       let scrollSetup = this.getScrollSetup()
+      let gtm = this.gtmSetup(this.settings.gtmId)
       output.file('index.html',
         `<html>
           <head>
+            ${gtm.head}
             <title>${title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -118,8 +120,9 @@ function download (assets) {
             </style>
           </head>
           <body style="${bodyStyles} height: 100%">
-            ${video}
+            ${gtm.body}
             ${artboard.innerHTML}
+            ${video}
           <script src="js/cjs.js"></script>
           ${scrollSetup.setup}
           </body>

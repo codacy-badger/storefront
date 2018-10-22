@@ -160,6 +160,10 @@
             </button>
           </div>
         </fieldset>
+        <fieldset>
+          <legend>GTM container ID <a href="https://developers.google.com/tag-manager/quickstart" target="_blank" class="help">?</a> </legend>
+          <input type="text" v-model="gtmId" placeholder="GTM-XXXXXX">
+        </fieldset>
         <div class="page-settings__controls">
           <input type="submit" value="Save" class="page-settings__save">
           <button class="page-settings__cancel">Cancel</button>
@@ -214,7 +218,8 @@ export default {
       bgVideo: '',
       bgVideoFix: '',
       fullPageScroll: 'no',
-      ogTags: [ { property: '', content: '' } ]
+      ogTags: [ { property: '', content: '' } ],
+      gtmId: ''
     }
   },
 
@@ -262,6 +267,7 @@ export default {
           this.bgAttachment = data.settings.styles.backgroundAttachment
           this.bgRepeat = data.settings.styles.backgroundRepeat
           this.bgSize = data.settings.styles.backgroundSize
+          this.gtmId = data.settings.gtmId
         }
 
         if (this.bgVideo.length) this.insertVideo(this.bgVideo)
@@ -432,6 +438,7 @@ export default {
         videoPosition: this.bgVideoFix,
         ogTags: this.ogTags,
         fullPageScroll: this.fullPageScroll,
+        gtmId: this.gtmId,
         styles: {
           backgroundImage: this.pageBackgroundUrl || false,
           backgroundColor: this.pageBackgroundColor || false,
@@ -821,6 +828,7 @@ export default {
     margin-bottom: 20px
   legend
     font-size: 18px
+    position: relative
   input[type="text"], select
     border: 1px solid #e7e8eb
     border-radius: 3px
@@ -842,5 +850,17 @@ export default {
       position: absolute
       right: 0
       top: 20px
+  .help
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 20px
+    height: 20px
+    color: #fff
+    background: $green
+    border-radius: 50%
+    position: absolute
+    top: -2px
+    right: -21px
 
 </style>
