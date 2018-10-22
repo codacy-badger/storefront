@@ -5,18 +5,17 @@
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
       </div>
+      <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
+        <label for="projectName">Hello, start your project</label>
+        <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
+        <template v-if="themes">
+          <div class="controller-themes">
+            <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
+          </div>
+        </template>
+      </div>
     </div>
     <div class="controller">
-        <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
-            <label for="projectName">Hello, start your project</label>
-            <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
-            <template v-if="themes">
-                <div class="controller-themes">
-                    <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
-                </div>
-            </template>
-        </div>
-
         <div class="controller-panel">
           <button class="controller-button is-green" tooltip-position="top" tooltip="Page settings" @click="showSettings = !showSettings">
             <VuseIcon name="cog"></VuseIcon>
