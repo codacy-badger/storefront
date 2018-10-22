@@ -1,6 +1,6 @@
 <template>
-    <section class="l-button-fifth" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-fifth"
+    <section class="l-button-fifth force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-fifth force-polyfill"
            v-styler:for="{ el: $sectionData.buttons[index].element, path:`$sectionData.buttons[${index}].element` }"
            @click.prevent="openLink(item)" :target="$sectionData.buttons[index].element.target"
            v-html="$sectionData.buttons[index].element.text"
@@ -13,6 +13,7 @@
 
 <script>
 import * as types from '@editor/types'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Button5',
@@ -44,6 +45,10 @@ export default {
         window.open(href)
       }
     }
+  },
+  mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
   }
 }
 </script>
