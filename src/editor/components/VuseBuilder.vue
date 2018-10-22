@@ -92,6 +92,11 @@
           </div>
           <div><input type="text" v-model="pageBackgroundColor" placeholder="background color (#000000)"></div>
           <div>
+            <span class="page-settings__label">Background position</span>
+            <input type="text" v-model="pageBackgroundPosX" placeholder="x" class="small">
+            <input type="text" v-model="pageBackgroundPosY" placeholder="y" class="small">
+          </div>
+          <div>
             <span class="page-settings__label">Background size</span>
             <select name="background-size" id="" v-model="bgSize">
               <option value="cover">cover</option>
@@ -202,6 +207,8 @@ export default {
       pageTitle: '',
       pageBackgroundUrl: '',
       pageBackgroundColor: '',
+      pageBackgroundPosX: '',
+      pageBackgroundPosY: '',
       bgSize: '',
       bgAttachment: '',
       bgRepeat: 'no-repeat',
@@ -241,10 +248,21 @@ export default {
           this.addTheme(Object.assign(this.data, this.currentLanding.theme))
         }
 
-        if (data.settings) {
+        if (data.settings && Object.keys(data.settings).length) {
           this.$builder.settings = data.settings
           if (this.$builder.settings.styles !== undefined) this.styleArtboard(this.$builder.settings.styles)
           this.ogTags = data.settings.ogTags
+          this.bgVideo = data.settings.video
+          this.bgVideoFix = data.settings.videoPosition
+          this.pageTitle = data.settings.title
+          this.fullPageScroll = data.settings.fullPageScroll
+          this.pageBackgroundUrl = data.settings.styles.backgroundImage
+          this.pageBackgroundColor = data.settings.styles.backgroundColor
+          this.pageBackgroundPositionX = data.settings.styles.backgroundPositionX
+          this.pageBackgroundPositionY = data.settings.styles.backgroundPositionY
+          this.bgAttachment = data.settings.styles.backgroundAttachment
+          this.bgRepeat = data.settings.styles.backgroundRepeat
+          this.bgSize = data.settings.styles.backgroundSize
         }
       })
     }
@@ -418,7 +436,9 @@ export default {
           backgroundColor: this.pageBackgroundColor || false,
           backgroundAttachment: this.bgAttachment,
           backgroundRepeat: this.bgRepeat,
-          backgroundSize: this.bgSize
+          backgroundSize: this.bgSize,
+          backgroundPositionX: this.pageBackgroundPosX,
+          backgroundPositionY: this.pageBackgroundPosY
         }
       }
       this.styleArtboard(data.styles)
@@ -513,7 +533,7 @@ export default {
   &.is-mobile
     width: 37rem
   &.fp-scroll section
-    height: 100vh
+    height: 100vh !important
 
 .controller
   box-sizing: border-box
@@ -798,6 +818,9 @@ export default {
   input[type="checkbox"]
     position: relative
     top: 1px
+  .small
+    width: 20% !important
+    margin-right: 10px
   .og-input
     width: 87% !important
   .og-tag

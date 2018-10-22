@@ -405,25 +405,28 @@ export default {
     }
   },
   mounted () {
-    if (!this.$builder.isEditing) return
+    if (this.$builder && !this.$builder.isEditing) return
 
     this.el.addEventListener('click', this.showStyler)
     this.el.addEventListener('focus', this.showStyler)
 
+    this.setInitialValue()
+  },
+  updated () {
     if (this.options.resizable) {
       // listen resize event, add params to element
-      let handler = () => {
-        this.addStyle('width', `${this.el.offsetWidth}px`)
-        this.addStyle('height', `${this.el.offsetHeight}px`)
+      let handler = (e) => {
+        console.log(e)
+        if (document.getElementById('artboard') && !document.getElementById('artboard').classList.contains('fp-scroll')) {
+          this.addStyle('width', `${this.el.offsetWidth}px`)
+          this.addStyle('height', `${this.el.offsetHeight}px`)
+        }
       }
 
       let ro = new ResizeObserver(handler)
       ro.observe(this.el)
     }
 
-    this.setInitialValue()
-  },
-  updated () {
     this.setInitialValue()
   },
   beforeDestroy () {
