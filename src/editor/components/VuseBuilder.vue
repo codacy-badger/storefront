@@ -519,7 +519,6 @@ export default {
   transition: 0.2s
   min-height: 100vh
   position: relative
-  overflow: hidden
   &.is-editable .is-editable
     outline: none
     &:hover
@@ -534,6 +533,19 @@ export default {
     width: 37rem
   &.fp-scroll section
     height: 100vh !important
+  &:before,
+  &:after
+    content: ''
+    background-color: #9E9E9E
+    position: absolute
+    top: 0
+    bottom: 0
+    width: 10000rem
+    z-index: 1
+  &:before
+    right: 100%
+  &:after
+    left: 100%
 
 .controller
   box-sizing: border-box
