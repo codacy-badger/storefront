@@ -11,12 +11,10 @@
         </span>
       </h2>
       <div class="b-system-platforms flex flex_center">
-        <div class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
-             :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible }">
+        <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
+             :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.isPlatform }">
           <div class="b-system-platforms__item__tab"
-             :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.isPlatform }"
              @click="selectPlatform(key)"
-
             >
             <VuseIcon :name="key" class="vuse-icon"></VuseIcon>
             <span
@@ -36,8 +34,9 @@
       </div>
       <div class="b-system-requirements">
         <div class="b-system-requirements__table">
-          <div v-for="(value, key) in $sectionData.platforms" v-bind:key="key">
-            <div v-if="$sectionData.isPlatform === key && value.visible">
+          <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" v-bind:key="key"
+               v-show="$sectionData.isPlatform === key && value.visible">
+            <div>
               <div class="b-system-requirements__table-row  flex flex_center">
                 <div class="b-system-requirements__table-col">
 
@@ -213,6 +212,7 @@ export default {
      position: relative
      cursor: pointer
      opacity: 1
+     border: dotted transparent 0.1rem
      &_opacity
        display: none
        .is-editable &
@@ -227,14 +227,12 @@ export default {
        text-overflow: ellipsis
        white-space: nowrap
        overflow: hidden
-       &:hover, &_active
-         border: dotted #333 0.1rem
-       &_active
-         background: #18d88b
        & .vuse-icon
          position: relative
          top: -0.1rem
          left: -0.2rem
+     &:hover, &_active
+       border: dotted #333 0.1rem
        .is-mobile &
          max-width: 12rem
        @media only screen and (max-width: 540px)
