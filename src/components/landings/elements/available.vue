@@ -1,24 +1,35 @@
 <template>
   <section class="l-socials flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-    <div class="b-socials flex flex_center">
-      <div class="b-socials__item"
-         v-for="(value, key) in $sectionData.socials" :key="key"
-         :class="{ 'b-socials__item_opacity' : false === $sectionData.socials[key].visible }"
-        >
-        <a class="b-socials__item-button flex flex_center"
-          :target="$sectionData.socials[key].button.target"
-          :href="$sectionData.socials[key].button.href"
-          :title="$sectionData.socials[key].name"
-          v-styler:for="{ el: $sectionData.socials[key].button, path: `$sectionData.socials[${key}].button`}"
-          :style="$sectionData.socials[key].button.styles"
+    <div>
+      <h2 class="b-socials-chapter">
+          <span class="b-socials-chapter__text"
+                v-html="$sectionData.h2.element.text"
+                v-styler:for="{ el: $sectionData.h2.element, path: `$sectionData.h2.element`}"
+                :style="$sectionData.h2.element.styles
+            ">
+            Enter your text
+          </span>
+      </h2>
+      <div class="b-socials flex flex_center">
+        <div class="b-socials__item"
+           v-for="(value, key) in $sectionData.socials" :key="key"
+           :class="{ 'b-socials__item_opacity' : false === $sectionData.socials[key].visible }"
           >
-          <VuseIcon :name="key"></VuseIcon>
-        </a>
-        <button class="b-socials__item-eye controller-button is-green is-editable-show"
-          @click="$sectionData.socials[key].visible = !$sectionData.socials[key].visible"
-          >
-          <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
-        </button>
+          <a class="b-socials__item-button flex flex_center"
+            :target="$sectionData.socials[key].button.target"
+            :href="$sectionData.socials[key].button.href"
+            :title="$sectionData.socials[key].name"
+            v-styler:for="{ el: $sectionData.socials[key].button, path: `$sectionData.socials[${key}].button`}"
+            :style="$sectionData.socials[key].button.styles"
+            >
+            <VuseIcon :name="key"></VuseIcon>
+          </a>
+          <button class="b-socials__item-eye controller-button is-green is-editable-show"
+            @click="$sectionData.socials[key].visible = !$sectionData.socials[key].visible"
+            >
+            <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -29,7 +40,7 @@ import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
-  name: 'Social',
+  name: 'Available',
   components: {
     VuseIcon
   },
@@ -37,39 +48,32 @@ export default {
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,
+    h2: {
+      element: types.Text
+    },
     socials: {
-      'facebook': {
-        name: 'Facebook',
+      'windows': {
+        name: 'Windows',
         visible: true,
         button: types.Icon
       },
-      'instagram': {
-        name: 'Instagram',
+      'apple': {
+        name: 'Apple',
         visible: true,
         button: types.Icon
       },
-      'vk': {
-        name: 'Vk',
+      'linuxfull': {
+        name: 'Linux',
         visible: true,
         button: types.Icon
       },
-      'twitter': {
-        name: 'Twitter',
+      'steam': {
+        name: 'Steam',
         visible: true,
         button: types.Icon
       },
-      'youtube': {
-        name: 'Youtube',
-        visible: true,
-        button: types.Icon
-      },
-      'kickstarter': {
-        name: 'Kickstarter',
-        visible: true,
-        button: types.Icon
-      },
-      'wechat': {
-        name: 'Wechat',
+      'gog': {
+        name: 'GOG Galaxy',
         visible: true,
         button: types.Icon
       }
@@ -97,7 +101,7 @@ export default {
   background-position: center
   background-size: cover
   color: #000
-  padding: 0
+  padding: 0 0 2rem
   min-height: 12rem
   &.is-editable
     resize: vertical
@@ -122,6 +126,14 @@ export default {
     &
       flex-wrap: wrap
       height: auto !important
+  &-chapter
+    font-size: 2rem
+    text-align: center
+    display: block
+    width: 100%
+    &__text
+      display: inline-block
+      margin: 2rem 0
   &__item
     position: relative
     margin: 1rem
@@ -135,7 +147,7 @@ export default {
       height: 5rem
       padding: 1rem
       border: none
-      display: inline-block
+      postition: relative
       &:hover
         filter: brightness(120%)
       &:active
@@ -144,8 +156,8 @@ export default {
         resize: both
         overflow: hidden
       .vuse-icon
-        width: 100%
-        height: auto
+         width: 100%
+         height: auto
     &-eye
       position: absolute
       top: -2rem

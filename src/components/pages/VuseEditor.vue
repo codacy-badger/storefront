@@ -21,6 +21,7 @@ import logo from '@components/landings/logos/logo'
 import footer from '@components/landings/footers/footer'
 import system from '@components/landings/elements/system'
 import social from '@components/landings/elements/social'
+import available from '@components/landings/elements/available'
 
 Vuse.mix({
   components: {
@@ -40,6 +41,7 @@ Vuse.component('Delimiter', delimiter)
 Vuse.component('Logo', logo)
 Vuse.component('System', system)
 Vuse.component('Social', social)
+Vuse.component('Available', available)
 
 Vuse.use(pwa)
 
