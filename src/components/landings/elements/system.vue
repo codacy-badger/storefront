@@ -1,15 +1,17 @@
 <template>
   <section class="l-system flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
     <div class="b-system">
-      <h2 class="b-system-chapter">
-        <span class="b-system-chapter__text"
-          v-html="$sectionData.h2.element.text"
-          v-styler:for="{ el: $sectionData.h2.element, path: `$sectionData.h2.element`}"
-          :style="$sectionData.h2.element.styles
-          ">
-          Enter your text
-        </span>
-      </h2>
+      <div>
+        <h2 class="b-system-chapter">
+          <span class="b-system-chapter__text"
+            v-html="$sectionData.h2.element.text"
+            v-styler:for="{ el: $sectionData.h2.element, path: `$sectionData.h2.element`}"
+            :style="$sectionData.h2.element.styles
+            ">
+            Enter your text
+          </span>
+        </h2>
+      </div>
       <div class="b-system-platforms flex flex_center">
         <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
              :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.isPlatform }">
@@ -72,7 +74,7 @@
                   >
                 </div>
                 <div class="b-system-requirements__table-col b-system-requirements__table-col-eye is-editable-show">
-                  <button class="b-system-requirements__table-col__btn controller-button is-green" tooltip-position="top" tooltip="Show / Hide"
+                  <button class="b-system-requirements__table-col__btn controller-button is-green" tooltip-position="left" tooltip="Show / Hide"
                      @click="$sectionData.platforms[key].requirements[index].visible = !$sectionData.platforms[key].requirements[index].visible"
                     >
                     <VuseIcon name="eye"></VuseIcon>
@@ -106,7 +108,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '',
+  cover: '/img/covers/system.png',
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,
@@ -163,6 +165,16 @@ export default {
     visiblePlatform (key) {
       this.$sectionData.platforms[key].visible = !this.$sectionData.platforms[key].visible
       this.selectPlatform(key)
+
+      if (this.$sectionData.platforms.visible === true) {
+        return
+      }
+
+      for (let p in this.$sectionData.platforms) {
+        if (this.$sectionData.platforms[p].visible === true) {
+          this.selectPlatform(p)
+        }
+      }
     }
   },
   mounted () {
@@ -181,11 +193,17 @@ export default {
   background-size: cover
   color: #000
   padding: 3rem 0 6rem
-  min-height: 35rem
+  height: 68rem
   &.is-editable
     resize: vertical
     overflow: hidden
-
+  .is-tablet &, .is-mobile &
+    flex-wrap: wrap
+    padding: 2rem 0
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
+      height: auto !important
 .b-system
   width: 95%
   max-width: 100rem

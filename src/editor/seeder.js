@@ -134,6 +134,32 @@ const data = new Map([
       }
     })
   )],
+  [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: false,
+      resizable: true,
+      hasLink: true,
+      background: true,
+      colorFill: true,
+      shape: true,
+      target: '_blank',
+      text: '',
+      classes: [],
+      href: '',
+      styles: {
+        'background-image': false,
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': '#333',
+        'background': false,
+        'fill': '#fff',
+        'border-radius': '100%',
+        'width': '',
+        'height': ''
+      }
+    })
+  )],
   [types.Grid, () => ({ mobile: '', tablet: '', desktop: '', widescreen: '' })],
   [String, 'This is pretty neat'],
   [types.GalleryItem, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png']
