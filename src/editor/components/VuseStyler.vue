@@ -81,6 +81,11 @@
         </button>
       </li>
 
+      <!-- dimensions -->
+      <li v-if="options.resizable" class="styler-list__dimensions">
+        <span v-text="dimensions.width"></span> x <span v-text="dimensions.height"></span>
+      </li>
+
     </ul><!--/.styler-list-->
 
     <ul class="styler-list">
@@ -368,6 +373,10 @@ export default {
     galleryItem: {
       link: false,
       linlContentPopup: false
+    },
+    dimensions: {
+      width: null,
+      height: null
     }
   }),
   watch: {
@@ -403,6 +412,9 @@ export default {
     if (this.type === 'button') {
       this.el.contentEditable = 'true'
     }
+
+    this.dimensions.width = this.el.offsetWidth
+    this.dimensions.height = this.el.offsetHeight
   },
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
@@ -417,6 +429,8 @@ export default {
       // listen resize event, add params to element
       let handler = (e) => {
         console.log(e)
+        this.dimensions.width = e[0].contentRect.width
+        this.dimensions.height = e[0].contentRect.height
         if (document.getElementById('artboard') && !document.getElementById('artboard').classList.contains('fp-scroll')) {
           this.addStyle('width', `${this.el.offsetWidth}px`)
           this.addStyle('height', `${this.el.offsetHeight}px`)
@@ -884,6 +898,8 @@ export default {
     list-style: none
     margin: 0
     padding: 0
+    &__dimensions
+      margin-right: 5px
   &-input
     background: $white
     color: $dark

@@ -71,116 +71,127 @@
     </ul>
     <aside class="page-settings" :class="{ 'is-visiable': showSettings }">
       <form v-on:submit.prevent="applySettings">
-        <fieldset>
-          <legend>Page title</legend>
-          <input type="text" v-model="pageTitle" placeholder="type awesome title">
-          <div class="page-settings__favicon">
-            <div class="page-settings__favicon--preview">
-              <img :src="favicon" alt="">
+        <div class="page-settings__tabs">
+          <a href="" v-for="(tab, index) in tabs"
+             :key="index"
+             :class="{'is-active': showTab === index}"
+             class="page-settings__tab-button"
+             @click.prevent="showTab = index">{{tab}}</a>
+        </div>
+        <div class="page-settings__tab-content" v-if="showTab === 0">
+          <fieldset>
+            <legend>Page title</legend>
+            <input type="text" v-model="pageTitle" placeholder="type awesome title">
+            <div class="page-settings__favicon">
+              <div class="page-settings__favicon--preview">
+                <img :src="favicon" alt="">
+              </div>
+              <div>
+                <span class="page-settings__label">Page icon (32x32 ico, png, gif)</span>
+                <input
+                  style="display: none;"
+                  type="file"
+                  accept="image/*,video/mp4,video/x-m4v,video/*"
+                  v-bind:ref="'choseIconContentInput'"
+                  @change="onChooseIcon"/>
+                <button class="styler-button" @click.prevent="choseIcon" title="Upload image">
+                  <VuseIcon name="upload"></VuseIcon>
+                </button>
+              </div>
             </div>
-            <div>
-              <span class="page-settings__label">Page icon (32x32 ico, png, gif)</span>
+          </fieldset>
+          <fieldset>
+            <legend>OpenGraph</legend>
+            <div v-for="(item, index) in ogTags" :key="index" class="og-tag">
+              <select v-model="item.property" class="og-input">
+                <option value="og:title" selected>og:title</option>
+                <option value="og:description">og:description</option>
+                <option value="og:image">og:image</option>
+                <option value="og:type">og:type</option>
+                <option value="og:url">og:url</option>
+                <option value="og:locale">og:locale</option>
+                <option value="og:locale:alternate">og:locale:alternate</option>
+                <option value="og:video">og:video</option>
+              </select>
+              <input type="text" v-model="item.content" placeholder="content" class="og-input">
+              <button class="controller-button" @click.prevent="deleteTag(index)" v-if="index !== ogTags.length-1 ">
+                <VuseIcon name="trash"></VuseIcon>
+              </button>
+              <button class="controller-button is-green" tooltip-position="top" tooltip="add tag" @click.prevent="addTag" v-if="index === ogTags.length-1 ">
+                <VuseIcon name="plus"></VuseIcon>
+              </button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>GTM container ID <a href="https://developers.google.com/tag-manager/quickstart" target="_blank" class="help">?</a> </legend>
+            <input type="text" v-model="gtmId" placeholder="GTM-XXXXXX">
+          </fieldset>
+        </div>
+        <div class="page-settings__tab-content" v-if="showTab === 1">
+          <fieldset>
+            <legend>Page background</legend>
+            <div class="page-settings__upload">
+              <input type="text" v-model="pageBackgroundUrl" placeholder="background url">
               <input
                 style="display: none;"
                 type="file"
                 accept="image/*,video/mp4,video/x-m4v,video/*"
-                v-bind:ref="'choseIconContentInput'"
-                @change="onChooseIcon"/>
-              <button class="styler-button" @click.prevent="choseIcon" title="Upload image">
+                v-bind:ref="'choseBackgroundContentInput'"
+                @change="onChooseBackground"/>
+              <button class="styler-button" @click.prevent="choseBackground" title="Upload image">
                 <VuseIcon name="upload"></VuseIcon>
               </button>
             </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Page background</legend>
-          <div class="page-settings__upload">
-            <input type="text" v-model="pageBackgroundUrl" placeholder="background url">
-            <input
-              style="display: none;"
-              type="file"
-              accept="image/*,video/mp4,video/x-m4v,video/*"
-              v-bind:ref="'choseBackgroundContentInput'"
-              @change="onChooseBackground"/>
-            <button class="styler-button" @click.prevent="choseBackground" title="Upload image">
-              <VuseIcon name="upload"></VuseIcon>
-            </button>
-          </div>
-          <div><input type="text" v-model="pageBackgroundColor" placeholder="background color (#000000)"></div>
-          <div>
-            <span class="page-settings__label">Background position</span>
-            <input type="text" v-model="pageBackgroundPosX" placeholder="x" class="small">
-            <input type="text" v-model="pageBackgroundPosY" placeholder="y" class="small">
-          </div>
-          <div>
-            <span class="page-settings__label">Background size</span>
-            <select name="background-size" id="" v-model="bgSize">
-              <option value="cover">cover</option>
-              <option value="contain">contain</option>
-            </select>
-          </div>
-          <div>
-            <input type="checkbox" v-model="bgRepeat" true-value="repeat" false-value="no-repeat" name="bgrepeat" id="bgrepeat">
-            <label for="bgrepeat">Repeat</label>
-          </div>
-          <div>
-            <input type="checkbox" v-model="bgAttachment" true-value="fixed" false-value="scroll" name="bgfix" id="bgfix">
-            <label for="bgfix">Fixed</label>
-          </div>
-          <br><br>
-          <div>
+            <div><input type="text" v-model="pageBackgroundColor" placeholder="background color (#000000)"></div>
+            <div>
+              <span class="page-settings__label">Background position</span>
+              <input type="text" v-model="pageBackgroundPosX" placeholder="x" class="small">
+              <input type="text" v-model="pageBackgroundPosY" placeholder="y" class="small">
+            </div>
+            <div>
+              <span class="page-settings__label">Background size</span>
+              <select name="background-size" id="" v-model="bgSize">
+                <option value="cover">cover</option>
+                <option value="contain">contain</option>
+              </select>
+            </div>
+            <div>
+              <input type="checkbox" v-model="bgRepeat" true-value="repeat" false-value="no-repeat" name="bgrepeat" id="bgrepeat">
+              <label for="bgrepeat">Repeat</label>
+            </div>
+            <div>
+              <input type="checkbox" v-model="bgAttachment" true-value="fixed" false-value="scroll" name="bgfix" id="bgfix">
+              <label for="bgfix">Fixed</label>
+            </div>
+            <br><br>
+            <div>
             <span class="page-settings__label">
               Video background
             </span>
-            <div class="page-settings__upload">
-              <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
-              <input
-                style="display: none;"
-                type="file"
-                accept="image/*,video/mp4,video/x-m4v,video/*"
-                v-bind:ref="'choseVideoBackgroundContentInput'"
-                @change="onChooseVideoBackground"/>
-              <button class="styler-button" @click.prevent="choseVideoBackground" title="Upload image">
-                <VuseIcon name="upload"></VuseIcon>
-              </button>
+              <div class="page-settings__upload">
+                <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
+                <input
+                  style="display: none;"
+                  type="file"
+                  accept="image/*,video/mp4,video/x-m4v,video/*"
+                  v-bind:ref="'choseVideoBackgroundContentInput'"
+                  @change="onChooseVideoBackground"/>
+                <button class="styler-button" @click.prevent="choseVideoBackground" title="Upload image">
+                  <VuseIcon name="upload"></VuseIcon>
+                </button>
+              </div>
             </div>
-          </div>
-          <div>
-            <input type="checkbox" v-model="bgVideoFix" true-value="fixed" false-value="" name="bgvidfix" id="bgvidfix">
-            <label for="bgvidfix">Fixed</label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Full page scroll</legend>
-          <input type="checkbox" id="fpscroll" v-model="fullPageScroll" true-value="yes" false-value="no">
-          <label for="fpscroll">Enabled</label>
-        </fieldset>
-        <fieldset>
-          <legend>OpenGraph</legend>
-          <div v-for="(item, index) in ogTags" :key="index" class="og-tag">
-            <select v-model="item.property" class="og-input">
-              <option value="og:title" selected>og:title</option>
-              <option value="og:description">og:description</option>
-              <option value="og:image">og:image</option>
-              <option value="og:type">og:type</option>
-              <option value="og:url">og:url</option>
-              <option value="og:locale">og:locale</option>
-              <option value="og:locale:alternate">og:locale:alternate</option>
-              <option value="og:video">og:video</option>
-            </select>
-            <input type="text" v-model="item.content" placeholder="content" class="og-input">
-            <button class="controller-button" @click.prevent="deleteTag(index)" v-if="index !== ogTags.length-1 ">
-              <VuseIcon name="trash"></VuseIcon>
-            </button>
-            <button class="controller-button is-green" tooltip-position="top" tooltip="add tag" @click.prevent="addTag" v-if="index === ogTags.length-1 ">
-              <VuseIcon name="plus"></VuseIcon>
-            </button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>GTM container ID <a href="https://developers.google.com/tag-manager/quickstart" target="_blank" class="help">?</a> </legend>
-          <input type="text" v-model="gtmId" placeholder="GTM-XXXXXX">
-        </fieldset>
+            <div>
+              <input type="checkbox" v-model="bgVideoFix" true-value="fixed" false-value="" name="bgvidfix" id="bgvidfix">
+              <label for="bgvidfix">Fixed</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Full page scroll</legend>
+            <input type="checkbox" id="fpscroll" v-model="fullPageScroll" true-value="yes" false-value="no">
+            <label for="fpscroll">Enabled</label>
+          </fieldset>
+        </div>
         <div class="page-settings__controls">
           <input type="submit" value="Save" class="page-settings__save">
           <button class="page-settings__cancel">Cancel</button>
@@ -237,7 +248,9 @@ export default {
       fullPageScroll: 'no',
       ogTags: [ { property: '', content: '' } ],
       gtmId: '',
-      favicon: 'https://protocol.one/wp-content/uploads/2018/09/03.png'
+      favicon: 'https://protocol.one/wp-content/uploads/2018/09/03.png',
+      tabs: ['SEO', 'View'],
+      showTab: 0
     }
   },
 
@@ -862,6 +875,20 @@ export default {
       background: $color-border-dark
       img
         max-width: 32px
+  &__tabs
+    padding-left: 21px
+    margin-bottom: 25px
+    border-bottom: 2px solid lighten($dark, 20%)
+  &__tab-button
+    text-decoration: none
+    display: inline-block
+    margin: 0 10px 10px 0
+    border-radius: 4px
+    padding: 7px 12px
+    color: #fff
+    background: lighten($dark, 20%)
+    &.is-active
+      background: $dark
   fieldset
     border: 1px solid #e7e8eb
     border-radius: 3px
