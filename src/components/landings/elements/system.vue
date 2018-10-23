@@ -165,6 +165,16 @@ export default {
     visiblePlatform (key) {
       this.$sectionData.platforms[key].visible = !this.$sectionData.platforms[key].visible
       this.selectPlatform(key)
+
+      if (this.$sectionData.platforms.visible === true) {
+        return
+      }
+
+      for (let p in this.$sectionData.platforms) {
+        if (this.$sectionData.platforms[p].visible === true) {
+          this.selectPlatform(p)
+        }
+      }
     }
   },
   mounted () {
@@ -183,7 +193,7 @@ export default {
   background-size: cover
   color: #000
   padding: 3rem 0 6rem
-  min-height: 35rem
+  height: 68rem
   &.is-editable
     resize: vertical
     overflow: hidden
