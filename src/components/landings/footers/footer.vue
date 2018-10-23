@@ -1,8 +1,8 @@
 <template>
-  <section class="l-footer" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-footer force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
     <footer class="b-footer">
       <div class="b-footer__group b-footer__group_1">
-        <div class="b-footer__logo" v-for="(item, index) in $sectionData.images"
+        <div class="b-footer__logo force-polyfill" v-for="(item, index) in $sectionData.images"
              v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
              :data-index="index"
              :key="index"
@@ -38,6 +38,7 @@
 
 <script>
 import * as types from '@editor/types'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Footer',
@@ -87,6 +88,10 @@ export default {
         window.open(href)
       }
     }
+  },
+  mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
   }
 }
 </script>

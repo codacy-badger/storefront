@@ -1,10 +1,11 @@
 <template>
-    <section class="l-delimiter" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+    <section class="l-delimiter force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
     </section>
 </template>
 
 <script>
 import * as types from '@editor/types'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Delimiter',
@@ -18,6 +19,10 @@ export default {
       type: Number,
       required: true
     }
+  },
+  mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
   }
 }
 </script>

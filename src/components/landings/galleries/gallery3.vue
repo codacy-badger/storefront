@@ -1,14 +1,14 @@
 <template>
-  <section class="b-gallery-three" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-three force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="b-gallery-three__wrap">
         <div class="b-gallery-three-block flex flex_center">
-          <div class="b-gallery-three-block__item flex flex_center flex_columns"
+          <div class="b-gallery-three-block__item flex flex_center flex_columns force-polyfill"
                v-for="(item, index) in $sectionData.images" :key="index"
                v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
                :data-index="index"
                :style="$sectionData.images[index].preview.styles"
             >
-            <div class="b-gallery-three-block__item-wrap">
+            <div class="b-gallery-three-block__item-wrap force-polyfill">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
                  v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
                  v-bind:style="$sectionData.images[index].button.styles"
@@ -43,7 +43,7 @@
               </div>
               <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
               <div class="b-gallery-three-btn-container">
-                <span class="b-gallery-three-btn-container__button"
+                <span class="b-gallery-three-btn-container__button force-polyfil"
                       v-styler="$sectionData.button"
                       v-text="$sectionData.button.text"
                       v-bind:style="$sectionData.button.styles"
@@ -58,6 +58,7 @@
 
 <script>
 import * as types from '@editor/types'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Gallery3',
@@ -152,6 +153,10 @@ export default {
       }
       return false
     }
+  },
+  mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
   }
 }
 </script>

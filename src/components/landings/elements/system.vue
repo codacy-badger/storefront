@@ -1,5 +1,5 @@
 <template>
-  <section class="l-system flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-system flex flex_center force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
     <div class="b-system">
       <h2 class="b-system-chapter">
         <span class="b-system-chapter__text"
@@ -90,6 +90,7 @@
 <script>
 import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
+import ResizePolyfill from 'resize-polyfill'
 
 const Requirements = [
   { name: 'OS', min: types.Text, max: types.Text, visible: true },
@@ -166,6 +167,8 @@ export default {
     }
   },
   mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
     this.selectPlatform('apple')
   }
 }

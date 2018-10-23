@@ -1,10 +1,10 @@
 <template>
-  <section class="l-logo"
+  <section class="l-logo force-polyfill"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
     v-bind:style="$sectionData.mainStyle.styles">
       <div v-for="(logo, index) in $sectionData.images" :key="index" class="b-logo">
-        <uploader class="b-logo__img" :path="`$sectionData.images[${index}].element`"
+        <uploader class="b-logo__img force-polyfill" :path="`$sectionData.images[${index}].element`"
           v-styler:for="{ el: $sectionData.images[index].element, path: `$sectionData.images[${index}].element` }"
           v-bind:style="$sectionData.images[index].element.styles"
           ></uploader>
@@ -14,6 +14,7 @@
 
 <script>
 import * as types from '@editor/types'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Logo',
@@ -29,6 +30,10 @@ export default {
     id: {
       type: Number, required: true
     }
+  },
+  mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
   }
 }
 </script>

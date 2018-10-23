@@ -1,5 +1,5 @@
 <template>
-  <section class="b-gallery-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-one force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="p-split flex__item flex flex__item_full flex_center">
         <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
           <div class="hero-tile"
@@ -45,6 +45,7 @@
 <script>
 import * as types from '@editor/types'
 import { galleryPreviewClick } from '@cscripts/gallery1'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Gallery1',
@@ -99,6 +100,8 @@ export default {
     }
   },
   mounted: function () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
     this.bindingClickPreview(0)
   },
   updated: function () {
@@ -207,81 +210,6 @@ a
   display: none
   &_show
     display: block
-
-// button layout2 styles
-.l-layout2-btn
-  width: 100%
-  min-height: 10rem
-  position: relative
-.b-layout2-btn
-  background-color: #fff
-  color: #333
-  font-size: 3rem
-  text-align: center
-  cursor: pointer
-  z-index: 100
-  transition: all 100ms
-  margin: 0 auto
-  line-height: 3rem
-  padding: 2rem
-  width: 20rem
-  min-width: 5rem
-  min-height: 2rem
-  display: flex
-  align-items: center
-  justify-content: center
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(80%)
-  &.is-editable
-    resize: both
-    overflow: hidden
-@media only screen and (max-width: 768px)
-  .b-layout2-btn
-    font-size: 2rem
-
-.is-tablet,
-.is-mobile
-  .b-layout2-btn
-    font-size: 2rem
-
-.gallery1-btn-container
-  text-align: center
-  position: relative
-  z-index: 100
-  padding-bottom: 5vh
-  &__button
-    position: relative
-    font-size: 3rem
-    line-height: 3rem
-    padding: 2rem 4rem
-    background-color: #fff
-    color: #000
-    width: 25rem
-    min-width: 5rem
-    min-height: 2rem
-    margin: 0 auto
-    transition: 100ms
-    cursor: pointer
-    text-align: center
-    display: flex
-    align-items: center
-    justify-content: center
-    .is-tablet &,
-    .is-mobile &
-      font-size: 2rem
-    @media only screen and (max-width: 768px)
-      &
-        font-size: 2rem
-    &:hover
-      filter: brightness(120%)
-    &:active
-      filter: brightness(80%)
-    &.is-editable
-      resize: both
-      overflow: hidden
-// end button layout2 styles
 
 .p-bg__cont
   width: 100%

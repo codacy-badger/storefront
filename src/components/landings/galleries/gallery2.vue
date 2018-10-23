@@ -1,8 +1,8 @@
 <template>
-  <section class="b-gallery-two" v-on:resize="closePopup" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-two force-polyfill" v-on:resize="closePopup" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="b-gallery-two__wrap">
         <div class="b-gallery-two flex flex_center">
-          <div class="b-gallery-two__item-wrap"
+          <div class="b-gallery-two__item-wrap force-polyfill"
             v-for="(item, index) in $sectionData.images"
             v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
             :data-index="index"
@@ -32,6 +32,7 @@
 
 <script>
 import * as types from '@editor/types'
+import ResizePolyfill from 'resize-polyfill'
 
 export default {
   name: 'Gallery2',
@@ -128,6 +129,10 @@ export default {
       }
       return false
     }
+  },
+  mounted () {
+    let el = document.getElementsByClassName('force-polyfill')
+    ResizePolyfill(el)
   }
 }
 </script>
