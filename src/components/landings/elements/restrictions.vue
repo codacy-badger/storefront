@@ -41,7 +41,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '',
+  cover: '/img/covers/restrictions.png',
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,

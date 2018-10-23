@@ -33,7 +33,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '',
+  cover: '/img/covers/social.png',
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,

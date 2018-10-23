@@ -44,7 +44,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '',
+  cover: '/img/covers/available.png',
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,

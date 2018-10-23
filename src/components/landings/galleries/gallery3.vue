@@ -205,7 +205,7 @@ export default {
          border: dotted #333 1px
       &-wrap
         width: 100%
-        // height: 100% // #5 in https://jira.protocol.one/browse/SFC-53?focusedCommentId=10186&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-10186
+        height: 100% // #5 in https://jira.protocol.one/browse/SFC-53?focusedCommentId=10186&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-10186
         min-width: 5rem
         min-height: 17rem
         padding: 1rem
