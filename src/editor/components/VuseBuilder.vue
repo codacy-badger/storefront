@@ -74,6 +74,23 @@
         <fieldset>
           <legend>Page title</legend>
           <input type="text" v-model="pageTitle" placeholder="type awesome title">
+          <div class="page-settings__favicon">
+            <div class="page-settings__favicon--preview">
+              <img :src="favicon" alt="">
+            </div>
+            <div>
+              <span class="page-settings__label">Page icon (32x32 ico, png, gif)</span>
+              <input
+                style="display: none;"
+                type="file"
+                accept="image/*,video/mp4,video/x-m4v,video/*"
+                v-bind:ref="'choseIconContentInput'"
+                @change="onChooseIcon"/>
+              <button class="styler-button" @click.prevent="choseIcon" title="Upload image">
+                <VuseIcon name="upload"></VuseIcon>
+              </button>
+            </div>
+          </div>
         </fieldset>
         <fieldset>
           <legend>Page background</legend>
@@ -219,7 +236,8 @@ export default {
       bgVideoFix: '',
       fullPageScroll: 'no',
       ogTags: [ { property: '', content: '' } ],
-      gtmId: ''
+      gtmId: '',
+      favicon: 'https://protocol.one/wp-content/uploads/2018/09/03.png'
     }
   },
 
@@ -268,6 +286,7 @@ export default {
           this.bgRepeat = data.settings.styles.backgroundRepeat
           this.bgSize = data.settings.styles.backgroundSize
           this.gtmId = data.settings.gtmId
+          this.favicon = data.sttings.favicon
         }
 
         if (this.bgVideo.length) this.insertVideo(this.bgVideo)
@@ -439,6 +458,7 @@ export default {
         ogTags: this.ogTags,
         fullPageScroll: this.fullPageScroll,
         gtmId: this.gtmId,
+        favicon: this.favicon,
         styles: {
           backgroundImage: this.pageBackgroundUrl || false,
           backgroundColor: this.pageBackgroundColor || false,
@@ -480,6 +500,14 @@ export default {
     },
     deleteTag (index) {
       this.ogTags.splice(index, 1)
+    },
+    choseIcon () {
+      this['$refs']['choseIconContentInput'].click()
+    },
+    onChooseIcon (event) {
+      this.uploadFile(event)
+        .then((data) => { this.favicon = data.src })
+        .catch((error) => console.warn(error))
     },
     choseBackground: function () {
       this.backgroundUrl = ''
@@ -821,6 +849,19 @@ export default {
     background: $dark
     &:hover
       background: lighten($dark, 10%)
+  &__favicon
+    display: flex
+    justify-content: flex-start
+    &--preview
+      width: 64px
+      height: 64px
+      margin-right: 10px
+      display: flex
+      justify-content: center
+      align-items: center
+      background: $color-border-dark
+      img
+        max-width: 32px
   fieldset
     border: 1px solid #e7e8eb
     border-radius: 3px

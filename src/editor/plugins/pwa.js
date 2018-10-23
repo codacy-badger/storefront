@@ -103,6 +103,7 @@ function download (assets) {
       let bodyStyles = this.getBodyStyles()
       let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
       let og = this.settings.ogTags ? this.getOgMetaTags(this.settings.ogTags) : ''
+      let icon = this.settings.favicon
       let scrollSetup = this.getScrollSetup()
       let gtm = this.gtmSetup(this.settings.gtmId)
       output.file('index.html',
@@ -112,6 +113,7 @@ function download (assets) {
             <title>${title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="shortcut icon" href="${icon}"/>
             <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto" rel="stylesheet">
             ${scrollSetup.style}
             ${og}
