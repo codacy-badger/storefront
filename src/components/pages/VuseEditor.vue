@@ -22,6 +22,7 @@ import footer from '@components/landings/footers/footer'
 import system from '@components/landings/elements/system'
 import social from '@components/landings/elements/social'
 import available from '@components/landings/elements/available'
+import restrictions from '@components/landings/elements/restrictions'
 
 Vuse.mix({
   components: {
@@ -42,6 +43,7 @@ Vuse.component('Logo', logo)
 Vuse.component('System', system)
 Vuse.component('Social', social)
 Vuse.component('Available', available)
+Vuse.component('Restrictions', restrictions)
 
 Vuse.use(pwa)
 

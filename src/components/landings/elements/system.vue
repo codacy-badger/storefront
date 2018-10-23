@@ -74,7 +74,7 @@
                   >
                 </div>
                 <div class="b-system-requirements__table-col b-system-requirements__table-col-eye is-editable-show">
-                  <button class="b-system-requirements__table-col__btn controller-button is-green" tooltip-position="top" tooltip="Show / Hide"
+                  <button class="b-system-requirements__table-col__btn controller-button is-green" tooltip-position="left" tooltip="Show / Hide"
                      @click="$sectionData.platforms[key].requirements[index].visible = !$sectionData.platforms[key].requirements[index].visible"
                     >
                     <VuseIcon name="eye"></VuseIcon>
