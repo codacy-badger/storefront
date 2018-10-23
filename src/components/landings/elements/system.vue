@@ -187,7 +187,13 @@ export default {
   &.is-editable
     resize: vertical
     overflow: hidden
-
+  .is-tablet &, .is-mobile &
+    flex-wrap: wrap
+    padding: 2rem 0
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
+      height: auto !important
 .b-system
   width: 95%
   max-width: 100rem

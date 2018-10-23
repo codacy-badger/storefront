@@ -104,7 +104,6 @@ export default {
     overflow: hidden
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
-    height: auto !important
     padding: 2rem 0
   @media only screen and (max-width: 768px)
     &
