@@ -14,7 +14,7 @@ import * as types from '@editor/types'
 export default {
   name: 'Title1',
   cover: '/img/covers/title1.png',
-  group: 'titles',
+  group: 'texts',
   $schema: {
     mainStyle: types.StyleObject,
     titles: [{
@@ -45,7 +45,7 @@ export default {
     overflow: hidden
   &__title
     width: 100%
-    font-size: 1.5rem
+    font-size: 2.5rem
     display: block
   &::selection, & ::selection
     color: #ff0

@@ -15,7 +15,7 @@ import gallery3 from '@components/landings/galleries/gallery3.vue'
 import button1 from '@components/landings/buttons/button1'
 import button5 from '@components/landings/buttons/button5'
 import button6 from '@components/landings/buttons/button6'
-import title1 from '@components/landings/titles/title1'
+import title1 from '@components/landings/texts/title1'
 import delimiter from '@components/landings/delimiters/delimiter'
 import logo from '@components/landings/logos/logo'
 import footer from '@components/landings/footers/footer'
@@ -23,6 +23,8 @@ import system from '@components/landings/elements/system'
 import social from '@components/landings/elements/social'
 import available from '@components/landings/elements/available'
 import restrictions from '@components/landings/elements/restrictions'
+import image from '@components/landings/images/image'
+import description from '@components/landings/texts/description'
 
 Vuse.mix({
   components: {
@@ -44,6 +46,8 @@ Vuse.component('System', system)
 Vuse.component('Social', social)
 Vuse.component('Available', available)
 Vuse.component('Restrictions', restrictions)
+Vuse.component('Picture', image)
+Vuse.component('Description', description)
 
 Vuse.use(pwa)
 

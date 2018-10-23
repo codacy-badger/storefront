@@ -24,6 +24,28 @@ const DEFAULT_OPTIONS = {
  * @type {Map}
  */
 const data = new Map([
+  [types.Description, () => (_.merge({}, DEFAULT_OPTIONS, {
+    text: 'Your Game takes players on a grand adventure filled with detractors, monsters, gold hunters and grave danger. Dramatic events unfolded which overturned your life and now you have to fight for survival in a new hostile world. Discover, explore, and conquer as you survive through different dimensions of reality!',
+    aligned: true,
+    typography: true,
+    removable: true,
+    styles: {
+      'font-family': 'Open Sans',
+      'font-size': 1.4,
+      'font-weight': false,
+      'font-style': false,
+      'text-decoration': false,
+      'text-align': false,
+      'color': false,
+      'background-image': false,
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': false,
+      'justify-content': false
+    }
+  }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
     aligned: true,
