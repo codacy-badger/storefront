@@ -15,7 +15,8 @@ const DEFAULT_OPTIONS = {
   box: false, // (colorer)
   canCopy: false,
   background: false,
-  shape: false
+  shape: false, // border-radius prop
+  pseudo: false // can have a pseudo-class
 }
 
 /**
@@ -110,6 +111,7 @@ const data = new Map([
       typography: true,
       background: true,
       shape: true,
+      pseudo: {},
       text: 'Click Me!',
       classes: [],
       href: '',

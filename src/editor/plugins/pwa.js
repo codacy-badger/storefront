@@ -123,8 +123,10 @@ function download (assets) {
           </head>
           <body style="${bodyStyles} height: 100%">
             ${gtm.body}
-            ${artboard.innerHTML}
-            ${video}
+            <div class="main">
+              ${artboard.innerHTML}
+            </div>
+            ${video} 
           <script src="js/cjs.js"></script>
           ${scrollSetup.setup}
           </body>

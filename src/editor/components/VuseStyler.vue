@@ -32,6 +32,12 @@
           <VuseIcon name="fillet"></VuseIcon>
         </button>
       </li>
+      <!-- hover -->
+      <li v-if="options.pseudo">
+        <button class="styler-button" @click="updateOption('pseudo')" title="Change shape">
+          <VuseIcon name="hand"></VuseIcon>
+        </button>
+      </li>
 
       <template v-if="type === 'galleryItem'">
         <li>
@@ -262,6 +268,20 @@
         </ul>
       </li>
 
+      <!-- Hover -->
+      <li v-if="currentOption === 'pseudo'">
+        <div>
+          <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+            <VuseIcon name="palettes"></VuseIcon>
+          </button>
+        </div>
+        <div v-if="showPseudoBg" class="b-styler__bg_options_container">
+          <div class="b-styler__bg_options__item">
+            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex })" v-model="backgroundHoverColor"></sketch-color-pecker>
+          </div>
+        </div>
+      </li>
+
     </ul><!--/.styler-list-->
   </div>
 </template>
@@ -273,7 +293,7 @@ import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
-import { isParentTo } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
 import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
@@ -342,6 +362,7 @@ export default {
     videoBackgroundSources: [],
     backgroundUrl: '',
     backgroundColor: '#ffffff',
+    backgroundHoverColor: '#ffffff',
     backgroundOptions: {
       repeat: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y'],
       positions: [
@@ -377,7 +398,8 @@ export default {
     dimensions: {
       width: null,
       height: null
-    }
+    },
+    showPseudoBg: false
   }),
   watch: {
     colorerColor: function () {
@@ -413,8 +435,8 @@ export default {
       this.el.contentEditable = 'true'
     }
 
-    this.dimensions.width = this.el.offsetWidth
-    this.dimensions.height = this.el.offsetHeight
+    this.dimensions.width = this.el.offsetWidth.toFixed(0)
+    this.dimensions.height = this.el.offsetHeight.toFixed(0)
   },
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
@@ -428,7 +450,6 @@ export default {
     if (this.options.resizable) {
       // listen resize event, add params to element
       let handler = (e) => {
-        console.log(e)
         this.dimensions.width = e[0].contentRect.width
         this.dimensions.height = e[0].contentRect.height
         if (document.getElementById('artboard') && !document.getElementById('artboard').classList.contains('fp-scroll')) {
@@ -744,6 +765,16 @@ export default {
 
       this.addStyle('background-color', this.backgroundColor.hex8)
       this.addStyle('border-color', this.backgroundColor.hex8)
+    },
+    changePseudoStyle (style) {
+      let poneId = ''
+      poneId = randomPoneId()
+      console.log(poneId)
+      this.el.dataset.pone = poneId
+
+      let styleTemplate = getPseudoTemplate(poneId, { hover: style })
+
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
     },
     identifyBackgroundSettingsSection: function () {
       if (this.imageBgSelected === true) {
