@@ -11,3 +11,5 @@ export class Grid {}
 export class Slogan {}
 export class GalleryItem {}
 export class StyleObject {}
+export class Icon {}
+export class Description {}
