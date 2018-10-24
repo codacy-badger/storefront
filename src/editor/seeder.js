@@ -184,7 +184,23 @@ const data = new Map([
   )],
   [types.Grid, () => ({ mobile: '', tablet: '', desktop: '', widescreen: '' })],
   [String, 'This is pretty neat'],
-  [types.GalleryItem, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png']
+  [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
+    removable: true,
+    resizable: true,
+    alt: 'Default image',
+    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    background: true,
+    styles: {
+      'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': false,
+      'width': '',
+      'height': ''
+    }
+  }))],
 ])
 
 export default class Seeder {

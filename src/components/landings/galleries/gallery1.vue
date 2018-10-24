@@ -1,12 +1,13 @@
 <template>
   <section class="b-gallery-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <div class="p-split flex__item flex flex__item_full flex_center">
+      <div class="p-split flex__item flex flex_center">
         <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
           <div class="hero-tile"
               v-for="(item, index) in $sectionData.images"
               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
               :data-index="index"
               :key="index"
+              :style="$sectionData.images[index].preview.styles"
               :gallery-one-preview="'loader__content_show'"
               @click="onFocus(index)" >
             <div class="hero-tile__frame">
@@ -54,22 +55,22 @@ export default {
     mainStyle: types.StyleObject,
     images: [
       {
-        preview: types.Image,
-        label: types.Text,
+        preview: types.GalleryItem,
+        label: types.Button,
         title: types.Text,
         img: types.Image,
         text: types.Text
       },
       {
-        preview: types.Image,
-        label: types.Text,
+        preview: types.GalleryItem,
+        label: types.Button,
         title: types.Text,
         img: types.Image,
         text: types.Text
       },
       {
-        preview: types.Image,
-        label: types.Text,
+        preview: types.GalleryItem,
+        label: types.Button,
         title: types.Text,
         img: types.Image,
         text: types.Text
@@ -343,8 +344,6 @@ a
   border-radius: 0.5rem
   width: 13rem
   height: 15rem
-  -webkit-transform: skewX(-14.92632deg) translateX(20px)
-  transform: skewX(-14.92632deg) translateX(20px)
   border: 0.4rem solid #a7a1a1
   -webkit-transition: all 200ms
   transition: all 200ms
@@ -358,8 +357,6 @@ a
   height: 100%
   -o-object-fit: contain
   object-fit: contain
-  -webkit-transform: skewX(14.92632deg)
-  transform: skewX(14.92632deg)
 
 .hero-tile__name
   border-radius: 0.25rem
@@ -378,8 +375,8 @@ a
 .hero-tile_active
   .hero-tile__frame
     border-color: #a7a1a1
-    -webkit-transform: skewX(-14.92632deg) translateX(20px) scale(1.1)
-    transform: skewX(-14.92632deg) translateX(20px) scale(1.1)
+    -webkit-transform: scale(1.1)
+    transform: scale(1.1)
   .hero-tile__name
     background-color: #a7a1a1
     color: #000
@@ -396,17 +393,13 @@ a
   .hero-tile__frame
     width: 6.5rem
     height: 7.5rem
-    -webkit-transform: skewX(-14.92584deg) translateX(10px)
-    transform: skewX(-14.92584deg) translateX(10px)
   .hero-tile__img
     left: -1rem
     width: 8.5rem
-    -webkit-transform: skewX(14.92584deg)
-    transform: skewX(14.92584deg)
   .hero-tile_active
     .hero-tile__frame
-      -webkit-transform: skewX(-14.92584deg) translateX(10px) scale(1.1)
-      transform: skewX(-14.92584deg) translateX(10px) scale(1.1)
+      -webkit-transform: scale(1.1)
+      transform: scale(1.1)
     .hero-tile__name
       -webkit-transform: translateY(-7px)
       transform: translateY(-7px)
@@ -417,17 +410,13 @@ a
   .hero-tile__frame
     width: 6.5rem
     height: 7.5rem
-    -webkit-transform: skewX(-14.92584deg) translateX(10px)
-    transform: skewX(-14.92584deg) translateX(10px)
   .hero-tile__img
     left: -1rem
     width: 8.5rem
-    -webkit-transform: skewX(14.92584deg)
-    transform: skewX(14.92584deg)
   .hero-tile_active
     .hero-tile__frame
-      -webkit-transform: skewX(-14.92584deg) translateX(10px) scale(1.1)
-      transform: skewX(-14.92584deg) translateX(10px) scale(1.1)
+      -webkit-transform: scale(1.1)
+      transform: scale(1.1)
     .hero-tile__name
       -webkit-transform: translateY(-7px)
       transform: translateY(-7px)
