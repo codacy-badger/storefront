@@ -49,48 +49,48 @@ export default {
     restrictions: {
       'age': {
         visible: true,
-        selected: { value: '0+', img: '/img/rest/age/0.svg' },
+        selected: { value: '0+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759Ga/o_20S5qo.svg' },
         options: [
-          { value: '0+', img: '/img/rest/age/0.svg' },
-          { value: '6+', img: '/img/rest/age/6.svg' },
-          { value: '12+', img: '/img/rest/age/12.svg' },
-          { value: '18+', img: '/img/rest/age/18.svg' },
-          { value: '21+', img: '/img/rest/age/21.svg' }
+          { value: '0+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759Ga/o_20S5qo.svg' },
+          { value: '6+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759H0/o_1KX2IR.svg' },
+          { value: '12+', img: 'https://gn695.cdn.stg.gamenet.ru/0/759HF/o_DNNg8.svg' },
+          { value: '18+', img: 'https://gn24.cdn.stg.gamenet.ru/0/759HU/o_1AgXj1.svg' },
+          { value: '21+', img: 'https://gn822.cdn.stg.gamenet.ru/0/759Hf/o_299afp.svg' }
         ]
       },
       'pegi': {
         visible: true,
-        selected: { value: '3', img: '/img/rest/pegi/3.svg' },
+        selected: { value: '3', img: 'https://gn875.cdn.stg.gamenet.ru/0/759I0/o_13iwpA.svg' },
         options: [
-          { value: '3', img: '/img/rest/pegi/3.svg' },
-          { value: '7', img: '/img/rest/pegi/7.svg' },
-          { value: '12', img: '/img/rest/pegi/12.svg' },
-          { value: '16', img: '/img/rest/pegi/16.svg' },
-          { value: '18', img: '/img/rest/pegi/18.svg' }
+          { value: '3', img: 'https://gn875.cdn.stg.gamenet.ru/0/759I0/o_13iwpA.svg' },
+          { value: '7', img: 'https://gn414.cdn.stg.gamenet.ru/0/759ID/o_vuop.svg' },
+          { value: '12', img: 'https://gn793.cdn.stg.gamenet.ru/0/759IR/o_1S1h6M.svg' },
+          { value: '16', img: 'https://gn800.cdn.stg.gamenet.ru/0/759Il/o_ANYUX.svg' },
+          { value: '18', img: 'https://gn653.cdn.stg.gamenet.ru/0/759Ix/o_Xqb9n.svg' }
         ]
       },
       'usk': {
         visible: true,
-        selected: { value: '0', img: '/img/rest/usk/USK0_neu2.svg' },
+        selected: { value: '0', img: 'https://gn191.cdn.stg.gamenet.ru/0/759JH/o_1g38pS.svg' },
         options: [
-          { value: '0', img: '/img/rest/usk/USK0_neu2.svg' },
-          { value: '6', img: '/img/rest/usk/USK6_neu2.svg' },
-          { value: '12', img: '/img/rest/usk/USK12_neu2.svg' },
-          { value: '16', img: '/img/rest/usk/USK16_neu2.svg' },
-          { value: '18', img: '/img/rest/usk/USK18_neu2.svg' }
+          { value: '0', img: 'https://gn191.cdn.stg.gamenet.ru/0/759JH/o_1g38pS.svg' },
+          { value: '6', img: 'https://gn182.cdn.stg.gamenet.ru/0/759JS/o_25hRrV.svg' },
+          { value: '12', img: 'https://gn972.cdn.stg.gamenet.ru/0/759Jf/o_amDyU.svg' },
+          { value: '16', img: 'https://gn972.cdn.stg.gamenet.ru/0/759Jf/o_amDyU.svg' },
+          { value: '18', img: 'https://gn320.cdn.stg.gamenet.ru/0/759K2/o_x4V42.svg' }
         ]
       },
       'cero': {
         visible: true,
-        selected: { value: 'All ages', img: '/img/rest/cero/CERO_A.svg' },
+        selected: { value: 'All ages', img: 'https://gn773.cdn.stg.gamenet.ru/0/759KN/o_sazoN.svg' },
         options: [
-          { value: 'All ages', img: '/img/rest/cero/CERO_A.svg' },
-          { value: 'Ages 12 and up only', img: '/img/rest/cero/CERO_B.svg' },
-          { value: 'Ages 15 and up only', img: '/img/rest/cero/CERO_C.svg' },
-          { value: 'Ages 17 and up only', img: '/img/rest/cero/CERO_D.svg' },
-          { value: 'Ages 18 and up only', img: '/img/rest/cero/CERO_Z.svg' },
-          { value: 'Education/Database', img: '/img/rest/cero/CERO_Kyouiku_Deitabeisu.svg' },
-          { value: 'Rating pending', img: '/img/rest/cero/CERO_Shin_Sa_Yo_Tei.svg' }
+          { value: 'All ages', img: 'https://gn773.cdn.stg.gamenet.ru/0/759KN/o_sazoN.svg' },
+          { value: 'Ages 12 and up only', img: 'https://gn925.cdn.stg.gamenet.ru/0/759LL/o_zwWo0.svg' },
+          { value: 'Ages 15 and up only', img: 'https://gn572.cdn.stg.gamenet.ru/0/759LZ/o_qfcL4.svg' },
+          { value: 'Ages 17 and up only', img: 'https://gn959.cdn.stg.gamenet.ru/0/759Lq/o_FHJmm.svg' },
+          { value: 'Ages 18 and up only', img: 'https://gn640.cdn.stg.gamenet.ru/0/759MA/o_4FtnT.svg' },
+          { value: 'Education/Database', img: 'https://gn119.cdn.stg.gamenet.ru/0/759MN/o_18ADS5.svg' },
+          { value: 'Rating pending', img: 'https://gn801.cdn.stg.gamenet.ru/0/759MZ/o_1b7UOI.svg' }
         ]
       }
     }
