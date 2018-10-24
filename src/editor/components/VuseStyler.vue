@@ -399,7 +399,8 @@ export default {
       width: null,
       height: null
     },
-    showPseudoBg: false
+    showPseudoBg: false,
+    pseudoStyles: {}
   }),
   watch: {
     colorerColor: function () {
@@ -445,6 +446,14 @@ export default {
     this.el.addEventListener('focus', this.showStyler)
 
     this.setInitialValue()
+
+    // Restoring from a snapshot
+    // to apply the pseudoclass to the element
+    if (Object.keys(this.options.pseudo).length) {
+      _.forEach(this.options.pseudo, (styles, pseudo) => {
+        this.changePseudoStyle(styles, pseudo)
+      })
+    }
   },
   updated () {
     if (this.options.resizable) {
@@ -766,13 +775,21 @@ export default {
       this.addStyle('background-color', this.backgroundColor.hex8)
       this.addStyle('border-color', this.backgroundColor.hex8)
     },
-    changePseudoStyle (style) {
+    /**
+     * Add style to pseudocalss
+     * @param style {object}
+     * @param pseudoClass {string}
+     */
+    changePseudoStyle (style, pseudoClass = 'hover') {
       let poneId = ''
+      let pseudoClassValue = {}
+      pseudoClassValue[pseudoClass] = style
       poneId = randomPoneId()
-      console.log(poneId)
       this.el.dataset.pone = poneId
+      _.merge(this.pseudoStyles, pseudoClassValue)
+      this.options.pseudo = this.pseudoStyles
 
-      let styleTemplate = getPseudoTemplate(poneId, { hover: style })
+      let styleTemplate = getPseudoTemplate(poneId, this.pseudoStyles)
 
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
     },
