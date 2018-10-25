@@ -1,5 +1,5 @@
 <template>
-    <section class="l-button-one force-polyfill" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+    <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one is-editable force-polyfill"
            @click.prevent="openLink(item)" :target="$sectionData.buttons[index].element.target"
            v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
