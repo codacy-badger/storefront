@@ -162,15 +162,15 @@ export default {
 .b-gallery-three
   display: flex
   align-items: center
+  flex-wrap: wrap
   &.is-editable
    resize: vertical
    overflow: hidden
   .is-tablet &,
   .is-mobile &
-    flex-wrap: wrap
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
-      flex-wrap: wrap
       height: auto !important
   &__wrap
     margin: 0 auto
