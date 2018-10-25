@@ -175,7 +175,7 @@ export default {
   &__wrap
     margin: 0 auto
     max-width: 160rem
-    min-width: 80%
+    width: 80%
   &__subtitle
     margin-bottom: 0
     font-weight: 400
