@@ -44,7 +44,7 @@ export default {
     resize: vertical
     overflow: hidden
   &__title
-    width: 100%
+    width: 90%
     font-size: 1.4rem
     line-height: 1.4
     display: block
