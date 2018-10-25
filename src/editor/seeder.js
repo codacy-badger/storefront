@@ -108,7 +108,7 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: true,
+      resizable: false,
       removable: true,
       styles: {
         'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
@@ -186,7 +186,7 @@ const data = new Map([
   [String, 'This is pretty neat'],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
-    resizable: true,
+    resizable: false,
     alt: 'Default image',
     url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
     background: true,
@@ -196,7 +196,7 @@ const data = new Map([
       'background-repeat': false,
       'background-size': false,
       'background-color': false,
-      'background': false,
+      'background': '#fff',
       'width': '',
       'height': ''
     }

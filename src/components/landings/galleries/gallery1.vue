@@ -1,7 +1,7 @@
 <template>
   <section class="b-gallery-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="p-split flex__item flex flex_center">
-        <div class="p-split__tiles flex__item flex__item_size-2 clearfix">
+        <div class="p-split__tiles flex__item clearfix">
           <div class="hero-tile"
               v-for="(item, index) in $sectionData.images"
               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
@@ -21,7 +21,7 @@
             </span>
           </div>
         </div>
-        <div class="p-split__detail flex__item flex__item_size-1 hero-detail loader">
+        <div class="p-split__detail flex__item hero-detail loader">
           <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
             <h2 class="hero-detail__name h1"
                v-html="$sectionData.images[index].title.text"
@@ -344,7 +344,6 @@ a
   border-radius: 0.5rem
   width: 13rem
   height: 15rem
-  border: 0.4rem solid #a7a1a1
   -webkit-transition: all 200ms
   transition: all 200ms
 
@@ -364,38 +363,22 @@ a
   display: inline-block
   -webkit-transition: all 200ms
   transition: all 200ms
-  max-width: 13rem
-  .is-tablet &,
-  .is-mobile &
-    max-width: 6.5rem
-  @media only screen and (max-width: 768px)
-    &
-      max-width: 6.5rem
+  width: 13rem
+  height: 2rem
+  &.is-editable
+    resize: vertical
+    overflow: hidden
 
 .hero-tile_active
   .hero-tile__frame
-    border-color: #a7a1a1
     -webkit-transform: scale(1.1)
     transform: scale(1.1)
   .hero-tile__name
-    background-color: #a7a1a1
-    color: #000
     -webkit-transform: translateY(-1rem)
     transform: translateY(-1rem)
 
-.hero-tile:hover .hero-tile__frame
-  border-color: #a7a1a1
-
 .is-tablet,
 .is-mobile
-  .hero-tile:nth-child(6)
-    clear: left
-  .hero-tile__frame
-    width: 6.5rem
-    height: 7.5rem
-  .hero-tile__img
-    left: -1rem
-    width: 8.5rem
   .hero-tile_active
     .hero-tile__frame
       -webkit-transform: scale(1.1)
@@ -405,14 +388,6 @@ a
       transform: translateY(-7px)
 
 @media only screen and (max-width: 768px)
-  .hero-tile:nth-child(6)
-    clear: left
-  .hero-tile__frame
-    width: 6.5rem
-    height: 7.5rem
-  .hero-tile__img
-    left: -1rem
-    width: 8.5rem
   .hero-tile_active
     .hero-tile__frame
       -webkit-transform: scale(1.1)
@@ -428,11 +403,17 @@ a
       clear: none
     &:nth-child(5), &:nth-child(9)
       clear: left
+.p-split
+ width: 95%
+ max-width: 98rem
+ margin: 0 auto
 .p-split__tiles
   margin: 1rem
   text-align: center
+  width: 50%
 .p-split__detail
   text-align: center
+  width: 50%
 
 @media only screen and (max-width: 600px)
   .hero-tile
