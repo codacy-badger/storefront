@@ -196,7 +196,8 @@ export default {
         margin-right: 0
 
     &__item
-      width: 20%
+      width: 20rem
+      min-width: 10rem
       margin: 1rem
       &.is-editable
        resize: both
@@ -265,6 +266,9 @@ export default {
         min-height: 100%
         margin: 0
         z-index: 100
+        background-image: url(https://gn779.cdn.gamenet.ru/TY0Xv2riHu/75YKm/o_1lNeRV.png)
+        background-size: cover
+        transition: all 200ms
         &.is-editable
           top: 50%
           left: 50%
@@ -273,27 +277,8 @@ export default {
           min-width: auto
           min-height: auto
           margin: -5rem 0 0 -5rem
-        &:before, &:after
-          content: ''
-          position: absolute
-          top: 50%
-          left: 50%
-        &:before
-          margin: -43px 0 0 -43px
-          width: 86px
-          height: 86px
-          -webkit-transform: scale(0.9)
-          transform: scale(0.9)
-          -webkit-transition: all 200ms
-          transition: all 200ms
-          background-image: url(https://gn897.cdn.gamenet.ru/TY0Xv2riHu/6u2ah/o_o01QL.png)
-        &:after
-          margin: -14px 0 0 -14px
-          width: 28px
-          height: 28px
-          background-image: url(https://gn295.cdn.gamenet.ru/TY0Xv2riHu/6u2as/o_1MFnq3.png)
-      &-wrap:hover &-link:before
-          transform: scale(1) rotate(-120deg)
+        &:hover
+          transform: scale(1.2) rotate(-120deg)
 
       &-img
         position: absolute
