@@ -202,9 +202,8 @@ export default {
     width: 10rem
     height: 10rem
     margin: -5rem 0 0 -5rem
-  :hover
-    transform: scale(1) rotate(-120deg)
-    transform: scale(0.9)
+  &:hover
+    transform: scale(1.2) rotate(-120deg)
 .b-gallery-two__text
   position: absolute
   bottom: 1.5rem
