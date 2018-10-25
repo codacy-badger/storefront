@@ -38,6 +38,12 @@
           <VuseIcon name="fillet"></VuseIcon>
         </button>
       </li>
+      <!-- hover -->
+      <li v-if="options.pseudo">
+        <button class="styler-button" @click="updateOption('pseudo')" title="Change shape">
+          <VuseIcon name="hand"></VuseIcon>
+        </button>
+      </li>
 
       <template v-if="type === 'galleryItem'">
         <li>
@@ -85,6 +91,11 @@
         <button class="styler-button" @click="removeElement" title="Delete">
           <VuseIcon name="trash" class="vuse-icon"></VuseIcon>
         </button>
+      </li>
+
+      <!-- dimensions -->
+      <li v-if="options.resizable" class="styler-list__dimensions">
+        <span v-text="dimensions.width"></span> x <span v-text="dimensions.height"></span>
       </li>
 
     </ul><!--/.styler-list-->
@@ -270,6 +281,20 @@
         </ul>
       </li>
 
+      <!-- Hover -->
+      <li v-if="currentOption === 'pseudo'">
+        <div>
+          <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+            <VuseIcon name="palettes"></VuseIcon>
+          </button>
+        </div>
+        <div v-if="showPseudoBg" class="b-styler__bg_options_container">
+          <div class="b-styler__bg_options__item">
+            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex })" v-model="backgroundHoverColor"></sketch-color-pecker>
+          </div>
+        </div>
+      </li>
+
     </ul><!--/.styler-list-->
   </div>
 </template>
@@ -282,7 +307,7 @@ import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
 import ControlColorFill from './controls/TheControlColorFill.vue'
-import { isParentTo } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
 import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
@@ -352,6 +377,7 @@ export default {
     videoBackgroundSources: [],
     backgroundUrl: '',
     backgroundColor: '#ffffff',
+    backgroundHoverColor: '#ffffff',
     backgroundOptions: {
       repeat: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y'],
       positions: [
@@ -383,7 +409,13 @@ export default {
     galleryItem: {
       link: false,
       linlContentPopup: false
-    }
+    },
+    dimensions: {
+      width: null,
+      height: null
+    },
+    showPseudoBg: false,
+    pseudoStyles: {}
   }),
   watch: {
     colorerColor: function () {
@@ -418,6 +450,9 @@ export default {
     if (this.type === 'button') {
       this.el.contentEditable = 'true'
     }
+
+    this.dimensions.width = this.el.offsetWidth.toFixed(0)
+    this.dimensions.height = this.el.offsetHeight.toFixed(0)
   },
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
@@ -426,12 +461,21 @@ export default {
     this.el.addEventListener('focus', this.showStyler)
 
     this.setInitialValue()
+
+    // Restoring from a snapshot
+    // to apply the pseudoclass to the element
+    if (Object.keys(this.options.pseudo).length) {
+      _.forEach(this.options.pseudo, (styles, pseudo) => {
+        this.changePseudoStyle(styles, pseudo)
+      })
+    }
   },
   updated () {
     if (this.options.resizable) {
       // listen resize event, add params to element
       let handler = (e) => {
-        console.log(e)
+        this.dimensions.width = e[0].contentRect.width
+        this.dimensions.height = e[0].contentRect.height
         if (document.getElementById('artboard') && !document.getElementById('artboard').classList.contains('fp-scroll')) {
           this.addStyle('width', `${this.el.offsetWidth}px`)
           this.addStyle('height', `${this.el.offsetHeight}px`)
@@ -746,6 +790,24 @@ export default {
       this.addStyle('background-color', this.backgroundColor.hex8)
       this.addStyle('border-color', this.backgroundColor.hex8)
     },
+    /**
+     * Add style to pseudocalss
+     * @param style {object}
+     * @param pseudoClass {string}
+     */
+    changePseudoStyle (style, pseudoClass = 'hover') {
+      let poneId = ''
+      let pseudoClassValue = {}
+      pseudoClassValue[pseudoClass] = style
+      poneId = randomPoneId()
+      this.el.dataset.pone = poneId
+      _.merge(this.pseudoStyles, pseudoClassValue)
+      this.options.pseudo = this.pseudoStyles
+
+      let styleTemplate = getPseudoTemplate(poneId, this.pseudoStyles)
+
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
     identifyBackgroundSettingsSection: function () {
       if (this.imageBgSelected === true) {
         this.showBackgroundSettingsSection('image')
@@ -899,6 +961,8 @@ export default {
     list-style: none
     margin: 0
     padding: 0
+    &__dimensions
+      margin-right: 5px
   &-input
     background: $white
     color: $dark

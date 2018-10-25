@@ -1,4 +1,4 @@
-import getPath from 'lodash-es/get'
+import * as _ from 'lodash-es'
 import * as types from './types'
 
 export function isObject (obj) {
@@ -22,7 +22,7 @@ export function isParentTo (target, parent) {
 export function getTypeFromSchema (target, schema) {
   const tempTarget = target.split('.')
   tempTarget.shift()
-  const value = getPath(schema, tempTarget.join('.'))
+  const value = _.get(schema, tempTarget.join('.'))
   if (value === types.Grid) return 'grid'
   if (value === types.Text) return 'text'
   if (value === types.Description) return 'text'
@@ -112,4 +112,35 @@ export function cleanDOM (artboard) {
   stylers.forEach((styler) => {
     styler.remove()
   })
+}
+
+export function randomPoneId () {
+  return `pone${Math.random().toString().substring(2, 7)}`
+}
+
+/**
+ * Return template of scoped style for el
+ * @param poneId
+ * @param data {Object} Like:
+ *  {
+ *    'hover': {
+ *      'background-color': '#f2f3f6',
+ *      'color': '#000000'
+ *    }
+ *  }
+ * @returns {string}
+ */
+export function getPseudoTemplate(poneId, data) {
+  let content = ''
+  _.forEach(data, (styles, pseudo) => {
+    let acc = ''
+    _.forEach(styles, (value, style) => {
+      acc += `${style}: ${value};`
+    })
+    content += `[data-pone="${poneId}"]:${pseudo} {
+      ${acc}
+    }`
+  })
+
+  return `<style type="text/css" id="${poneId}">${content}</style>`
 }
