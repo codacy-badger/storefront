@@ -6,6 +6,7 @@
            v-html="$sectionData.buttons[index].element.text"
            :href="$sectionData.buttons[index].element.href"
            v-bind:style="$sectionData.buttons[index].element.styles"
+           v-bind:class="$sectionData.buttons[index].element.classes"
           >
       </a>
     </section>

@@ -283,11 +283,20 @@
 
       <!-- Hover -->
       <li v-if="currentOption === 'pseudo'">
-        <div>
-          <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
-            <VuseIcon name="palettes"></VuseIcon>
-          </button>
-        </div>
+        <ul class="align">
+          <li>
+            <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+              <VuseIcon name="palettes"></VuseIcon>
+            </button>
+          </li>
+          <li>
+            <span>Animation: </span>
+            <select v-model="animation" @change="selectAnimation">
+              <option v-for="(anim, index) in animationList" :key="index" :value="anim">{{anim.name}}</option>
+            </select>
+          </li>
+        </ul>
+
         <div v-if="showPseudoBg" class="b-styler__bg_options_container">
           <div class="b-styler__bg_options__item">
             <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex })" v-model="backgroundHoverColor"></sketch-color-pecker>
@@ -415,7 +424,16 @@ export default {
       height: null
     },
     showPseudoBg: false,
-    pseudoStyles: {}
+    pseudoStyles: {},
+    animation: { name: 'none', className: '' },
+    animationList: [
+      { name: 'none', className: '' },
+      { name: 'tada', className: 'ptah-a-tada' },
+      { name: 'fade', className: 'ptah-a-fade' },
+      { name: 'shake', className: 'ptah-a-shake' },
+      { name: 'bounce', className: 'ptah-a-bounce' },
+      { name: 'jerk', className: 'ptah-a-jerk' }
+    ]
   }),
   watch: {
     colorerColor: function () {
@@ -469,6 +487,13 @@ export default {
         this.changePseudoStyle(styles, pseudo)
       })
     }
+
+    // Apply animation to element
+    this.options.classes.forEach((name, index) => {
+      if (name.indexOf('ptah-a-') > -1) {
+        this.animation = _.find(this.animationList, ['className', name])
+      }
+    })
   },
   updated () {
     if (this.options.resizable) {
@@ -807,6 +832,18 @@ export default {
       let styleTemplate = getPseudoTemplate(poneId, this.pseudoStyles)
 
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+    /**
+     * Add animation to element
+     */
+    selectAnimation () {
+      this.options.classes.forEach((name, index) => {
+        // remove other animation classes
+        if (name.indexOf('ptah-a') > -1) {
+          this.options.classes.splice(index, 1)
+        }
+      })
+      this.options.classes.push(this.animation.className)
     },
     identifyBackgroundSettingsSection: function () {
       if (this.imageBgSelected === true) {

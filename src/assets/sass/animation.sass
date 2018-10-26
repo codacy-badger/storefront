@@ -1,0 +1,80 @@
+.ptah-a-tada:hover
+  animation: action-tada .45s cubic-bezier(.4,0,.2,1)
+
+@keyframes action-tada
+  0%
+    transform: scale(1)
+  20%
+    transform: scale(1.1) rotate(3deg)
+  40%
+    transform: scale(0.97)
+  60%
+    transform: scale(0.99) rotate(-3deg)
+  80%
+    transform: scale(1.05)
+  100%
+    transform: scale(1)
+
+.ptah-a-fade:hover
+  animation: action-fade .45s cubic-bezier(.4,0,.2,1)
+
+@keyframes action-fade
+  0%
+    opacity: 1
+  33%
+    opacity: .65
+  67%
+    opacity: .85
+  100%
+    opacity: 1
+
+.ptah-a-shake:hover
+  animation: action-shake .45s cubic-bezier(.4,0,.2,1)
+
+@keyframes action-shake
+  0%
+    transform: translateX(0px)
+  15%
+    transform: translateX(-3px)
+  25%
+    transform: translateX(3px)
+  45%
+    transform: translateX(-2px)
+  65%
+    transform: translateX(3px)
+  85%
+    transform: translateX(-2px)
+  100%
+    transform: translateX(0px)
+
+.ptah-a-bounce:hover
+  animation: action-bounce .45s cubic-bezier(.4,0,.2,1)
+
+@keyframes action-bounce
+  0%
+    transform: translate(0px, 0px)
+  10%
+    transform: translate(0px, 2px)
+  50%
+    transform: translate(0px, -7px)
+  90%
+    transform: translate(0px, 4px)
+  100%
+    transform: translate(0px, 0px)
+
+.ptah-a-jerk:hover
+  animation: action-jerk .45s cubic-bezier(.4,0,.2,1)
+
+@keyframes action-jerk
+  0%
+    transform: translateX(0px) rotateZ(0deg)
+  20%
+    transform: translateX(-5px) rotateZ(-15deg)
+  40%
+    transform: translateX(5px) rotateZ(15deg)
+  60%
+    transform: translateX(-3px) rotateZ(5deg)
+  80%
+    transform: translateX(3px) rotateZ(-5deg)
+  100%
+    transform: translateX(0px) rotateZ(0deg)

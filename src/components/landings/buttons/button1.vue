@@ -1,6 +1,7 @@
 <template>
     <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one is-editable"
+           v-bind:class="$sectionData.buttons[index].element.classes"
            @click.prevent="openLink(item)" :target="$sectionData.buttons[index].element.target"
            v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
            v-html="$sectionData.buttons[index].element.text"
