@@ -13,7 +13,7 @@
                v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
-            >
+              >
             </a>
             <div class="b-gallery-two__item-content">
               <img class="b-gallery-two__img ie-object-fit" :src="$sectionData.images[index].preview.url" :alt="$sectionData.images[index].preview.text">
@@ -138,25 +138,24 @@ export default {
 .b-gallery-two
   display: flex
   align-items: center
+  flex-wrap: wrap
   &.is-editable
     resize: vertical
     overflow: hidden
   .is-tablet &,
   .is-mobile &
-    flex-wrap: wrap
     height: auto !important
   @media only screen and (max-width: 768px)
     &
-      flex-wrap: wrap
       height: auto !important
   &__wrap
     max-width: 160rem
     width: 80%
     margin: 0 auto
 .b-gallery-two__item-wrap
-  width: 20%
+  width: 20rem
+  min-width: 10rem
   height: 22rem
-  min-width: 5rem
   min-height: 5rem
   margin: 1rem
   padding: 1rem
@@ -193,33 +192,17 @@ export default {
   height: 10rem
   margin: -5rem 0 0 -5rem
   z-index: 100
+  background-image: url(https://gn779.cdn.gamenet.ru/TY0Xv2riHu/75YKm/o_1lNeRV.png)
+  background-size: cover
+  transition: all 200ms
   &.is-editable
     top: 50%
     left: 50%
     width: 10rem
     height: 10rem
     margin: -5rem 0 0 -5rem
-.b-gallery-two__link:before, .b-gallery-two__link:after
-  content: ''
-  position: absolute
-  top: 50%
-  left: 50%
-.b-gallery-two__link:before
-  margin: -43px 0 0 -43px
-  width: 86px
-  height: 86px
-  -webkit-transform: scale(0.9)
-  transform: scale(0.9)
-  -webkit-transition: all 200ms
-  transition: all 200ms
-  background-image: url(https://gn897.cdn.gamenet.ru/TY0Xv2riHu/6u2ah/o_o01QL.png)
-.b-gallery-two__link:after
-  margin: -14px 0 0 -14px
-  width: 28px
-  height: 28px
-  background-image: url(https://gn295.cdn.gamenet.ru/TY0Xv2riHu/6u2as/o_1MFnq3.png)
-.b-gallery-two__item-wrap:hover .b-gallery-two__link:before
-  transform: scale(1) rotate(-120deg)
+  &:hover
+    transform: scale(1.2) rotate(-120deg)
 .b-gallery-two__text
   position: absolute
   bottom: 1.5rem

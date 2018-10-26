@@ -15,7 +15,7 @@
         </button>
       </li>
       <!-- background -->
-      <li v-if="options.background || type === 'section'">
+      <li v-if="options.background || type === 'section' || type === 'galleryItem'">
         <button class="styler-button" @click="updateOption('colorer')" title="Background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
@@ -103,7 +103,7 @@
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
-          <li v-if="type !== 'button'">
+          <li v-if="type !== 'button' && type !== 'galleryItem'">
             <button class="styler-button" @click="showBackgroundSettingsSection('link')">
               <VuseIcon name="link"></VuseIcon>
             </button>
@@ -706,7 +706,7 @@ export default {
         let inner = ''
 
         if (this.$props.type === 'section') {
-          position = 'right-start'
+          position = 'left-start'
           inner = true
         } else {
           position = 'bottom'
@@ -991,6 +991,7 @@ export default {
   flex-direction: column
   justify-content: center
   align-items: center
+  color:#fff
   &-list
     display: flex
     justify-content: center
