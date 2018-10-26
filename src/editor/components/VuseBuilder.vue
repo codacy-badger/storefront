@@ -465,16 +465,16 @@ export default {
     },
     applySettings () {
       const data = {
-        title: this.pageTitle || false,
-        video: this.bgVideo || false,
+        title: this.pageTitle || '',
+        video: this.bgVideo || '',
         videoPosition: this.bgVideoFix,
         ogTags: this.ogTags,
         fullPageScroll: this.fullPageScroll,
         gtmId: this.gtmId,
         favicon: this.favicon,
         styles: {
-          backgroundImage: this.pageBackgroundUrl || false,
-          backgroundColor: this.pageBackgroundColor || false,
+          backgroundImage: this.pageBackgroundUrl || '',
+          backgroundColor: this.pageBackgroundColor || '',
           backgroundAttachment: this.bgAttachment,
           backgroundRepeat: this.bgRepeat,
           backgroundSize: this.bgSize,
