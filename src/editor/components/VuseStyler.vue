@@ -299,7 +299,7 @@
 
         <div v-if="showPseudoBg" class="b-styler__bg_options_container">
           <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex })" v-model="backgroundHoverColor"></sketch-color-pecker>
+            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex + ' !important' })" v-model="backgroundHoverColor"></sketch-color-pecker>
           </div>
         </div>
       </li>
