@@ -51,6 +51,43 @@
                   >
                 </span>
               </div>
+              <div>
+                  <div class="b-products-list__item-block" v-for="(keyB, indexB) in $sectionData.products[index].blocks" :key="keyB">
+                    <div class="b-products-list__item-row">
+                        <div class="b-products-list__item-row-chapter" v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
+                          v-html="$sectionData.products[index].blocks[indexB].chapter.text"
+                          :style="$sectionData.products[index].blocks[indexB].chapter.styles"
+                          >
+                        </div>
+                    </div>
+                    <div class="b-products-list__item-row flex" v-for="(keyR, indexR) in $sectionData.products[index].blocks[indexB].rows" :key="keyR">
+                      <div class="b-products-list__item-col b-products-list__item-col_icon">
+                        <div class="b-products-list__item-col-icon">
+                            <button class="b-products-list__item-col-icon-btn controller-button is-green is-editable-show"
+                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type` }"
+                              :style="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.styles"
+                              v-bind:class="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.classes"
+                              >
+                              <VuseIcon class="b-products-list__item-col-icon-i" :name="$sectionData.products[index].blocks[indexB].rows[indexR].icon.value"></VuseIcon>
+                            </button>
+                            <select class="b-products-list__item-col-icon-select is-editable-show" v-model="$sectionData.products[index].blocks[indexB].rows[indexR].icon.value">
+                              <option v-for="option in $sectionData.products[index].blocks[indexB].rows[indexR].options" :value="option.value" v-bind:key="option.value">
+                                {{ option.value }}
+                              </option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="b-products-list__item-col b-products-list__item-col_text">
+                        <div class=""
+                          v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text` }"
+                          v-html="$sectionData.products[index].blocks[indexB].rows[indexR].text.text"
+                          :style="$sectionData.products[index].blocks[indexB].rows[indexR].text.styles"
+                         >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
@@ -60,9 +97,18 @@
 
 <script>
 import * as types from '@editor/types'
+import VuseIcon from '@editor/components/VuseIcon'
+
+const Icons = [
+  { value: 'plus' },
+  { value: 'close' }
+]
 
 export default {
   name: 'Products',
+  components: {
+    VuseIcon
+  },
   cover: '/img/covers/products.png',
   group: 'products',
   $schema: {
@@ -75,7 +121,23 @@ export default {
         label: types.Label,
         name: types.Text,
         title: types.Text,
-        button: types.Button
+        button: types.Button,
+        blocks: [
+          {
+            chapter: types.Text,
+            rows: [
+              { icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() },
+              { icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() }
+            ]
+          },
+          {
+            chapter: types.Text,
+            rows: [
+              { icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() },
+              { icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -210,4 +272,46 @@ export default {
         &.is-editable
           resize: both
           overflow: hidden
+      &-block
+        margin: 3rem 0 1rem
+        border-top: dotted rgba(255, 255, 255, 0.3) 0.1rem
+        padding: 1rem 0
+      &-row
+        margin: 0 0 0.5rem
+        &-chapter
+          color: #fff
+          margin: 0 0 1rem
+          text-align: center
+      &-col
+        &_icon
+          width: 2rem
+        &_text
+          color: #F8E71C
+          width: 90%
+          padding: 0 0 0 1rem
+          overflow: hidden
+          .b-products-list__item-block:nth-child(2) &
+            color: #9B9B9B
+        &-icon
+          position: relative
+          & .vuse-icon
+            fill: #F8E71C
+            .b-products-list__item-block:nth-child(2) &
+              fill: #9B9B9B
+          &-btn
+            width: 2rem
+            height: 2rem
+            display: inline-block
+            position: relative
+            top: -0.2rem
+            padding: 0
+          &-select
+            position: absolute
+            width: 2rem
+            left: -2rem
+            top: 0
+            display: none
+            .is-editable &
+              display: block
+
 </style>
