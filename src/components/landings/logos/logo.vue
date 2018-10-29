@@ -22,7 +22,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     images: [
-      { element: types.Image }
+      { element: types.Logo }
     ]
   },
   props: {

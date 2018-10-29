@@ -23,6 +23,7 @@ import available from '@components/landings/elements/available'
 import restrictions from '@components/landings/elements/restrictions'
 import image from '@components/landings/images/image'
 import description from '@components/landings/texts/description'
+import products from '@components/landings/products/products'
 
 Vuse.mix({
   components: {
@@ -44,6 +45,7 @@ Vuse.component('Available', available)
 Vuse.component('Restrictions', restrictions)
 Vuse.component('Picture', image)
 Vuse.component('Description', description)
+Vuse.component('Products', products)
 
 Vuse.use(pwa)
 

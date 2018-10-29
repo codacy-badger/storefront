@@ -15,7 +15,7 @@
         </button>
       </li>
       <!-- background -->
-      <li v-if="options.background || type === 'section' || type === 'galleryItem'">
+      <li v-if="options.background || type === 'section' || type === 'galleryItem' || type === 'product'">
         <button class="styler-button" @click="updateOption('colorer')" title="Background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
@@ -103,7 +103,7 @@
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
-          <li v-if="type !== 'button' && type !== 'galleryItem'">
+          <li v-if="type !== 'button' && type !== 'galleryItem' && type !== 'product'">
             <button class="styler-button" @click="showBackgroundSettingsSection('link')">
               <VuseIcon name="link"></VuseIcon>
             </button>
@@ -153,17 +153,6 @@
               </button>
             </div>
           </div>
-        </div>
-
-        <div v-if="galleryItem.link === true" class="b-styler__bg_options_container">
-            <div class="b-styler__bg_options__item">
-                <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
-                    <input class="input" type="text" placeholder="Link to full image or video" v-model="galleryItem.linkContentPopup"/>
-                    <button class="button" @click="addBackgroundAsLink">
-                        <VuseIcon name="link"></VuseIcon>
-                    </button>
-                </div>
-            </div>
         </div>
 
         <div v-if="imageBgSelected === true && backgroundSettingsShow.image === true" class="b-styler__bg_options_container">
@@ -415,10 +404,6 @@ export default {
     fontSize: null,
     fontFamily: null,
     borderRadius: 0,
-    galleryItem: {
-      link: false,
-      linlContentPopup: false
-    },
     dimensions: {
       width: null,
       height: null

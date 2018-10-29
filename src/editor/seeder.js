@@ -74,9 +74,31 @@ const data = new Map([
     removable: true,
     resizable: true,
     alt: 'Default image',
-    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
+    background: true,
     styles: {
-      'width': '15rem',
+      'background-image': false,
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': '#fff',
+      'background': false,
+      'height': ''
+    }
+  }))],
+  [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
+    removable: true,
+    resizable: true,
+    alt: 'Default logo',
+    url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
+    background: true,
+    styles: {
+      'background-image': false,
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': false,
       'height': ''
     }
   }))],
@@ -158,6 +180,37 @@ const data = new Map([
       }
     })
   )],
+  [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      typography: true,
+      background: true,
+      shape: true,
+      text: 'Label',
+      classes: [],
+      href: '',
+      styles: {
+        'background-image': false,
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'color': '#000',
+        'border-color': false,
+        'font-size': 1,
+        'border-radius': 0,
+        'font-weight': false,
+        'font-style': false,
+        'font-family': 'Open Sans',
+        'text-decoration': false,
+        'justify-content': false,
+        'width': '',
+        'height': ''
+      }
+    })
+  )],
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: false,
@@ -190,7 +243,22 @@ const data = new Map([
     removable: true,
     resizable: false,
     alt: 'Default image',
-    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    url: 'https://gn548.cdn.gamenet.ru/TY0Xv2riHu/772oj/o_OnTml.png',
+    background: true,
+    styles: {
+      'background-image': 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
+      'background-position': false,
+      'background-repeat': false,
+      'background-size': false,
+      'background-color': false,
+      'background': '#fff',
+      'width': '',
+      'height': ''
+    }
+  }))],
+  [types.Product, () => (_.merge({}, DEFAULT_OPTIONS, {
+    removable: true,
+    resizable: false,
     background: true,
     styles: {
       'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
@@ -198,7 +266,7 @@ const data = new Map([
       'background-repeat': false,
       'background-size': false,
       'background-color': false,
-      'background': '#fff',
+      'background': '#333',
       'width': '',
       'height': ''
     }

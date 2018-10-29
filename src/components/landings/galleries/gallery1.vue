@@ -168,7 +168,7 @@ a
   padding-bottom: 35px
 
 .pages__page_hero
-  background: center url(https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png) no-repeat
+  background: center url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png) no-repeat
   background-size: cover
   background-color: #000
 

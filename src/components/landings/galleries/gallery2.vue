@@ -59,17 +59,12 @@ export default {
         preview: types.Image,
         label: types.Text,
         button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
       }
     ],
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
-    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     content: ''
   },
   props: {
@@ -151,7 +146,7 @@ export default {
     width: 80%
     margin: 0 auto
 .b-gallery-two__item-wrap
-  width: 20rem
+  width: 28rem
   min-width: 10rem
   height: 22rem
   min-height: 5rem

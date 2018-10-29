@@ -21,6 +21,13 @@ export default {
             name: 'Layout 2',
             sections: ['Logo', 'Title1', 'Description', 'Button', 'Available', 'Delimiter', 'Gallery2', 'Delimiter', 'Title1', 'Description', 'Picture', 'Description', 'Delimiter', 'Gallery3', 'Delimiter', 'System', 'Logo', 'Button', 'Title1', 'Social', 'Logo', 'Restrictions']
           }
+        },
+        {
+          slug: 'ProductsTest',
+          theme: {
+            name: 'Products Test',
+            sections: ['Products']
+          }
         }
       ])
     })

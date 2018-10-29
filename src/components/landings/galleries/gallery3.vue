@@ -85,13 +85,13 @@ export default {
     ],
     logos: [
       {
-        element: types.Image
+        element: types.Logo
       }
     ],
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
-    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     content: ''
   },
   props: {

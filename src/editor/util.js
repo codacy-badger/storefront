@@ -31,6 +31,8 @@ export function getTypeFromSchema (target, schema) {
   if (value === types.Link) return 'link'
   if (value === types.ClassList) return 'section'
   if (value === types.StyleObject) return 'section'
+  if (value === types.Product) return 'product'
+  if (value === types.Label) return 'text'
   if (value === String) return 'text'
   if (value === Number) return 'text'
 
@@ -83,10 +85,6 @@ export function getTypeFromTagName (tagName) {
       return 'section'
     case 'HEADER':
       return 'section'
-    case 'BTITLE':
-      return 'title'
-    case 'GALLERY-ITEM':
-      return 'gallery-item'
     default:
       break
   }
