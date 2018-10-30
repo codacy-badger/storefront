@@ -1,7 +1,7 @@
 <template>
   <section class="b-gallery-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="p-split flex__item flex flex_center">
-        <div class="p-split__tiles flex__item clearfix">
+        <div class="p-split__tiles flex__item clearfix p-split__tiles_mobile">
           <div class="hero-tile"
               v-for="(item, index) in $sectionData.images"
               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="p-split__detail flex__item hero-detail loader">
-          <div class="loader__content" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
+          <div class="loader__content loader__content_mobile" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
             <h2 class="hero-detail__name h1"
                v-html="$sectionData.images[index].title.text"
                :style="$sectionData.images[index].title.styles"
@@ -205,6 +205,15 @@ a
   display: none
   &_show
     display: block
+  &_mobile
+      .is-tablet &,
+      .is-mobile &
+        display: block
+        margin: 2rem 0
+      @media only screen and (max-width: 768px)
+        &
+          display: block
+          margin: 2rem 0
 
 // button layout2 styles
 .l-layout2-btn
@@ -408,10 +417,16 @@ a
   margin: 1rem
   text-align: center
   width: 50%
+  &_mobile
+    .is-tablet &,
+    .is-mobile &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
 .p-split__detail
   text-align: center
   width: 50%
-
 @media only screen and (max-width: 600px)
   .hero-tile
     &:nth-child(6)
