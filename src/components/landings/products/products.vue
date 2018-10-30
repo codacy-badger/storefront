@@ -1,7 +1,7 @@
 <template>
   <section class="l-products" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
       <div class="b-products">
-        <div class="b-products-list flex flex_center">
+        <div class="b-products-list flex flex_justify-content-center flex_align-items-start">
           <div class="b-products-list__item flex flex_columns"
                v-for="(item, index) in $sectionData.products"
                :key="index"
@@ -52,18 +52,32 @@
                 </span>
               </div>
               <div>
-                  <div class="b-products-list__item-block" v-for="(keyB, indexB) in $sectionData.products[index].blocks" :key="keyB">
-                    <div class="b-products-list__item-row">
-                        <div class="b-products-list__item-row-chapter" v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
-                          v-html="$sectionData.products[index].blocks[indexB].chapter.text"
-                          :style="$sectionData.products[index].blocks[indexB].chapter.styles"
-                          >
+                  <div class="b-products-list__item-block" v-for="(keyB, indexB) in $sectionData.products[index].blocks" :key="index + indexB">
+                    <div class="b-products-list__item-row flex flex_center">
+                        <div class="b-products-list__item-col b-products-list__item-col_text">
+                          <div class="b-products-list__item-row-chapter" v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
+                            v-html="$sectionData.products[index].blocks[indexB].chapter.text"
+                            :style="$sectionData.products[index].blocks[indexB].chapter.styles"
+                            >
+                          </div>
+                        </div>
+                        <div class="b-products-list__item-col is-editable-show">
+                          <span v-if="indexB !== $sectionData.products[index].blocks.length-1" tooltip-position="left" tooltip="remove block" class="b-products-list__item-col-delete is-editable-show"
+                                @click="deleteBlock(index, indexB)"
+                            >
+                            <VuseIcon class="vuse-icon" name="close"></VuseIcon>
+                          </span>
+                          <span v-if="indexB === $sectionData.products[index].blocks.length-1" tooltip-position="left" tooltip="add block" class="b-products-list__item-col-add is-editable-show"
+                                @click="addBlock(index, indexB)"
+                            >
+                            <VuseIcon class="vuse-icon" name="plus"></VuseIcon>
+                          </span>
                         </div>
                     </div>
-                    <div class="b-products-list__item-row flex" v-for="(keyR, indexR) in $sectionData.products[index].blocks[indexB].rows" :key="keyR">
+                    <div class="b-products-list__item-row flex" v-for="(keyR, indexR) in $sectionData.products[index].blocks[indexB].rows" :key="index + indexB + indexR">
                       <div class="b-products-list__item-col b-products-list__item-col_icon">
                         <div class="b-products-list__item-col-icon">
-                            <button class="b-products-list__item-col-icon-btn controller-button is-green is-editable-show"
+                            <button class="b-products-list__item-col-icon-btn controller-button is-green"
                               v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type` }"
                               :style="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.styles"
                               v-bind:class="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.classes"
@@ -71,19 +85,31 @@
                               <VuseIcon class="b-products-list__item-col-icon-i" :name="$sectionData.products[index].blocks[indexB].rows[indexR].icon.value"></VuseIcon>
                             </button>
                             <select class="b-products-list__item-col-icon-select is-editable-show" v-model="$sectionData.products[index].blocks[indexB].rows[indexR].icon.value">
-                              <option v-for="option in $sectionData.products[index].blocks[indexB].rows[indexR].options" :value="option.value" v-bind:key="option.value">
+                              <option v-for="option in $sectionData.products[index].blocks[indexB].rows[indexR].options" :value="option.value" :key="index + indexB + indexR + option.value">
                                 {{ option.value }}
                               </option>
                             </select>
                         </div>
                       </div>
                       <div class="b-products-list__item-col b-products-list__item-col_text">
-                        <div class=""
+                        <div contenteditable="true" class=""
                           v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text` }"
                           v-html="$sectionData.products[index].blocks[indexB].rows[indexR].text.text"
                           :style="$sectionData.products[index].blocks[indexB].rows[indexR].text.styles"
                          >
                         </div>
+                      </div>
+                      <div class="b-products-list__item-col is-editable-show">
+                        <span v-if="indexR !== $sectionData.products[index].blocks[indexB].rows.length-1" tooltip-position="left" tooltip="remove row" class="b-products-list__item-col-delete is-editable-show"
+                          @click="deleteRow(index, indexB, indexR)"
+                          >
+                          <VuseIcon class="vuse-icon" name="close"></VuseIcon>
+                        </span>
+                        <span v-if="indexR === $sectionData.products[index].blocks[indexB].rows.length-1" tooltip-position="left" tooltip="add row" class="b-products-list__item-col-add is-editable-show"
+                              @click="addRow(index, indexB, indexR)"
+                          >
+                          <VuseIcon class="vuse-icon" name="plus"></VuseIcon>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -109,7 +135,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '/img/covers/products.png',
+  cover: '/img/covers/product1.png',
   group: 'products',
   $schema: {
     mainStyle: types.StyleObject,
@@ -126,15 +152,15 @@ export default {
           {
             chapter: types.Text,
             rows: [
-              { icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() },
-              { icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() }
+              { id: 'row10', icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() },
+              { id: 'row11', icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() }
             ]
           },
           {
             chapter: types.Text,
             rows: [
-              { icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() },
-              { icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() }
+              { id: 'row20', icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() },
+              { id: 'row21', icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() }
             ]
           }
         ]
@@ -160,6 +186,22 @@ export default {
       if (el && undefined !== href) {
         window.open(href)
       }
+    },
+    deleteRow (index, indexB, indexR) {
+      this.$sectionData.products[index].blocks[indexB].rows.splice(indexR, 1)
+    },
+    addRow (index, indexB, indexR) {
+      let obj = this.$sectionData.products[index].blocks[indexB].rows[indexR]
+      let newObj = JSON.parse(JSON.stringify(obj))
+      this.$sectionData.products[index].blocks[indexB].rows.push(newObj)
+    },
+    deleteBlock (index, indexB) {
+      this.$sectionData.products[index].blocks.splice(indexB, 1)
+    },
+    addBlock (index, indexB) {
+      let obj = this.$sectionData.products[index].blocks[indexB]
+      let newObj = JSON.parse(JSON.stringify(obj))
+      this.$sectionData.products[index].blocks.push(newObj)
     }
   }
 }
@@ -185,17 +227,18 @@ export default {
       height: auto !important
   &-list
     margin-bottom: 1rem
-    .is-mobile &
+    .is-mobile &,
+    .is-tablet &
       flex-wrap: wrap
-    @media only screen and (max-width: 460px)
+    @media only screen and (max-width: 768px)
       &
         flex-wrap: wrap
     &__item
       max-width: 100%
-      width: 30rem
-      min-width: 30rem
+      width: 23rem
+      min-width: 20rem
       min-height: 60rem
-      margin: 1rem
+      margin: 1rem 0.5rem
       padding: 0
       position: relative
       &.is-editable
@@ -235,7 +278,7 @@ export default {
         position: relative
         font-size: 2rem
         font-family: 'Open Sans'
-        width: 20rem
+        width: 15rem
         min-width: 6rem
         min-height: 2rem
         margin: 1rem auto
@@ -277,27 +320,24 @@ export default {
         border-top: dotted rgba(255, 255, 255, 0.3) 0.1rem
         padding: 1rem 0
       &-row
-        margin: 0 0 0.5rem
+        margin: 0 0 1rem
         &-chapter
           color: #fff
-          margin: 0 0 1rem
           text-align: center
+          font-size: 1.6rem
+          line-height: 1.4
       &-col
         &_icon
           width: 2rem
+          padding: 0 1rem 0 0
         &_text
           color: #F8E71C
-          width: 90%
-          padding: 0 0 0 1rem
+          width: 100%
           overflow: hidden
           .b-products-list__item-block:nth-child(2) &
             color: #9B9B9B
         &-icon
           position: relative
-          & .vuse-icon
-            fill: #F8E71C
-            .b-products-list__item-block:nth-child(2) &
-              fill: #9B9B9B
           &-btn
             width: 2rem
             height: 2rem
@@ -305,6 +345,9 @@ export default {
             position: relative
             top: -0.2rem
             padding: 0
+            fill: #F8E71C
+            .b-products-list__item-block:nth-child(2) &
+              fill: #9B9B9B
           &-select
             position: absolute
             width: 2rem
@@ -313,5 +356,16 @@ export default {
             display: none
             .is-editable &
               display: block
+        &-delete
+          fill: #F44336
+          color: #F44336
+        &-add
+          fill: #FFC107
+          color: #FFC107
+
+.is-editable-show
+  display: none
+  .is-editable &
+    display: inline-block
 
 </style>

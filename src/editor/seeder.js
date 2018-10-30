@@ -230,7 +230,7 @@ const data = new Map([
         'background-size': false,
         'background-color': '#333',
         'background': false,
-        'fill': '#fff',
+        'fill': false,
         'border-radius': '100%',
         'width': '',
         'height': ''

@@ -254,6 +254,7 @@ export default {
          position: relative
          top: -0.1rem
          left: -0.2rem
+         fill: #fff
      &:hover, &_active
        border: dotted #333 0.1rem
      &__btn

@@ -45,6 +45,14 @@
         </button>
       </li>
 
+      <template v-if="type === 'product' && section.data.products.length !== 0">
+        <li>
+          <button class="styler-button" @click="copyItemProduct">
+            <VuseIcon name="plus"></VuseIcon>
+          </button>
+        </li>
+      </template>
+
       <template v-if="type === 'galleryItem'">
         <li>
           <button class="styler-button" @click="copyItemGallery">
@@ -675,6 +683,12 @@ export default {
       let l = Object.assign({}, newObj)
       this.section.data.images.push(l)
       this.section.schema.images.push(l)
+    },
+    copyItemProduct () {
+      let newObj = JSON.parse(JSON.stringify(this.section.data.products[0]))
+      let l = Object.assign({}, newObj)
+      this.section.data.products.push(l)
+      this.section.schema.products.push(l)
     },
     execute (command, value = null) {
       this.el.focus()
