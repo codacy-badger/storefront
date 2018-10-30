@@ -494,6 +494,29 @@ export default {
         this.animation = _.find(this.animationList, ['className', name])
       }
     })
+
+    if (this.options.resizable) {
+      let resizer = document.createElement('div')
+      resizer.className = 'ptah-resizer'
+      this.el.appendChild(resizer)
+
+      const initResize = (e) => {
+        console.log('init')
+        window.addEventListener('mousemove', Resize, false)
+        window.addEventListener('mouseup', stopResize, false)
+      }
+      const Resize = (e) => {
+        let rect = this.el.getBoundingClientRect()
+        this.addStyle('width', (e.clientX - rect.left) + 'px')
+        this.addStyle('height', (e.clientY - rect.top) + 'px')
+      }
+      const stopResize = (e) => {
+        window.removeEventListener('mousemove', Resize, false)
+        window.removeEventListener('mouseup', stopResize, false)
+      }
+
+      resizer.addEventListener('mousedown', initResize, false)
+    }
   },
   updated () {
     if (this.options.resizable) {
@@ -501,10 +524,6 @@ export default {
       let handler = (e) => {
         this.dimensions.width = e[0].contentRect.width
         this.dimensions.height = e[0].contentRect.height
-        if (document.getElementById('artboard') && !document.getElementById('artboard').classList.contains('fp-scroll')) {
-          this.addStyle('width', `${this.el.offsetWidth}px`)
-          this.addStyle('height', `${this.el.offsetHeight}px`)
-        }
       }
 
       let ro = new ResizeObserver(handler)
@@ -1149,4 +1168,14 @@ label
   font-size: 1.4rem
   &:hover
     filter: brightness(120%)
+.ptah-resizer
+  width: 10px
+  height: 10px
+  background: #fff
+  border: 1px solid rgba(0, 0, 0, .5)
+  cursor: se-resize
+  position: absolute
+  right: 0px
+  bottom: 0px
+  z-index: 20
 </style>
