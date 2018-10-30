@@ -33,6 +33,7 @@ export function getTypeFromSchema (target, schema) {
   if (value === types.StyleObject) return 'section'
   if (value === types.Product) return 'product'
   if (value === types.Label) return 'text'
+  if (value === types.Cost) return 'text'
   if (value === String) return 'text'
   if (value === Number) return 'text'
 

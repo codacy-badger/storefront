@@ -8,8 +8,7 @@
               :data-index="index"
               :key="index"
               :style="$sectionData.images[index].preview.styles"
-              :gallery-one-preview="'loader__content_show'"
-              @click="onFocus(index)" >
+              :gallery-one-preview="'loader__content_show'">
             <div class="hero-tile__frame">
               <img class="hero-tile__img" :src="$sectionData.images[index].preview.url" :alt="item.title.text">
             </div>
@@ -75,8 +74,7 @@ export default {
         img: types.Image,
         text: types.Text
       }
-    ],
-    index: 0
+    ]
   },
   props: {
     id: {
@@ -94,9 +92,6 @@ export default {
   methods: {
     bindingClickPreview (index) {
       galleryPreviewClick(index)
-    },
-    onFocus (index) {
-      this.index = index
     }
   },
   mounted: function () {
@@ -209,11 +204,11 @@ a
       .is-tablet &,
       .is-mobile &
         display: block
-        margin: 2rem 0
+        margin: 10rem 0
       @media only screen and (max-width: 768px)
         &
           display: block
-          margin: 2rem 0
+          margin: 10rem 0
 
 // button layout2 styles
 .l-layout2-btn

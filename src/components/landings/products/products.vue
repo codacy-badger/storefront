@@ -222,6 +222,9 @@ export default {
   display: flex
   align-items: center
   padding: 1rem
+  max-width: 160rem
+  width: 80%
+  margin: 0 auto
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -328,7 +331,7 @@ export default {
           line-height: 1.4
       &-col
         &_icon
-          width: 2rem
+          width: 3rem
           padding: 0 1rem 0 0
         &_text
           color: #F8E71C
