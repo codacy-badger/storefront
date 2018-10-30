@@ -324,10 +324,12 @@ export default {
     &_mobile
       .is-tablet &,
       .is-mobile &
-        display: none
+        width: 0
+        overflow: hidden
       @media only screen and (max-width: 768px)
         &
-          display: none
+          width: 0
+          overflow: hidden
   &-right
     width: 50%
     .is-mobile &
@@ -359,6 +361,7 @@ export default {
       padding: 0
       position: relative
       display: none
+      border: 0.5rem solid transparent
       .is-mobile &
       .is-tablet &
         max-width: 100%
@@ -374,6 +377,8 @@ export default {
         display: block
       &_active
         display: block
+        box-shadow: 0 0 2rem 0 rgba(50, 50, 50, 1)
+        border: 0.5rem solid #18d88b
       &_mobile
         .is-tablet &,
         .is-mobile &
@@ -407,24 +412,21 @@ export default {
           resize: both
           overflow: hidden
       &-image
-        width: 100%
+        width: 10rem
         margin: 0
         padding: 1rem
-        height: 20rem
+        height: 10rem
         overflow: hidden
         &.is-editable
           resize: both
           overflow: hidden
         &_mini
-          height: 10rem
+          margin: 0 auto
           &.is-editable
-            resize: vertical
+            resize: both
         &-img
-          height: 100%
+          height: auto
           text-align: center
-          & .uploader, & div img
-            width: auto
-            height: 100%
       &-name
         font-size: 3rem
         line-height: 1.4

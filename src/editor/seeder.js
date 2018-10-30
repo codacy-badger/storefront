@@ -29,7 +29,6 @@ const data = new Map([
     text: 'Your Game takes players on a grand adventure filled with detractors, monsters, gold hunters and grave danger. Dramatic events unfolded which overturned your life and now you have to fight for survival in a new hostile world. Discover, explore, and conquer as you survive through different dimensions of reality!',
     aligned: true,
     typography: true,
-    removable: true,
     styles: {
       'font-family': 'Open Sans',
       'font-size': 1.4,
@@ -51,7 +50,6 @@ const data = new Map([
     text: 'Enter your text',
     aligned: true,
     typography: true,
-    removable: true,
     styles: {
       'font-family': 'Open Sans',
       'font-size': 1.4,
@@ -71,7 +69,6 @@ const data = new Map([
   }))],
   // [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
     resizable: true,
     alt: 'Default image',
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
@@ -87,7 +84,6 @@ const data = new Map([
     }
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
     resizable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
@@ -272,7 +268,7 @@ const data = new Map([
   [String, 'This is pretty neat'],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
-    resizable: false,
+    resizable: true,
     alt: 'Default image',
     url: 'https://gn548.cdn.gamenet.ru/TY0Xv2riHu/772oj/o_OnTml.png',
     background: true,
@@ -289,7 +285,7 @@ const data = new Map([
   }))],
   [types.Product, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
-    resizable: false,
+    resizable: true,
     background: true,
     styles: {
       'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',

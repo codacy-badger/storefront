@@ -93,7 +93,7 @@ export default {
     cursor: pointer
 
   > img
-    //width: 100%
+    width: 100%
     display: inline-block
     height: 100%
     min-width: 1rem

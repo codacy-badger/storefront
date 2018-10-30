@@ -250,19 +250,16 @@ export default {
       &-wrap
         padding: 2rem
       &-image
-        width: 100%
-        margin: 0
+        width: 10rem
+        margin: 0 auto
         padding: 1rem
         height: 20rem
         overflow: hidden
         &.is-editable
-          resize: vertical
+          resize: both
         &-img
-          height: 100%
+          height: auto
           text-align: center
-          & .uploader, & div img
-            width: auto
-            height: 100%
       &-name
         font-size: 3rem
         line-height: 1.4
