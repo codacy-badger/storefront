@@ -56,21 +56,21 @@
           </div>
         </div><!--/.b-products-left-->
         <div class="b-products-right b-products-right_mobile">
-          <div class="b-products-list flex flex_justify-content-center flex_align-items-start">
+          <div class="b-products-list">
             <div class="b-products-list__item b-products-list__item_mobile flex flex_columns"
                  v-for="(item, index) in $sectionData.products"
                  :key="index"
-                 v-styler:product="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
+                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
                  :style="$sectionData.products[index].el.styles"
                  :product-extend-stage="index"
               >
-              <div class="b-products-list__item-label"
+              <div contenteditable="true" class="b-products-list__item-label"
                    v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label` }"
                    v-html="$sectionData.products[index].label.text"
                    :style="$sectionData.products[index].label.styles"
                    v-bind:class="$sectionData.products[index].label.classes"
                 >
-              </div>
+            </div>
               <div class="b-products-list__item-header flex">
                 <div class="b-products-list__item-header-col">
                   <div>
@@ -205,7 +205,7 @@ export default {
     mainStyle: types.StyleObject,
     products: [
       {
-        el: types.Product,
+        el: types.StyleObject,
         visible: true,
         preview: types.Image,
         label: types.Label,
@@ -306,14 +306,14 @@ export default {
   background-position: center
   background-size: cover
   color: #000
-  padding: 3rem 0 1rem
+  padding: 3rem
   min-height: 12rem
 .b-products
   display: flex
   align-items: center
   padding: 1rem
   max-width: 160rem
-  width: 80%
+  width: 100%
   margin: 0 auto
   @media only screen and (max-width: 768px)
     &
@@ -332,51 +332,68 @@ export default {
           overflow: hidden
   &-right
     width: 50%
+    min-height: 60rem
+    position: relative
     .is-mobile &
-        width: 100%
+      width: 100%
+      height: 100%
     .is-tablet &
-        width: 80%
+      width: 95%
+      height: 100%
     @media only screen and (max-width: 768px)
       &
-        width: 80%
-    @media only screen and (max-width: 540px)
-      &
-        width: 100%
+        width: 95%
+        height: 100%
   &-list
-    margin-bottom: 1rem
+    margin: 1rem auto
+    width: 95%
+    min-width: 95%
+    height: 95%
+    margin: 0 0 2rem
     &_mini
+      margin: 0
+      background-color: transparent
       flex-wrap: wrap
     .is-mobile &,
     .is-tablet &
-      flex-wrap: wrap
+      display: block
     @media only screen and (max-width: 768px)
       &
-        flex-wrap: wrap
+        display: block
     &__item
+      position: absolute
+      top: 0
+      left: 0
       width: 100%
       height: 100%
-      min-width: 34rem
-      min-height: 34rem
-      margin: 1rem 0.5rem
       padding: 0
-      position: relative
-      display: none
+      visibility: hidden
       border: 0.5rem solid transparent
-      .is-mobile &
+      background-color: #333
+      overflow: hidden
+      .is-mobile &,
       .is-tablet &
-        max-width: 100%
+        width: 100%
+        position: relative
+        visibility: visible
       @media only screen and (max-width: 768px)
         &
           width: 100%
+          position: relative
+          visibility: visible
       &_mini
-        width: 23rem
-        min-width: 15rem
+        width: 20rem
+        height: 25rem
         min-height: 15rem
-        max-width: 30rem
-        max-height: 30rem
-        display: block
+        max-height: 60rem
+        margin: 1rem
+        visibility: visible
+        position: relative
+        &.is-editable
+          resize: vertical
+          overflow: hidden
       &_active
-        display: block
+        visibility: visible
         box-shadow: 0 0 2rem 0 rgba(50, 50, 50, 1)
         border: 0.5rem solid #18d88b
       &_mobile
@@ -390,9 +407,6 @@ export default {
             display: block
             margin: 2rem 0
             width: 100%
-      &.is-editable
-        resize: both
-        overflow: hidden
       &-wrap
         padding: 2rem
       &-cost
@@ -496,6 +510,11 @@ export default {
         border-top: dotted rgba(255, 255, 255, 0.3) 0.1rem
         padding: 1rem 0
         width: 40%
+        .is-mobile &,
+          width: 100%
+        @media only screen and (max-width: 540px)
+          &
+            width: 100%
       &-row
         margin: 0 0 1rem
         &-chapter
@@ -540,13 +559,30 @@ export default {
           fill: #FFC107
           color: #FFC107
       &-header
+        .is-mobile &,
+          flex-wrap: wrap
+        @media only screen and (max-width: 540px)
+          &
+            flex-wrap: wrap
         &-col:nth-child(1)
           width: 70%
           min-height: 10rem
           padding: 2rem 2rem 0
+          order: 0
+          .is-mobile &,
+            order: 1
+          @media only screen and (max-width: 540px)
+            &
+              order: 1
         &-col:nth-child(2)
           width: 30%
           min-height: 10rem
+          order: 1
+          .is-mobile &,
+            order: 0
+          @media only screen and (max-width: 540px)
+            &
+              order: 0
 
 .is-editable-show
   display: none

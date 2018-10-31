@@ -253,12 +253,13 @@ export default {
         width: 10rem
         margin: 0 auto
         padding: 1rem
-        height: 20rem
+        height: auto
+        min-height: 5rem
         overflow: hidden
         &.is-editable
           resize: both
         &-img
-          height: auto
+          height: 100%
           text-align: center
       &-name
         font-size: 3rem
