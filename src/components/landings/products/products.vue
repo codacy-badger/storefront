@@ -135,7 +135,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '/img/covers/product1.png',
+  cover: '/img/covers/products.png',
   group: 'products',
   $schema: {
     mainStyle: types.StyleObject,
