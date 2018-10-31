@@ -23,10 +23,10 @@ export default {
           }
         },
         {
-          slug: 'ProductsExtend',
+          slug: 'Products',
           theme: {
-            name: 'Products Extend',
-            sections: ['ProductsExtend']
+            name: 'Products',
+            sections: ['Products', 'ProductsExtend']
           }
         }
       ])
