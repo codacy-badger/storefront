@@ -3,12 +3,12 @@
       <div class="b-products">
         <div class="b-products-list flex flex_justify-content-center flex_align-items-start">
           <div class="b-products-list__item flex flex_columns"
-               v-for="(item, index) in $sectionData.products"
-               :key="index"
-               v-styler:product="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
-               :style="$sectionData.products[index].el.styles"
-            >
-            <div class="b-products-list__item-label"
+            v-for="(item, index) in $sectionData.products"
+            :key="index"
+            v-styler:product="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
+            :style="$sectionData.products[index].el.styles"
+          >
+            <div class="b-products-list__item-label" contenteditable="true"
                  v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label` }"
                  v-html="$sectionData.products[index].label.text"
                  :style="$sectionData.products[index].label.styles"
@@ -19,9 +19,6 @@
                  v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`}"
                  :style="$sectionData.products[index].preview.styles"
               >
-              <div class="b-products-list__item-image-img">
-                <uploader v-bind:path="'$sectionData.products[' + index + '].preview'" />
-              </div>
             </div>
             <div class="b-products-list__item-wrap">
               <div>
@@ -34,9 +31,9 @@
               </div>
               <div>
                 <span class="b-products-list__item-title"
-                      v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title` }"
-                      v-html="$sectionData.products[index].title.text"
-                      :style="$sectionData.products[index].title.styles"
+                  v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title` }"
+                  v-html="$sectionData.products[index].title.text"
+                  :style="$sectionData.products[index].title.styles"
                   >
                 </span>
               </div>
@@ -218,6 +215,9 @@ export default {
   color: #000
   padding: 3rem 0 1rem
   min-height: 12rem
+  &.is-editable
+    resize: vertical
+    overflow: hidden
 .b-products
   display: flex
   align-items: center
@@ -244,23 +244,23 @@ export default {
       margin: 1rem 0.5rem
       padding: 0
       position: relative
+      overflow: hidden
       &.is-editable
         resize: both
-        overflow: hidden
       &-wrap
         padding: 2rem
       &-image
-        width: 10rem
+        width: 100%
+        max-width: 100%
         margin: 0 auto
         padding: 1rem
-        height: auto
+        height: 15rem
         min-height: 5rem
         overflow: hidden
+        background-color: #fff
+        background-image: url('https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png')
         &.is-editable
           resize: both
-        &-img
-          height: 100%
-          text-align: center
       &-name
         font-size: 3rem
         line-height: 1.4

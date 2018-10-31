@@ -15,9 +15,6 @@
                @dblclick="onClick(item, index)"
               >
             </a>
-            <div class="b-gallery-two__item-content">
-              <img class="b-gallery-two__img ie-object-fit" :src="$sectionData.images[index].preview.url" :alt="$sectionData.images[index].preview.text">
-            </div>
           </div>
         </div>
       </div>
@@ -161,21 +158,6 @@ export default {
   width: 45%
 .b-gallery-two__item-wrap_size-small
   width: 20%
-.b-gallery-two__item-content
-  position: relative
-  height: 100%
-  background-color: #fff
-  background-position: center
-  background-size: cover
-  overflow: hidden
-  pointer-events: none
-  background: linear-gradient(135deg, rgba(204, 204, 204, 0.4) 0%, rgba(161, 161, 161, 0.4) 100%)
-.b-gallery-two__item-wrap:hover .b-gallery-two__item-content
-  background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
-
-.b-gallery-two__item-wrap .b-gallery-two__item-content .b-gallery-two__text,
-.b-gallery-two__item-content:hover .b-gallery-two__text
-  opacity: 1
 .b-gallery-two__link
   position: absolute
   display: block

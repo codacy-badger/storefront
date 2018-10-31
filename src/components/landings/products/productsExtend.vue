@@ -22,9 +22,6 @@
                    v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview`}"
                    :style="$sectionData.products[index].mini.preview.styles"
                 >
-                <div class="b-products-list__item-image-img">
-                  <uploader v-bind:path="'$sectionData.products[' + index + '].mini.preview'" />
-                </div>
               </div>
               <div class="b-products-list__item-wrap">
                 <div>
@@ -106,9 +103,6 @@
                      v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`}"
                      :style="$sectionData.products[index].preview.styles"
                     >
-                    <div class="b-products-list__item-image-img">
-                      <uploader v-bind:path="'$sectionData.products[' + index + '].preview'" />
-                    </div>
                   </div>
                 </div>
               </div>

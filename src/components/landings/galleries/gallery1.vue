@@ -8,10 +8,8 @@
               :data-index="index"
               :key="index"
               :style="$sectionData.images[index].preview.styles"
-              :gallery-one-preview="'loader__content_show'">
-            <div class="hero-tile__frame">
-              <img class="hero-tile__img" :src="$sectionData.images[index].preview.url" :alt="item.title.text">
-            </div>
+              :gallery-one-preview="'loader__content_show'"
+            >
             <span class="hero-tile__name"
                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label` }"
                v-html="$sectionData.images[index].label.text"
@@ -27,9 +25,12 @@
                :style="$sectionData.images[index].title.styles"
                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`} ">
             </h2>
-            <!-- upload image -->
-            <uploader class="hero-detail__img" v-bind:path="'$sectionData.images[' + index + '].img'" />
-            <!--/upload image -->
+            <!-- image -->
+            <div class="hero-detail__img"
+              :style="$sectionData.images[index].img.styles"
+              v-styler:for="{ el: $sectionData.images[index].img, path:`$sectionData.images[${index}].img`} "
+            />
+            <!--/image -->
             <p class="hero-detail__bio"
              v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`}"
              :style="$sectionData.images[index].text.styles"
@@ -339,25 +340,6 @@ a
   display: inline-block
   vertical-align: top
 
-.hero-tile__frame
-  position: relative
-  overflow: hidden
-  border-radius: 0.5rem
-  width: 13rem
-  height: 15rem
-  -webkit-transition: all 200ms
-  transition: all 200ms
-
-.hero-tile__img
-  position: absolute
-  top: 0
-  left: -2rem
-  width: 17rem
-  max-width: 20rem
-  height: 100%
-  -o-object-fit: contain
-  object-fit: contain
-
 .hero-tile__name
   border-radius: 0.25rem
   padding: 0.3rem 0.5rem
@@ -371,9 +353,6 @@ a
     overflow: hidden
 
 .hero-tile_active
-  .hero-tile__frame
-    -webkit-transform: scale(1.1)
-    transform: scale(1.1)
   .hero-tile__name
     -webkit-transform: translateY(-1rem)
     transform: translateY(-1rem)
@@ -381,18 +360,12 @@ a
 .is-tablet,
 .is-mobile
   .hero-tile_active
-    .hero-tile__frame
-      -webkit-transform: scale(1.1)
-      transform: scale(1.1)
     .hero-tile__name
       -webkit-transform: translateY(-7px)
       transform: translateY(-7px)
 
 @media only screen and (max-width: 768px)
   .hero-tile_active
-    .hero-tile__frame
-      -webkit-transform: scale(1.1)
-      transform: scale(1.1)
     .hero-tile__name
       -webkit-transform: translateY(-7px)
       transform: translateY(-7px)
@@ -419,9 +392,6 @@ a
     @media only screen and (max-width: 768px)
       &
         display: none
-.p-split__detail
-  text-align: center
-  width: 50%
 @media only screen and (max-width: 600px)
   .hero-tile
     &:nth-child(6)
@@ -431,8 +401,16 @@ a
 .p-split__tiles
   margin: 1rem
   text-align: center
+
 .p-split__detail
   text-align: center
+  width: 50%
+  .is-tablet &,
+  .is-mobile &
+    width: 100%
+  @media only screen and (max-width: 768px)
+    &
+      width: 100%
 
 .is-tablet,
 .is-mobile
@@ -457,41 +435,17 @@ a
       -ms-flex: 0 0 auto
       flex: 0 0 auto
 
-.hero-detail__name
-  font-weight: 400
-
-.hero-detail__img
-  position: relative
-  width: 100%
-  margin: 1rem auto
-  background-repeat: no-repeat
-  background-position: center
-  background-size: contain
-  height: 43rem
+.hero-detail
   .is-tablet &,
   .is-mobile &
-    width: 70%
-    max-height: none
-    height: auto
-    margin: 0.5rem auto
+    .hero-detail
+      margin-bottom: 1rem
   @media only screen and (max-width: 768px)
     &
-      width: 70%
-      max-height: none
-      height: auto
-      margin: 0.5rem auto
-  & img
-    height: 100%
-    width: auto !important
-    margin: 0 auto
-    .is-tablet &,
-    .is-mobile &
-      width: 100%
-      height: auto
-    @media only screen and (max-width: 768px)
-      &
-        width: 100%
-        height: auto
+      margin-bottom: 1rem
+
+.hero-detail__name
+  font-weight: 400
 
 .hero-detail__bio
   font-size: 1.4rem
@@ -499,14 +453,18 @@ a
   max-width: 50rem
   margin: 1rem auto
 
-.is-tablet,
-.is-mobile
-  .hero-detail
-    margin-bottom: 1rem
-
-@media only screen and (max-width: 768px)
-  .hero-detail
-    margin-bottom: 1rem
+.hero-detail__img
+  width: 40rem
+  height: 40rem
+  margin: 0 auto
+  .is-tablet &,
+  .is-mobile &
+    width: 30rem
+    height: 30rem
+  @media only screen and (max-width: 768px)
+    &
+      width: 30rem
+      height: 30rem
 
 .l-title
   &__title,

@@ -74,12 +74,12 @@ const data = new Map([
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     background: true,
     styles: {
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
+      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'contain',
       'background-color': '#fff',
-      'background': false,
+      'width': '',
       'height': ''
     }
   }))],
@@ -256,7 +256,6 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': '#333',
-        'background': false,
         'fill': false,
         'border-radius': '100%',
         'width': '',
