@@ -1,20 +1,6 @@
 <template>
     <section class="l-button-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <div class="l-button-one__container" v-bind:style="{ 'justify-content': $sectionData.container.hSelected.value, 'align-items': $sectionData.container.vSelected.value }">
-        <div class="container-edit">
-          <span>horizontal: </span>
-          <select v-model=$sectionData.container.hSelected>
-            <option v-for="(align, index) in $sectionData.container.horizontal" :key="index" :value="align">
-              {{align.name}}
-            </option>
-          </select>
-          <span>vertical: </span>
-          <select v-model=$sectionData.container.vSelected>
-            <option v-for="(align, index) in $sectionData.container.vertical" :key="index" :value="align">
-              {{align.name}}
-            </option>
-          </select>
-        </div>
+      <sandbox path="$sectionData.container" v-styler="$sectionData.container" v-bind:style="$sectionData.container.styles">
         <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button-one is-editable"
            v-bind:class="$sectionData.buttons[index].element.classes"
            @click.prevent="openLink(item)" :target="$sectionData.buttons[index].element.target"
@@ -24,7 +10,7 @@
            v-bind:style="$sectionData.buttons[index].element.styles"
         >
         </a>
-      </div>
+      </sandbox>
     </section>
 </template>
 
@@ -40,20 +26,7 @@ export default {
     buttons: [{
       element: types.Button
     }],
-    container: {
-      vSelected: { name: 'center', value: 'center' },
-      hSelected: { name: 'center', value: 'center' },
-      vertical: [
-        { name: 'top', value: 'flex-start' },
-        { name: 'center', value: 'center' },
-        { name: 'bottom', value: 'flex-end' }
-      ],
-      horizontal: [
-        { name: 'left', value: 'flex-start' },
-        { name: 'center', value: 'center' },
-        { name: 'right', value: 'flex-end' }
-      ]
-    }
+    container: types.StyleObject
   },
   props: {
     id: {
