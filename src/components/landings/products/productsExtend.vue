@@ -1,6 +1,6 @@
 <template>
-  <section class="l-products" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <div class="b-products flex flex_center">
+  <section class="l-products flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+      <div class="b-products">
         <div class="b-products-left b-products-left_mobile flex flex_center">
           <div class="b-products-list b-products-list_mini flex flex_justify-content-center flex_align-items-start">
             <div class="b-products-list__item b-products-list__item_mini flex flex_columns"
@@ -11,7 +11,7 @@
                  :data-index="index"
                  :product-extend-preview="'b-products-list__item_active'"
               >
-              <div class="b-products-list__item-label"
+              <div class="b-products-list__item-label" contenteditable="true"
                    v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label` }"
                    v-html="$sectionData.products[index].mini.label.text"
                    :style="$sectionData.products[index].mini.label.styles"
@@ -25,7 +25,7 @@
               </div>
               <div class="b-products-list__item-wrap">
                 <div>
-                  <div class="b-products-list__item-cost"
+                  <div class="b-products-list__item-cost" contenteditable="true"
                         v-styler:for="{ el: $sectionData.products[index].mini.cost, path:`$sectionData.products[${index}].mini.cost` }"
                         v-html="$sectionData.products[index].mini.cost.text"
                         :style="$sectionData.products[index].mini.cost.styles"
@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div>
-                  <span class="b-products-list__item-name b-products-list__item-name_mini"
+                  <span class="b-products-list__item-name b-products-list__item-name_mini" contenteditable="true"
                     v-styler:for="{ el: $sectionData.products[index].mini.name, path:`$sectionData.products[${index}].mini.name` }"
                     v-html="$sectionData.products[index].mini.name.text"
                     :style="$sectionData.products[index].mini.name.styles"
@@ -41,7 +41,7 @@
                   </span>
                 </div>
                 <div>
-                  <span class="b-products-list__item-title b-products-list__item-title_mini"
+                  <span class="b-products-list__item-title b-products-list__item-title_mini" contenteditable="true"
                         v-styler:for="{ el: $sectionData.products[index].mini.title, path:`$sectionData.products[${index}].mini.title` }"
                         v-html="$sectionData.products[index].mini.title.text"
                         :style="$sectionData.products[index].mini.title.styles"
@@ -71,7 +71,7 @@
               <div class="b-products-list__item-header flex">
                 <div class="b-products-list__item-header-col">
                   <div>
-                    <span class="b-products-list__item-name"
+                    <span class="b-products-list__item-name" contenteditable="true"
                       v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name` }"
                       v-html="$sectionData.products[index].name.text"
                       :style="$sectionData.products[index].name.styles"
@@ -79,7 +79,7 @@
                     </span>
                   </div>
                   <div>
-                    <span class="b-products-list__item-title"
+                    <span class="b-products-list__item-title" contenteditable="true"
                       v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title` }"
                       v-html="$sectionData.products[index].title.text"
                       :style="$sectionData.products[index].title.styles"
@@ -87,7 +87,7 @@
                     </span>
                   </div>
                   <div>
-                    <span class="b-products-list__item-button"
+                    <span class="b-products-list__item-button" contenteditable="true"
                       v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button` }"
                       v-html="$sectionData.products[index].button.text"
                       @click.prevent="openLink(item)" :target="$sectionData.products[index].button.target"
@@ -98,7 +98,7 @@
                     </span>
                   </div>
                 </div>
-                <div>
+                <div class="b-products-list__item-header-col">
                   <div class="b-products-list__item-image"
                      v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`}"
                      :style="$sectionData.products[index].preview.styles"
@@ -111,7 +111,8 @@
                     <div class="b-products-list__item-block" v-for="(keyB, indexB) in $sectionData.products[index].blocks" :key="index + indexB">
                       <div class="b-products-list__item-row flex flex_center">
                           <div class="b-products-list__item-col b-products-list__item-col_text">
-                            <div class="b-products-list__item-row-chapter" v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
+                            <div class="b-products-list__item-row-chapter" contenteditable="true"
+                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
                               v-html="$sectionData.products[index].blocks[indexB].chapter.text"
                               :style="$sectionData.products[index].blocks[indexB].chapter.styles"
                               >
@@ -133,7 +134,7 @@
                       <div class="b-products-list__item-row flex" v-for="(keyR, indexR) in $sectionData.products[index].blocks[indexB].rows" :key="index + indexB + indexR">
                         <div class="b-products-list__item-col b-products-list__item-col_icon">
                           <div class="b-products-list__item-col-icon">
-                              <button class="b-products-list__item-col-icon-btn controller-button is-green"
+                              <button class="b-products-list__item-col-icon-btn controller-button is-green" contenteditable="true"
                                 v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type` }"
                                 :style="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.styles"
                                 v-bind:class="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.classes"
@@ -201,7 +202,7 @@ export default {
       {
         el: types.StyleObject,
         visible: true,
-        preview: types.Image,
+        preview: types.ImageNoResize,
         label: types.Label,
         name: types.Text,
         title: types.Text,
@@ -225,7 +226,7 @@ export default {
         mini: {
           el: types.Product,
           visible: true,
-          preview: types.Image,
+          preview: types.ImageNoResize,
           label: types.Label,
           name: types.Text,
           title: types.Text,
@@ -302,6 +303,7 @@ export default {
   color: #000
   padding: 3rem
   min-height: 12rem
+
 .b-products
   display: flex
   align-items: center
@@ -314,7 +316,6 @@ export default {
       height: auto !important
   &-left
     width: 50%
-    height: 100%
     &_mobile
       .is-tablet &,
       .is-mobile &
@@ -333,27 +334,22 @@ export default {
       height: 100%
     .is-tablet &
       width: 95%
-      height: 100%
+      height: auto
     @media only screen and (max-width: 768px)
       &
         width: 95%
-        height: 100%
+        height: auto
   &-list
     margin: 1rem auto
-    width: 95%
-    min-width: 95%
-    height: 95%
+    width: 100%
+    min-width: 100%
     margin: 0 0 2rem
+    overflow:hidden
+    padding: 1rem
     &_mini
       margin: 0
       background-color: transparent
       flex-wrap: wrap
-    .is-mobile &,
-    .is-tablet &
-      display: block
-    @media only screen and (max-width: 768px)
-      &
-        display: block
     &__item
       position: absolute
       top: 0
@@ -377,6 +373,7 @@ export default {
           visibility: visible
       &_mini
         width: 20rem
+        min-width: 20rem
         height: 25rem
         min-height: 15rem
         max-height: 60rem
@@ -402,7 +399,7 @@ export default {
             margin: 2rem 0
             width: 100%
       &-wrap
-        padding: 2rem
+        padding: 1rem
       &-cost
         width: 100%
         min-width: 6rem
@@ -420,21 +417,16 @@ export default {
           resize: both
           overflow: hidden
       &-image
-        width: 10rem
+        width: 100%
         margin: 0
-        padding: 1rem
-        height: 10rem
+        height: 20rem
+        min-height: 20rem
         overflow: hidden
-        &.is-editable
-          resize: both
-          overflow: hidden
         &_mini
+          width: 100%
+          height: 10rem
+          min-height: 10rem
           margin: 0 auto
-          &.is-editable
-            resize: both
-        &-img
-          height: auto
-          text-align: center
       &-name
         font-size: 3rem
         line-height: 1.4
@@ -503,7 +495,7 @@ export default {
         margin: 3rem 1rem 1rem
         border-top: dotted rgba(255, 255, 255, 0.3) 0.1rem
         padding: 1rem 0
-        width: 40%
+        width: 45%
         .is-mobile &,
           width: 100%
         @media only screen and (max-width: 540px)
@@ -553,6 +545,7 @@ export default {
           fill: #FFC107
           color: #FFC107
       &-header
+        min-height: 18rem
         .is-mobile &,
           flex-wrap: wrap
         @media only screen and (max-width: 540px)
@@ -563,19 +556,23 @@ export default {
           min-height: 10rem
           padding: 2rem 2rem 0
           order: 0
-          .is-mobile &,
+          .is-mobile &
+            width: 100%
             order: 1
           @media only screen and (max-width: 540px)
             &
+              width: 100%
               order: 1
         &-col:nth-child(2)
           width: 30%
           min-height: 10rem
           order: 1
-          .is-mobile &,
+          .is-mobile &
+            width: 100%
             order: 0
           @media only screen and (max-width: 540px)
             &
+              width: 100%
               order: 0
 
 .is-editable-show

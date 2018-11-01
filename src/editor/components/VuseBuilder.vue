@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="artboard" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
+    <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
@@ -805,8 +805,11 @@ export default {
   height: 2rem
   display: inline-block
   vertical-align: middle
-  cursor: pointer
-  &_trash
+  .is-editable &,
+  .is-editable + &,
+  .is-editable ~ &,
+  .controller-button &
+    cursor: pointer
 
 .floatHover
   cursor: pointer

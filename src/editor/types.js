@@ -16,3 +16,4 @@ export class Description {}
 export class Product {}
 export class Label {}
 export class Cost {}
+export class ImageNoResize {}

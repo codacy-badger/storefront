@@ -139,7 +139,7 @@ const BLOCK = {
 const PRODUCT = {
   el: types.Product,
   visible: true,
-  preview: types.Image,
+  preview: types.ImageNoResize,
   label: types.Label,
   name: types.Text,
   title: types.Text,
@@ -213,9 +213,7 @@ export default {
   color: #000
   padding: 3rem 0 1rem
   min-height: 12rem
-  &.is-editable
-    resize: vertical
-    overflow: hidden
+
 .b-products
   display: flex
   align-items: center
@@ -223,8 +221,12 @@ export default {
   max-width: 160rem
   width: 80%
   margin: 0 auto
+  .is-mobile &,
+  .is-tablet &
+    width: 95%
   @media only screen and (max-width: 768px)
     &
+      width: 95%
       height: auto !important
   &-list
     margin-bottom: 1rem
@@ -245,20 +247,22 @@ export default {
       overflow: hidden
       &.is-editable
         resize: both
+        .is-mobile &,
+        .is-tablet &
+          resize: vertical
+        @media only screen and (max-width: 768px)
+          &
+            fresize: vertical
       &-wrap
         padding: 2rem
       &-image
         width: 100%
-        max-width: 100%
         margin: 0 auto
-        padding: 1rem
         height: 15rem
-        min-height: 5rem
+        min-height: 15rem
         overflow: hidden
         background-color: #fff
         background-image: url('https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png')
-        &.is-editable
-          resize: both
       &-name
         font-size: 3rem
         line-height: 1.4

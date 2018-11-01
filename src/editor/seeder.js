@@ -83,6 +83,19 @@ const data = new Map([
       'height': ''
     }
   }))],
+  [types.ImageNoResize, () => (_.merge({}, DEFAULT_OPTIONS, {
+    resizable: false,
+    alt: 'Default image',
+    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
+    background: true,
+    styles: {
+      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'contain',
+      'background-color': '#fff'
+    }
+  }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
     alt: 'Default logo',
