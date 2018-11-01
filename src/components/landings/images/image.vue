@@ -2,7 +2,8 @@
   <section class="l-pic"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    v-bind:style="$sectionData.mainStyle.styles">
+    v-bind:style="$sectionData.mainStyle.styles"
+    >
       <div v-for="(pic, index) in $sectionData.images" :key="index" class="b-pic"
         v-styler:for="{ el: $sectionData.images[index].element, path: `$sectionData.images[${index}].element` }"
         v-bind:style="$sectionData.images[index].element.styles"
@@ -49,6 +50,8 @@ export default {
   display: inline-block
   margin: 1rem auto
   text-align: center
+  width: 40rem
+  height: 40rem
   .is-editable &
     resize: both
     overflow: hidden

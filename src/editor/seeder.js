@@ -89,12 +89,11 @@ const data = new Map([
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
     styles: {
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': false,
+      'background-image': 'url(https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png)',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'contain',
+      'background-color': '#fff',
       'height': ''
     }
   }))],
@@ -272,12 +271,11 @@ const data = new Map([
     url: 'https://gn548.cdn.gamenet.ru/TY0Xv2riHu/772oj/o_OnTml.png',
     background: true,
     styles: {
-      'background-image': 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': '#fff',
+      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'contain',
+      'background-color': '#fff',
       'width': '',
       'height': ''
     }
@@ -287,12 +285,11 @@ const data = new Map([
     resizable: true,
     background: true,
     styles: {
-      'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
+      'background-image': false,
       'background-position': false,
       'background-repeat': false,
       'background-size': false,
-      'background-color': false,
-      'background': '#333',
+      'background-color': '#363636',
       'width': '',
       'height': ''
     }

@@ -2,7 +2,7 @@
 export function galleryPreviewClick(num) {
   const TARGET_PREVIEW = 'gallery-one-preview';
   const TARGET_STAGE = 'gallery-one-stage';
-  const PREVIEW_ACTIVE_CLASS = 'hero-tile_active';
+  const PREVIEW_ACTIVE_CLASS = 'b-preview_active';
   var previews = document.querySelectorAll('['+ TARGET_PREVIEW +']'),
     stages = document.querySelectorAll('['+ TARGET_STAGE +']');
 
