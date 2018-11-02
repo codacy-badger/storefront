@@ -531,6 +531,12 @@ export default {
           this.fontFamily = ff
         }
       }
+      if (this.options.background === true) {
+        this.backgroundUrl = this.options.styles['background-image']
+        if (this.options.styles['background-image'] !== '') {
+          this.imageBgSelected = true
+        }
+      }
     },
     onBoxAligned (value) {
       this.addTextStyle(value[0], value[1], value[2])

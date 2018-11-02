@@ -139,15 +139,15 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: false,
+      resizable: true,
       removable: true,
+      background: true,
       styles: {
-        'background-image': 'https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png',
+        'background-image': '',
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
-        'background': false,
         'height': ''
       }
     })
