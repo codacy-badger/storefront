@@ -60,9 +60,9 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  &.is-editable
+  /*&.is-editable
     resize: vertical
-    overflow: hidden
+    overflow: hidden*/
   &__container
     display: flex
     max-width: 100rem

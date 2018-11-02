@@ -90,6 +90,8 @@ export default {
 <style lang="sass">
 .slot
   display: flex
+  justify-content: center
+  align-items: center
   max-width: 100rem
   position: relative
   width: 100%

@@ -26,14 +26,16 @@ import restrictions from '@components/landings/elements/restrictions'
 import image from '@components/landings/images/image'
 import description from '@components/landings/texts/description'
 import bob from '@components/landings/test/slots'
-import bbb from '@components/landings/test/bbb'
+import PartButton from '@components/landings/test/partButton'
+import PartTitle from '@components/landings/test/partTitle'
 import Sandbox from '@components/landings/test/sandbox'
 
 Vuse.mix({
   components: {
     Uploader,
     Sandbox,
-    bbb
+    PartButton,
+    PartTitle
   }
 })
 
