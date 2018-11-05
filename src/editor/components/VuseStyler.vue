@@ -99,7 +99,7 @@
 
       <!-- dimensions -->
       <li v-if="options.resizable" class="styler-list__dimensions">
-        <span v-text="dimensions.width"></span> x <span v-text="dimensions.height"></span>
+        <span v-text="dmsToFixed.width"></span> x <span v-text="dmsToFixed.height"></span>
       </li>
 
     </ul><!--/.styler-list-->
@@ -424,6 +424,14 @@ export default {
       { name: 'jerk', className: 'ptah-a-jerk' }
     ]
   }),
+  computed: {
+    dmsToFixed () {
+      return {
+        width: this.dimensions.width.toFixed(0),
+        height: this.dimensions.height.toFixed(0)
+      }
+    }
+  },
   watch: {
     colorerColor: function () {
       this.changeColor()
@@ -458,8 +466,8 @@ export default {
       this.el.contentEditable = 'true'
     }
 
-    this.dimensions.width = this.el.offsetWidth.toFixed(0)
-    this.dimensions.height = this.el.offsetHeight.toFixed(0)
+    this.dimensions.width = this.el.offsetWidth
+    this.dimensions.height = this.el.offsetHeight
   },
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
