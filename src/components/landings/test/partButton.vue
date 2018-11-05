@@ -21,6 +21,7 @@ export default {
     color: #000
     background-color: #a7a1a1
     border: transparent solid  0.2rem
+    border-radius: 4px
     display: flex
     align-items: center
     justify-content: center

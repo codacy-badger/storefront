@@ -4,19 +4,24 @@
            :class="$sectionData.mainStyle.classes"
            v-bind:style="$sectionData.mainStyle.styles">
 
-    <ul class="add-list">
+    <!--<ul class="add-list">
       <li><button style="margin: 10px; font-size: 15px; padding: 5px;" @click="addButton">add button</button></li>
       <li><button style="margin: 10px; font-size: 15px; padding: 5px;" @click="addTitle">add title</button></li>
-    </ul>
+    </ul>-->
 
-    <sandbox class="temp-section__sandbox" path="$sectionData.container" v-styler="$sectionData.container" v-bind:style="$sectionData.container.styles">
-      <component v-for="(component, index) in $sectionData.components"
+    <sandbox class="temp-section__sandbox"
+             path="$sectionData.container"
+             mode="editor"
+             components="$sectionData.components"
+             v-styler="$sectionData.container"
+             v-bind:style="$sectionData.container.styles">
+      <!--<component v-for="(component, index) in $sectionData.components"
                  :is="component.name"
                  :key="index"
                  :href="$sectionData.components[index].element.href"
                  v-html="$sectionData.components[index].element.text"
                  v-bind:style="$sectionData.components[index].element.styles"
-                 v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element` }"></component>
+                 v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element` }"></component>-->
     </sandbox>
   </section>
 </template>
@@ -60,10 +65,10 @@ export default {
   methods: {
     addButton () {
       console.log(this.$section.data.elements[0].element)
-      this.$section.data.components.push(Object.assign({}, this.$section.data.elements[0]))
+      this.$section.data.components.push(JSON.parse(JSON.stringify(this.$section.data.elements[0])))
     },
     addTitle () {
-      this.$section.data.components.push(Object.assign({}, this.$section.data.elements[1]))
+      this.$section.data.components.push(JSON.parse(JSON.stringify(this.$section.data.elements[1])))
     }
   }
 }

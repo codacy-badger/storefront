@@ -1,5 +1,5 @@
 <template>
-  <section class="slot" v-if="mode === 'slot'">
+  <section class="slot">
       <button class="slot__tune" :class="{'active': showSettings}" @click.prevent="showSettings = !showSettings">
         <img src="https://gn198.cdn.stg.gamenet.ru/0/7870f/o_qpwDR.svg" alt="">
       </button>
@@ -54,9 +54,29 @@
           </li>
         </ul>
       </div>
-      <slot>
 
-      </slot>
+      <template v-if="mode === 'slot'">
+        <slot>
+
+        </slot>
+      </template>
+
+      <template v-if="mode === 'editor'">
+        <!--<button class="slot__elements" :class="{'active': showElements}" @click.prevent="showElements = !showElements">
+          <img src="https://gn198.cdn.stg.gamenet.ru/0/7870f/o_qpwDR.svg" alt="">
+        </button>-->
+        <ul class="add-list">
+          <li><button style="margin: 10px; font-size: 15px; padding: 5px;" @click="addButton">add button</button></li>
+          <li><button style="margin: 10px; font-size: 15px; padding: 5px;" @click="addTitle">add title</button></li>
+        </ul>
+        <component v-for="(component, index) in $sectionData.components"
+                   :is="component.name"
+                   :key="index"
+                   :href="$sectionData.components[index].element.href"
+                   v-html="$sectionData.components[index].element.text"
+                   v-bind:style="$sectionData.components[index].element.styles"
+                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element` }"></component>
+      </template>
   </section>
 </template>
 
@@ -72,15 +92,20 @@ export default {
     mode: {
       type: String,
       default: 'slot' // slot || editor
+    },
+    components: {
+      type: Object
     }
   },
   data: () => ({
     styles: {},
-    showSettings: false
+    showSettings: false,
+    showElements: false
   }),
   methods: {
     align (data) {
-      this.styles = Object.assign(this.styles, data)
+      console.log(this.$section.get(this.path + '.styles'))
+      this.styles = Object.assign(this.styles, this.$section.get(this.path + '.styles'), data)
       this.$section.set(this.path, { styles: this.styles })
     }
   }
@@ -136,6 +161,21 @@ export default {
     align-items: center
     position: absolute
     top: 0px
+    right: 0px
+    padding: 5px
+    cursor: pointer
+    &:hover, &.active
+      background: $color-form-text
+  &__elements
+    background: lighten($color-form-text, 20%)
+    border: none
+    width: 30px
+    height: 30px
+    display: flex
+    justify-content: center
+    align-items: center
+    position: absolute
+    top: 30px
     right: 0px
     padding: 5px
     cursor: pointer
