@@ -15,9 +15,6 @@
                @dblclick="onClick(item, index)"
               >
             </a>
-            <div class="b-gallery-two__item-content">
-              <img class="b-gallery-two__img ie-object-fit" :src="$sectionData.images[index].preview.url" :alt="$sectionData.images[index].preview.text">
-            </div>
           </div>
         </div>
       </div>
@@ -59,17 +56,12 @@ export default {
         preview: types.Image,
         label: types.Text,
         button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
       }
     ],
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
-    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     content: ''
   },
   props: {
@@ -139,12 +131,10 @@ export default {
   display: flex
   align-items: center
   flex-wrap: wrap
+  padding: 1rem
   &.is-editable
     resize: vertical
     overflow: hidden
-  .is-tablet &,
-  .is-mobile &
-    height: auto !important
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -153,7 +143,7 @@ export default {
     width: 80%
     margin: 0 auto
 .b-gallery-two__item-wrap
-  width: 20rem
+  width: 28rem
   min-width: 10rem
   height: 22rem
   min-height: 5rem
@@ -168,21 +158,6 @@ export default {
   width: 45%
 .b-gallery-two__item-wrap_size-small
   width: 20%
-.b-gallery-two__item-content
-  position: relative
-  height: 100%
-  background-color: #fff
-  background-position: center
-  background-size: cover
-  overflow: hidden
-  pointer-events: none
-  background: linear-gradient(135deg, rgba(204, 204, 204, 0.4) 0%, rgba(161, 161, 161, 0.4) 100%)
-.b-gallery-two__item-wrap:hover .b-gallery-two__item-content
-  background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
-
-.b-gallery-two__item-wrap .b-gallery-two__item-content .b-gallery-two__text,
-.b-gallery-two__item-content:hover .b-gallery-two__text
-  opacity: 1
 .b-gallery-two__link
   position: absolute
   display: block

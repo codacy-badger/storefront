@@ -13,7 +13,7 @@ import * as types from '@editor/types'
 
 export default {
   name: 'Description',
-  cover: '/img/covers/title1.png',
+  cover: '/img/covers/description.png',
   group: 'texts',
   $schema: {
     mainStyle: types.StyleObject,

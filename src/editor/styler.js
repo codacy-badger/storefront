@@ -18,7 +18,7 @@ function installStyler ({ builder, Vue }) {
       rootApp.appendChild(newNode)
       el.classList.add('is-editable')
 
-      if (binding.arg === 'for' || binding.arg === 'galleryItem') {
+      if (binding.arg === 'for' || binding.arg === 'galleryItem' || binding.arg === 'product') {
         name = binding.value.path
       } else {
         name = binding.expression
@@ -29,7 +29,7 @@ function installStyler ({ builder, Vue }) {
           el,
           section: section,
           type: (binding.arg !== 'index' && binding.arg !== 'for' && binding.arg) || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
-          options: binding.arg === 'for' || binding.arg === 'galleryItem' ? binding.value.el : binding.value,
+          options: binding.arg === 'for' || binding.arg === 'galleryItem'|| binding.arg === 'product' ? binding.value.el : binding.value,
           name: name
         }
       }).$mount(newNode))

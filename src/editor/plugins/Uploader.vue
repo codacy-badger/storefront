@@ -95,7 +95,9 @@ export default {
   > img
     width: 100%
     display: inline-block
-    max-height: 100%
+    height: 100%
+    min-width: 1rem
+    min-height: 1rem
     .is-mobile &
        height: auto
     @media only screen and (max-width: 540px)

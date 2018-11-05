@@ -1,6 +1,6 @@
 import JSZip from 'jszip'
 import saveAs from 'save-as'
-import { getImageBlob, cleanDOM } from '../util'
+import { getImageBlob, cleanDOM, gtagSetup } from '../util'
 
 /**
  * Adds a service worker that caches the static assets.
@@ -106,10 +106,12 @@ function download (assets) {
       let icon = this.settings.favicon
       let scrollSetup = this.getScrollSetup()
       let gtm = this.gtmSetup(this.settings.gtmId)
+      let gtag = gtagSetup(this.settings.gtag)
       output.file('index.html',
         `<html>
           <head>
             ${gtm.head}
+            ${gtag}
             <title>${title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
