@@ -281,7 +281,7 @@ class Vuse {
               ${styles}
             </style>
           </head>
-          <body class="b-body_preview" style="${bodyStyles} height: 100%">
+          <body class="b-body_preview" style="${bodyStyles}">
             ${video}
             <div class="main">
               ${artboard.innerHTML}
