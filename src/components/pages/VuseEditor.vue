@@ -29,11 +29,13 @@ import bob from '@components/landings/test/slots'
 import PartButton from '@components/landings/test/partButton'
 import PartTitle from '@components/landings/test/partTitle'
 import Sandbox from '@components/landings/test/sandbox'
+import ElementsList from '@components/landings/test/elementsList'
 
 Vuse.mix({
   components: {
     Uploader,
     Sandbox,
+    ElementsList,
     PartButton,
     PartTitle
   }

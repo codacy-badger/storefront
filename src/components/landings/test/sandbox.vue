@@ -1,7 +1,7 @@
 <template>
   <section class="slot">
-      <button class="slot__tune" :class="{'active': showSettings}" @click.prevent="showSettings = !showSettings">
-        <img src="https://gn198.cdn.stg.gamenet.ru/0/7870f/o_qpwDR.svg" alt="">
+      <button class="slot__tune" :class="{'active': showSettings}" @click.prevent="showList">
+        <img src="https://gn337.cdn.stg.gamenet.ru/0/79ndM/o_DXxZz.svg" alt="">
       </button>
       <div class="slot__align" v-if="showSettings">
         <div>Horizontal</div>
@@ -55,28 +55,9 @@
         </ul>
       </div>
 
-      <template v-if="mode === 'slot'">
-        <slot>
+      <slot>
 
-        </slot>
-      </template>
-
-      <template v-if="mode === 'editor'">
-        <!--<button class="slot__elements" :class="{'active': showElements}" @click.prevent="showElements = !showElements">
-          <img src="https://gn198.cdn.stg.gamenet.ru/0/7870f/o_qpwDR.svg" alt="">
-        </button>-->
-        <ul class="add-list">
-          <li><button style="margin: 10px; font-size: 15px; padding: 5px;" @click="addButton">add button</button></li>
-          <li><button style="margin: 10px; font-size: 15px; padding: 5px;" @click="addTitle">add title</button></li>
-        </ul>
-        <component v-for="(component, index) in $sectionData.components"
-                   :is="component.name"
-                   :key="index"
-                   :href="$sectionData.components[index].element.href"
-                   v-html="$sectionData.components[index].element.text"
-                   v-bind:style="$sectionData.components[index].element.styles"
-                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element` }"></component>
-      </template>
+      </slot>
   </section>
 </template>
 
@@ -88,13 +69,6 @@ export default {
     path: {
       type: String,
       required: true
-    },
-    mode: {
-      type: String,
-      default: 'slot' // slot || editor
-    },
-    components: {
-      type: Object
     }
   },
   data: () => ({
@@ -104,9 +78,16 @@ export default {
   }),
   methods: {
     align (data) {
-      console.log(this.$section.get(this.path + '.styles'))
       this.styles = Object.assign(this.styles, this.$section.get(this.path + '.styles'), data)
       this.$section.set(this.path, { styles: this.styles })
+    },
+    showList () {
+      this.showSettings = true
+      document.addEventListener('click', this.hideList, true)
+    },
+    hideList () {
+      this.showSettings = false
+      document.removeEventListener('click', this.hideList, true)
     }
   }
 }

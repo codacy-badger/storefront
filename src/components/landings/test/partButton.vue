@@ -1,5 +1,5 @@
 <template>
-  <a class="ptah-button">Action</a>
+  <a class="ptah-button ptah-sort">Action</a>
 </template>
 
 <script>

@@ -501,16 +501,19 @@ export default {
       this.el.appendChild(resizer)
 
       const initResize = (e) => {
-        console.log('init')
+        resizer.contentEditable = 'false'
         window.addEventListener('mousemove', Resize, false)
         window.addEventListener('mouseup', stopResize, false)
       }
       const Resize = (e) => {
+        this.el.contentEditable = 'false'
+        resizer.contentEditable = 'false'
         let rect = this.el.getBoundingClientRect()
         this.addStyle('width', (e.clientX - rect.left) + 'px')
         this.addStyle('height', (e.clientY - rect.top) + 'px')
       }
       const stopResize = (e) => {
+        this.el.contentEditable = 'true'
         window.removeEventListener('mousemove', Resize, false)
         window.removeEventListener('mouseup', stopResize, false)
       }
@@ -530,7 +533,7 @@ export default {
       ro.observe(this.el)
     }
 
-    this.setInitialValue()
+    // this.setInitialValue()
   },
   beforeDestroy () {
     this.hideStyler()
@@ -1175,7 +1178,7 @@ label
   border: 1px solid rgba(0, 0, 0, .5)
   cursor: se-resize
   position: absolute
-  right: 0px
-  bottom: 0px
+  right: -10px
+  bottom: -10px
   z-index: 20
 </style>
