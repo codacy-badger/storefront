@@ -143,3 +143,20 @@ export function getPseudoTemplate(poneId, data) {
 
   return `<style type="text/css" id="${poneId}">${content}</style>`
 }
+
+/**
+ * Return Google site tag template
+ * @param tag
+ */
+export function gtagSetup (tag) {
+  if (tag === '') return tag
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${tag}"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', '${tag}');
+          </script>
+          `
+}

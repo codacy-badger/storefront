@@ -40,7 +40,7 @@
       </li>
       <!-- hover -->
       <li v-if="options.pseudo">
-        <button class="styler-button" @click="updateOption('pseudo')" title="Change shape">
+        <button class="styler-button" @click="updateOption('pseudo')" title="Hover">
           <VuseIcon name="hand"></VuseIcon>
         </button>
       </li>
@@ -420,8 +420,7 @@ export default {
       { name: 'tada', className: 'ptah-a-tada' },
       { name: 'fade', className: 'ptah-a-fade' },
       { name: 'shake', className: 'ptah-a-shake' },
-      { name: 'bounce', className: 'ptah-a-bounce' },
-      { name: 'jerk', className: 'ptah-a-jerk' }
+      { name: 'bounce', className: 'ptah-a-bounce' }
     ]
   }),
   computed: {
@@ -538,6 +537,15 @@ export default {
         if (undefined !== ff) {
           this.fontFamily = ff
         }
+      }
+      if (this.options.background === true) {
+        this.backgroundUrl = this.options.styles['background-image']
+        if (this.options.styles['background-image'] !== '') {
+          this.imageBgSelected = true
+        }
+        this.backgroundSelectedOptions.repeat = this.options.styles['background-repeat'] || DEFAULT_BACKGROUND_REPEAT
+        this.backgroundSelectedOptions.position = this.options.styles['background-position'] || DEFAULT_BACKGROUND_POSITION
+        this.backgroundSelectedOptions.size = this.options.styles['background-size'] || DEFAULT_BACKGROUND_SIZE
       }
     },
     onBoxAligned (value) {
