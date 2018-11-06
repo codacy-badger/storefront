@@ -531,6 +531,15 @@ export default {
           this.fontFamily = ff
         }
       }
+      if (this.options.background === true) {
+        this.backgroundUrl = this.options.styles['background-image']
+        if (this.options.styles['background-image'] !== '') {
+          this.imageBgSelected = true
+        }
+        this.backgroundSelectedOptions.repeat = this.options.styles['background-repeat'] || DEFAULT_BACKGROUND_REPEAT
+        this.backgroundSelectedOptions.position = this.options.styles['background-position'] || DEFAULT_BACKGROUND_POSITION
+        this.backgroundSelectedOptions.size = this.options.styles['background-size'] || DEFAULT_BACKGROUND_SIZE
+      }
     },
     onBoxAligned (value) {
       this.addTextStyle(value[0], value[1], value[2])
