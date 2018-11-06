@@ -126,6 +126,10 @@
             <legend>GTM container ID <a href="https://developers.google.com/tag-manager/quickstart" target="_blank" class="help">?</a> </legend>
             <input type="text" v-model="gtmId" placeholder="GTM-XXXXXX">
           </fieldset>
+          <fieldset>
+            <legend>Google site tag </legend>
+            <input type="text" v-model="gtag" placeholder="UA-XXXXXXXX-X">
+          </fieldset>
         </div>
         <div class="page-settings__tab-content" v-if="showTab === 1">
           <fieldset>
@@ -248,6 +252,7 @@ export default {
       fullPageScroll: 'no',
       ogTags: [ { property: '', content: '' } ],
       gtmId: '',
+      gtag: '',
       favicon: 'https://protocol.one/wp-content/uploads/2018/09/03.png',
       tabs: ['SEO', 'View'],
       showTab: 0
@@ -274,36 +279,7 @@ export default {
     this.generateGroups()
 
     if (this.$route.params.slug !== 'new') {
-      this.getLandingData(this.$route.params.slug).then((data) => {
-        this.$builder.landing = this.$route.params.slug
-        // Open current landing/preset
-        if (this.currentLanding.sections) {
-          this.addTheme(this.currentLanding)
-        } else {
-          this.addTheme(Object.assign(this.data, this.currentLanding.theme))
-        }
 
-        if (data.settings && Object.keys(data.settings).length) {
-          this.$builder.settings = data.settings
-          if (this.$builder.settings.styles !== undefined) this.styleArtboard(this.$builder.settings.styles)
-          this.ogTags = data.settings.ogTags
-          this.bgVideo = data.settings.video
-          this.bgVideoFix = data.settings.videoPosition
-          this.pageTitle = data.settings.title
-          this.fullPageScroll = data.settings.fullPageScroll
-          this.pageBackgroundUrl = data.settings.styles.backgroundImage
-          this.pageBackgroundColor = data.settings.styles.backgroundColor
-          this.pageBackgroundPositionX = data.settings.styles.backgroundPositionX
-          this.pageBackgroundPositionY = data.settings.styles.backgroundPositionY
-          this.bgAttachment = data.settings.styles.backgroundAttachment
-          this.bgRepeat = data.settings.styles.backgroundRepeat
-          this.bgSize = data.settings.styles.backgroundSize
-          this.gtmId = data.settings.gtmId
-          this.favicon = data.sttings.favicon
-        }
-
-        if (this.bgVideo.length) this.insertVideo(this.bgVideo)
-      })
     }
   },
   computed: {
@@ -347,6 +323,8 @@ export default {
         _self.$builder.sort(evt.oldIndex, evt.newIndex)
       }
     })
+    this.getSettings()
+    this.applySettings()
   },
 
   updated () {
@@ -362,6 +340,41 @@ export default {
     ...mapActions([
       'getLandingData'
     ]),
+    getSettings () {
+      this.getLandingData(this.$route.params.slug).then((data) => {
+        this.$builder.landing = this.$route.params.slug
+        // Open current landing/preset
+        if (this.currentLanding.sections) {
+          this.addTheme(this.currentLanding)
+        } else {
+          this.addTheme(Object.assign(this.data, this.currentLanding.theme))
+        }
+
+        if (data.settings && Object.keys(data.settings).length) {
+          this.$builder.settings = data.settings
+          this.ogTags = data.settings.ogTags
+          this.bgVideo = data.settings.video
+          this.bgVideoFix = data.settings.videoPosition
+          this.pageTitle = data.settings.title
+          this.fullPageScroll = data.settings.fullPageScroll
+          this.pageBackgroundUrl = data.settings.styles.backgroundImage
+          this.pageBackgroundColor = data.settings.styles.backgroundColor
+          this.pageBackgroundPosX = data.settings.styles.backgroundPositionX
+          this.pageBackgroundPosY = data.settings.styles.backgroundPositionY
+          this.bgAttachment = data.settings.styles.backgroundAttachment
+          this.bgRepeat = data.settings.styles.backgroundRepeat
+          this.bgSize = data.settings.styles.backgroundSize
+          this.gtmId = data.settings.gtmId
+          this.gtag = data.settings.gtag
+          this.favicon = data.settings.favicon
+          if (this.$builder.settings.styles !== undefined) {
+            this.styleArtboard(this.$builder.settings.styles)
+          }
+        }
+
+        if (this.bgVideo.length) this.insertVideo(this.bgVideo)
+      })
+    },
     newSection () {
       // add the section immediatly if none are present.
       if (this.sections.length === 1) {
@@ -471,6 +484,7 @@ export default {
         ogTags: this.ogTags,
         fullPageScroll: this.fullPageScroll,
         gtmId: this.gtmId,
+        gtag: this.gtag,
         favicon: this.favicon,
         styles: {
           backgroundImage: this.pageBackgroundUrl || '',
