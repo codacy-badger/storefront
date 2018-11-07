@@ -433,7 +433,8 @@ export default {
       { name: 'shake', className: 'ptah-a-shake' },
       { name: 'bounce', className: 'ptah-a-bounce' },
       { name: 'jerk', className: 'ptah-a-jerk' }
-    ]
+    ],
+    resizer: null
   }),
   watch: {
     colorerColor: function () {
@@ -494,35 +495,13 @@ export default {
         this.animation = _.find(this.animationList, ['className', name])
       }
     })
-
-    if (this.options.resizable) {
-      let resizer = document.createElement('div')
-      resizer.className = 'ptah-resizer'
-      this.el.appendChild(resizer)
-
-      const initResize = (e) => {
-        resizer.contentEditable = 'false'
-        window.addEventListener('mousemove', Resize, false)
-        window.addEventListener('mouseup', stopResize, false)
-      }
-      const Resize = (e) => {
-        this.el.contentEditable = 'false'
-        resizer.contentEditable = 'false'
-        let rect = this.el.getBoundingClientRect()
-        this.addStyle('width', (e.clientX - rect.left) + 'px')
-        this.addStyle('height', (e.clientY - rect.top) + 'px')
-      }
-      const stopResize = (e) => {
-        this.el.contentEditable = 'true'
-        window.removeEventListener('mousemove', Resize, false)
-        window.removeEventListener('mouseup', stopResize, false)
-      }
-
-      resizer.addEventListener('mousedown', initResize, false)
-    }
   },
   updated () {
     if (this.options.resizable) {
+      this.resizer = document.createElement('div')
+      this.resizer.className = 'ptah-resizer'
+      this.el.appendChild(this.resizer)
+      this.resizer.addEventListener('mousedown', this.initResize, false)
       // listen resize event, add params to element
       let handler = (e) => {
         this.dimensions.width = e[0].contentRect.width
@@ -532,7 +511,6 @@ export default {
       let ro = new ResizeObserver(handler)
       ro.observe(this.el)
     }
-
     // this.setInitialValue()
   },
   beforeDestroy () {
@@ -543,6 +521,24 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
+    initResize (e) {
+      console.log('init', e)
+      this.resizer.contentEditable = 'false'
+      window.addEventListener('mousemove', this.resize, false)
+      window.addEventListener('mouseup', this.stopResize, false)
+    },
+    resize (e) {
+      this.el.contentEditable = 'false'
+      this.resizer.contentEditable = 'false'
+      let rect = this.el.getBoundingClientRect()
+      this.addStyle('width', (e.clientX - rect.left) + 'px')
+      this.addStyle('height', (e.clientY - rect.top) + 'px')
+    },
+    stopResize (e) {
+      this.el.contentEditable = 'true'
+      window.removeEventListener('mousemove', this.resize, false)
+      window.removeEventListener('mouseup', this.stopResize, false)
+    },
     setInitialValue () {
       if (this.type === 'button') {
         // listen event change border-radius
