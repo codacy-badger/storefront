@@ -31,16 +31,6 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     components: [],
-    elements: [
-      {
-        name: 'PartButton',
-        element: types.Button
-      },
-      {
-        name: 'PartTitle',
-        element: types.Text
-      }
-    ],
     container: types.StyleObject
   },
   props: {

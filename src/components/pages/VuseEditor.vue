@@ -12,9 +12,7 @@ import Uploader from '@editor/plugins/Uploader.vue'
 import gallery1 from '@components/landings/galleries/gallery1.vue'
 import gallery2 from '@components/landings/galleries/gallery2.vue'
 import gallery3 from '@components/landings/galleries/gallery3.vue'
-import button1 from '@components/landings/buttons/button1'
-import button5 from '@components/landings/buttons/button5'
-import button6 from '@components/landings/buttons/button6'
+import button from '@components/landings/buttons/button'
 import title1 from '@components/landings/texts/title1'
 import delimiter from '@components/landings/delimiters/delimiter'
 import logo from '@components/landings/logos/logo'
@@ -25,6 +23,8 @@ import available from '@components/landings/elements/available'
 import restrictions from '@components/landings/elements/restrictions'
 import image from '@components/landings/images/image'
 import description from '@components/landings/texts/description'
+import products from '@components/landings/products/products'
+import productsExtend from '@components/landings/products/productsExtend'
 import bob from '@components/landings/test/slots'
 import PartButton from '@components/landings/test/partButton'
 import PartTitle from '@components/landings/test/partTitle'
@@ -44,9 +44,7 @@ Vuse.mix({
 Vuse.component('Gallery1', gallery1)
 Vuse.component('Gallery2', gallery2)
 Vuse.component('Gallery3', gallery3)
-Vuse.component('Button1', button1)
-Vuse.component('Button5', button5)
-Vuse.component('Button6', button6)
+Vuse.component('Button', button)
 Vuse.component('Footer', footer)
 Vuse.component('Title1', title1)
 Vuse.component('Delimiter', delimiter)
@@ -57,6 +55,8 @@ Vuse.component('Available', available)
 Vuse.component('Restrictions', restrictions)
 Vuse.component('Picture', image)
 Vuse.component('Description', description)
+Vuse.component('Products', products)
+Vuse.component('ProductsExtend', productsExtend)
 Vuse.component('Bob', bob)
 
 Vuse.use(pwa)

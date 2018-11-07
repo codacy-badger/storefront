@@ -145,6 +145,7 @@ export default {
       .vuse-icon
         width: 100%
         height: auto
+        fill: #fff
     &-eye
       position: absolute
       top: -2rem

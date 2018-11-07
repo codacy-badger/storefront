@@ -15,9 +15,6 @@
                  @dblclick="onClick(item, index)"
               >
               </a>
-              <div class="b-gallery-three-block__item-content">
-                <img class="b-gallery-three-block__item-img ie-object-fit" :src="$sectionData.images[index].preview.url" :alt="$sectionData.images[index].title.text">
-              </div>
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
@@ -85,13 +82,13 @@ export default {
     ],
     logos: [
       {
-        element: types.Image
+        element: types.Logo
       }
     ],
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
-    url: 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png',
+    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     content: ''
   },
   props: {
@@ -162,12 +159,10 @@ export default {
 .b-gallery-three
   display: flex
   align-items: center
+  padding: 1rem
   &.is-editable
    resize: vertical
    overflow: hidden
-  .is-tablet &,
-  .is-mobile &
-    height: auto !important
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -222,20 +217,6 @@ export default {
           width: 100%
           padding: 0 0 2rem 0
 
-      &-content
-        position: absolute
-        z-index: 0
-        top: 0
-        right: 0
-        bottom: 0
-        left: 0
-        min-height: 10rem
-        background-color: #fff
-        background-position: center
-        background-size: cover
-        overflow: hidden
-        pointer-events: none
-        background: linear-gradient(135deg, rgba(204, 204, 204, 0.4) 0%, rgba(161, 161, 161, 0.4) 100%)
       &-wrap:hover &-content
         background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
 
@@ -273,15 +254,6 @@ export default {
           margin: -5rem 0 0 -5rem
         &:hover
           transform: scale(1.2) rotate(-120deg)
-
-      &-img
-        position: absolute
-        top: 0
-        left: 0
-        width: 100%
-        object-fit: cover
-        height: 100%
-        z-index: 50
 
   &-btn-container
     text-align: center

@@ -74,6 +74,9 @@ export default {
       cursor: pointer
       &:hover, &.active
         background: $color-form-text
+      img
+        width: 20px
+        height: 20px
     &__list
       width: 110px
       position: absolute
@@ -99,4 +102,5 @@ export default {
       border-radius: 4px
       padding: 8px 5px
       width: 100%
+      text-decoration: none
 </style>

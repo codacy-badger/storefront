@@ -12,14 +12,21 @@ export default {
           theme: {
             name: 'Layout 1',
             title: 'Awesome title',
-            sections: ['Logo', 'Delimiter', 'Title1', 'Description', 'Button1', 'Delimiter', 'Title1', 'Description', 'Gallery1', 'Button1', 'Delimiter', 'Title1', 'Gallery2', 'Button1', 'Delimiter', 'Footer']
+            sections: ['Logo', 'Delimiter', 'Title1', 'Description', 'Button', 'Delimiter', 'Title1', 'Description', 'Gallery1', 'Button', 'Delimiter', 'Title1', 'Gallery2', 'Button', 'Delimiter', 'Footer']
           }
         },
         {
           slug: 'Landing2',
           theme: {
             name: 'Layout 2',
-            sections: ['Logo', 'Title1', 'Description', 'Button1', 'Available', 'Delimiter', 'Gallery2', 'Delimiter', 'Title1', 'Description', 'Picture', 'Description', 'Delimiter', 'Gallery3', 'Delimiter', 'System', 'Logo', 'Button1', 'Title1', 'Social', 'Logo', 'Restrictions']
+            sections: ['Logo', 'Title1', 'Description', 'Button', 'Available', 'Delimiter', 'Gallery2', 'Delimiter', 'Title1', 'Description', 'Picture', 'Description', 'Delimiter', 'Gallery3', 'Delimiter', 'System', 'Logo', 'Button', 'Title1', 'Social', 'Logo', 'Restrictions']
+          }
+        },
+        {
+          slug: 'Products',
+          theme: {
+            name: 'Products',
+            sections: ['Products', 'ProductsExtend']
           }
         }
       ])

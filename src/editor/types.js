@@ -13,3 +13,7 @@ export class GalleryItem {}
 export class StyleObject {}
 export class Icon {}
 export class Description {}
+export class Product {}
+export class Label {}
+export class Cost {}
+export class ImageNoResize {}

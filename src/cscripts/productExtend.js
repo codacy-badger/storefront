@@ -1,8 +1,8 @@
 ;
-export function galleryPreviewClick(num) {
-  const TARGET_PREVIEW = 'gallery-one-preview';
-  const TARGET_STAGE = 'gallery-one-stage';
-  const PREVIEW_ACTIVE_CLASS = 'b-preview_active';
+export function productExtendPreviewClick(num) {
+  const TARGET_PREVIEW = 'product-extend-preview';
+  const TARGET_STAGE = 'product-extend-stage';
+  const PREVIEW_ACTIVE_CLASS = 'b-products-list__item_active';
   var previews = document.querySelectorAll('['+ TARGET_PREVIEW +']'),
     stages = document.querySelectorAll('['+ TARGET_STAGE +']');
 
@@ -57,4 +57,4 @@ export function galleryPreviewClick(num) {
 
 }
 
-galleryPreviewClick(0);
+productExtendPreviewClick(0);

@@ -120,7 +120,7 @@ export default {
     margin: 5px 0 15px 0
     padding: 0
     li
-      margin: 5px
+      margin: 5px 10px 5px 0
       padding: 0px
     a
       display: flex
@@ -132,6 +132,8 @@ export default {
       border-radius: 4px
       &:hover
         background: #fff
+      img
+        max-width: 100%
   &__tune
     background: lighten($color-form-text, 20%)
     border: none
@@ -147,6 +149,9 @@ export default {
     cursor: pointer
     &:hover, &.active
       background: $color-form-text
+    img
+      width: 20px
+      height: 20px
   &__elements
     background: lighten($color-form-text, 20%)
     border: none

@@ -8,7 +8,6 @@
              :key="index"
              :style="$sectionData.images[index].preview.styles"
           >
-          <img class="b-footer__logo-img" :src="$sectionData.images[index].preview.url" />
         </div>
       </div>
       <div class="b-footer__group b-footer__group_2">

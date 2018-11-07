@@ -1,5 +1,5 @@
 <template>
-  <div class="styler" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
+  <div class="styler is-editable" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
       <!-- aligned -->
@@ -15,8 +15,8 @@
         </button>
       </li>
       <!-- background -->
-      <li v-if="options.background || type === 'section' || type === 'galleryItem'">
-        <button class="styler-button" @click="updateOption('colorer')" title="Background">
+      <li v-if="options.background || type === 'section' || type === 'galleryItem' || type === 'product'">
+        <button class="styler-button" @click="updateOption('colorer')" title="Set background">
           <VuseIcon name="pic"></VuseIcon>
         </button>
       </li>
@@ -40,10 +40,18 @@
       </li>
       <!-- hover -->
       <li v-if="options.pseudo">
-        <button class="styler-button" @click="updateOption('pseudo')" title="Change shape">
+        <button class="styler-button" @click="updateOption('pseudo')" title="Hover">
           <VuseIcon name="hand"></VuseIcon>
         </button>
       </li>
+
+      <template v-if="type === 'product' && section.data.products.length !== 0">
+        <li>
+          <button class="styler-button" @click="copyItemProduct">
+            <VuseIcon name="plus"></VuseIcon>
+          </button>
+        </li>
+      </template>
 
       <template v-if="type === 'galleryItem'">
         <li>
@@ -61,10 +69,6 @@
                 @change="onChooseGalleryItemPreview"/>
             </form>
           </div>
-
-          <button class="styler-button" @click="choseGalleryItemPreview">
-            <VuseIcon name="upload"></VuseIcon>
-          </button>
         </li>
         <li v-if="type === 'link'">
           <button class="styler-button" @click="updateOption('link')">
@@ -95,7 +99,7 @@
 
       <!-- dimensions -->
       <li v-if="options.resizable" class="styler-list__dimensions">
-        <span v-text="dimensions.width"></span> x <span v-text="dimensions.height"></span>
+        <span v-text="dmsToFixed.width"></span> x <span v-text="dmsToFixed.height"></span>
       </li>
 
     </ul><!--/.styler-list-->
@@ -103,7 +107,7 @@
     <ul class="styler-list">
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
-          <li v-if="type !== 'button' && type !== 'galleryItem'">
+          <li v-if="type !== 'button' && type !== 'galleryItem' && type !== 'product'">
             <button class="styler-button" @click="showBackgroundSettingsSection('link')">
               <VuseIcon name="link"></VuseIcon>
             </button>
@@ -153,17 +157,6 @@
               </button>
             </div>
           </div>
-        </div>
-
-        <div v-if="galleryItem.link === true" class="b-styler__bg_options_container">
-            <div class="b-styler__bg_options__item">
-                <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
-                    <input class="input" type="text" placeholder="Link to full image or video" v-model="galleryItem.linkContentPopup"/>
-                    <button class="button" @click="addBackgroundAsLink">
-                        <VuseIcon name="link"></VuseIcon>
-                    </button>
-                </div>
-            </div>
         </div>
 
         <div v-if="imageBgSelected === true && backgroundSettingsShow.image === true" class="b-styler__bg_options_container">
@@ -299,7 +292,7 @@
 
         <div v-if="showPseudoBg" class="b-styler__bg_options_container">
           <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex })" v-model="backgroundHoverColor"></sketch-color-pecker>
+            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex + ' !important' })" v-model="backgroundHoverColor"></sketch-color-pecker>
           </div>
         </div>
       </li>
@@ -325,7 +318,7 @@ import ResizeObserver from 'resize-observer-polyfill'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
-const DEFAULT_BACKGROUND_SIZE = 'cover'
+const DEFAULT_BACKGROUND_SIZE = 'contain'
 
 const VIDEO_BACKGROUND_MP4_EXTENSION = 'mp4'
 const VIDEO_BACKGROUND_WEBM_EXTENSION = 'webm'
@@ -415,10 +408,6 @@ export default {
     fontSize: null,
     fontFamily: null,
     borderRadius: 0,
-    galleryItem: {
-      link: false,
-      linlContentPopup: false
-    },
     dimensions: {
       width: null,
       height: null
@@ -431,11 +420,18 @@ export default {
       { name: 'tada', className: 'ptah-a-tada' },
       { name: 'fade', className: 'ptah-a-fade' },
       { name: 'shake', className: 'ptah-a-shake' },
-      { name: 'bounce', className: 'ptah-a-bounce' },
-      { name: 'jerk', className: 'ptah-a-jerk' }
+      { name: 'bounce', className: 'ptah-a-bounce' }
     ],
     resizer: null
   }),
+  computed: {
+    dmsToFixed () {
+      return {
+        width: this.dimensions.width.toFixed(0),
+        height: this.dimensions.height.toFixed(0)
+      }
+    }
+  },
   watch: {
     colorerColor: function () {
       this.changeColor()
@@ -470,8 +466,8 @@ export default {
       this.el.contentEditable = 'true'
     }
 
-    this.dimensions.width = this.el.offsetWidth.toFixed(0)
-    this.dimensions.height = this.el.offsetHeight.toFixed(0)
+    this.dimensions.width = this.el.offsetWidth
+    this.dimensions.height = this.el.offsetHeight
   },
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
@@ -522,7 +518,6 @@ export default {
   },
   methods: {
     initResize (e) {
-      console.log('init', e)
       this.resizer.contentEditable = 'false'
       window.addEventListener('mousemove', this.resize, false)
       window.addEventListener('mouseup', this.stopResize, false)
@@ -559,6 +554,15 @@ export default {
         if (undefined !== ff) {
           this.fontFamily = ff
         }
+      }
+      if (this.options.background === true) {
+        this.backgroundUrl = this.options.styles['background-image']
+        if (this.options.styles['background-image'] !== '') {
+          this.imageBgSelected = true
+        }
+        this.backgroundSelectedOptions.repeat = this.options.styles['background-repeat'] || DEFAULT_BACKGROUND_REPEAT
+        this.backgroundSelectedOptions.position = this.options.styles['background-position'] || DEFAULT_BACKGROUND_POSITION
+        this.backgroundSelectedOptions.size = this.options.styles['background-size'] || DEFAULT_BACKGROUND_SIZE
       }
     },
     onBoxAligned (value) {
@@ -709,6 +713,12 @@ export default {
       this.section.data.images.push(l)
       this.section.schema.images.push(l)
     },
+    copyItemProduct () {
+      let newObj = JSON.parse(JSON.stringify(this.section.data.products[0]))
+      let l = Object.assign({}, newObj)
+      this.section.data.products.push(l)
+      this.section.schema.products.push(l)
+    },
     execute (command, value = null) {
       this.el.focus()
       document.execCommand(command, false, value)
@@ -821,15 +831,9 @@ export default {
         })
     },
     setBackgroundColor: function () {
-      this.addStyle('background-image', 'none')
-      this.addStyle('background-position', 'inherit')
-      this.addStyle('background-repeat', 'inherit')
-      this.addStyle('background-size', 'inherit')
-
       this.imageBgSelected = false
       this.videoBgSelected = false
       this.backgroundSettingsShow.color = false
-
       this.addStyle('background-color', this.backgroundColor.hex8)
       this.addStyle('border-color', this.backgroundColor.hex8)
     },
@@ -874,54 +878,30 @@ export default {
     },
     showBackground: function (data) {
       if (data['type'] === 'video') {
-        this.addStyle('background-image', 'none')
-        this.addStyle('background-position', 'inherit')
-        this.addStyle('background-repeat', 'inherit')
-        this.addStyle('background-size', 'inherit')
-        this.addStyle('background-color', 'transparent')
-        this.addStyle('background', 'none')
-
         this.videoBackgroundSources.push({ source: data['src'], type: data['mime'] })
         this.addVideoBackground()
-
         this.imageBgSelected = false
         this.videoBgSelected = true
-        this.backgroundColor = '#ffffff'
         this.isVideoBackgroundPoster = false
-
         this.showBackgroundSettingsSection('video')
       } else if (this.isVideoBackgroundPoster === true) {
-        this.addStyle('background-image', 'none')
-        this.addStyle('background-position', 'inherit')
-        this.addStyle('background-repeat', 'inherit')
-        this.addStyle('background-size', 'inherit')
-        this.addStyle('background-color', 'transparent')
-
         this.videoBackgroundPosterSource = data['src']
-
         this.addVideoBackground()
-
         this.imageBgSelected = false
         this.videoBgSelected = true
         this.backgroundColor = '#ffffff'
         this.isVideoBackgroundPoster = false
-
         this.showBackgroundSettingsSection('video')
       } else {
         this.videoBackgroundSources = []
-
         this.addStyle('background-image', 'url(' + data['src'] + ')')
         this.addStyle('background-position', DEFAULT_BACKGROUND_POSITION)
         this.addStyle('background-repeat', DEFAULT_BACKGROUND_REPEAT)
         this.addStyle('background-size', DEFAULT_BACKGROUND_SIZE)
-        this.addStyle('background-color', 'transparent')
-
         this.imageBgSelected = true
         this.videoBgSelected = false
-        this.backgroundColor = '#ffffff'
         this.isVideoBackgroundPoster = false
         this.videoBackgroundPosterSource = ''
-
         this.showBackgroundSettingsSection('image')
       }
     },
