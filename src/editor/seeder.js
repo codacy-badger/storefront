@@ -139,7 +139,6 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: true,
       removable: true,
       background: true,
       styles: {
@@ -148,7 +147,6 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
-        'height': ''
       }
     })
   )],
