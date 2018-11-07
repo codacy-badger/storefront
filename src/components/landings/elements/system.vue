@@ -23,6 +23,7 @@
               v-html="$sectionData.platforms[key].text.text"
               v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`}"
               :style="$sectionData.platforms[key].text.styles"
+              @click="selectPlatform(key)"
               >
               Enter your text
             </span>
@@ -92,6 +93,7 @@
 <script>
 import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
+import Seeder from '@editor/seeder'
 
 const Requirements = [
   { name: 'OS', min: types.Text, max: types.Text, visible: true },
@@ -102,6 +104,10 @@ const Requirements = [
   { name: 'Storage', min: types.Text, max: types.Text, visible: true },
   { name: 'Sound Card', min: types.Text, max: types.Text, visible: true }
 ]
+
+function mergeObjects (target, obj) {
+  return JSON.parse(JSON.stringify(Object.assign(Seeder.seed(target), obj)))
+}
 
 export default {
   name: 'System',
@@ -122,7 +128,7 @@ export default {
         element: types.Text,
         requirements: Requirements.slice(),
         button: types.Button,
-        text: types.Text,
+        text: mergeObjects(types.Text, { text: 'Windows' }),
         min: types.Text,
         rec: types.Text
       },
@@ -132,7 +138,7 @@ export default {
         element: types.Text,
         requirements: Requirements.slice(),
         button: types.Button,
-        text: types.Text,
+        text: mergeObjects(types.Text, { text: 'Apple' }),
         min: types.Text,
         rec: types.Text
       },
@@ -142,7 +148,7 @@ export default {
         element: types.Text,
         requirements: Requirements.slice(),
         button: types.Button,
-        text: types.Text,
+        text: mergeObjects(types.Text, { text: 'Linux' }),
         min: types.Text,
         rec: types.Text
       }
@@ -238,7 +244,7 @@ export default {
          display: block
      &__tab
        border: dotted transparent 0.1rem
-       padding: 0.5rem 1rem
+       padding: 0.5rem 2rem
        z-index: 0
        position: relative
        max-width: 20rem
@@ -254,14 +260,16 @@ export default {
          position: relative
          top: -0.1rem
          left: -0.2rem
-         fill: #fff
+         fill: #000
      &:hover, &_active
-       border: dotted #333 0.1rem
+       border: dotted #333 0.2rem
+       background: rgba(255, 255, 255, 0.8)
      &__btn
        position: absolute
-       top: -2rem
-       left: -2rem
+       top: -3rem
+       left: 50%
        z-index: 1
+       margin: 0 0 0 -1rem
 
 .b-system-requirements
   &__table
