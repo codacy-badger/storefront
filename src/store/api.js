@@ -28,6 +28,13 @@ export default {
             name: 'Products',
             sections: ['Products', 'ProductsExtend']
           }
+        },
+        {
+          slug: 'System',
+          theme: {
+            name: 'System',
+            sections: ['System']
+          }
         }
       ])
     })
