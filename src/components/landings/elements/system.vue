@@ -327,11 +327,16 @@ export default {
       padding: 1rem
       width: 38%
       text-align: center
+      position: relative
       &:nth-child(1)
         text-align: left
         width: 20%
       &-eye
         width: 3rem
+      &__btn
+       position: absolute
+       top: -0.5rem
+       right: -0.5rem
 
 .is-editable-show
   display: none
