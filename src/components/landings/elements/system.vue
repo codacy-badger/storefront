@@ -23,6 +23,7 @@
               v-html="$sectionData.platforms[key].text.text"
               v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`}"
               :style="$sectionData.platforms[key].text.styles"
+              @click="selectPlatform(key)"
               >
               Enter your text
             </span>
@@ -58,8 +59,11 @@
                 v-for="(v, index) in value.requirements" v-bind:key="index"
                 :class="{ 'b-system-requirements__table-row_opacity' : false === $sectionData.platforms[key].requirements[index].visible }"
                 >
-                <div class="b-system-requirements__table-col">
-                  {{ v.name }}
+                <div class="b-system-requirements__table-col"
+                  v-styler:for="{ el: $sectionData.platforms[key].requirements[index].text, path: `$sectionData.platforms[${key}].requirements[${index}].text`}"
+                  :style="$sectionData.platforms[key].requirements[index].text.styles"
+                  v-html="$sectionData.platforms[key].requirements[index].text.text"
+                  >
                 </div>
                 <div class="b-system-requirements__table-col"
                   v-styler:for="{ el: $sectionData.platforms[key].requirements[index].min, path: `$sectionData.platforms[${key}].requirements[${index}].min`}"
@@ -92,16 +96,51 @@
 <script>
 import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
+import Seeder from '@editor/seeder'
+import * as _ from 'lodash-es'
 
-const Requirements = [
-  { name: 'OS', min: types.Text, max: types.Text, visible: true },
-  { name: 'Processor', min: types.Text, max: types.Text, visible: true },
-  { name: 'Memory', min: types.Text, max: types.Text, visible: true },
-  { name: 'Graphics', min: types.Text, max: types.Text, visible: true },
-  { name: 'Direct X', min: types.Text, max: types.Text, visible: true },
-  { name: 'Storage', min: types.Text, max: types.Text, visible: true },
-  { name: 'Sound Card', min: types.Text, max: types.Text, visible: true }
-]
+const REQUIREMENTS = {
+  'OS': { text: types.Text, min: types.Text, max: types.Text, visible: true },
+  'Processor': { text: types.Text, min: types.Text, max: types.Text, visible: true },
+  'Memory': { text: types.Text, min: types.Text, max: types.Text, visible: true },
+  'Graphics': { text: types.Text, min: types.Text, max: types.Text, visible: true },
+  'Direct X': { text: types.Text, min: types.Text, max: types.Text, visible: true },
+  'Storage': { text: types.Text, min: types.Text, max: types.Text, visible: true },
+  'Sound Card': { text: types.Text, min: types.Text, max: types.Text, visible: true }
+}
+
+const REQUIREMENTS_CUSTOM = {
+  'OS': { text: { text: 'OS' } },
+  'Processor': { text: { text: 'Processor' } },
+  'Memory': { text: { text: 'Memory' } },
+  'Graphics': { text: { text: 'Graphics' } },
+  'Direct X': { text: { text: 'Direct X' } },
+  'Storage': { text: { text: 'Storage' } },
+  'Sound Card': { text: { text: 'Sound Card' } }
+}
+
+const PLATFORMS_CUSTOM = {
+  'windows': {
+    text: { text: 'Windows' },
+    requirements: _.merge({}, REQUIREMENTS_CUSTOM)
+  },
+  'apple': {
+    text: { text: 'Apple' },
+    requirements: _.merge({}, REQUIREMENTS_CUSTOM)
+  },
+  'linux': {
+    text: { text: 'Linux' },
+    requirements: _.merge({}, REQUIREMENTS_CUSTOM)
+  }
+}
+
+const SCHEMA_CUSTOM = {
+  h2: {
+    element: { text: 'System requirements' }
+  },
+  platforms: _.merge({}, PLATFORMS_CUSTOM),
+  edited: true
+}
 
 export default {
   name: 'System',
@@ -120,7 +159,7 @@ export default {
         name: 'Windows',
         visible: true,
         element: types.Text,
-        requirements: Requirements.slice(),
+        requirements: _.merge({}, REQUIREMENTS),
         button: types.Button,
         text: types.Text,
         min: types.Text,
@@ -130,7 +169,7 @@ export default {
         name: 'Apple',
         visible: true,
         element: types.Text,
-        requirements: Requirements.slice(),
+        requirements: _.merge({}, REQUIREMENTS),
         button: types.Button,
         text: types.Text,
         min: types.Text,
@@ -140,7 +179,7 @@ export default {
         name: 'Linux',
         visible: true,
         element: types.Text,
-        requirements: Requirements.slice(),
+        requirements: _.merge({}, REQUIREMENTS),
         button: types.Button,
         text: types.Text,
         min: types.Text,
@@ -177,6 +216,11 @@ export default {
       }
     }
   },
+  created () {
+    if (this.$sectionData['edited'] === undefined) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    }
+  },
   mounted () {
     this.selectPlatform('apple')
   }
@@ -194,6 +238,7 @@ export default {
   color: #000
   padding: 3rem 0 6rem
   height: 68rem
+  line-height: 1.4
   &.is-editable
     resize: vertical
     overflow: hidden
@@ -217,9 +262,11 @@ export default {
     text-align: center
     display: block
     width: 100%
+    height: auto
     &__text
       display: inline-block
       margin: 2rem 0
+      height: auto
   &-platforms
    justify-content: space-around
    padding: 2rem 0
@@ -238,7 +285,7 @@ export default {
          display: block
      &__tab
        border: dotted transparent 0.1rem
-       padding: 0.5rem 1rem
+       padding: 0.5rem 2rem
        z-index: 0
        position: relative
        max-width: 20rem
@@ -254,14 +301,16 @@ export default {
          position: relative
          top: -0.1rem
          left: -0.2rem
-         fill: #fff
+         fill: #000
      &:hover, &_active
-       border: dotted #333 0.1rem
+       border: dotted #333 0.2rem
+       background: rgba(255, 255, 255, 0.8)
      &__btn
        position: absolute
-       top: -2rem
-       left: -2rem
+       top: -3rem
+       left: 50%
        z-index: 1
+       margin: 0 0 0 -1rem
 
 .b-system-requirements
   &__table

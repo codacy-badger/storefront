@@ -18,9 +18,15 @@
           </div>
         </div>
       </div>
-      <div gallery-two-popup="" class="l-popup l-popup_on" v-show="true === $sectionData.isShowPopup" @click.prevent="closePopup">
+      <div gallery-two-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
         <div gallery-two-popup-padd="" class="l-popup__padd" v-bind:style="$sectionData.popupStyles">
           <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
+          <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
+            <VuseIcon class="vuse-icon" name="arrowLeft"></VuseIcon>
+          </div>
+          <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.images.length - 1">
+            <VuseIcon class="vuse-icon" name="arrowRight"></VuseIcon>
+          </div>
           <div gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
         </div>
       </div>
@@ -29,9 +35,13 @@
 
 <script>
 import * as types from '@editor/types'
+import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
   name: 'Gallery2',
+  components: {
+    VuseIcon
+  },
   cover: '/img/covers/gallery2.png',
   group: 'galleries',
   $schema: {
@@ -85,6 +95,10 @@ export default {
       }
       this.$sectionData.content = c
       this.openPopup(this.$sectionData.content)
+      this.setIndex(index)
+    },
+    setIndex (index) {
+      this.$sectionData.index = index
     },
     openPopup () {
       setTimeout(() => {
@@ -119,6 +133,21 @@ export default {
         return matches[1]
       }
       return false
+    },
+    clickArr (type) {
+      let index = this.$sectionData.index
+      let num = null
+      let el = null
+
+      if (type === 'prev') {
+        num = index - 1
+      } else {
+        num = index + 1
+      }
+
+      el = this.$sectionData.images[num]
+
+      this.onClick(el, num)
     }
   }
 }
@@ -186,7 +215,6 @@ export default {
   text-align: center
   -webkit-transition: 200ms opacity
   transition: 200ms opacity
-  pointer-events: none
   color: #000
   z-index: 100
 .b-gallery-two__img
@@ -231,7 +259,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.8)
   z-index: 99999
   cursor: pointer
-  &_on
+  &_flex
     display: -webkit-box
     display: -ms-flexbox
     display: flex
@@ -259,17 +287,16 @@ export default {
     width: 70%
   &__close
     position: absolute
-    top: 10px
-    right: 10px
-    width: 50px
-    height: 50px
-    pointer-events: none
+    top: 1rem
+    right: 1rem
+    width: 5rem
+    height: 5rem
   &__close:before,   &__close:after
     content: ''
     position: absolute
-    top: 23px
-    width: 50px
-    height: 3px
+    top: 2.3rem
+    width: 5rem
+    height: 0.3rem
     background-color: #fcff00
   &__close:before
     -webkit-transform: rotate(-45deg)
@@ -277,4 +304,25 @@ export default {
   &__close:after
     -webkit-transform: rotate(45deg)
     transform: rotate(45deg)
+  &__arr
+    position: absolute
+    top: 50%
+    width: 5rem
+    height: 5rem
+    margin: -2.5rem 0 0
+    transition: all 200ms
+    .is-tablet &,
+    .is-mobile &
+       top: 90%
+    @media only screen and (max-width: 460px)
+      &
+        top: 95%
+    & .vuse-icon
+      width: 5rem
+      height: 5rem
+      fill: #fcff00
+    &_prev
+      left: 0.5rem
+    &_next
+      right: 0.5rem
 </style>

@@ -19,7 +19,7 @@ export default {
           slug: 'Landing2',
           theme: {
             name: 'Layout 2',
-            sections: ['Logo', 'Title1', 'Description', 'Button', 'Available', 'Delimiter', 'Gallery2', 'Delimiter', 'Title1', 'Description', 'Picture', 'Description', 'Delimiter', 'Gallery3', 'Delimiter', 'System', 'Logo', 'Button', 'Title1', 'Social', 'Logo', 'Restrictions']
+            sections: ['Logo', 'Slogan', 'Description', 'Button', 'Available', 'Delimiter', 'Gallery2', 'Delimiter', 'Title1', 'Description', 'Picture', 'Description', 'Delimiter', 'Gallery3', 'Delimiter', 'System', 'Logo', 'Button', 'Title1', 'Social', 'Logo', 'Restrictions']
           }
         },
         {
@@ -27,6 +27,13 @@ export default {
           theme: {
             name: 'Products',
             sections: ['Products', 'ProductsExtend']
+          }
+        },
+        {
+          slug: 'System',
+          theme: {
+            name: 'System',
+            sections: ['System']
           }
         }
       ])
