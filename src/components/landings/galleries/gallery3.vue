@@ -4,13 +4,13 @@
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"
                v-for="(item, index) in $sectionData.images" :key="index"
-               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
+               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'galleryItem'}"
                :data-index="index"
                :style="$sectionData.images[index].preview.styles"
             >
             <div class="b-gallery-three-block__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
-                 v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
+                 v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
                  v-bind:style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
               >
@@ -18,7 +18,7 @@
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
-                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title` }"
+                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'text' }"
                 v-html="$sectionData.images[index].title.text"
                 :style="$sectionData.images[index].title.styles"
                 >
@@ -31,11 +31,11 @@
           <div gallery-three-popup-padd="" v-bind:style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
               <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
               <div class="l-popup__logos">
-                  <div v-for="(logo, index) in $sectionData.logos" v-bind:class="{'is-editable': $builder.isEditing}" :key="index" class="b-logo">
-                    <uploader class="b-logo__img" :path="`$sectionData.logos[${index}].element`"
-                      v-styler:for="{ el: $sectionData.logos[index].element, path: `$sectionData.logos[${index}].element` }"
-                      :style="$sectionData.logos[index].element.styles"
-                      ></uploader>
+                  <div class="b-logo" v-for="(logo, index) in $sectionData.logos"
+                    v-bind:class="{'is-editable': $builder.isEditing}" :key="index"
+                    v-styler:for="{ el: $sectionData.logos[index].element, path: `$sectionData.logos[${index}].element`, type: 'image' }"
+                    :style="$sectionData.logos[index].element.styles"
+                    >
                   </div>
               </div>
               <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
@@ -183,7 +183,6 @@ export default {
     @media only screen and (max-width: 460px)
       &
         margin-right: 0
-
     &__item
       width: 20rem
       min-width: 10rem
@@ -216,10 +215,8 @@ export default {
         &
           width: 100%
           padding: 0 0 2rem 0
-
       &-wrap:hover &-content
         background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
-
       &-title
         font-size: 1.6rem
         line-height: 1.4
@@ -229,7 +226,6 @@ export default {
         &::selection, & ::selection
           color: #ff0
           background: #000
-
       &-link
         position: absolute
         display: block
@@ -254,7 +250,6 @@ export default {
           margin: -5rem 0 0 -5rem
         &:hover
           transform: scale(1.2) rotate(-120deg)
-
   &-btn-container
     text-align: center
     position: relative
@@ -302,7 +297,7 @@ export default {
   width: 100%
   height: 100%
   background-color: rgba(0, 0, 0, 0.8)
-  z-index: 199
+  z-index: 99999
   cursor: pointer
   &_flex
     display: -webkit-box
@@ -348,5 +343,22 @@ export default {
 .l-popup__close:after
   -webkit-transform: rotate(45deg)
   transform: rotate(45deg)
+
+.b-logo
+  display: inline-block
+  margin: 1rem auto
+  text-align: center
+  width: 20rem
+  height: 20rem
+  .is-editable &
+    resize: both
+    overflow: hidden
+  .is-mobile &
+    margin: 1rem auto
+    height: auto
+  @media only screen and (max-width: 540px)
+    &
+      margin: 1rem auto
+      height: auto
 
 </style>

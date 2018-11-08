@@ -202,7 +202,6 @@ export default {
     },
     addBlock (index, indexB) {
       let newBlock = _.merge({}, Seeder.seed(BLOCK))
-      console.log(newBlock)
       this.$sectionData.products[index].blocks.push(newBlock)
     }
   }

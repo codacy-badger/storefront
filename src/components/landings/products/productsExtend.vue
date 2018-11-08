@@ -6,27 +6,27 @@
             <div class="b-products-list__item b-products-list__item_mini flex flex_columns"
                  v-for="(item, index) in $sectionData.products"
                  :key="index"
-                 v-styler:product="{el: $sectionData.products[index].mini.el, path: `$sectionData.products[${index}].mini.el`}"
+                 v-styler:product="{el: $sectionData.products[index].mini.el, path: `$sectionData.products[${index}].mini.el`, type: 'product'}"
                  :style="$sectionData.products[index].mini.el.styles"
                  :data-index="index"
                  :product-extend-preview="'b-products-list__item_active'"
               >
               <div class="b-products-list__item-label" contenteditable="true"
-                   v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label` }"
+                   v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label`, type: 'product' }"
                    v-html="$sectionData.products[index].mini.label.text"
                    :style="$sectionData.products[index].mini.label.styles"
                    v-bind:class="$sectionData.products[index].mini.label.classes"
                 >
               </div>
               <div class="b-products-list__item-image b-products-list__item-image_mini"
-                   v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview`}"
+                   v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview` }"
                    :style="$sectionData.products[index].mini.preview.styles"
                 >
               </div>
               <div class="b-products-list__item-wrap">
                 <div>
                   <div class="b-products-list__item-cost" contenteditable="true"
-                        v-styler:for="{ el: $sectionData.products[index].mini.cost, path:`$sectionData.products[${index}].mini.cost` }"
+                        v-styler:for="{ el: $sectionData.products[index].mini.cost, path:`$sectionData.products[${index}].mini.cost`, type: 'text' }"
                         v-html="$sectionData.products[index].mini.cost.text"
                         :style="$sectionData.products[index].mini.cost.styles"
                     >
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                   <span class="b-products-list__item-name b-products-list__item-name_mini" contenteditable="true"
-                    v-styler:for="{ el: $sectionData.products[index].mini.name, path:`$sectionData.products[${index}].mini.name` }"
+                    v-styler:for="{ el: $sectionData.products[index].mini.name, path:`$sectionData.products[${index}].mini.name`, type: 'text' }"
                     v-html="$sectionData.products[index].mini.name.text"
                     :style="$sectionData.products[index].mini.name.styles"
                     >
@@ -42,7 +42,7 @@
                 </div>
                 <div>
                   <span class="b-products-list__item-title b-products-list__item-title_mini" contenteditable="true"
-                        v-styler:for="{ el: $sectionData.products[index].mini.title, path:`$sectionData.products[${index}].mini.title` }"
+                        v-styler:for="{ el: $sectionData.products[index].mini.title, path:`$sectionData.products[${index}].mini.title`, type: 'text' }"
                         v-html="$sectionData.products[index].mini.title.text"
                         :style="$sectionData.products[index].mini.title.styles"
                     >
@@ -57,12 +57,12 @@
             <div class="b-products-list__item b-products-list__item_mobile flex flex_columns"
                  v-for="(item, index) in $sectionData.products"
                  :key="index"
-                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
+                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`, type: 'product' }"
                  :style="$sectionData.products[index].el.styles"
                  :product-extend-stage="index"
               >
               <div contenteditable="true" class="b-products-list__item-label"
-                   v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label` }"
+                   v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label`, type: 'text' }"
                    v-html="$sectionData.products[index].label.text"
                    :style="$sectionData.products[index].label.styles"
                    v-bind:class="$sectionData.products[index].label.classes"
@@ -72,7 +72,7 @@
                 <div class="b-products-list__item-header-col">
                   <div>
                     <span class="b-products-list__item-name" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name` }"
+                      v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name`, type: 'text' }"
                       v-html="$sectionData.products[index].name.text"
                       :style="$sectionData.products[index].name.styles"
                       >
@@ -80,7 +80,7 @@
                   </div>
                   <div>
                     <span class="b-products-list__item-title" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title` }"
+                      v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title`, type: 'text' }"
                       v-html="$sectionData.products[index].title.text"
                       :style="$sectionData.products[index].title.styles"
                       >
@@ -88,7 +88,7 @@
                   </div>
                   <div>
                     <span class="b-products-list__item-button" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button` }"
+                      v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button`, type: 'button' }"
                       v-html="$sectionData.products[index].button.text"
                       @click.prevent="openLink(item)" :target="$sectionData.products[index].button.target"
                       :style="$sectionData.products[index].button.styles"
@@ -112,7 +112,7 @@
                       <div class="b-products-list__item-row flex flex_center">
                           <div class="b-products-list__item-col b-products-list__item-col_text">
                             <div class="b-products-list__item-row-chapter" contenteditable="true"
-                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
+                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter`, type: 'text' }"
                               v-html="$sectionData.products[index].blocks[indexB].chapter.text"
                               :style="$sectionData.products[index].blocks[indexB].chapter.styles"
                               >
@@ -135,7 +135,7 @@
                         <div class="b-products-list__item-col b-products-list__item-col_icon">
                           <div class="b-products-list__item-col-icon">
                               <button class="b-products-list__item-col-icon-btn controller-button is-green" contenteditable="true"
-                                v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type` }"
+                                v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type`, type: 'icon' }"
                                 :style="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.styles"
                                 v-bind:class="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.classes"
                                 >
@@ -150,7 +150,7 @@
                         </div>
                         <div class="b-products-list__item-col b-products-list__item-col_text">
                           <div contenteditable="true" class=""
-                            v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text` }"
+                            v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text`, type: 'text' }"
                             v-html="$sectionData.products[index].blocks[indexB].rows[indexR].text.text"
                             :style="$sectionData.products[index].blocks[indexB].rows[indexR].text.styles"
                            >

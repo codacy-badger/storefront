@@ -7,14 +7,14 @@
               :key="index"
             >
             <div class="b-preview__image"
-              v-styler:galleryItem="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview` }"
+              v-styler:galleryItem="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'galleryItem' }"
               :style="$sectionData.images[index].preview.styles"
               :data-index="index"
               :gallery-one-preview="'loader__content_show'"
               >
             </div>
             <div class="b-preview__name"
-              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label` }"
+              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
               v-html="$sectionData.images[index].label.text"
               :style="$sectionData.images[index].label.styles"
               >
@@ -26,16 +26,17 @@
             <h2 class="b-gallery-one-stage__name"
                v-html="$sectionData.images[index].title.text"
                :style="$sectionData.images[index].title.styles"
-               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`} ">
+               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'text' }">
             </h2>
             <!-- image -->
             <div class="b-gallery-one-stage__img"
               :style="$sectionData.images[index].img.styles"
-              v-styler:for="{ el: $sectionData.images[index].img, path:`$sectionData.images[${index}].img`} "
-            />
+              v-styler:for="{ el: $sectionData.images[index].img, path:`$sectionData.images[${index}].img`, type: 'image' }"
+              >
+            </div>
             <!--/image -->
             <p class="b-gallery-one-stage__bio"
-             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`}"
+             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`, type: 'text' }"
              :style="$sectionData.images[index].text.styles"
              v-html="$sectionData.images[index].text.text">
             </p>

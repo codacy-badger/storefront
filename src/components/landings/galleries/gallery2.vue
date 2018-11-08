@@ -4,13 +4,13 @@
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"
             v-for="(item, index) in $sectionData.images"
-            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
+            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'galleryItem'}"
             :data-index="index"
             :key="index"
             :style="$sectionData.images[index].preview.styles"
           >
             <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
-               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
+               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
               >
