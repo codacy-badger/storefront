@@ -95,6 +95,7 @@ export function cleanDOM (artboard) {
   const editables = Array.from(artboard.querySelectorAll('.is-editable'))
   const uploaders = Array.from(artboard.querySelectorAll('.uploader'))
   const stylers = Array.from(artboard.querySelectorAll('.styler'))
+  const controls = Array.from(artboard.querySelectorAll('.ptah-control'))
 
   editables.forEach((el) => {
     el.contentEditable = 'inherit'
@@ -110,6 +111,9 @@ export function cleanDOM (artboard) {
   })
   stylers.forEach((styler) => {
     styler.remove()
+  })
+  controls.forEach((control) => {
+    control.remove()
   })
 }
 

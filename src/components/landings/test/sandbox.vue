@@ -1,9 +1,9 @@
 <template>
   <section class="slot">
-      <button class="slot__tune" :class="{'active': showSettings}" @click.prevent="showList">
+      <button class="slot__tune ptah-control" :class="{'active': showSettings}" @click.prevent="showList">
         <img src="https://gn337.cdn.stg.gamenet.ru/0/79ndM/o_DXxZz.svg" alt="">
       </button>
-      <div class="slot__align" v-if="showSettings">
+      <div class="slot__align ptah-control" v-if="showSettings">
         <div>Horizontal</div>
         <ul class="slot__list">
           <li>

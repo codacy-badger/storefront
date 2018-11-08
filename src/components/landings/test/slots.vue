@@ -23,7 +23,6 @@
 
 <script>
 import * as types from '@editor/types'
-// import Sortable from 'sortablejs'
 
 export default {
   name: 'Bob',
@@ -42,12 +41,8 @@ export default {
 
   }),
   mounted () {
-    /* Sortable.create(this.$refs.sandbox.$el, {
-      draggable: '.ptah-sort',
-      onUpdate (evt) {
-        this.$section.data.components.sort(evt.oldIndex, evt.newIndex)
-      }
-    }) */
+  },
+  updated () {
   },
   methods: {
     onAddElement (element) {

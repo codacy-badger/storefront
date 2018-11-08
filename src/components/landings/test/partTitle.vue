@@ -1,5 +1,5 @@
 <template>
-  <h1 class="ptah-sort">Title</h1>
+  <h1>Title</h1>
 </template>
 
 <style lang="sass">

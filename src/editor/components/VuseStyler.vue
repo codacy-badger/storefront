@@ -2,6 +2,17 @@
   <div class="styler is-editable" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
+      <!-- sort -->
+      <li v-if="isArrayEl">
+        <button class="styler-button" @click="sort('up')" title="Up" style="transform: rotate(180deg)">
+          <VuseIcon name="arrowDown"></VuseIcon>
+        </button>
+      </li>
+      <li v-if="isArrayEl">
+        <button class="styler-button" @click="sort('down')" title="Down">
+          <VuseIcon name="arrowDown"></VuseIcon>
+        </button>
+      </li>
       <!-- aligned -->
       <li v-if="options.aligned">
         <button class="styler-button" @click="updateOption('align')" title="Text align">
@@ -430,6 +441,10 @@ export default {
         width: this.dimensions.width.toFixed(0),
         height: this.dimensions.height.toFixed(0)
       }
+    },
+    isArrayEl () {
+      if (this.type === 'section' || this.type === 'header') return false
+      return this.name.indexOf('[') > 0
     }
   },
   watch: {
@@ -491,12 +506,15 @@ export default {
         this.animation = _.find(this.animationList, ['className', name])
       }
     })
-  },
-  updated () {
+
     if (this.options.resizable) {
       this.resizer = document.createElement('div')
       this.resizer.className = 'ptah-resizer'
       this.el.appendChild(this.resizer)
+    }
+  },
+  updated () {
+    if (this.options.resizable) {
       this.resizer.addEventListener('mousedown', this.initResize, false)
       // listen resize event, add params to element
       let handler = (e) => {
@@ -517,6 +535,28 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
+    sort (direction) {
+      let path = _.split(this.name, '.')[1] // find path to element
+      path = _.toPath(path)
+      let container = path[0]
+      let index = parseInt(path[1])
+      let newIndex = null
+
+      if (direction === 'up') {
+        newIndex = index - 1
+      } else {
+        newIndex = index + 1
+      }
+
+      const correctArr = function (_arr, _param) {
+        _arr[_param[1]] = _arr.splice(_param[0], 1, _arr[_param[1]])[0]
+      }
+
+      if (newIndex >= 0 && newIndex < this.section.data[container].length) {
+        correctArr(this.section.data[container], [index, newIndex])
+        correctArr(this.section.schema[container], [index, newIndex])
+      }
+    },
     initResize (e) {
       this.resizer.contentEditable = 'false'
       window.addEventListener('mousemove', this.resize, false)

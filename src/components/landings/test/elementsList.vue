@@ -1,9 +1,9 @@
 <template>
-  <div class="ptah-elements">
-    <button class="ptah-elements__show-list" @click="openList" :class="{'active': showList}">
+  <div class="ptah-elements is-editable">
+    <button class="ptah-elements__show-list ptah-control" @click="openList" :class="{'active': showList}">
       <img src="https://gn423.cdn.stg.gamenet.ru/0/79nas/o_1mRf76.svg" alt="">
     </button>
-    <aside class="ptah-elements__list" v-if="showList">
+    <aside class="ptah-elements__list ptah-control" v-if="showList">
       <ul>
         <li><a href="#" @click.prevent="addButton" class="ptah-elements__button">Add button</a></li>
         <li><a href="#" @click.prevent="addTitle" class="ptah-elements__button">Add title</a></li>
