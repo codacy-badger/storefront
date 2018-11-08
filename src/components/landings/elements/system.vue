@@ -1,5 +1,5 @@
 <template>
-  <section class="l-system flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-system flex" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
     <div class="b-system">
       <div>
         <h2 class="b-system-chapter">
@@ -237,14 +237,12 @@ export default {
   background-size: cover
   color: #000
   padding: 3rem 0 6rem
-  height: 68rem
+  min-height: 68rem
   line-height: 1.4
-  &.is-editable
-    resize: vertical
-    overflow: hidden
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     padding: 2rem 0
+    height: auto !important
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
