@@ -16,6 +16,7 @@
                  :href="$sectionData.components[index].element.href"
                  v-html="$sectionData.components[index].element.text"
                  v-bind:style="$sectionData.components[index].element.styles"
+                 v-bind:class="$sectionData.components[index].element.classes"
                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element` }"></component>
     </sandbox>
   </section>

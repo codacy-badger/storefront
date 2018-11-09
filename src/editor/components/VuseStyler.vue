@@ -3,12 +3,12 @@
        @click.stop="">
     <ul class="styler-list">
       <!-- sort -->
-      <li v-if="isArrayEl">
+      <li v-if="isArrayEl && !isFirstInArray">
         <button class="styler-button" @click="sort('up')" title="Up" style="transform: rotate(180deg)">
           <VuseIcon name="arrowDown"></VuseIcon>
         </button>
       </li>
-      <li v-if="isArrayEl">
+      <li v-if="isArrayEl && !isLastInArray">
         <button class="styler-button" @click="sort('down')" title="Down">
           <VuseIcon name="arrowDown"></VuseIcon>
         </button>
@@ -109,6 +109,12 @@
       </li>
 
       <!-- dimensions -->
+      <li v-if="options.resizable">
+        <button class="styler-button" @click="updateOption('size')" title="Delete">
+          <VuseIcon name="cog" class="vuse-icon"></VuseIcon>
+        </button>
+      </li>
+
       <li v-if="options.resizable" class="styler-list__dimensions">
         <span v-text="dmsToFixed.width"></span> x <span v-text="dmsToFixed.height"></span>
       </li>
@@ -308,6 +314,16 @@
         </div>
       </li>
 
+      <li v-if="currentOption === 'size'">
+        <form @change="changeSize" class="b-styler__dimentions">
+          <div class="b-styler__dimentions--edit">
+            w: <input data-type="w" type="number" v-model="dimensions.width">
+            h: <input data-type="h" type="number" v-model="dimensions.height">
+          </div>
+          <input type="checkbox" v-model="keepProportions" id="keepProp"> <label for="keepProp">Keep proportions</label>
+        </form>
+      </li>
+
     </ul><!--/.styler-list-->
   </div>
 </template>
@@ -325,7 +341,6 @@ import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
 import * as _ from 'lodash-es'
-import ResizeObserver from 'resize-observer-polyfill'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
@@ -423,6 +438,8 @@ export default {
       width: null,
       height: null
     },
+    proportions: null,
+    keepProportions: true,
     showPseudoBg: false,
     pseudoStyles: {},
     animation: { name: 'none', className: '' },
@@ -437,14 +454,26 @@ export default {
   }),
   computed: {
     dmsToFixed () {
+      console.log(this.dimensions.width)
       return {
-        width: this.dimensions.width.toFixed(0),
-        height: this.dimensions.height.toFixed(0)
+        width: parseInt(this.dimensions.width).toFixed(0),
+        height: parseInt(this.dimensions.height).toFixed(0)
       }
+    },
+    // find path to element
+    path () {
+      let path = _.split(this.name, '.')[1]
+      return _.toPath(path)
     },
     isArrayEl () {
       if (this.type === 'section' || this.type === 'header') return false
       return this.name.indexOf('[') > 0
+    },
+    isFirstInArray () {
+      return parseInt(this.path[1]) === 0
+    },
+    isLastInArray () {
+      return (parseInt(this.path[1]) + 1) === this.section.data[this.path[0]].length
     }
   },
   watch: {
@@ -507,25 +536,9 @@ export default {
       }
     })
 
-    if (this.options.resizable) {
-      this.resizer = document.createElement('div')
-      this.resizer.className = 'ptah-resizer'
-      this.el.appendChild(this.resizer)
-    }
+    this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
   updated () {
-    if (this.options.resizable) {
-      this.resizer.addEventListener('mousedown', this.initResize, false)
-      // listen resize event, add params to element
-      let handler = (e) => {
-        this.dimensions.width = e[0].contentRect.width
-        this.dimensions.height = e[0].contentRect.height
-      }
-
-      let ro = new ResizeObserver(handler)
-      ro.observe(this.el)
-    }
-    // this.setInitialValue()
   },
   beforeDestroy () {
     this.hideStyler()
@@ -535,11 +548,21 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
+    changeSize (e) {
+      if (this.keepProportions) {
+        if (e.target.dataset.type === 'w') {
+          this.dimensions.height = this.dimensions.width / this.proportions
+        } else {
+          this.dimensions.width = this.dimensions.height * this.proportions
+        }
+      }
+
+      this.addStyle('width', this.dimensions.width + 'px')
+      this.addStyle('height', this.dimensions.height + 'px')
+    },
     sort (direction) {
-      let path = _.split(this.name, '.')[1] // find path to element
-      path = _.toPath(path)
-      let container = path[0]
-      let index = parseInt(path[1])
+      let container = this.path[0]
+      let index = parseInt(this.path[1])
       let newIndex = null
 
       if (direction === 'up') {
@@ -556,23 +579,6 @@ export default {
         correctArr(this.section.data[container], [index, newIndex])
         correctArr(this.section.schema[container], [index, newIndex])
       }
-    },
-    initResize (e) {
-      this.resizer.contentEditable = 'false'
-      window.addEventListener('mousemove', this.resize, false)
-      window.addEventListener('mouseup', this.stopResize, false)
-    },
-    resize (e) {
-      this.el.contentEditable = 'false'
-      this.resizer.contentEditable = 'false'
-      let rect = this.el.getBoundingClientRect()
-      this.addStyle('width', (e.clientX - rect.left) + 'px')
-      this.addStyle('height', (e.clientY - rect.top) + 'px')
-    },
-    stopResize (e) {
-      this.el.contentEditable = 'true'
-      window.removeEventListener('mousemove', this.resize, false)
-      window.removeEventListener('mouseup', this.stopResize, false)
     },
     setInitialValue () {
       if (this.type === 'button') {
@@ -1151,15 +1157,32 @@ label
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
 
-.b-styler__bg_options_container
-  margin-top: 10px
-  padding: 15px 5px
-  border-top: 1px solid #ffffff
-  display: flex
-  flex-direction: column
-
-.b-styler__bg_options__item
-  margin-bottom: 0.2rem
+.b-styler
+  &__bg_options_container
+    margin-top: 10px
+    padding: 15px 5px
+    border-top: 1px solid #ffffff
+    display: flex
+    flex-direction: column
+  &__bg_options__item
+    margin-bottom: 0.2rem
+  &__dimentions
+    &--edit
+      display: flex
+      align-items: center
+      margin-bottom: 8px
+      margin-top: 5px
+      border-top: 1px solid #fff
+      padding-top: 10px
+    input[type="number"]
+      width: 70px
+      padding: 5px
+      border-radius: 3px
+      margin: 0 10px 0 3px
+    input[type="checkbox"]
+      margin: 0 4px 0 0
+      position: relative
+      top: -1px
 
 .b-font-size
   font-family: Helvetica Neue, Helvetica, Arial
