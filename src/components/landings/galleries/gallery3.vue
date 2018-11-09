@@ -55,6 +55,13 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
+
+const GALLERY_ITEM = {
+  preview: types.Image,
+  label: types.Text,
+  button: types.Button
+}
 
 export default {
   name: 'Gallery3',
@@ -64,22 +71,13 @@ export default {
     mainStyle: types.StyleObject,
     button: types.Button,
     images: [
-      {
-        preview: types.Image,
-        title: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        title: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        title: types.Text,
-        button: types.Button
-      }
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM)
     ],
+    defObj: {
+      images: _.merge({}, GALLERY_ITEM)
+    },
     logos: [
       {
         element: types.Logo

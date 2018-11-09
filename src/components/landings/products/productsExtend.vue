@@ -12,14 +12,14 @@
                  :product-extend-preview="'b-products-list__item_active'"
               >
               <div class="b-products-list__item-label" contenteditable="true"
-                   v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label`, type: 'product' }"
+                   v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label`, type: 'text' }"
                    v-html="$sectionData.products[index].mini.label.text"
                    :style="$sectionData.products[index].mini.label.styles"
                    v-bind:class="$sectionData.products[index].mini.label.classes"
                 >
               </div>
               <div class="b-products-list__item-image b-products-list__item-image_mini"
-                   v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview` }"
+                   v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview`, type: 'image'}"
                    :style="$sectionData.products[index].mini.preview.styles"
                 >
               </div>
@@ -57,7 +57,7 @@
             <div class="b-products-list__item b-products-list__item_mobile flex flex_columns"
                  v-for="(item, index) in $sectionData.products"
                  :key="index"
-                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`, type: 'product' }"
+                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`, type: 'product'}"
                  :style="$sectionData.products[index].el.styles"
                  :product-extend-stage="index"
               >
@@ -88,7 +88,7 @@
                   </div>
                   <div>
                     <span class="b-products-list__item-button" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button`, type: 'button' }"
+                      v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button`, type: 'text' }"
                       v-html="$sectionData.products[index].button.text"
                       @click.prevent="openLink(item)" :target="$sectionData.products[index].button.target"
                       :style="$sectionData.products[index].button.styles"
@@ -100,7 +100,7 @@
                 </div>
                 <div class="b-products-list__item-header-col">
                   <div class="b-products-list__item-image"
-                     v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`}"
+                     v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`, type: 'image'}"
                      :style="$sectionData.products[index].preview.styles"
                     >
                   </div>
@@ -183,11 +183,48 @@
 import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
 import { productExtendPreviewClick } from '@cscripts/productExtend'
+import Seeder from '@editor/seeder'
+import * as _ from 'lodash-es'
 
-const Icons = [
+const ICONS = [
   { value: 'plus' },
   { value: 'close' }
 ]
+
+const ROW = {
+  icon: { value: 'plus', type: types.Icon }, text: types.Text, options: ICONS.slice()
+}
+
+const BLOCK = {
+  chapter: types.Text,
+  rows: [
+    _.merge({}, ROW),
+    _.merge({}, ROW)
+  ]
+}
+
+const PRODUCT = {
+  el: types.Product,
+  visible: true,
+  preview: types.ImageNoResize,
+  label: types.Label,
+  name: types.Text,
+  title: types.Text,
+  button: types.Button,
+  blocks: [
+    _.merge({}, BLOCK),
+    _.merge({}, BLOCK)
+  ],
+  mini: {
+    el: types.Product,
+    visible: true,
+    preview: types.ImageNoResize,
+    label: types.Label,
+    name: types.Text,
+    title: types.Text,
+    cost: types.Cost
+  }
+}
 
 export default {
   name: 'ProductsExtend',
@@ -199,41 +236,12 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     products: [
-      {
-        el: types.StyleObject,
-        visible: true,
-        preview: types.ImageNoResize,
-        label: types.Label,
-        name: types.Text,
-        title: types.Text,
-        button: types.Button,
-        blocks: [
-          {
-            chapter: types.Text,
-            rows: [
-              { id: 'row10', icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() },
-              { id: 'row11', icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() }
-            ]
-          },
-          {
-            chapter: types.Text,
-            rows: [
-              { id: 'row20', icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() },
-              { id: 'row21', icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() }
-            ]
-          }
-        ],
-        mini: {
-          el: types.Product,
-          visible: true,
-          preview: types.ImageNoResize,
-          label: types.Label,
-          name: types.Text,
-          title: types.Text,
-          cost: types.Cost
-        }
-      }
-    ]
+      _.merge({}, PRODUCT),
+      _.merge({}, PRODUCT)
+    ],
+    defObj: {
+      products: _.merge({}, PRODUCT)
+    }
   },
   props: {
     id: {
@@ -267,17 +275,15 @@ export default {
       this.$sectionData.products[index].blocks[indexB].rows.splice(indexR, 1)
     },
     addRow (index, indexB, indexR) {
-      let obj = this.$sectionData.products[index].blocks[indexB].rows[indexR]
-      let newObj = JSON.parse(JSON.stringify(obj))
-      this.$sectionData.products[index].blocks[indexB].rows.push(newObj)
+      let newRow = Seeder.seed(_.merge({}, ROW))
+      this.$sectionData.products[index].blocks[indexB].rows.push(newRow)
     },
     deleteBlock (index, indexB) {
       this.$sectionData.products[index].blocks.splice(indexB, 1)
     },
     addBlock (index, indexB) {
-      let obj = this.$sectionData.products[index].blocks[indexB]
-      let newObj = JSON.parse(JSON.stringify(obj))
-      this.$sectionData.products[index].blocks.push(newObj)
+      let newBlock = _.merge({}, Seeder.seed(BLOCK))
+      this.$sectionData.products[index].blocks.push(newBlock)
     },
     bindingProductExtendPreviewClick (index) {
       productExtendPreviewClick(index)

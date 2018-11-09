@@ -35,7 +35,14 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
+
+const GALLERY_ITEM = {
+  preview: types.Image,
+  label: types.Text,
+  button: types.Button
+}
 
 export default {
   name: 'Gallery2',
@@ -52,22 +59,13 @@ export default {
       type: types.Text
     },
     images: [
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      }
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM)
     ],
+    defObj: {
+      images: _.merge({}, GALLERY_ITEM)
+    },
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },

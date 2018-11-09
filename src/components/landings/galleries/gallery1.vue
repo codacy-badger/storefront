@@ -49,7 +49,16 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
 import { galleryPreviewClick } from '@cscripts/gallery1'
+
+const GALLERY_ITEM = {
+  preview: types.GalleryItem,
+  label: types.Text,
+  title: types.Text,
+  img: types.Image,
+  text: types.Text
+}
 
 export default {
   name: 'Gallery1',
@@ -58,28 +67,13 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     images: [
-      {
-        preview: types.GalleryItem,
-        label: types.Text,
-        title: types.Text,
-        img: types.Image,
-        text: types.Text
-      },
-      {
-        preview: types.GalleryItem,
-        label: types.Text,
-        title: types.Text,
-        img: types.Image,
-        text: types.Text
-      },
-      {
-        preview: types.GalleryItem,
-        label: types.Text,
-        title: types.Text,
-        img: types.Image,
-        text: types.Text
-      }
-    ]
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM)
+    ],
+    defObj: {
+      images: _.merge({}, GALLERY_ITEM)
+    }
   },
   props: {
     id: {

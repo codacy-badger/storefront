@@ -168,7 +168,10 @@ export default {
     products: [
       _.merge({}, PRODUCT),
       _.merge({}, PRODUCT)
-    ]
+    ],
+    defObj: {
+      products: _.merge({}, PRODUCT)
+    }
   },
   props: {
     id: {

@@ -25,10 +25,8 @@ function installStyler ({ builder, Vue }) {
         name = binding.expression
       }
 
-
       if (binding.value.type !== undefined) {
         type = binding.value.type
-        console.log(type)
       }
 
       section.stylers.push(new StylerInstance({
