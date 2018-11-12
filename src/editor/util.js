@@ -164,3 +164,12 @@ export function gtagSetup (tag) {
           </script>
           `
 }
+
+/**
+ * Swap array elements
+ * @param _arr
+ * @param _param {Array} - [index, newIndex]
+ */
+export function correctArray (_arr, _param) {
+  _arr[_param[1]] = _arr.splice(_param[0], 1, _arr[_param[1]])[0]
+}

@@ -81,12 +81,12 @@ export default {
       width: 110px
       position: absolute
       z-index: 20
-      right: -110px
+      right: 30px
       top: 0px
       background: $color-form-text
       color: #fff
       padding: 10px 10px 0
-      border-radius: 0 4px 4px 4px
+      border-radius: 4px 0px 4px 4px
       ul
         margin: 0
         padding: 0

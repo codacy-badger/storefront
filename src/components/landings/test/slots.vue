@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     onAddElement (element) {
+      element.element.removable = true
       this.$section.data.components.push(element)
     }
   }

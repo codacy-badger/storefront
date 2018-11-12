@@ -336,7 +336,7 @@ import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
 import ControlColorFill from './controls/TheControlColorFill.vue'
-import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, correctArray } from '../util'
 import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
@@ -454,7 +454,6 @@ export default {
   }),
   computed: {
     dmsToFixed () {
-      console.log(this.dimensions.width)
       return {
         width: parseInt(this.dimensions.width).toFixed(0),
         height: parseInt(this.dimensions.height).toFixed(0)
@@ -571,13 +570,9 @@ export default {
         newIndex = index + 1
       }
 
-      const correctArr = function (_arr, _param) {
-        _arr[_param[1]] = _arr.splice(_param[0], 1, _arr[_param[1]])[0]
-      }
-
       if (newIndex >= 0 && newIndex < this.section.data[container].length) {
-        correctArr(this.section.data[container], [index, newIndex])
-        correctArr(this.section.schema[container], [index, newIndex])
+        correctArray(this.section.data[container], [index, newIndex])
+        correctArray(this.section.schema[container], [index, newIndex])
       }
     },
     setInitialValue () {
