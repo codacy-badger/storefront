@@ -11,16 +11,16 @@
             <div class="b-gallery-three-block__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
                  v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
-                 v-bind:style="$sectionData.images[index].button.styles"
+                 :style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
               >
               </a>
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
-                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'text' }"
-                v-html="$sectionData.images[index].title.text"
-                :style="$sectionData.images[index].title.styles"
+                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
+                v-html="$sectionData.images[index].label.text"
+                :style="$sectionData.images[index].label.styles"
                 >
               </span>
             </div>
