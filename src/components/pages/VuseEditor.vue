@@ -25,6 +25,7 @@ import image from '@components/landings/images/image'
 import description from '@components/landings/texts/description'
 import products from '@components/landings/products/products'
 import productsExtend from '@components/landings/products/productsExtend'
+import Slogan from '@components/landings/texts/slogan'
 import bob from '@components/landings/test/slots'
 import PartButton from '@components/landings/test/partButton'
 import PartTitle from '@components/landings/test/partTitle'
@@ -57,6 +58,7 @@ Vuse.component('Picture', image)
 Vuse.component('Description', description)
 Vuse.component('Products', products)
 Vuse.component('ProductsExtend', productsExtend)
+Vuse.component('Slogan', Slogan)
 Vuse.component('Bob', bob)
 
 Vuse.use(pwa)
