@@ -52,8 +52,8 @@ export default {
   color: #000
   padding: 1rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
 .b-slogan
   display: inline-block
   margin: 1rem auto
@@ -69,8 +69,8 @@ export default {
   max-width: 98rem
   max-height: 90%
   .is-editable &
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   .is-mobile &
     margin: 1rem auto
     height: auto

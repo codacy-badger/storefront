@@ -122,8 +122,8 @@ export default {
   padding: 1rem
   min-height: 63rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -312,8 +312,8 @@ h2
   &:active
     filter: brightness(80%)
   &.is-editable
-    resize: both
-    overflow: hidden
+    // resize: both
+    // overflow: hidden
 @media only screen and (max-width: 768px)
   .b-layout2-btn
     font-size: 2rem
@@ -356,7 +356,7 @@ h2
     &:active
       filter: brightness(80%)
     &.is-editable
-      resize: both
-      overflow: hidden
+      // resize: both
+      // overflow: hidden
 // end button layout2 styles
 </style>

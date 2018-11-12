@@ -245,14 +245,14 @@ export default {
       padding: 0
       position: relative
       overflow: hidden
-      &.is-editable
+      /*&.is-editable
         resize: both
         .is-mobile &,
         .is-tablet &
           resize: vertical
         @media only screen and (max-width: 768px)
           &
-            fresize: vertical
+            fresize: vertical*/
       &-wrap
         padding: 2rem
       &-image
@@ -300,8 +300,8 @@ export default {
         &:active
           filter: brightness(50%)
         &.is-editable
-          resize: both
-          overflow: hidden
+          // resize: both
+          // overflow: hidden
       &-label
         position: absolute
         left: 0
@@ -315,9 +315,9 @@ export default {
         display: flex
         align-items: center
         justify-content: center
-        &.is-editable
+        /*&.is-editable
           resize: both
-          overflow: hidden
+          overflow: hidden*/
       &-block
         margin: 3rem 0 1rem
         border-top: dotted rgba(255, 255, 255, 0.3) 0.1rem

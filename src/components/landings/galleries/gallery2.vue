@@ -162,8 +162,8 @@ export default {
   flex-wrap: wrap
   padding: 1rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -181,8 +181,8 @@ export default {
   cursor: pointer
   position: relative
   &.is-editable
-    resize: both
-    overflow: hidden
+    //resize: both
+    // overflow: hidden
 .b-gallery-two__item-wrap_size-big
   width: 45%
 .b-gallery-two__item-wrap_size-small

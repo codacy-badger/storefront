@@ -104,8 +104,8 @@ export default {
   min-height: 6rem
   background: center url(https://gn510.cdn.gamenet.ru/TY0Xv2riHu/6nOTD/o_yT2c2.png) no-repeat
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
 .b-footer
   width: 100%
   display: flex
@@ -148,8 +148,8 @@ export default {
     align-items: center
     justify-content: center
     &.is-editable
-      resize: both
-      overflow: hidden
+      // resize: both
+      // overflow: hidden
   &__link
     font-size: 1.4rem
     line-height: 1.8rem

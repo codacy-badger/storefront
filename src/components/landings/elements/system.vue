@@ -239,9 +239,9 @@ export default {
   padding: 3rem 0 6rem
   height: 68rem
   line-height: 1.4
-  &.is-editable
+  /*&.is-editable
     resize: vertical
-    overflow: hidden
+    overflow: hidden*/
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     padding: 2rem 0

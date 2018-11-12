@@ -44,16 +44,16 @@ export default {
   color: #000
   padding: 1rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
 .b-pic
   display: inline-block
   margin: 1rem auto
   text-align: center
   width: 40rem
   height: 40rem
-  .is-editable &
-    resize: both
-    overflow: hidden
+  // .is-editable &
+    // resize: both
+    // overflow: hidden
 
 </style>

@@ -161,8 +161,8 @@ export default {
   align-items: center
   padding: 1rem
   &.is-editable
-   resize: vertical
-   overflow: hidden
+   // resize: vertical
+   // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -189,8 +189,8 @@ export default {
       min-width: 10rem
       margin: 1rem
       &.is-editable
-       resize: both
-       overflow: hidden
+       // resize: both
+       // overflow: hidden
        &:active
          border: dotted #333 1px
       &-wrap
@@ -202,8 +202,8 @@ export default {
         cursor: pointer
         position: relative
         &.is-editable
-          resize: both
-          overflow: hidden
+          // resize: both
+          // overflow: hidden
       .is-tablet &
         width: 50%
       .is-mobile &
@@ -283,8 +283,8 @@ export default {
       &:hover
         background-color: #fcff00
       &.is-editable
-        resize: both
-        overflow: hidden
+        // resize: both
+        // overflow: hidden
 
 .l-popup__logos
   margin: 2rem 0

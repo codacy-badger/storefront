@@ -115,8 +115,8 @@ export default {
   padding: 3rem 0 1rem
   min-height: 12rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     padding: 2rem 0
@@ -171,8 +171,8 @@ export default {
       display: inline-block
       padding: 0 1rem 1rem 0
       .is-editable > &
-        resize: both
-        overflow: hidden
+        // resize: both
+        // overflow: hidden
       & img
         width: 100%
         height: 100%
