@@ -61,13 +61,20 @@
         </div>
     </div>
     <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
-        <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
-            <div class="menu-header" @click="toggleGroupVisibility"><span class="menu-title">{{ name }}</span><span class="menu-icon">
-      <VuseIcon name="arrowDown"></VuseIcon></span></div>
-            <div class="menu-body">
-                <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
-            </div>
-        </li>
+      <li v-if="$builder.sections.length">
+        <ul class="page-sections" ref="scope">
+          <li v-for="section in $builder.sections" :key="section.id">{{ section.name }}</li>
+        </ul>
+      </li>
+      <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
+          <div class="menu-header" @click="toggleGroupVisibility">
+            <span class="menu-title">{{ name }}</span>
+            <span class="menu-icon"><VuseIcon name="arrowDown"></VuseIcon></span>
+          </div>
+          <div class="menu-body">
+              <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
+          </div>
+      </li>
     </ul>
     <aside class="page-settings" :class="{ 'is-visiable': showSettings }">
       <form v-on:submit.prevent="applySettings">
@@ -323,13 +330,31 @@ export default {
         _self.$builder.sort(evt.oldIndex, evt.newIndex)
       }
     })
+
     this.getSettings()
     this.applySettings()
   },
 
   updated () {
+    const _self = this
+
     if (this.$builder.scrolling) {
       this.$builder.scrolling(this.$refs.artboard)
+    }
+
+    if (this.$builder.sections.length) {
+      this.sortable = Sortable.create(this.$refs.scope, {
+        group: {
+          name: 'scope'
+        },
+        animation: 150,
+        sort: true,
+        disabled: false,
+        preventOnFilter: false,
+        onUpdate (evt) {
+          _self.$builder.sort(evt.oldIndex, evt.newIndex)
+        }
+      })
     }
   },
 
@@ -948,4 +973,12 @@ export default {
     top: -2px
     right: -21px
 
+.page-sections
+  list-style: none
+  padding: 0
+  margin: 0 0 40px 0
+  li
+    margin: 0 0 4px
+    padding: 1rem 0.5rem
+    background: lighten($green, 40%)
 </style>
