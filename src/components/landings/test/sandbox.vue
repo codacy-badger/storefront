@@ -116,12 +116,12 @@ export default {
 <style lang="sass">
 .slot
   display: flex
+  flex-wrap: wrap
   justify-content: center
   align-items: center
   max-width: 100rem
   position: relative
   width: 100%
-  height: 100%
   .is-editable &
     border: 1px dashed $green
   &__align
