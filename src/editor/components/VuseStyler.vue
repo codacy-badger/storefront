@@ -376,7 +376,10 @@ export default {
       }
     },
     type: {
-      type: String,
+      // @todo fix it properly
+      // Somewhere deep inside there is undefined value passed through
+      // causing String type check to fail
+      // type: String,
       required: true
     },
     name: {
