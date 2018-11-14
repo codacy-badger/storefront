@@ -1,6 +1,6 @@
 <script>
 import VuseIcon from '../VuseIcon'
-import { Sketch } from 'vue-color'
+import ControlColorPicker from './ControlColorPicker.vue'
 import VueCircleSlider from 'vue-circle-slider'
 
 const LIST_FONTS = [
@@ -21,7 +21,7 @@ const LIST_FONTS = [
 export default {
   components: {
     VuseIcon,
-    SketchColorPecker: Sketch,
+    ControlColorPicker,
     VueCircleSlider
   },
   props: {
@@ -77,6 +77,13 @@ export default {
       }
 
       this[block] = !this[block]
+    },
+    setTextSelectColor () {
+      this.boxMode('color', this.textSelectColor && this.textSelectColor.hex, '')
+    },
+    closeTextSelectColor () {
+      this.isTextSelectColor = false
+      this.$emit('updatePopper')
     }
   }
 }
@@ -117,11 +124,12 @@ export default {
       </li>
     </ul>
 
-    <div v-if="isTextSelectColor" class="b-styler__bg_options_container">
-      <div class="b-styler__bg_options__item">
-        <sketch-color-pecker @click.native="boxMode('color', textSelectColor.hex, '')" v-model="textSelectColor"></sketch-color-pecker>
-      </div>
-    </div>
+    <ControlColorPicker
+      v-if="isTextSelectColor"
+      v-model="textSelectColor"
+      @change="setTextSelectColor"
+      @close="closeTextSelectColor"
+    />
 
     <div v-if="isShowFontSizer" class="b-styler__bg_options_container">
       <div class="b-styler__bg_options__item flex flex_center">

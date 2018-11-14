@@ -162,11 +162,12 @@
           </li>
         </ul>
 
-        <div v-if="backgroundSettingsShow.color === true" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="setBackgroundColor(backgroundColor)" v-model="backgroundColor"></sketch-color-pecker>
-          </div>
-        </div>
+        <ControlColorPicker
+          v-if="backgroundSettingsShow.color"
+          v-model="backgroundColor"
+          @change="setBackgroundColor"
+          @close="backgroundSettingsShow.color = false"
+        />
 
         <div v-if="backgroundSettingsShow.link === true" class="b-styler__bg_options_container">
           <div class="b-styler__bg_options__item">
@@ -233,9 +234,10 @@
 
       <!-- Set color fill-->
       <li v-if="currentOption === 'colorFill'">
-        <ControlColorFill
-          @boxStyled="onBoxStyled">
-        </ControlColorFill>
+        <ControlColorPicker
+          @change="setColorFill"
+          @close="updateOption('')"
+        />
       </li>
 
       <!-- Set link -->
@@ -263,7 +265,8 @@
           v-bind:fontSize="fontSize"
           v-bind:fontFamily="fontFamily"
           @styled="onBoxAligned"
-          @boxStyled="onBoxStyled">
+          @boxStyled="onBoxStyled"
+          @updatePopper="updatePopper">
         </ControlStyleText>
       </li>
 
@@ -311,11 +314,12 @@
           </li>
         </ul>
 
-        <div v-if="showPseudoBg" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex + ' !important' })" v-model="backgroundHoverColor"></sketch-color-pecker>
-          </div>
-        </div>
+        <ControlColorPicker
+          v-if="showPseudoBg"
+          v-model="backgroundHoverColor"
+          @change="setBackgroundHoverColor"
+          @close="showPseudoBg = false"
+        />
       </li>
 
       <li v-if="currentOption === 'size'">
@@ -339,9 +343,8 @@ import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
-import ControlColorFill from './controls/TheControlColorFill.vue'
+import ControlColorPicker from './controls/ControlColorPicker.vue'
 import { isParentTo, randomPoneId, getPseudoTemplate, correctArray } from '../util'
-import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
 import * as _ from 'lodash-es'
@@ -361,8 +364,7 @@ export default {
     ControlStyleText,
     ControlShape,
     ControlSetUrl,
-    ControlColorFill,
-    SketchColorPecker: Sketch
+    ControlColorPicker
   },
   props: {
     el: {
@@ -630,6 +632,9 @@ export default {
     },
     updateOption (option) {
       this.currentOption = option
+      this.updatePopper()
+    },
+    updatePopper () {
       this.$nextTick(() => {
         this.popper.update()
       })
@@ -889,12 +894,31 @@ export default {
           self.isRequestProcess = false
         })
     },
-    setBackgroundColor: function () {
+    /**
+     * Applies the color value
+     * That one goes for boxes background
+     */
+    setBackgroundColor () {
       this.imageBgSelected = false
       this.videoBgSelected = false
-      this.backgroundSettingsShow.color = false
       this.addStyle('background-color', this.backgroundColor.hex8)
       this.addStyle('border-color', this.backgroundColor.hex8)
+    },
+    /**
+     * Applies the color value
+     * That one goes for buttons hover
+     */
+    setBackgroundHoverColor () {
+      this.changePseudoStyle({
+        'background-color': this.backgroundHoverColor.hex + ' !important'
+      })
+    },
+    /**
+     * Applies the color value
+     * That one goes icons fill color
+     */
+    setColorFill ({ hex }) {
+      this.onBoxStyled({ type: 'fill', value: hex, unit: '' })
     },
     /**
      * Add style to pseudocalss
