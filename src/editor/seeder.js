@@ -107,6 +107,7 @@ const data = new Map([
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
       'background-color': '#fff',
+      'width': '',
       'height': ''
     }
   }))],
@@ -139,7 +140,7 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: true,
+      resizable: false,
       removable: true,
       background: true,
       styles: {
@@ -147,8 +148,7 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': false,
-        'height': ''
+        'background-color': false
       }
     })
   )],
@@ -279,7 +279,7 @@ const data = new Map([
   [String, 'This is pretty neat'],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
-    resizable: true,
+    resizable: false,
     alt: 'Default image',
     url: 'https://gn548.cdn.gamenet.ru/TY0Xv2riHu/772oj/o_OnTml.png',
     background: true,

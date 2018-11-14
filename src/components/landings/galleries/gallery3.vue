@@ -201,6 +201,9 @@ export default {
         padding: 1rem
         cursor: pointer
         position: relative
+        display: flex
+        align-items: center
+        justify-content: center
         &.is-editable
           // resize: both
           // overflow: hidden
@@ -231,27 +234,14 @@ export default {
           background: #000
 
       &-link
-        position: absolute
         display: block
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        min-width: 100%
-        min-height: 100%
+        width: 10rem
+        height: 10rem
         margin: 0
         z-index: 100
         background-image: url(https://gn779.cdn.gamenet.ru/TY0Xv2riHu/75YKm/o_1lNeRV.png)
         background-size: cover
         transition: all 200ms
-        &.is-editable
-          top: 50%
-          left: 50%
-          width: 10rem
-          height: 10rem
-          min-width: auto
-          min-height: auto
-          margin: -5rem 0 0 -5rem
         &:hover
           transform: scale(1.2) rotate(-120deg)
 

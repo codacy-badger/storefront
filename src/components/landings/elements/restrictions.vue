@@ -45,7 +45,7 @@ export default {
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,
-    image: types.Image,
+    image: types.ImageNoResize,
     restrictions: {
       'age': {
         visible: true,

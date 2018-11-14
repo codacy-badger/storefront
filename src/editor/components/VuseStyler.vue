@@ -550,9 +550,9 @@ export default {
     changeSize (e) {
       if (this.keepProportions) {
         if (e.target.dataset.type === 'w') {
-          this.dimensions.height = this.dimensions.width / this.proportions
+          this.dimensions.height = (this.dimensions.width / this.proportions).toFixed(0)
         } else {
-          this.dimensions.width = this.dimensions.height * this.proportions
+          this.dimensions.width = (this.dimensions.height * this.proportions).toFixed(0)
         }
       }
 
@@ -1162,6 +1162,7 @@ label
   &__bg_options__item
     margin-bottom: 0.2rem
   &__dimentions
+    padding: 0 15px
     &--edit
       display: flex
       align-items: center
