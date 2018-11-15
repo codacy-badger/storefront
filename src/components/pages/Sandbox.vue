@@ -2,7 +2,18 @@
   <div>
     <h1>A page for components preview and testing</h1>
     <hr>
-
+    BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button>
+    <div style="width: 246px;">
+      <BaseDropdown :isOpened="ddOpen">
+        <BaseDropdownItem>Section</BaseDropdownItem>
+        <BaseDropdownItem :isSelected="true">Gallery</BaseDropdownItem>
+        <BaseDropdownItem>Cover</BaseDropdownItem>
+        <BaseDropdownItem>Image</BaseDropdownItem>
+        <BaseDropdownItem>Form</BaseDropdownItem>
+        <BaseDropdownItem>Image</BaseDropdownItem>
+      </BaseDropdown>
+    </div>
+    <hr>
     BaseLoading
     <BaseLoading/>
     <hr>
@@ -56,7 +67,13 @@
 
 <script>
 export default {
-  name: 'Sandbox'
+  name: 'Sandbox',
+
+  data () {
+    return {
+      ddOpen: true
+    }
+  }
 }
 </script>
 
