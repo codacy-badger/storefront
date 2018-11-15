@@ -155,7 +155,7 @@
           <div class="b-styler__bg_options__item">
             <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
               <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
-              <button class="button" @click="addBackgroundAsLink">
+              <button class="button" @click="addBackgroundAsLink" title="Save">
                 <VuseIcon name="link"></VuseIcon>
               </button>
             </div>
@@ -281,7 +281,8 @@
       <li v-if="currentOption === 'pseudo'">
         <ul class="align">
           <li>
-            <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+            <button class="styler-button" @click="showPseudoBg = !showPseudoBg"
+              title="Set hover color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
