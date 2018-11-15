@@ -70,6 +70,7 @@ const data = new Map([
   // [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default image',
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     background: true,

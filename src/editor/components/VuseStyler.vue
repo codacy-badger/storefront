@@ -681,26 +681,27 @@ export default {
         if (this.name.indexOf('[') > 0) { // if array element
           path = _.toPath(path)
           this.section.data[path[0]].splice(parseInt(path[1]), 1)
+          this.hideStyler()
         } else {
           this.section.data[path].text = ''
           this.section.data[path].url = ''
           Object.assign(this.section.data[path].styles, { 'display': 'none' })
+          this.el.remove()
+          this.$refs.styler.remove()
         }
-        this.el.remove()
-        this.$refs.styler.remove()
       }
     },
     copyItemGallery () {
       let newObj = JSON.parse(JSON.stringify(this.section.data.images[0]))
       let l = Object.assign({}, newObj)
       this.section.data.images.push(l)
-      this.section.schema.images.push(l)
+      // this.section.schema.images.push(l) // https://protocol1.atlassian.net/browse/PTH-81
     },
     copyItemProduct () {
       let newObj = JSON.parse(JSON.stringify(this.section.data.products[0]))
       let l = Object.assign({}, newObj)
       this.section.data.products.push(l)
-      this.section.schema.products.push(l)
+      // this.section.schema.products.push(l)
     },
     execute (command, value = null) {
       this.el.focus()
