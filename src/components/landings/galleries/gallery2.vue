@@ -4,13 +4,13 @@
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"
             v-for="(item, index) in $sectionData.images"
-            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
+            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'galleryItem'}"
             :data-index="index"
             :key="index"
             :style="$sectionData.images[index].preview.styles"
           >
             <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
-               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
+               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
               >
@@ -35,7 +35,14 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
+
+const GALLERY_ITEM = {
+  preview: types.Image,
+  label: types.Text,
+  button: types.Button
+}
 
 export default {
   name: 'Gallery2',
@@ -52,22 +59,13 @@ export default {
       type: types.Text
     },
     images: [
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      }
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM)
     ],
+    defObj: {
+      images: _.merge({}, GALLERY_ITEM)
+    },
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },

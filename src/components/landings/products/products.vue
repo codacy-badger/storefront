@@ -5,11 +5,11 @@
           <div class="b-products-list__item flex flex_columns"
             v-for="(item, index) in $sectionData.products"
             :key="index"
-            v-styler:product="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
+            v-styler:product="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`, type: 'product'}"
             :style="$sectionData.products[index].el.styles"
           >
             <div class="b-products-list__item-label" contenteditable="true"
-                 v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label` }"
+                 v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label`, type: 'text' }"
                  v-html="$sectionData.products[index].label.text"
                  :style="$sectionData.products[index].label.styles"
                  v-bind:class="$sectionData.products[index].label.classes"
@@ -23,7 +23,7 @@
             <div class="b-products-list__item-wrap">
               <div>
                 <span class="b-products-list__item-name" contenteditable="true"
-                  v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name` }"
+                  v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name`, type: 'text' }"
                   v-html="$sectionData.products[index].name.text"
                   :style="$sectionData.products[index].name.styles"
                   >
@@ -31,7 +31,7 @@
               </div>
               <div>
                 <span class="b-products-list__item-title" contenteditable="true"
-                  v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title` }"
+                  v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title`, type: 'text' }"
                   v-html="$sectionData.products[index].title.text"
                   :style="$sectionData.products[index].title.styles"
                   >
@@ -39,7 +39,7 @@
               </div>
               <div>
                 <span class="b-products-list__item-button" contenteditable="true"
-                  v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button` }"
+                  v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button`, type: 'button' }"
                   v-html="$sectionData.products[index].button.text"
                   @click.prevent="openLink(item)" :target="$sectionData.products[index].button.target"
                   :style="$sectionData.products[index].button.styles"
@@ -53,7 +53,7 @@
                     <div class="b-products-list__item-row flex flex_center">
                         <div class="b-products-list__item-col b-products-list__item-col_text">
                           <div class="b-products-list__item-row-chapter" contenteditable="true"
-                            v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
+                            v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter`, type: 'text' }"
                             v-html="$sectionData.products[index].blocks[indexB].chapter.text"
                             :style="$sectionData.products[index].blocks[indexB].chapter.styles"
                             >
@@ -76,7 +76,7 @@
                       <div class="b-products-list__item-col b-products-list__item-col_icon">
                         <div class="b-products-list__item-col-icon">
                             <button class="b-products-list__item-col-icon-btn controller-button is-green"
-                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type` }"
+                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type`, type: 'icon' }"
                               :style="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.styles"
                               v-bind:class="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.classes"
                               >
@@ -91,7 +91,7 @@
                       </div>
                       <div class="b-products-list__item-col b-products-list__item-col_text">
                         <div contenteditable="true" class=""
-                          v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text` }"
+                          v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text`, type: 'text' }"
                           v-html="$sectionData.products[index].blocks[indexB].rows[indexR].text.text"
                           :style="$sectionData.products[index].blocks[indexB].rows[indexR].text.styles"
                          >
@@ -123,19 +123,25 @@
 import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
 import Seeder from '@editor/seeder'
+import * as _ from 'lodash-es'
 
 const ICONS = [
   { value: 'plus' },
   { value: 'close' }
 ]
-const ROW = { icon: { value: 'plus', type: types.Icon }, text: types.Text, options: ICONS.slice() }
+
+const ROW = {
+  icon: { value: 'plus', type: types.Icon }, text: types.Text, options: ICONS.slice()
+}
+
 const BLOCK = {
   chapter: types.Text,
   rows: [
-    Object.assign({}, ROW),
-    Object.assign({}, ROW)
+    _.merge({}, ROW),
+    _.merge({}, ROW)
   ]
 }
+
 const PRODUCT = {
   el: types.Product,
   visible: true,
@@ -145,8 +151,8 @@ const PRODUCT = {
   title: types.Text,
   button: types.Button,
   blocks: [
-    Object.assign({}, BLOCK),
-    Object.assign({}, BLOCK)
+    _.merge({}, BLOCK),
+    _.merge({}, BLOCK)
   ]
 }
 
@@ -160,9 +166,12 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     products: [
-      Object.assign({}, PRODUCT),
-      Object.assign({}, PRODUCT)
-    ]
+      _.merge({}, PRODUCT),
+      _.merge({}, PRODUCT)
+    ],
+    defObj: {
+      products: _.merge({}, PRODUCT)
+    }
   },
   props: {
     id: {
@@ -188,14 +197,14 @@ export default {
       this.$sectionData.products[index].blocks[indexB].rows.splice(indexR, 1)
     },
     addRow (index, indexB, indexR) {
-      let newRow = Seeder.seed(Object.assign({}, ROW))
+      let newRow = Seeder.seed(_.merge({}, ROW))
       this.$sectionData.products[index].blocks[indexB].rows.push(newRow)
     },
     deleteBlock (index, indexB) {
       this.$sectionData.products[index].blocks.splice(indexB, 1)
     },
     addBlock (index, indexB) {
-      let newBlock = Seeder.seed(Object.assign({}, BLOCK))
+      let newBlock = _.merge({}, Seeder.seed(BLOCK))
       this.$sectionData.products[index].blocks.push(newBlock)
     }
   }
@@ -213,7 +222,7 @@ export default {
   color: #000
   padding: 3rem 0 1rem
   min-height: 12rem
-
+  height: auto
 .b-products
   display: flex
   align-items: center
@@ -289,7 +298,6 @@ export default {
         color: #fff
         background-color: #18d88b
         display: flex
-        align-items: center
         justify-content: center
         flex-direction: column
         user-select: none

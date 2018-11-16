@@ -22,7 +22,7 @@
       </li>
       <!-- colorFill -->
       <li v-if="options.colorFill">
-        <button class="styler-button" @click="updateOption('colorFill')" title="Change fill color icon">
+        <button class="styler-button" @click="updateOption('colorFill')" title="Change icon fill color">
           <VuseIcon name="fill"></VuseIcon>
         </button>
       </li>
@@ -45,20 +45,20 @@
         </button>
       </li>
 
-      <template v-if="type === 'product' && section.data.products.length !== 0">
+      <template v-if="type === 'product' || type === 'galleryItem'">
         <li>
-          <button class="styler-button" @click="copyItemProduct">
+          <button class="styler-button" @click="addItem('create')" title="Add item">
             <VuseIcon name="plus"></VuseIcon>
+          </button>
+        </li>
+        <li>
+          <button class="styler-button" @click="addItem('clone')" title="Copy item">
+            <VuseIcon name="copy"></VuseIcon>
           </button>
         </li>
       </template>
 
       <template v-if="type === 'galleryItem'">
-        <li>
-          <button class="styler-button" @click="copyItemGallery">
-            <VuseIcon name="plus"></VuseIcon>
-          </button>
-        </li>
         <li>
           <div style="display: none;">
             <form>
@@ -71,7 +71,7 @@
           </div>
         </li>
         <li v-if="type === 'link'">
-          <button class="styler-button" @click="updateOption('link')">
+          <button class="styler-button" @click="updateOption('link')" title="Link">
             <VuseIcon name="link"></VuseIcon>
           </button>
         </li>
@@ -79,12 +79,12 @@
 
       <template v-if="type === 'grid'">
         <li>
-          <button class="styler-button" @click="selectDevice('mobile')">
+          <button class="styler-button" @click="selectDevice('mobile')" title="Use for mobile">
             <VuseIcon name="mobile"></VuseIcon>
           </button>
         </li>
         <li>
-          <button class="styler-button" @click="selectDevice('desktop')">
+          <button class="styler-button" @click="selectDevice('desktop')" title="Use for desktop">
             <VuseIcon name="laptop"></VuseIcon>
           </button>
         </li>
@@ -108,7 +108,8 @@
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
           <li v-if="type !== 'button' && type !== 'galleryItem' && type !== 'product'">
-            <button class="styler-button" @click="showBackgroundSettingsSection('link')">
+            <button class="styler-button" @click="showBackgroundSettingsSection('link')"
+              title="Set image url">
               <VuseIcon name="link"></VuseIcon>
             </button>
           </li>
@@ -124,19 +125,21 @@
               </form>
             </div>
 
-            <button class="styler-button" @click="choseBackground">
+            <button class="styler-button" @click="choseBackground" title="Upload image">
               <VuseIcon name="upload"></VuseIcon>
             </button>
           </li>
 
           <li v-if="imageBgSelected === true || videoBgSelected === true">
-            <button class="styler-button" @click="identifyBackgroundSettingsSection">
+            <button class="styler-button" @click="identifyBackgroundSettingsSection"
+              title="Change image settings">
               <VuseIcon name="cog"></VuseIcon>
             </button>
           </li>
 
           <li>
-            <button class="styler-button" @click="showColorPeckerSection">
+            <button class="styler-button" @click="showColorPeckerSection"
+              title="Set background color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
@@ -152,7 +155,7 @@
           <div class="b-styler__bg_options__item">
             <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
               <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
-              <button class="button" @click="addBackgroundAsLink">
+              <button class="button" @click="addBackgroundAsLink" title="Save">
                 <VuseIcon name="link"></VuseIcon>
               </button>
             </div>
@@ -278,7 +281,8 @@
       <li v-if="currentOption === 'pseudo'">
         <ul class="align">
           <li>
-            <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+            <button class="styler-button" @click="showPseudoBg = !showPseudoBg"
+              title="Set hover color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
@@ -691,17 +695,28 @@ export default {
         }
       }
     },
-    copyItemGallery () {
-      let newObj = JSON.parse(JSON.stringify(this.section.data.images[0]))
-      let l = Object.assign({}, newObj)
-      this.section.data.images.push(l)
-      // this.section.schema.images.push(l) // https://protocol1.atlassian.net/browse/PTH-81
-    },
-    copyItemProduct () {
-      let newObj = JSON.parse(JSON.stringify(this.section.data.products[0]))
-      let l = Object.assign({}, newObj)
-      this.section.data.products.push(l)
-      // this.section.schema.products.push(l)
+    /**
+     * create/clone element in componetns
+     */
+    addItem (event) {
+      let newObj = null
+      let path = _.split(this.name, '.')[1]
+      let devObj = this.section.data.defObj
+      let obj = null
+
+      if (path.indexOf('[') > 0) {
+        path = _.toPath(path)
+      }
+
+      if (event === 'clone') {
+        newObj = JSON.parse(JSON.stringify(this.section.data[path[0]][parseInt(path[1])]))
+      } else if (event === 'create' && devObj[path[0]] !== undefined) {
+        newObj = JSON.parse(JSON.stringify(this.section.data.defObj[path[0]]))
+      }
+
+      obj = Object.assign({}, newObj)
+      this.section.data[path[0]].push(obj)
+      this.section.schema[path[0]].push(obj)
     },
     execute (command, value = null) {
       this.el.focus()

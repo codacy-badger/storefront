@@ -6,27 +6,27 @@
             <div class="b-products-list__item b-products-list__item_mini flex flex_columns"
                  v-for="(item, index) in $sectionData.products"
                  :key="index"
-                 v-styler:product="{el: $sectionData.products[index].mini.el, path: `$sectionData.products[${index}].mini.el`}"
+                 v-styler:product="{el: $sectionData.products[index].mini.el, path: `$sectionData.products[${index}].mini.el`, type: 'product'}"
                  :style="$sectionData.products[index].mini.el.styles"
                  :data-index="index"
                  :product-extend-preview="'b-products-list__item_active'"
               >
               <div class="b-products-list__item-label" contenteditable="true"
-                   v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label` }"
+                   v-styler:for="{ el: $sectionData.products[index].mini.label, path:`$sectionData.products[${index}].mini.label`, type: 'text' }"
                    v-html="$sectionData.products[index].mini.label.text"
                    :style="$sectionData.products[index].mini.label.styles"
                    v-bind:class="$sectionData.products[index].mini.label.classes"
                 >
               </div>
               <div class="b-products-list__item-image b-products-list__item-image_mini"
-                   v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview`}"
+                   v-styler:for="{el: $sectionData.products[index].mini.preview, path: `$sectionData.products[${index}].mini.preview`, type: 'image'}"
                    :style="$sectionData.products[index].mini.preview.styles"
                 >
               </div>
               <div class="b-products-list__item-wrap">
                 <div>
                   <div class="b-products-list__item-cost" contenteditable="true"
-                        v-styler:for="{ el: $sectionData.products[index].mini.cost, path:`$sectionData.products[${index}].mini.cost` }"
+                        v-styler:for="{ el: $sectionData.products[index].mini.cost, path:`$sectionData.products[${index}].mini.cost`, type: 'text' }"
                         v-html="$sectionData.products[index].mini.cost.text"
                         :style="$sectionData.products[index].mini.cost.styles"
                     >
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                   <span class="b-products-list__item-name b-products-list__item-name_mini" contenteditable="true"
-                    v-styler:for="{ el: $sectionData.products[index].mini.name, path:`$sectionData.products[${index}].mini.name` }"
+                    v-styler:for="{ el: $sectionData.products[index].mini.name, path:`$sectionData.products[${index}].mini.name`, type: 'text' }"
                     v-html="$sectionData.products[index].mini.name.text"
                     :style="$sectionData.products[index].mini.name.styles"
                     >
@@ -42,7 +42,7 @@
                 </div>
                 <div>
                   <span class="b-products-list__item-title b-products-list__item-title_mini" contenteditable="true"
-                        v-styler:for="{ el: $sectionData.products[index].mini.title, path:`$sectionData.products[${index}].mini.title` }"
+                        v-styler:for="{ el: $sectionData.products[index].mini.title, path:`$sectionData.products[${index}].mini.title`, type: 'text' }"
                         v-html="$sectionData.products[index].mini.title.text"
                         :style="$sectionData.products[index].mini.title.styles"
                     >
@@ -57,12 +57,12 @@
             <div class="b-products-list__item b-products-list__item_mobile flex flex_columns"
                  v-for="(item, index) in $sectionData.products"
                  :key="index"
-                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`}"
+                 v-styler:for="{el: $sectionData.products[index].el, path: `$sectionData.products[${index}].el`, type: 'product'}"
                  :style="$sectionData.products[index].el.styles"
                  :product-extend-stage="index"
               >
               <div contenteditable="true" class="b-products-list__item-label"
-                   v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label` }"
+                   v-styler:for="{ el: $sectionData.products[index].label, path:`$sectionData.products[${index}].label`, type: 'text' }"
                    v-html="$sectionData.products[index].label.text"
                    :style="$sectionData.products[index].label.styles"
                    v-bind:class="$sectionData.products[index].label.classes"
@@ -72,7 +72,7 @@
                 <div class="b-products-list__item-header-col">
                   <div>
                     <span class="b-products-list__item-name" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name` }"
+                      v-styler:for="{ el: $sectionData.products[index].name, path:`$sectionData.products[${index}].name`, type: 'text' }"
                       v-html="$sectionData.products[index].name.text"
                       :style="$sectionData.products[index].name.styles"
                       >
@@ -80,7 +80,7 @@
                   </div>
                   <div>
                     <span class="b-products-list__item-title" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title` }"
+                      v-styler:for="{ el: $sectionData.products[index].title, path:`$sectionData.products[${index}].title`, type: 'text' }"
                       v-html="$sectionData.products[index].title.text"
                       :style="$sectionData.products[index].title.styles"
                       >
@@ -88,7 +88,7 @@
                   </div>
                   <div>
                     <span class="b-products-list__item-button" contenteditable="true"
-                      v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button` }"
+                      v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button`, type: 'text' }"
                       v-html="$sectionData.products[index].button.text"
                       @click.prevent="openLink(item)" :target="$sectionData.products[index].button.target"
                       :style="$sectionData.products[index].button.styles"
@@ -100,7 +100,7 @@
                 </div>
                 <div class="b-products-list__item-header-col">
                   <div class="b-products-list__item-image"
-                     v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`}"
+                     v-styler:for="{el: $sectionData.products[index].preview, path: `$sectionData.products[${index}].preview`, type: 'image'}"
                      :style="$sectionData.products[index].preview.styles"
                     >
                   </div>
@@ -112,7 +112,7 @@
                       <div class="b-products-list__item-row flex flex_center">
                           <div class="b-products-list__item-col b-products-list__item-col_text">
                             <div class="b-products-list__item-row-chapter" contenteditable="true"
-                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter` }"
+                              v-styler:for="{ el: $sectionData.products[index].blocks[indexB].chapter, path:`$sectionData.products[${index}].blocks[${indexB}].chapter`, type: 'text' }"
                               v-html="$sectionData.products[index].blocks[indexB].chapter.text"
                               :style="$sectionData.products[index].blocks[indexB].chapter.styles"
                               >
@@ -135,7 +135,7 @@
                         <div class="b-products-list__item-col b-products-list__item-col_icon">
                           <div class="b-products-list__item-col-icon">
                               <button class="b-products-list__item-col-icon-btn controller-button is-green" contenteditable="true"
-                                v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type` }"
+                                v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].icon.type, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].icon.type`, type: 'icon' }"
                                 :style="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.styles"
                                 v-bind:class="$sectionData.products[index].blocks[indexB].rows[indexR].icon.type.classes"
                                 >
@@ -150,7 +150,7 @@
                         </div>
                         <div class="b-products-list__item-col b-products-list__item-col_text">
                           <div contenteditable="true" class=""
-                            v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text` }"
+                            v-styler:for="{ el: $sectionData.products[index].blocks[indexB].rows[indexR].text, path:`$sectionData.products[${index}].blocks[${indexB}].rows[${indexR}].text`, type: 'text' }"
                             v-html="$sectionData.products[index].blocks[indexB].rows[indexR].text.text"
                             :style="$sectionData.products[index].blocks[indexB].rows[indexR].text.styles"
                            >
@@ -183,11 +183,48 @@
 import * as types from '@editor/types'
 import VuseIcon from '@editor/components/VuseIcon'
 import { productExtendPreviewClick } from '@cscripts/productExtend'
+import Seeder from '@editor/seeder'
+import * as _ from 'lodash-es'
 
-const Icons = [
+const ICONS = [
   { value: 'plus' },
   { value: 'close' }
 ]
+
+const ROW = {
+  icon: { value: 'plus', type: types.Icon }, text: types.Text, options: ICONS.slice()
+}
+
+const BLOCK = {
+  chapter: types.Text,
+  rows: [
+    _.merge({}, ROW),
+    _.merge({}, ROW)
+  ]
+}
+
+const PRODUCT = {
+  el: types.Product,
+  visible: true,
+  preview: types.ImageNoResize,
+  label: types.Label,
+  name: types.Text,
+  title: types.Text,
+  button: types.Button,
+  blocks: [
+    _.merge({}, BLOCK),
+    _.merge({}, BLOCK)
+  ],
+  mini: {
+    el: types.Product,
+    visible: true,
+    preview: types.ImageNoResize,
+    label: types.Label,
+    name: types.Text,
+    title: types.Text,
+    cost: types.Cost
+  }
+}
 
 export default {
   name: 'ProductsExtend',
@@ -199,41 +236,12 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     products: [
-      {
-        el: types.StyleObject,
-        visible: true,
-        preview: types.ImageNoResize,
-        label: types.Label,
-        name: types.Text,
-        title: types.Text,
-        button: types.Button,
-        blocks: [
-          {
-            chapter: types.Text,
-            rows: [
-              { id: 'row10', icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() },
-              { id: 'row11', icon: { value: 'plus', type: types.Icon }, text: types.Text, options: Icons.slice() }
-            ]
-          },
-          {
-            chapter: types.Text,
-            rows: [
-              { id: 'row20', icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() },
-              { id: 'row21', icon: { value: 'close', type: types.Icon }, text: types.Text, options: Icons.slice() }
-            ]
-          }
-        ],
-        mini: {
-          el: types.Product,
-          visible: true,
-          preview: types.ImageNoResize,
-          label: types.Label,
-          name: types.Text,
-          title: types.Text,
-          cost: types.Cost
-        }
-      }
-    ]
+      _.merge({}, PRODUCT),
+      _.merge({}, PRODUCT)
+    ],
+    defObj: {
+      products: _.merge({}, PRODUCT)
+    }
   },
   props: {
     id: {
@@ -267,17 +275,15 @@ export default {
       this.$sectionData.products[index].blocks[indexB].rows.splice(indexR, 1)
     },
     addRow (index, indexB, indexR) {
-      let obj = this.$sectionData.products[index].blocks[indexB].rows[indexR]
-      let newObj = JSON.parse(JSON.stringify(obj))
-      this.$sectionData.products[index].blocks[indexB].rows.push(newObj)
+      let newRow = Seeder.seed(_.merge({}, ROW))
+      this.$sectionData.products[index].blocks[indexB].rows.push(newRow)
     },
     deleteBlock (index, indexB) {
       this.$sectionData.products[index].blocks.splice(indexB, 1)
     },
     addBlock (index, indexB) {
-      let obj = this.$sectionData.products[index].blocks[indexB]
-      let newObj = JSON.parse(JSON.stringify(obj))
-      this.$sectionData.products[index].blocks.push(newObj)
+      let newBlock = _.merge({}, Seeder.seed(BLOCK))
+      this.$sectionData.products[index].blocks.push(newBlock)
     },
     bindingProductExtendPreviewClick (index) {
       productExtendPreviewClick(index)
@@ -458,7 +464,6 @@ export default {
         color: #fff
         background-color: #18d88b
         display: flex
-        align-items: center
         justify-content: center
         flex-direction: column
         user-select: none
