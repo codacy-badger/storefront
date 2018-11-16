@@ -22,7 +22,7 @@
       </li>
       <!-- colorFill -->
       <li v-if="options.colorFill">
-        <button class="styler-button" @click="updateOption('colorFill')" title="Change fill color icon">
+        <button class="styler-button" @click="updateOption('colorFill')" title="Change icon fill color">
           <VuseIcon name="fill"></VuseIcon>
         </button>
       </li>
@@ -47,12 +47,12 @@
 
       <template v-if="type === 'product' || type === 'galleryItem'">
         <li>
-          <button class="styler-button" @click="addItem('create')">
+          <button class="styler-button" @click="addItem('create')" title="Add item">
             <VuseIcon name="plus"></VuseIcon>
           </button>
         </li>
         <li>
-          <button class="styler-button" @click="addItem('clone')">
+          <button class="styler-button" @click="addItem('clone')" title="Copy item">
             <VuseIcon name="copy"></VuseIcon>
           </button>
         </li>
@@ -71,7 +71,7 @@
           </div>
         </li>
         <li v-if="type === 'link'">
-          <button class="styler-button" @click="updateOption('link')">
+          <button class="styler-button" @click="updateOption('link')" title="Link">
             <VuseIcon name="link"></VuseIcon>
           </button>
         </li>
@@ -79,12 +79,12 @@
 
       <template v-if="type === 'grid'">
         <li>
-          <button class="styler-button" @click="selectDevice('mobile')">
+          <button class="styler-button" @click="selectDevice('mobile')" title="Use for mobile">
             <VuseIcon name="mobile"></VuseIcon>
           </button>
         </li>
         <li>
-          <button class="styler-button" @click="selectDevice('desktop')">
+          <button class="styler-button" @click="selectDevice('desktop')" title="Use for desktop">
             <VuseIcon name="laptop"></VuseIcon>
           </button>
         </li>
@@ -108,7 +108,8 @@
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
           <li v-if="type !== 'button' && type !== 'galleryItem' && type !== 'product'">
-            <button class="styler-button" @click="showBackgroundSettingsSection('link')">
+            <button class="styler-button" @click="showBackgroundSettingsSection('link')"
+              title="Set image url">
               <VuseIcon name="link"></VuseIcon>
             </button>
           </li>
@@ -124,19 +125,21 @@
               </form>
             </div>
 
-            <button class="styler-button" @click="choseBackground">
+            <button class="styler-button" @click="choseBackground" title="Upload image">
               <VuseIcon name="upload"></VuseIcon>
             </button>
           </li>
 
           <li v-if="imageBgSelected === true || videoBgSelected === true">
-            <button class="styler-button" @click="identifyBackgroundSettingsSection">
+            <button class="styler-button" @click="identifyBackgroundSettingsSection"
+              title="Change image settings">
               <VuseIcon name="cog"></VuseIcon>
             </button>
           </li>
 
           <li>
-            <button class="styler-button" @click="showColorPeckerSection">
+            <button class="styler-button" @click="showColorPeckerSection"
+              title="Set background color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
@@ -152,7 +155,7 @@
           <div class="b-styler__bg_options__item">
             <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
               <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
-              <button class="button" @click="addBackgroundAsLink">
+              <button class="button" @click="addBackgroundAsLink" title="Save">
                 <VuseIcon name="link"></VuseIcon>
               </button>
             </div>
@@ -278,7 +281,8 @@
       <li v-if="currentOption === 'pseudo'">
         <ul class="align">
           <li>
-            <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+            <button class="styler-button" @click="showPseudoBg = !showPseudoBg"
+              title="Set hover color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
