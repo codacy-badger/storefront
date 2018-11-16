@@ -1,15 +1,23 @@
 <template>
-    <section class="l-button" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
-      <a v-for="(item, index) in $sectionData.buttons" :key="index" class="b-button is-editable"
-           v-bind:class="$sectionData.buttons[index].element.classes"
-           @click.prevent="openLink(item)" :target="$sectionData.buttons[index].element.target"
-           v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
-           v-html="$sectionData.buttons[index].element.text"
-           :href="$sectionData.buttons[index].element.href"
-           v-bind:style="$sectionData.buttons[index].element.styles"
-          >
-      </a>
-    </section>
+  <section
+    class="l-button"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    v-styler:section="$sectionData.mainStyle"
+  >
+    <a
+      v-for="(item, index) in $sectionData.buttons"
+      class="b-button is-editable"
+      :key="index"
+      :class="$sectionData.buttons[index].element.classes"
+      :target="$sectionData.buttons[index].element.target"
+      :href="$sectionData.buttons[index].element.href"
+      :style="$sectionData.buttons[index].element.styles"
+      v-styler:for="{ el: $sectionData.buttons[index].element, path: `$sectionData.buttons[${index}].element` }"
+      v-html="$sectionData.buttons[index].element.text"
+      @click.prevent="openLink(item)"
+    ></a>
+  </section>
 </template>
 
 <script>
@@ -72,7 +80,7 @@ export default {
   color: #000
   background-color: #a7a1a1
   display: flex
-  align-items: center
+  text-align: center
   justify-content: center
   flex-direction: column
   user-select: none

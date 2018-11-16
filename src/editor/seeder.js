@@ -152,7 +152,7 @@ const data = new Map([
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
+      box: false,
       canCopy: true,
       resizable: true,
       hasLink: true,
@@ -180,6 +180,7 @@ const data = new Map([
         'font-family': 'Open Sans',
         'text-decoration': false,
         'justify-content': false,
+        'text-align': 'center',
         'width': '',
         'height': ''
       }
@@ -309,7 +310,7 @@ const data = new Map([
 
 export default class Seeder {
   // Seeds values using a schema.
-  static seed (schema) {
+  static seed(schema) {
     if (isObject(schema)) {
       return Object.keys(schema).reduce((values, key) => {
         values[key] = Seeder.seed(schema[key])
