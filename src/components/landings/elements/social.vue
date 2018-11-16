@@ -16,6 +16,7 @@
         </a>
         <button class="b-socials__item-eye controller-button is-green is-editable-show"
           @click="$sectionData.socials[key].visible = !$sectionData.socials[key].visible"
+          title="Show / Hide"
           >
           <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
         </button>

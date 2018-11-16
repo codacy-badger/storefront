@@ -22,7 +22,8 @@
             </select>
           </div>
           <button class="b-restrictions__item-eye controller-button is-green is-editable-show"
-                  @click="$sectionData.restrictions[key].visible = !$sectionData.restrictions[key].visible"
+            @click="$sectionData.restrictions[key].visible = !$sectionData.restrictions[key].visible"
+            title="Show / Hide"
             >
             <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
           </button>

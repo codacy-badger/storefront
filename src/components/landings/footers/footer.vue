@@ -37,6 +37,15 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
+
+const IMAGE = {
+  preview: types.Image
+}
+
+const LINK = {
+  element: types.Link
+}
 
 export default {
   name: 'Footer',
@@ -48,24 +57,18 @@ export default {
       element: types.Text
     }],
     images: [
-      {
-        preview: types.Image
-      },
-      {
-        preview: types.Image
-      }
+      _.merge({}, IMAGE),
+      _.merge({}, IMAGE)
     ],
     links: [
-      {
-        element: types.Link
-      },
-      {
-        element: types.Link
-      },
-      {
-        element: types.Link
-      }
-    ]
+      _.merge({}, LINK),
+      _.merge({}, LINK),
+      _.merge({}, LINK)
+    ],
+    defObj: {
+      images: _.merge({}, IMAGE),
+      links: _.merge({}, LINK)
+    }
   },
   props: {
     id: {
