@@ -68,6 +68,8 @@ export default {
       this.$emit('boxStyled', { type, value, unit })
     },
     showBlocks (block) {
+      const originalBlockValue = this[block]
+
       this.isShowFontSizer = false
       this.isTextSelectColor = false
       this.isShowFontFamily = false
@@ -76,7 +78,7 @@ export default {
         return
       }
 
-      this[block] = !this[block]
+      this[block] = !originalBlockValue
     },
     setTextSelectColor () {
       this.boxMode('color', this.textSelectColor && this.textSelectColor.hex, '')
@@ -108,17 +110,20 @@ export default {
         </button>
       </li>
       <li>
-        <button class="styler-button" title="Font size" @click="showBlocks('isShowFontSizer')">
+        <button class="styler-button" title="Font size" @click="showBlocks('isShowFontSizer')"
+          :class="{'_pressed': isShowFontSizer}">
           <VuseIcon name="fontSize"></VuseIcon>
         </button>
       </li>
       <li>
-        <button class="styler-button" title="Text color" @click="showBlocks('isTextSelectColor')">
+        <button class="styler-button" title="Text color" @click="showBlocks('isTextSelectColor')"
+          :class="{'_pressed': isTextSelectColor}">
           <VuseIcon name="palettes"></VuseIcon>
         </button>
       </li>
       <li>
-        <button class="styler-button"  title="Font name" @click="showBlocks('isShowFontFamily')">
+        <button class="styler-button"  title="Font name" @click="showBlocks('isShowFontFamily')"
+          :class="{'_pressed': isShowFontFamily}">
           <VuseIcon name="font"></VuseIcon>
         </button>
       </li>
