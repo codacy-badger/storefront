@@ -160,8 +160,8 @@ export default {
   flex-wrap: wrap
   padding: 1rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -178,31 +178,24 @@ export default {
   padding: 1rem
   cursor: pointer
   position: relative
+  display: flex
+  align-items: center
+  justify-content: center
   &.is-editable
-    resize: both
-    overflow: hidden
+    //resize: both
+    // overflow: hidden
 .b-gallery-two__item-wrap_size-big
   width: 45%
 .b-gallery-two__item-wrap_size-small
   width: 20%
 .b-gallery-two__link
-  position: absolute
   display: block
-  top: 50%
-  left: 50%
   width: 10rem
   height: 10rem
-  margin: -5rem 0 0 -5rem
   z-index: 100
   background-image: url(https://gn779.cdn.gamenet.ru/TY0Xv2riHu/75YKm/o_1lNeRV.png)
   background-size: cover
   transition: all 200ms
-  &.is-editable
-    top: 50%
-    left: 50%
-    width: 10rem
-    height: 10rem
-    margin: -5rem 0 0 -5rem
   &:hover
     transform: scale(1.2) rotate(-120deg)
 .b-gallery-two__text

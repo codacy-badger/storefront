@@ -105,8 +105,8 @@ export default {
   padding: 0 0 2rem
   min-height: 12rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     padding: 2rem 0
@@ -153,8 +153,8 @@ export default {
       &:active
         filter: brightness(50%)
       &.is-editable
-        resize: both
-        overflow: hidden
+        // resize: both
+        // overflow: hidden
       .vuse-icon
          width: 100%
          height: auto

@@ -386,9 +386,9 @@ export default {
         margin: 1rem
         visibility: visible
         position: relative
-        &.is-editable
+        /*&.is-editable
           resize: vertical
-          overflow: hidden
+          overflow: hidden*/
       &_active
         visibility: visible
         box-shadow: 0 0 2rem 0 rgba(50, 50, 50, 1)
@@ -419,9 +419,9 @@ export default {
         max-width: 100%
         max-height: 10rem
         margin: 0 auto
-        &.is-editable
+        /*&.is-editable
           resize: both
-          overflow: hidden
+          overflow: hidden*/
       &-image
         width: 100%
         margin: 0
@@ -477,9 +477,9 @@ export default {
           filter: brightness(120%)
         &:active
           filter: brightness(50%)
-        &.is-editable
+        /*&.is-editable
           resize: both
-          overflow: hidden
+          overflow: hidden*/
       &-label
         position: absolute
         left: 0
@@ -493,9 +493,9 @@ export default {
         display: flex
         align-items: center
         justify-content: center
-        &.is-editable
+        /*&.is-editable
           resize: both
-          overflow: hidden
+          overflow: hidden*/
       &-block
         margin: 3rem 1rem 1rem
         border-top: dotted rgba(255, 255, 255, 0.3) 0.1rem

@@ -41,8 +41,8 @@ export default {
   align-items: center
   height: 17rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   &__title
     width: 90%
     font-size: 1.4rem

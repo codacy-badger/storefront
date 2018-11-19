@@ -66,8 +66,8 @@ export default {
   align-items: center
   justify-content: center
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
 .b-button
   position: relative
   font-size: 3rem
@@ -91,7 +91,7 @@ export default {
   &:active
     filter: brightness(50%)
   &.is-editable
-    resize: both
-    overflow: hidden
+    // resize: both
+    // overflow: hidden
 
 </style>
