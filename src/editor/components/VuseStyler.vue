@@ -15,43 +15,51 @@
       </li>
       <!-- aligned -->
       <li v-if="options.aligned">
-        <button class="styler-button" @click="updateOption('align')" title="Text align">
+        <button class="styler-button" @click="updateOption('align')" title="Text align"
+          :class="{'_pressed': currentOption === 'align'}">
           <VuseIcon name="align"></VuseIcon>
         </button>
       </li>
       <!-- font and him styles-->
       <li v-if="options.typography">
-        <button class="styler-button" @click="updateOption('textStyle')" title="Text style">
+        <button class="styler-button" @click="updateOption('textStyle')" title="Text style"
+          :class="{'_pressed': currentOption === 'textStyle'}">
           <VuseIcon name="textStyle"></VuseIcon>
         </button>
       </li>
       <!-- background -->
       <li v-if="options.background || type === 'section' || type === 'galleryItem' || type === 'product'">
-        <button class="styler-button" @click="updateOption('colorer')" title="Set background">
+        <button class="styler-button" @click="updateOption('colorer')" title="Set background"
+          :class="{'_pressed': currentOption === 'colorer'}">
           <VuseIcon name="pic"></VuseIcon>
         </button>
       </li>
       <!-- colorFill -->
       <li v-if="options.colorFill">
-        <button class="styler-button" @click="updateOption('colorFill')" title="Change icon fill color">
+        <button class="styler-button" @click="updateOption('colorFill')"
+        title="Change icon fill color"
+        :class="{'_pressed': currentOption === 'colorFill'}">
           <VuseIcon name="fill"></VuseIcon>
         </button>
       </li>
       <!-- link -->
       <li v-if="options.hasLink">
-        <button class="styler-button" @click="updateOption('link')" title="Link">
+        <button class="styler-button" @click="updateOption('link')" title="Link"
+          :class="{'_pressed': currentOption === 'link'}">
           <VuseIcon name="link"></VuseIcon>
         </button>
       </li>
       <!-- shape -->
       <li v-if="options.shape">
-        <button class="styler-button" @click="updateOption('shape')" title="Change shape">
+        <button class="styler-button" @click="updateOption('shape')" title="Change shape"
+          :class="{'_pressed': currentOption === 'shape'}">
           <VuseIcon name="fillet"></VuseIcon>
         </button>
       </li>
       <!-- hover -->
       <li v-if="options.pseudo">
-        <button class="styler-button" @click="updateOption('pseudo')" title="Hover">
+        <button class="styler-button" @click="updateOption('pseudo')" title="Hover"
+          :class="{'_pressed': currentOption === 'pseudo'}">
           <VuseIcon name="hand"></VuseIcon>
         </button>
       </li>
@@ -126,7 +134,8 @@
         <ul class="colorer">
           <li v-if="type !== 'button' && type !== 'galleryItem' && type !== 'product'">
             <button class="styler-button" @click="showBackgroundSettingsSection('link')"
-              title="Set image url">
+              title="Set image url"
+              :class="{'_pressed': backgroundSettingsShow.link}">
               <VuseIcon name="link"></VuseIcon>
             </button>
           </li>
@@ -149,24 +158,27 @@
 
           <li v-if="imageBgSelected === true || videoBgSelected === true">
             <button class="styler-button" @click="identifyBackgroundSettingsSection"
-              title="Change image settings">
+              title="Change image settings"
+              :class="{'_pressed': (imageBgSelected && backgroundSettingsShow.image) || (videoBgSelected && backgroundSettingsShow.video)}">
               <VuseIcon name="cog"></VuseIcon>
             </button>
           </li>
 
           <li>
             <button class="styler-button" @click="showColorPeckerSection"
-              title="Set background color">
+              title="Set background color"
+              :class="{'_pressed': backgroundSettingsShow.color}">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
         </ul>
 
-        <div v-if="backgroundSettingsShow.color === true" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="setBackgroundColor(backgroundColor)" v-model="backgroundColor"></sketch-color-pecker>
-          </div>
-        </div>
+        <ControlColorPicker
+          v-if="backgroundSettingsShow.color"
+          v-model="backgroundColor"
+          @change="setBackgroundColor"
+          @close="closeBackgroundColorPicker"
+        />
 
         <div v-if="backgroundSettingsShow.link === true" class="b-styler__bg_options_container">
           <div class="b-styler__bg_options__item">
@@ -233,16 +245,17 @@
 
       <!-- Set color fill-->
       <li v-if="currentOption === 'colorFill'">
-        <ControlColorFill
-          @boxStyled="onBoxStyled">
-        </ControlColorFill>
+        <ControlColorPicker
+          @change="setColorFill"
+          @close="updateOption('')"
+        />
       </li>
 
       <!-- Set link -->
       <li v-if="currentOption === 'link'">
         <ControlSetUrl
           v-bind:url="options.href"
-          v-bind:target="options.target"
+          v-bind:target="options.target || ''"
           v-bind:isBox="options.box"
           @setUrl="addLink">
         </ControlSetUrl>
@@ -263,7 +276,8 @@
           v-bind:fontSize="fontSize"
           v-bind:fontFamily="fontFamily"
           @styled="onBoxAligned"
-          @boxStyled="onBoxStyled">
+          @boxStyled="onBoxStyled"
+          @updatePopper="updatePopper">
         </ControlStyleText>
       </li>
 
@@ -299,7 +313,8 @@
         <ul class="align">
           <li>
             <button class="styler-button" @click="showPseudoBg = !showPseudoBg"
-              title="Set hover color">
+              title="Set hover color"
+              :class="{'_pressed': showPseudoBg}">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
@@ -311,11 +326,12 @@
           </li>
         </ul>
 
-        <div v-if="showPseudoBg" class="b-styler__bg_options_container">
-          <div class="b-styler__bg_options__item">
-            <sketch-color-pecker @click.native="changePseudoStyle({ 'background-color': backgroundHoverColor.hex + ' !important' })" v-model="backgroundHoverColor"></sketch-color-pecker>
-          </div>
-        </div>
+        <ControlColorPicker
+          v-if="showPseudoBg"
+          v-model="backgroundHoverColor"
+          @change="setBackgroundHoverColor"
+          @close="closeBackgroundHoverColorPicker"
+        />
       </li>
 
       <li v-if="currentOption === 'size'">
@@ -339,9 +355,8 @@ import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
-import ControlColorFill from './controls/TheControlColorFill.vue'
+import ControlColorPicker from './controls/ControlColorPicker.vue'
 import { isParentTo, randomPoneId, getPseudoTemplate, correctArray } from '../util'
-import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
 import * as _ from 'lodash-es'
@@ -361,8 +376,7 @@ export default {
     ControlStyleText,
     ControlShape,
     ControlSetUrl,
-    ControlColorFill,
-    SketchColorPecker: Sketch
+    ControlColorPicker
   },
   props: {
     el: {
@@ -376,7 +390,10 @@ export default {
       }
     },
     type: {
-      type: String,
+      // @todo fix it properly
+      // Somewhere deep inside there is undefined value passed through
+      // causing String type check to fail
+      // type: String,
       required: true
     },
     name: {
@@ -626,7 +643,14 @@ export default {
       this.addStyle(styles.type, `${styles.value}${styles.unit}`)
     },
     updateOption (option) {
-      this.currentOption = option
+      if (this.currentOption === option) {
+        this.currentOption = ''
+      } else {
+        this.currentOption = option
+      }
+      this.updatePopper()
+    },
+    updatePopper () {
       this.$nextTick(() => {
         this.popper.update()
       })
@@ -814,7 +838,7 @@ export default {
       document.addEventListener('click', this.hideStyler, true)
       // TODO: this work incorrectly
       // document.addEventListener('blur', this.hideStyler);
-      this.currentOption = ''
+      // this.currentOption = ''
     },
     hideStyler (event) {
       if (event && isParentTo(event.target, this.$el)) {
@@ -886,12 +910,39 @@ export default {
           self.isRequestProcess = false
         })
     },
-    setBackgroundColor: function () {
+    /**
+     * Applies the color value
+     * That one goes for boxes background
+     */
+    setBackgroundColor () {
       this.imageBgSelected = false
       this.videoBgSelected = false
-      this.backgroundSettingsShow.color = false
       this.addStyle('background-color', this.backgroundColor.hex8)
       this.addStyle('border-color', this.backgroundColor.hex8)
+    },
+    /**
+     * Applies the color value
+     * That one goes for buttons hover
+     */
+    setBackgroundHoverColor () {
+      this.changePseudoStyle({
+        'background-color': this.backgroundHoverColor.hex + ' !important'
+      })
+    },
+    /**
+     * Applies the color value
+     * That one goes icons fill color
+     */
+    setColorFill ({ hex }) {
+      this.onBoxStyled({ type: 'fill', value: hex, unit: '' })
+    },
+    closeBackgroundColorPicker () {
+      this.backgroundSettingsShow.color = false
+      this.updatePopper()
+    },
+    closeBackgroundColorHoverPicker () {
+      this.showPseudoBg = false
+      this.updatePopper()
     },
     /**
      * Add style to pseudocalss
@@ -1081,7 +1132,8 @@ export default {
     height: 3rem
     border-radius: 3rem
     margin: 0 5px 0 0
-    &:hover
+    &:hover,
+    &._pressed
       background: darken($dark, 20%)
     &:first-child
       margin-left: 5px
