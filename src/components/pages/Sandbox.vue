@@ -13,19 +13,19 @@
 
     BaseButton
     <BaseButton
-      :variant="buttons[0].variant"
+      :variant="'black'"
       >
       Button
     </BaseButton>
     <BaseButton
-      :variant="buttons[1].variant"
-      :transparent="buttons[1].transparent"
+      :variant="'gray'"
+      :transparent="true"
       >
       Button
     </BaseButton>
     <BaseButton
-      :variant="buttons[2].variant"
-      :transparent="buttons[2].transparent"
+      :variant="'light-gray'"
+      :transparent="false"
       >
       Button
     </BaseButton>
@@ -35,16 +35,7 @@
 
 <script>
 export default {
-  name: 'Sandbox',
-  data () {
-    return {
-      buttons: [
-        { variant: 'black', transparent: false },
-        { variant: 'gray', transparent: true },
-        { variant: 'light-gray', transparent: false }
-      ]
-    }
-  }
+  name: 'Sandbox'
 }
 </script>
 

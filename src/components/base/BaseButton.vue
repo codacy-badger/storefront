@@ -1,6 +1,4 @@
 <script>
-import booleanValidator from '../helpers/boolean-validator'
-
 export default {
   props: {
     /* color variant button */
@@ -28,7 +26,7 @@ export default {
     /* transparent button */
     transparent: {
       default: false,
-      validator: booleanValidator('BaseButton', 'transparent')
+      type: Boolean
     },
     /* type button */
     type: {
@@ -42,22 +40,21 @@ export default {
     /* is presset button */
     pressed: {
       default: false,
-      validator: booleanValidator('BaseButton', 'pressed')
+      type: Boolean
     },
     /* is disabled */
     disabled: {
       default: false,
-      validator: booleanValidator('BaseButton', 'disabled')
+      type: Boolean
     }
   },
   computed: {
-    setClasses () {
+    btnClasses () {
       const name = 'b-pth-base-button'
       const classes = [`${name}_${this.variant}`, `${name}_${this.size}`]
       if (this.pressed) {
         classes.push(name + '_pressed')
       }
-      console.log(this.transparent)
       if (this.transparent) {
         classes.push(name + '_transparent')
       }
@@ -69,7 +66,7 @@ export default {
 
 <template>
   <button class="b-pth-base-button"
-    :class="setClasses"
+    :class="btnClasses"
     :type="type"
     :disabled="disabled"
     :transparent="transparent"
