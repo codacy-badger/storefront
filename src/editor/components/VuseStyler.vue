@@ -1080,8 +1080,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../assets/sass/app'
-
 .styler
   position: absolute
   top: 0
