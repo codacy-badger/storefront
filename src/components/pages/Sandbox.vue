@@ -31,7 +31,7 @@
     </BaseButton>
     <hr>
     Icons
-    <div class="icons">
+    <div class="b-icons">
       <icon-base name="left" iconColor="red"><icon-align-left></icon-align-left></icon-base>
       <icon-base name="center" iconColor="green"><icon-align-center></icon-align-center></icon-base>
       <icon-base name="right" iconColor="magenta"><icon-align-right></icon-align-right></icon-base>
@@ -61,8 +61,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.icons
-  width: 700px
+.b-icons
+  width: 70rem
   display: flex
   align-items: center
   justify-content: space-between
