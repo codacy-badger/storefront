@@ -47,10 +47,9 @@
       <icon-base name="underline" viewBox="0 0 12 15"><icon-font-underline></icon-font-underline></icon-base>
       <icon-base name="menu" viewBox="0 0 16 16"><icon-menu></icon-menu></icon-base>
       <icon-base name="plus" viewBox="0 0 16 16"><icon-plus></icon-plus></icon-base>
-      <!-- TODO: вот эти 3 отправятся на доработку -->
-      <icon-base name="desktop"><icon-platform-desktop></icon-platform-desktop></icon-base>
-      <icon-base name="laptop"><icon-platform-laptop></icon-platform-laptop></icon-base>
-      <icon-base name="mobile"><icon-platform-mobile></icon-platform-mobile></icon-base>
+      <icon-base name="desktop" viewBox="0 0 16 14"><icon-platform-desktop></icon-platform-desktop></icon-base>
+      <icon-base name="laptop" viewBox="0 0 22 16"><icon-platform-laptop></icon-platform-laptop></icon-base>
+      <icon-base name="mobile" viewBox="0 0 10 14"><icon-platform-mobile></icon-platform-mobile></icon-base>
     </div>
   </div>
 </template>
