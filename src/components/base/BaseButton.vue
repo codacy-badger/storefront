@@ -1,8 +1,8 @@
 <script>
 export default {
   props: {
-    /* color variant button */
-    variant: {
+    /* variant button */
+    color: {
       default: 'black',
       type: String,
       validator (value) {
@@ -51,7 +51,7 @@ export default {
   computed: {
     btnClasses () {
       const name = 'b-pth-base-button'
-      const classes = [`${name}_${this.variant}`, `${name}_${this.size}`]
+      const classes = [`${name}_${this.color}`, `${name}_${this.size}`]
       if (this.pressed) {
         classes.push(name + '_pressed')
       }

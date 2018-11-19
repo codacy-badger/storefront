@@ -13,18 +13,18 @@
 
     BaseButton
     <BaseButton
-      :variant="'black'"
+      :color="'black'"
       >
       Button
     </BaseButton>
     <BaseButton
-      :variant="'gray'"
+      :color="'gray'"
       :transparent="true"
       >
       Button
     </BaseButton>
     <BaseButton
-      :variant="'light-gray'"
+      :color="'light-gray'"
       :transparent="false"
       >
       Button
