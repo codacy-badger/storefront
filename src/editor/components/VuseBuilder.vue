@@ -45,20 +45,9 @@
             <VuseIcon name="back"></VuseIcon>
           </button>
         </div>
-        <div class="main-panel">
-          <button class="controller-button" tooltip-position="top" tooltip="on desktop" :class="{ 'is-blue': device === 'is-desktop', 'is-green': device !== 'is-desktop' }" @click="setDevice('is-desktop')">
-            <VuseIcon name="monitor"></VuseIcon>
-          </button>
-          <button class="controller-button" tooltip-position="top" tooltip="on laptop" :class="{ 'is-blue': device === 'is-laptop', 'is-green': device !== 'is-laptop' }" @click="setDevice('is-laptop')">
-            <VuseIcon name="laptop"></VuseIcon>
-          </button>
-          <button class="controller-button" tooltip-position="top" tooltip="on tablet" :class="{ 'is-blue': device === 'is-tablet', 'is-green': device !== 'is-tablet' }" @click="setDevice('is-tablet')">
-            <VuseIcon name="tablet"></VuseIcon>
-          </button>
-          <button class="controller-button" tooltip-position="top" tooltip="on mobile" :class="{ 'is-blue': device === 'is-mobile', 'is-green': device !== 'is-mobile' }" @click="setDevice('is-mobile')">
-            <VuseIcon name="mobile"></VuseIcon>
-          </button>
-        </div>
+        <!-- platform selection menu -->
+        <MenuPlatforms @setDevice="setDevice"></MenuPlatforms>
+        <!--/ platform selection menu -->
     </div>
     <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
         <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
@@ -208,13 +197,15 @@
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
+import MenuPlatforms from '@components/menu/MenuPlatforms'
 import { mapState, mapActions } from 'vuex'
 import api from '@store/api'
 
 export default {
   name: 'VuseBuilder',
   components: {
-    VuseIcon
+    VuseIcon,
+    MenuPlatforms
   },
   props: {
     showIntro: {
