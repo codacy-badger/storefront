@@ -18,6 +18,12 @@ const routes = [
     alias: ''
   },
   {
+    path: '/_sandbox/',
+    component: () => import('@components/pages/Sandbox'),
+    name: 'Sandbox',
+    alias: ''
+  },
+  {
     path: '/404',
     name: '404',
     component: lazyLoadView(import(/* webpackChunkName: "404" */ '@components/NotFound'))
@@ -42,10 +48,10 @@ function lazyLoadView (AsyncView) {
   const AsyncHandler = () => ({
     component: AsyncView,
     // A component to use while the component is loading.
-    loading: import('@components/base/_base-loading'),
+    loading: import('@components/base/BaseLoading'),
     // A fallback component in case the timeout is exceeded
     // when loading the component.
-    error: import('@components/base/_base-timeout'),
+    error: import('@components/base/BaseTimeout'),
     // Delay before showing the loading component.
     // Default: 200 (milliseconds).
     delay: 70,

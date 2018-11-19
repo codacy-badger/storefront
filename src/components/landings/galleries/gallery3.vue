@@ -4,23 +4,23 @@
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"
                v-for="(item, index) in $sectionData.images" :key="index"
-               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
+               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'galleryItem'}"
                :data-index="index"
                :style="$sectionData.images[index].preview.styles"
             >
             <div class="b-gallery-three-block__item-wrap">
               <a gallery-three-link="" :gallery-three-url="$sectionData.images[index].button.href" class="b-gallery-three-block__item-link"
-                 v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
-                 v-bind:style="$sectionData.images[index].button.styles"
+                 v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
+                 :style="$sectionData.images[index].button.styles"
                  @dblclick="onClick(item, index)"
               >
               </a>
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
-                v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title` }"
-                v-html="$sectionData.images[index].title.text"
-                :style="$sectionData.images[index].title.styles"
+                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
+                v-html="$sectionData.images[index].label.text"
+                :style="$sectionData.images[index].label.styles"
                 >
               </span>
             </div>
@@ -31,11 +31,11 @@
           <div gallery-three-popup-padd="" v-bind:style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
               <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
               <div class="l-popup__logos">
-                  <div v-for="(logo, index) in $sectionData.logos" v-bind:class="{'is-editable': $builder.isEditing}" :key="index" class="b-logo">
-                    <uploader class="b-logo__img" :path="`$sectionData.logos[${index}].element`"
-                      v-styler:for="{ el: $sectionData.logos[index].element, path: `$sectionData.logos[${index}].element` }"
-                      :style="$sectionData.logos[index].element.styles"
-                      ></uploader>
+                  <div class="b-logo" v-for="(logo, index) in $sectionData.logos"
+                    v-bind:class="{'is-editable': $builder.isEditing}" :key="index"
+                    v-styler:for="{ el: $sectionData.logos[index].element, path: `$sectionData.logos[${index}].element`, type: 'image' }"
+                    :style="$sectionData.logos[index].element.styles"
+                    >
                   </div>
               </div>
               <div gallery-three-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
@@ -55,6 +55,13 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
+
+const GALLERY_ITEM = {
+  preview: types.Image,
+  label: types.Text,
+  button: types.Button
+}
 
 export default {
   name: 'Gallery3',
@@ -64,22 +71,13 @@ export default {
     mainStyle: types.StyleObject,
     button: types.Button,
     images: [
-      {
-        preview: types.Image,
-        title: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        title: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        title: types.Text,
-        button: types.Button
-      }
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM)
     ],
+    defObj: {
+      images: _.merge({}, GALLERY_ITEM)
+    },
     logos: [
       {
         element: types.Logo
@@ -161,8 +159,8 @@ export default {
   align-items: center
   padding: 1rem
   &.is-editable
-   resize: vertical
-   overflow: hidden
+   // resize: vertical
+   // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -183,14 +181,13 @@ export default {
     @media only screen and (max-width: 460px)
       &
         margin-right: 0
-
     &__item
       width: 20rem
       min-width: 10rem
       margin: 1rem
       &.is-editable
-       resize: both
-       overflow: hidden
+       // resize: both
+       // overflow: hidden
        &:active
          border: dotted #333 1px
       &-wrap
@@ -201,9 +198,12 @@ export default {
         padding: 1rem
         cursor: pointer
         position: relative
+        display: flex
+        align-items: center
+        justify-content: center
         &.is-editable
-          resize: both
-          overflow: hidden
+          // resize: both
+          // overflow: hidden
       .is-tablet &
         width: 50%
       .is-mobile &
@@ -216,10 +216,8 @@ export default {
         &
           width: 100%
           padding: 0 0 2rem 0
-
       &-wrap:hover &-content
         background: linear-gradient(135deg, rgba(204, 204, 204, 0.1) 0%, rgba(161, 161, 161, 0.1) 100%)
-
       &-title
         font-size: 1.6rem
         line-height: 1.4
@@ -229,32 +227,17 @@ export default {
         &::selection, & ::selection
           color: #ff0
           background: #000
-
       &-link
-        position: absolute
         display: block
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        min-width: 100%
-        min-height: 100%
+        width: 10rem
+        height: 10rem
         margin: 0
         z-index: 100
         background-image: url(https://gn779.cdn.gamenet.ru/TY0Xv2riHu/75YKm/o_1lNeRV.png)
         background-size: cover
         transition: all 200ms
-        &.is-editable
-          top: 50%
-          left: 50%
-          width: 10rem
-          height: 10rem
-          min-width: auto
-          min-height: auto
-          margin: -5rem 0 0 -5rem
         &:hover
           transform: scale(1.2) rotate(-120deg)
-
   &-btn-container
     text-align: center
     position: relative
@@ -283,8 +266,8 @@ export default {
       &:hover
         background-color: #fcff00
       &.is-editable
-        resize: both
-        overflow: hidden
+        // resize: both
+        // overflow: hidden
 
 .l-popup__logos
   margin: 2rem 0
@@ -302,7 +285,7 @@ export default {
   width: 100%
   height: 100%
   background-color: rgba(0, 0, 0, 0.8)
-  z-index: 199
+  z-index: 99999
   cursor: pointer
   &_flex
     display: -webkit-box
@@ -348,5 +331,22 @@ export default {
 .l-popup__close:after
   -webkit-transform: rotate(45deg)
   transform: rotate(45deg)
+
+.b-logo
+  display: inline-block
+  margin: 1rem auto
+  text-align: center
+  width: 20rem
+  height: 20rem
+  .is-editable &
+    resize: both
+    overflow: hidden
+  .is-mobile &
+    margin: 1rem auto
+    height: auto
+  @media only screen and (max-width: 540px)
+    &
+      margin: 1rem auto
+      height: auto
 
 </style>

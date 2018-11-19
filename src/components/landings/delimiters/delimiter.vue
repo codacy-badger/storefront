@@ -32,6 +32,6 @@ export default {
   justify-content: center
   min-height: 10rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
 </style>

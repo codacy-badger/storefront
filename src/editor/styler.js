@@ -14,6 +14,7 @@ function installStyler ({ builder, Vue }) {
       const section = vnode.context.$section
       const rootApp = vnode.context.$root.$el
       let name
+      let type = false
 
       rootApp.appendChild(newNode)
       el.classList.add('is-editable')
@@ -24,11 +25,15 @@ function installStyler ({ builder, Vue }) {
         name = binding.expression
       }
 
+      if (binding.value.type !== undefined) {
+        type = binding.value.type
+      }
+
       section.stylers.push(new StylerInstance({
         propsData: {
           el,
           section: section,
-          type: (binding.arg !== 'index' && binding.arg !== 'for' && binding.arg) || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
+          type: (binding.arg !== 'index' && binding.arg !== 'for' && binding.arg) || type || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
           options: binding.arg === 'for' || binding.arg === 'galleryItem'|| binding.arg === 'product' ? binding.value.el : binding.value,
           name: name
         }

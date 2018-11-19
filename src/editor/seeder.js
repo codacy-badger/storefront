@@ -70,6 +70,7 @@ const data = new Map([
   // [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default image',
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     background: true,
@@ -107,6 +108,7 @@ const data = new Map([
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
       'background-color': '#fff',
+      'width': '',
       'height': ''
     }
   }))],
@@ -139,7 +141,7 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: true,
+      resizable: false,
       removable: true,
       background: true,
       styles: {
@@ -147,14 +149,13 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': false,
-        'height': ''
+        'background-color': false
       }
     })
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
+      box: false,
       canCopy: true,
       resizable: true,
       hasLink: true,
@@ -182,6 +183,7 @@ const data = new Map([
         'font-family': 'Open Sans',
         'text-decoration': false,
         'justify-content': false,
+        'text-align': 'center',
         'width': '',
         'height': ''
       }
@@ -279,7 +281,7 @@ const data = new Map([
   [String, 'This is pretty neat'],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
-    resizable: true,
+    resizable: false,
     alt: 'Default image',
     url: 'https://gn548.cdn.gamenet.ru/TY0Xv2riHu/772oj/o_OnTml.png',
     background: true,
@@ -311,7 +313,7 @@ const data = new Map([
 
 export default class Seeder {
   // Seeds values using a schema.
-  static seed (schema) {
+  static seed(schema) {
     if (isObject(schema)) {
       return Object.keys(schema).reduce((values, key) => {
         values[key] = Seeder.seed(schema[key])

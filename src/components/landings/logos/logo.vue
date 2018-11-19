@@ -43,8 +43,8 @@ export default {
   color: #000
   padding: 1rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
 .b-logo
   display: inline-block
   margin: 1rem auto
@@ -52,8 +52,8 @@ export default {
   width: 20rem
   height: 20rem
   .is-editable &
-    resize: both
-    overflow: hidden
+    // resize: both
+    // overflow: hidden
   .is-mobile &
     margin: 1rem auto
     height: auto

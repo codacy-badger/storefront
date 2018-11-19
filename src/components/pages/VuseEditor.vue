@@ -26,10 +26,19 @@ import description from '@components/landings/texts/description'
 import products from '@components/landings/products/products'
 import productsExtend from '@components/landings/products/productsExtend'
 import Slogan from '@components/landings/texts/slogan'
+import bob from '@components/landings/test/slots'
+import PartButton from '@components/landings/test/partButton'
+import PartTitle from '@components/landings/test/partTitle'
+import Sandbox from '@components/landings/test/sandbox'
+import ElementsList from '@components/landings/test/elementsList'
 
 Vuse.mix({
   components: {
-    Uploader
+    Uploader,
+    Sandbox,
+    ElementsList,
+    PartButton,
+    PartTitle
   }
 })
 
@@ -50,6 +59,7 @@ Vuse.component('Description', description)
 Vuse.component('Products', products)
 Vuse.component('ProductsExtend', productsExtend)
 Vuse.component('Slogan', Slogan)
+Vuse.component('Bob', bob)
 
 Vuse.use(pwa)
 

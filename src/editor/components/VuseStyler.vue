@@ -2,6 +2,17 @@
   <div class="styler is-editable" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
        @click.stop="">
     <ul class="styler-list">
+      <!-- sort -->
+      <li v-if="isArrayEl && !isFirstInArray">
+        <button class="styler-button" @click="sort('up')" title="Up" style="transform: rotate(180deg)">
+          <VuseIcon name="arrowDown"></VuseIcon>
+        </button>
+      </li>
+      <li v-if="isArrayEl && !isLastInArray">
+        <button class="styler-button" @click="sort('down')" title="Down">
+          <VuseIcon name="arrowDown"></VuseIcon>
+        </button>
+      </li>
       <!-- aligned -->
       <li v-if="options.aligned">
         <button class="styler-button" @click="updateOption('align')" title="Text align">
@@ -22,7 +33,7 @@
       </li>
       <!-- colorFill -->
       <li v-if="options.colorFill">
-        <button class="styler-button" @click="updateOption('colorFill')" title="Change fill color icon">
+        <button class="styler-button" @click="updateOption('colorFill')" title="Change icon fill color">
           <VuseIcon name="fill"></VuseIcon>
         </button>
       </li>
@@ -45,20 +56,20 @@
         </button>
       </li>
 
-      <template v-if="type === 'product' && section.data.products.length !== 0">
+      <template v-if="type === 'product' || type === 'galleryItem'">
         <li>
-          <button class="styler-button" @click="copyItemProduct">
+          <button class="styler-button" @click="addItem('create')" title="Add item">
             <VuseIcon name="plus"></VuseIcon>
+          </button>
+        </li>
+        <li>
+          <button class="styler-button" @click="addItem('clone')" title="Copy item">
+            <VuseIcon name="copy"></VuseIcon>
           </button>
         </li>
       </template>
 
       <template v-if="type === 'galleryItem'">
-        <li>
-          <button class="styler-button" @click="copyItemGallery">
-            <VuseIcon name="plus"></VuseIcon>
-          </button>
-        </li>
         <li>
           <div style="display: none;">
             <form>
@@ -71,7 +82,7 @@
           </div>
         </li>
         <li v-if="type === 'link'">
-          <button class="styler-button" @click="updateOption('link')">
+          <button class="styler-button" @click="updateOption('link')" title="Link">
             <VuseIcon name="link"></VuseIcon>
           </button>
         </li>
@@ -79,12 +90,12 @@
 
       <template v-if="type === 'grid'">
         <li>
-          <button class="styler-button" @click="selectDevice('mobile')">
+          <button class="styler-button" @click="selectDevice('mobile')" title="Use for mobile">
             <VuseIcon name="mobile"></VuseIcon>
           </button>
         </li>
         <li>
-          <button class="styler-button" @click="selectDevice('desktop')">
+          <button class="styler-button" @click="selectDevice('desktop')" title="Use for desktop">
             <VuseIcon name="laptop"></VuseIcon>
           </button>
         </li>
@@ -98,6 +109,12 @@
       </li>
 
       <!-- dimensions -->
+      <li v-if="options.resizable">
+        <button class="styler-button" @click="updateOption('size')" title="Delete">
+          <VuseIcon name="cog" class="vuse-icon"></VuseIcon>
+        </button>
+      </li>
+
       <li v-if="options.resizable" class="styler-list__dimensions">
         <span v-text="dmsToFixed.width"></span> x <span v-text="dmsToFixed.height"></span>
       </li>
@@ -108,7 +125,8 @@
       <li v-if="currentOption === 'colorer'">
         <ul class="colorer">
           <li v-if="type !== 'button' && type !== 'galleryItem' && type !== 'product'">
-            <button class="styler-button" @click="showBackgroundSettingsSection('link')">
+            <button class="styler-button" @click="showBackgroundSettingsSection('link')"
+              title="Set image url">
               <VuseIcon name="link"></VuseIcon>
             </button>
           </li>
@@ -124,19 +142,21 @@
               </form>
             </div>
 
-            <button class="styler-button" @click="choseBackground">
+            <button class="styler-button" @click="choseBackground" title="Upload image">
               <VuseIcon name="upload"></VuseIcon>
             </button>
           </li>
 
           <li v-if="imageBgSelected === true || videoBgSelected === true">
-            <button class="styler-button" @click="identifyBackgroundSettingsSection">
+            <button class="styler-button" @click="identifyBackgroundSettingsSection"
+              title="Change image settings">
               <VuseIcon name="cog"></VuseIcon>
             </button>
           </li>
 
           <li>
-            <button class="styler-button" @click="showColorPeckerSection">
+            <button class="styler-button" @click="showColorPeckerSection"
+              title="Set background color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
@@ -152,7 +172,7 @@
           <div class="b-styler__bg_options__item">
             <div class="input-group is-rounded has-itemAfter is-primary b-styler__bg_options__item">
               <input class="input" type="text" placeholder="Link to image or video" v-model="backgroundUrl"/>
-              <button class="button" @click="addBackgroundAsLink">
+              <button class="button" @click="addBackgroundAsLink" title="Save">
                 <VuseIcon name="link"></VuseIcon>
               </button>
             </div>
@@ -278,7 +298,8 @@
       <li v-if="currentOption === 'pseudo'">
         <ul class="align">
           <li>
-            <button class="styler-button" @click="showPseudoBg = !showPseudoBg">
+            <button class="styler-button" @click="showPseudoBg = !showPseudoBg"
+              title="Set hover color">
               <VuseIcon name="palettes"></VuseIcon>
             </button>
           </li>
@@ -297,6 +318,16 @@
         </div>
       </li>
 
+      <li v-if="currentOption === 'size'">
+        <form @change="changeSize" class="b-styler__dimentions">
+          <div class="b-styler__dimentions--edit">
+            w: <input data-type="w" type="number" v-model="dimensions.width">
+            h: <input data-type="h" type="number" v-model="dimensions.height">
+          </div>
+          <input type="checkbox" v-model="keepProportions" id="keepProp"> <label for="keepProp">Keep proportions</label>
+        </form>
+      </li>
+
     </ul><!--/.styler-list-->
   </div>
 </template>
@@ -309,12 +340,11 @@ import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
 import ControlColorFill from './controls/TheControlColorFill.vue'
-import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, correctArray } from '../util'
 import { Sketch } from 'vue-color'
 import $ from 'jquery'
 import axios from 'axios'
 import * as _ from 'lodash-es'
-import ResizeObserver from 'resize-observer-polyfill'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
@@ -412,6 +442,8 @@ export default {
       width: null,
       height: null
     },
+    proportions: null,
+    keepProportions: true,
     showPseudoBg: false,
     pseudoStyles: {},
     animation: { name: 'none', className: '' },
@@ -421,14 +453,30 @@ export default {
       { name: 'fade', className: 'ptah-a-fade' },
       { name: 'shake', className: 'ptah-a-shake' },
       { name: 'bounce', className: 'ptah-a-bounce' }
-    ]
+    ],
+    resizer: null
   }),
   computed: {
     dmsToFixed () {
       return {
-        width: this.dimensions.width.toFixed(0),
-        height: this.dimensions.height.toFixed(0)
+        width: parseInt(this.dimensions.width).toFixed(0),
+        height: parseInt(this.dimensions.height).toFixed(0)
       }
+    },
+    // find path to element
+    path () {
+      let path = _.split(this.name, '.')[1]
+      return _.toPath(path)
+    },
+    isArrayEl () {
+      if (this.type === 'section' || this.type === 'header') return false
+      return this.name.indexOf('[') > 0
+    },
+    isFirstInArray () {
+      return parseInt(this.path[1]) === 0
+    },
+    isLastInArray () {
+      return (parseInt(this.path[1]) + 1) === this.section.data[this.path[0]].length
     }
   },
   watch: {
@@ -490,24 +538,10 @@ export default {
         this.animation = _.find(this.animationList, ['className', name])
       }
     })
+
+    this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
   updated () {
-    if (this.options.resizable) {
-      // listen resize event, add params to element
-      let handler = (e) => {
-        this.dimensions.width = e[0].contentRect.width
-        this.dimensions.height = e[0].contentRect.height
-        if (document.getElementById('artboard') && !document.getElementById('artboard').classList.contains('fp-scroll')) {
-          this.addStyle('width', `${this.el.offsetWidth}px`)
-          this.addStyle('height', `${this.el.offsetHeight}px`)
-        }
-      }
-
-      let ro = new ResizeObserver(handler)
-      ro.observe(this.el)
-    }
-
-    this.setInitialValue()
   },
   beforeDestroy () {
     this.hideStyler()
@@ -517,6 +551,34 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
+    changeSize (e) {
+      if (this.keepProportions) {
+        if (e.target.dataset.type === 'w') {
+          this.dimensions.height = (this.dimensions.width / this.proportions).toFixed(0)
+        } else {
+          this.dimensions.width = (this.dimensions.height * this.proportions).toFixed(0)
+        }
+      }
+
+      this.addStyle('width', this.dimensions.width + 'px')
+      this.addStyle('height', this.dimensions.height + 'px')
+    },
+    sort (direction) {
+      let container = this.path[0]
+      let index = parseInt(this.path[1])
+      let newIndex = null
+
+      if (direction === 'up') {
+        newIndex = index - 1
+      } else {
+        newIndex = index + 1
+      }
+
+      if (newIndex >= 0 && newIndex < this.section.data[container].length) {
+        correctArray(this.section.data[container], [index, newIndex])
+        correctArray(this.section.schema[container], [index, newIndex])
+      }
+    },
     setInitialValue () {
       if (this.type === 'button') {
         // listen event change border-radius
@@ -681,26 +743,37 @@ export default {
         if (this.name.indexOf('[') > 0) { // if array element
           path = _.toPath(path)
           this.section.data[path[0]].splice(parseInt(path[1]), 1)
+          this.hideStyler()
         } else {
           this.section.data[path].text = ''
           this.section.data[path].url = ''
           Object.assign(this.section.data[path].styles, { 'display': 'none' })
+          this.el.remove()
+          this.$refs.styler.remove()
         }
-        this.el.remove()
-        this.$refs.styler.remove()
       }
     },
-    copyItemGallery () {
-      let newObj = JSON.parse(JSON.stringify(this.section.data.images[0]))
-      let l = Object.assign({}, newObj)
-      this.section.data.images.push(l)
-      this.section.schema.images.push(l)
-    },
-    copyItemProduct () {
-      let newObj = JSON.parse(JSON.stringify(this.section.data.products[0]))
-      let l = Object.assign({}, newObj)
-      this.section.data.products.push(l)
-      this.section.schema.products.push(l)
+    /**
+     * create/clone element in componetns
+     */
+    addItem (event) {
+      let newObj = null
+      let path = _.split(this.name, '.')[1]
+      let devObj = this.section.data.defObj
+      let obj = null
+
+      if (path.indexOf('[') > 0) {
+        path = _.toPath(path)
+      }
+
+      if (event === 'clone') {
+        newObj = JSON.parse(JSON.stringify(this.section.data[path[0]][parseInt(path[1])]))
+      } else if (event === 'create' && devObj[path[0]] !== undefined) {
+        newObj = JSON.parse(JSON.stringify(this.section.data.defObj[path[0]]))
+      }
+
+      obj = Object.assign({}, newObj)
+      this.section.data[path[0]].push(obj)
     },
     execute (command, value = null) {
       this.el.focus()
@@ -1094,15 +1167,33 @@ label
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
 
-.b-styler__bg_options_container
-  margin-top: 10px
-  padding: 15px 5px
-  border-top: 1px solid #ffffff
-  display: flex
-  flex-direction: column
-
-.b-styler__bg_options__item
-  margin-bottom: 0.2rem
+.b-styler
+  &__bg_options_container
+    margin-top: 10px
+    padding: 15px 5px
+    border-top: 1px solid #ffffff
+    display: flex
+    flex-direction: column
+  &__bg_options__item
+    margin-bottom: 0.2rem
+  &__dimentions
+    padding: 0 15px
+    &--edit
+      display: flex
+      align-items: center
+      margin-bottom: 8px
+      margin-top: 5px
+      border-top: 1px solid #fff
+      padding-top: 10px
+    input[type="number"]
+      width: 70px
+      padding: 5px
+      border-radius: 3px
+      margin: 0 10px 0 3px
+    input[type="checkbox"]
+      margin: 0 4px 0 0
+      position: relative
+      top: -1px
 
 .b-font-size
   font-family: Helvetica Neue, Helvetica, Arial
@@ -1130,4 +1221,14 @@ label
   font-size: 1.4rem
   &:hover
     filter: brightness(120%)
+.ptah-resizer
+  width: 10px
+  height: 10px
+  background: #fff
+  border: 1px solid rgba(0, 0, 0, .5)
+  cursor: se-resize
+  position: absolute
+  right: -10px
+  bottom: -10px
+  z-index: 20
 </style>

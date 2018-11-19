@@ -4,13 +4,13 @@
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"
             v-for="(item, index) in $sectionData.images"
-            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`}"
+            v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'galleryItem'}"
             :data-index="index"
             :key="index"
             :style="$sectionData.images[index].preview.styles"
           >
             <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
-               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`}"
+               v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
                v-bind:style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
               >
@@ -35,7 +35,14 @@
 
 <script>
 import * as types from '@editor/types'
+import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
+
+const GALLERY_ITEM = {
+  preview: types.Image,
+  label: types.Text,
+  button: types.Button
+}
 
 export default {
   name: 'Gallery2',
@@ -52,22 +59,13 @@ export default {
       type: types.Text
     },
     images: [
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      },
-      {
-        preview: types.Image,
-        label: types.Text,
-        button: types.Button
-      }
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM),
+      _.merge({}, GALLERY_ITEM)
     ],
+    defObj: {
+      images: _.merge({}, GALLERY_ITEM)
+    },
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
@@ -162,8 +160,8 @@ export default {
   flex-wrap: wrap
   padding: 1rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -180,31 +178,24 @@ export default {
   padding: 1rem
   cursor: pointer
   position: relative
+  display: flex
+  align-items: center
+  justify-content: center
   &.is-editable
-    resize: both
-    overflow: hidden
+    //resize: both
+    // overflow: hidden
 .b-gallery-two__item-wrap_size-big
   width: 45%
 .b-gallery-two__item-wrap_size-small
   width: 20%
 .b-gallery-two__link
-  position: absolute
   display: block
-  top: 50%
-  left: 50%
   width: 10rem
   height: 10rem
-  margin: -5rem 0 0 -5rem
   z-index: 100
   background-image: url(https://gn779.cdn.gamenet.ru/TY0Xv2riHu/75YKm/o_1lNeRV.png)
   background-size: cover
   transition: all 200ms
-  &.is-editable
-    top: 50%
-    left: 50%
-    width: 10rem
-    height: 10rem
-    margin: -5rem 0 0 -5rem
   &:hover
     transform: scale(1.2) rotate(-120deg)
 .b-gallery-two__text

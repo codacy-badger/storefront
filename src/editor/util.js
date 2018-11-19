@@ -95,6 +95,7 @@ export function cleanDOM (artboard) {
   const editables = Array.from(artboard.querySelectorAll('.is-editable'))
   const uploaders = Array.from(artboard.querySelectorAll('.uploader'))
   const stylers = Array.from(artboard.querySelectorAll('.styler'))
+  const controls = Array.from(artboard.querySelectorAll('.ptah-control'))
 
   editables.forEach((el) => {
     el.contentEditable = 'inherit'
@@ -110,6 +111,9 @@ export function cleanDOM (artboard) {
   })
   stylers.forEach((styler) => {
     styler.remove()
+  })
+  controls.forEach((control) => {
+    control.remove()
   })
 }
 
@@ -159,4 +163,13 @@ export function gtagSetup (tag) {
             gtag('config', '${tag}');
           </script>
           `
+}
+
+/**
+ * Swap array elements
+ * @param _arr
+ * @param _param {Array} - [index, newIndex]
+ */
+export function correctArray (_arr, _param) {
+  _arr[_param[1]] = _arr.splice(_param[0], 1, _arr[_param[1]])[0]
 }

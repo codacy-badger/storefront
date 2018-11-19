@@ -22,7 +22,8 @@
             </select>
           </div>
           <button class="b-restrictions__item-eye controller-button is-green is-editable-show"
-                  @click="$sectionData.restrictions[key].visible = !$sectionData.restrictions[key].visible"
+            @click="$sectionData.restrictions[key].visible = !$sectionData.restrictions[key].visible"
+            title="Show / Hide"
             >
             <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
           </button>
@@ -45,7 +46,7 @@ export default {
   group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,
-    image: types.Image,
+    image: types.ImageNoResize,
     restrictions: {
       'age': {
         visible: true,
@@ -115,8 +116,8 @@ export default {
   padding: 3rem 0 1rem
   min-height: 12rem
   &.is-editable
-    resize: vertical
-    overflow: hidden
+    // resize: vertical
+    // overflow: hidden
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     padding: 2rem 0
@@ -171,8 +172,8 @@ export default {
       display: inline-block
       padding: 0 1rem 1rem 0
       .is-editable > &
-        resize: both
-        overflow: hidden
+        // resize: both
+        // overflow: hidden
       & img
         width: 100%
         height: 100%
