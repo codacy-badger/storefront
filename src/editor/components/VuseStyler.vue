@@ -716,7 +716,6 @@ export default {
 
       obj = Object.assign({}, newObj)
       this.section.data[path[0]].push(obj)
-      this.section.schema[path[0]].push(obj)
     },
     execute (command, value = null) {
       this.el.focus()
