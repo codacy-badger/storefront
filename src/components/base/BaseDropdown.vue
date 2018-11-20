@@ -1,11 +1,12 @@
 <template>
-  <SlideUpDown :active="isOpened" :duration="200">
-    <slot></slot>
-  </SlideUpDown>
+  <transition name="slide-fade" v-if="isOpened">
+    <div>
+      <slot></slot>
+    </div>
+  </transition>
 </template>
 
 <script>
-import SlideUpDown from 'vue-slide-up-down'
 export default {
   name: 'BaseDropdown',
 
@@ -14,10 +15,19 @@ export default {
       type: Boolean,
       required: true
     }
-  },
-
-  components: {
-    SlideUpDown
   }
 }
 </script>
+
+<style lang="sass" scoped>
+// Animations down here
+.slide-fade-enter-active
+  transition: all .2s ease
+
+.slide-fade-leave-active
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+
+.slide-fade-enter, .slide-fade-leave-to
+  transform: translateX(-8px)
+  opacity: 0
+</style>

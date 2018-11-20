@@ -18,6 +18,12 @@ const routes = [
     alias: ''
   },
   {
+    path: '/editorNext/:slug',
+    component: () => import('@components/pages/VuseEditorNext'),
+    name: 'VuseEditorNext',
+    alias: ''
+  },
+  {
     path: '/_sandbox/',
     component: () => import('@components/pages/Sandbox'),
     name: 'Sandbox',

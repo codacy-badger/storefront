@@ -5,12 +5,13 @@
     BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button>
     <div style="width: 246px;">
       <BaseDropdown :isOpened="ddOpen">
-        <BaseDropdownItem>Section</BaseDropdownItem>
-        <BaseDropdownItem :isSelected="true">Gallery</BaseDropdownItem>
-        <BaseDropdownItem>Cover</BaseDropdownItem>
-        <BaseDropdownItem>Image</BaseDropdownItem>
-        <BaseDropdownItem>Form</BaseDropdownItem>
-        <BaseDropdownItem>Image</BaseDropdownItem>
+        <ul>
+          <li>Section</li>
+          <li>Gallery</li>
+          <li>Cover</li>
+          <li>Image</li>
+          <li>Form</li>
+        </ul>
       </BaseDropdown>
     </div>
     <hr>
@@ -46,7 +47,7 @@
       <icon-base name="left" iconColor="red"><icon-align-left></icon-align-left></icon-base>
       <icon-base name="center" iconColor="green"><icon-align-center></icon-align-center></icon-base>
       <icon-base name="right" iconColor="magenta"><icon-align-right></icon-align-right></icon-base>
-      <icon-base name="down" viewBox="0 0 6 4" width="6"><icon-arrow-drop-down></icon-arrow-drop-down></icon-base>
+      <icon-base name="down" width="6" height="18" ><icon-arrow-drop-down></icon-arrow-drop-down></icon-base>
       <icon-base name="close" viewBox="0 0 8 8"><icon-close></icon-close></icon-base>
       <icon-base name="fill" viewBox="0 0 15 18"><icon-color-fill></icon-color-fill></icon-base>
       <icon-base name="drag" viewBox="0 0 3 21"><icon-drag></icon-drag></icon-base>
