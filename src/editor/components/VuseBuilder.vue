@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="b-pth-header">
+      <!-- platform selection menu -->
+      <MenuPlatforms @setDevice="setDevice"></MenuPlatforms>
+      <!--/ platform selection menu -->
+    </div>
     <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
@@ -45,9 +50,6 @@
             <VuseIcon name="back"></VuseIcon>
           </button>
         </div>
-        <!-- platform selection menu -->
-        <MenuPlatforms @setDevice="setDevice"></MenuPlatforms>
-        <!--/ platform selection menu -->
     </div>
     <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
         <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
@@ -566,10 +568,21 @@ export default {
 
 <style lang="sass">
 @import '../../assets/sass/app'
-
+.b-pth-header
+  width: 100%
+  height: 7.2rem
+  background-color: #9E9E9E
+  display: flex
+  align-items: center
+  justify-content: center
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  z-index: 9999
 .artboard
   transform-origin: top center
-  margin: 0 auto
+  margin: 7.2rem auto 0
   transition: 0.2s
   min-height: 100vh
   position: relative

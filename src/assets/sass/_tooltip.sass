@@ -1,5 +1,6 @@
 [tooltip]
   position: relative
+  color: #888
 
 [tooltip]:hover:after,
 [tooltip]:hover:before
@@ -9,11 +10,11 @@
 [tooltip]:before
   content: ""
   top: -13px
-  width: 0;
-  height: 0;
+  width: 0
+  height: 0
   border-style: solid
   border-width: 7px 7px 0 7px
-  border-color: #323c47 transparent transparent transparent
+  border-color: #FFFFFF transparent transparent transparent
 
 [tooltip]:after,
 [tooltip]:before
@@ -30,7 +31,7 @@
 [tooltip]:after
   content: attr(tooltip)
   top: -44px
-  background-color: #323c47
+  background-color: #FFFFFF
   padding: 10px
   white-space: nowrap
   border-radius: 6px
@@ -41,7 +42,7 @@
   top: auto
   bottom: -13px
   border-width: 0 7px 7px 7px
-  border-color: transparent transparent #323c47 transparent
+  border-color: transparent transparent #FFFFFF transparent
 
 [tooltip-position=bottom]:after
   top: auto
@@ -53,7 +54,7 @@
   -webkit-transform: translateY(-50%)
   transform: translateY(-50%)
   border-width: 7px 0 7px 7px
-  border-color: transparent transparent transparent #323c47
+  border-color: transparent transparent transparent #FFFFFF
 
 [tooltip-position=left]:after
   top: 50%
@@ -68,7 +69,7 @@
   -webkit-transform: translateY(-50%)
   transform: translateY(-50%)
   border-width: 7px 7px 7px 0
-  border-color: transparent #323c47 transparent transparent
+  border-color: transparent #FFFFFF transparent transparent
 
 [tooltip-position=right]:after
   top: 50%
