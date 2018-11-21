@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <BuilderLayout :builder="builder">
     <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
@@ -209,19 +209,22 @@
         </div>
       </form>
     </aside>
-  </div>
+  </BuilderLayout>
 </template>
 
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
+import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import api from '@store/api'
 
 export default {
   name: 'VuseBuilder',
+
   components: {
-    VuseIcon
+    VuseIcon,
+    BuilderLayout
   },
   props: {
     showIntro: {
@@ -295,6 +298,10 @@ export default {
     ]),
     emptySections: function () {
       return !this.showIntro && !this.$builder.sections.length
+    },
+
+    builder () {
+      return this.$builder
     }
   },
   mounted () {
