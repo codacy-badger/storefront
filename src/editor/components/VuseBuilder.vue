@@ -663,7 +663,6 @@ export default {
     outline: none
     border-radius: 2rem
     padding: 0.5rem
-    color: $white
     fill: $white
     font-size: 1.6rem
     svg
