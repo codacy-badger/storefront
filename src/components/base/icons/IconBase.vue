@@ -2,12 +2,12 @@
   <svg xmlns="http://www.w3.org/2000/svg"
        :width="width"
        :height="height"
-       :aria-labelledby="iconName"
+       :aria-labelledby="name"
        role="presentation"
        :viewBox="icons[name].viewBox"
   >
       <g :fill="color">
-        <component v-bind:is="icons[name].component"></component>
+        <component :is="icons[name].component"></component>
       </g>
       </svg>
 </template>
@@ -17,7 +17,6 @@ export default {
   props: {
     name: {
       type: String,
-      default: 'IconClose',
       required: true
     },
     width: {
