@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@store/api'
+import Sidebar from './Sidebar'
 
 Vue.use(Vuex)
 
@@ -73,9 +74,14 @@ const mutations = {
   }
 }
 
+const modules = {
+  Sidebar
+}
+
 export default new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 })

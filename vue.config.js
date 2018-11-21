@@ -9,7 +9,7 @@ module.exports = {
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'sass',
-      patterns: [path.resolve(__dirname, 'src/assets/sass/app.sass')]
+      patterns: [path.resolve(__dirname, 'src/assets/sass/_colors.sass')]
     }
   },
   css: {

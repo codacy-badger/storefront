@@ -5,12 +5,13 @@
     BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button>
     <div style="width: 246px;">
       <BaseDropdown :isOpened="ddOpen">
-        <BaseDropdownItem>Section</BaseDropdownItem>
-        <BaseDropdownItem :isSelected="true">Gallery</BaseDropdownItem>
-        <BaseDropdownItem>Cover</BaseDropdownItem>
-        <BaseDropdownItem>Image</BaseDropdownItem>
-        <BaseDropdownItem>Form</BaseDropdownItem>
-        <BaseDropdownItem>Image</BaseDropdownItem>
+        <ul>
+          <li>Section</li>
+          <li>Gallery</li>
+          <li>Cover</li>
+          <li>Image</li>
+          <li>Form</li>
+        </ul>
       </BaseDropdown>
     </div>
     <hr>
