@@ -1,24 +1,21 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg"
-       :width="width"
-       :height="height"
-       :viewBox="viewBox"
-       :aria-labelledby="iconName"
-       role="presentation"
-  >
-    <title :id="iconName" lang="en">{{iconName}} icon</title>
-      <g :fill="iconColor">
-      <slot />
-      </g>
-      </svg>
+  <component
+    :xmlns="'http://www.w3.org/2000/svg'"
+    :is="componentName"
+    :fill="color"
+    :width="width"
+    :height="height"
+    :aria-labelledby="name"
+    role="presentation">
+  </component>
 </template>
 
 <script>
 export default {
   props: {
-    iconName: {
+    name: {
       type: String,
-      default: 'box'
+      required: true
     },
     width: {
       type: [Number, String],
@@ -28,22 +25,26 @@ export default {
       type: [Number, String],
       default: 18
     },
-    iconColor: {
+    color: {
       type: String,
       default: 'currentColor'
-    },
-    viewBox: {
-      type: String,
-      default: '0 0 18 18'
+    }
+  },
+
+  computed: {
+    componentName () {
+      const nameByChar = this.name.split('')
+      const firstChar = nameByChar.splice(0, 1).join('').toUpperCase()
+      return `Icon${firstChar}${nameByChar.join('')}`
     }
   }
 }
 </script>
 
 <style scoped>
-  svg {
-    display: inline-block;
-    vertical-align: baseline;
-    margin-bottom: -2px; /* yes, I'm that particular about formatting */
-  }
+svg {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-bottom: -2px; /* yes, I'm that particular about formatting */
+}
 </style>
