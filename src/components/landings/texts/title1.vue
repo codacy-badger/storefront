@@ -39,7 +39,7 @@ export default {
   text-align: center
   display: flex
   align-items: center
-  height: 10rem
+  min-height: 10rem
   &.is-editable
     // resize: vertical
     // overflow: hidden

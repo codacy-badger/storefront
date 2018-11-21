@@ -72,8 +72,6 @@ export default {
 </template>
 
 <style lang="sass">
-@import '../../../assets/sass/colors'
-
 .b-control-set-url
   &__label
     color: $white

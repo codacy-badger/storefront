@@ -289,7 +289,7 @@ export default {
       &-button
         position: relative
         font-size: 2rem
-        font-family: 'Open Sans'
+        font-family: 'Roboto'
         width: 15rem
         min-width: 6rem
         min-height: 2rem
