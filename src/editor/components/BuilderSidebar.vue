@@ -21,9 +21,7 @@
 
         <IconBase
           slot="icon"
-          name="desktop"
-          viewBox="0 0 16 14">
-          <IconPlatformDesktop></IconPlatformDesktop>
+          name="platformDesktop">
         </IconBase>
 
         <span>{{item.title}}</span>
