@@ -1,5 +1,10 @@
 <template>
   <BuilderLayout :builder="builder">
+    <div class="b-pth-header">
+      <!-- platform selection menu -->
+      <MenuPlatforms @setDevice="setDevice"></MenuPlatforms>
+      <!--/ platform selection menu -->
+    </div>
     <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
@@ -43,20 +48,6 @@
           </button>
           <button class="controller-button is-dark" tooltip-position="top" tooltip="Back to landings" @click="backToLandings">
             <VuseIcon name="back"></VuseIcon>
-          </button>
-        </div>
-        <div class="main-panel">
-          <button class="controller-button" tooltip-position="top" tooltip="on desktop" :class="{ 'is-blue': device === 'is-desktop', 'is-green': device !== 'is-desktop' }" @click="setDevice('is-desktop')">
-            <VuseIcon name="monitor"></VuseIcon>
-          </button>
-          <button class="controller-button" tooltip-position="top" tooltip="on laptop" :class="{ 'is-blue': device === 'is-laptop', 'is-green': device !== 'is-laptop' }" @click="setDevice('is-laptop')">
-            <VuseIcon name="laptop"></VuseIcon>
-          </button>
-          <button class="controller-button" tooltip-position="top" tooltip="on tablet" :class="{ 'is-blue': device === 'is-tablet', 'is-green': device !== 'is-tablet' }" @click="setDevice('is-tablet')">
-            <VuseIcon name="tablet"></VuseIcon>
-          </button>
-          <button class="controller-button" tooltip-position="top" tooltip="on mobile" :class="{ 'is-blue': device === 'is-mobile', 'is-green': device !== 'is-mobile' }" @click="setDevice('is-mobile')">
-            <VuseIcon name="mobile"></VuseIcon>
           </button>
         </div>
     </div>
@@ -215,15 +206,16 @@
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
+import MenuPlatforms from '@components/menu/MenuPlatforms'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import api from '@store/api'
 
 export default {
   name: 'VuseBuilder',
-
   components: {
     VuseIcon,
+    MenuPlatforms,
     BuilderLayout
   },
   props: {
@@ -607,7 +599,18 @@ export default {
 
 <style lang="sass">
 @import '../../assets/sass/app'
-
+.b-pth-header
+  width: 100%
+  height: 7.2rem
+  background-color: #9E9E9E
+  display: flex
+  align-items: center
+  justify-content: center
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  z-index: 999
 .artboard
   transform-origin: top center
   margin: 0 auto
@@ -666,7 +669,6 @@ export default {
     outline: none
     border-radius: 2rem
     padding: 0.5rem
-    color: $white
     fill: $white
     font-size: 1.6rem
     svg
