@@ -1,11 +1,6 @@
 <template>
   <BuilderLayout :builder="builder">
-    <div class="b-pth-header">
-      <!-- platform selection menu -->
-      <MenuPlatforms @setDevice="setDevice"></MenuPlatforms>
-      <!--/ platform selection menu -->
-    </div>
-    <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}, device]">
+    <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
@@ -206,7 +201,6 @@
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
-import MenuPlatforms from '@components/menu/MenuPlatforms'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import api from '@store/api'
@@ -215,7 +209,6 @@ export default {
   name: 'VuseBuilder',
   components: {
     VuseIcon,
-    MenuPlatforms,
     BuilderLayout
   },
   props: {
@@ -239,7 +232,6 @@ export default {
       sections: this.getSections(),
       currentSection: '',
       groups: {},
-      device: 'is-desktop',
       showSettings: false,
       pageTitle: '',
       pageBackgroundUrl: '',
@@ -493,9 +485,6 @@ export default {
       })
       return sections
     },
-    setDevice (device) {
-      this.device = device
-    },
     backToLandings () {
       this.save()
       this.$router.push({ path: `/dashboard` })
@@ -599,18 +588,6 @@ export default {
 
 <style lang="sass">
 @import '../../assets/sass/app'
-.b-pth-header
-  width: 100%
-  height: 7.2rem
-  background-color: #9E9E9E
-  display: flex
-  align-items: center
-  justify-content: center
-  position: fixed
-  top: 0
-  right: 0
-  left: 0
-  z-index: 999
 .artboard
   transform-origin: top center
   margin: 0 auto
@@ -621,14 +598,6 @@ export default {
     outline: none
     &:hover
       box-shadow: inset 0 0 0.5rem 0.2rem $color-green
-  &.is-desktop
-    width: 100%
-  &.is-laptop
-    width: 120rem
-  &.is-tablet
-    width: 76rem
-  &.is-mobile
-    width: 37rem
   &.fp-scroll section
     height: 100vh !important
   &:before,

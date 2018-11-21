@@ -143,7 +143,7 @@ export default {
   border-right: 1px solid rgba(#000000, 0.08)
   background: #F1F1F1
   position: fixed
-  top: 64px
+  top: 72px
   left: -220px
   bottom: 0
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.05)
