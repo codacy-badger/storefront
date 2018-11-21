@@ -579,7 +579,7 @@ export default {
   top: 0
   right: 0
   left: 0
-  z-index: 9999
+  z-index: 999
 .artboard
   transform-origin: top center
   margin: 7.2rem auto 0
