@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <BuilderLayout :builder="builder">
     <div class="b-pth-header">
       <!-- platform selection menu -->
       <MenuPlatforms @setDevice="setDevice"></MenuPlatforms>
@@ -200,13 +200,14 @@
         </div>
       </form>
     </aside>
-  </div>
+  </BuilderLayout>
 </template>
 
 <script>
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
 import MenuPlatforms from '@components/menu/MenuPlatforms'
+import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import api from '@store/api'
 
@@ -214,7 +215,8 @@ export default {
   name: 'VuseBuilder',
   components: {
     VuseIcon,
-    MenuPlatforms
+    MenuPlatforms,
+    BuilderLayout
   },
   props: {
     showIntro: {
@@ -288,6 +290,10 @@ export default {
     ]),
     emptySections: function () {
       return !this.showIntro && !this.$builder.sections.length
+    },
+
+    builder () {
+      return this.$builder
     }
   },
   mounted () {
@@ -607,7 +613,7 @@ export default {
   z-index: 999
 .artboard
   transform-origin: top center
-  margin: 7.2rem auto 0
+  margin: 0 auto
   transition: 0.2s
   min-height: 100vh
   position: relative

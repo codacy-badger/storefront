@@ -12,6 +12,9 @@
     </button>
 
     <div class="builder-sidebar__content">
+      <ul slot="dropdown">
+        <li v-for="section in builder.sections" :key="section.id">{{ section.name }}</li>
+      </ul>
       <menu-item
         v-for="(item, index) in contents"
         :key="index"
@@ -68,6 +71,9 @@ export default {
   },
 
   props: {
+    builder: {
+      required: true
+    },
     isExpanded: {
       required: true,
       type: Boolean

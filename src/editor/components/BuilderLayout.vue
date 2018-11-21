@@ -11,6 +11,7 @@
         :class="{'_expanded': isExpanded}">
 
         <BuilderSidebar
+          :builder="builder"
           :isExpanded="isExpanded"
           @toggleSidebar="toggleSidebar"
           ></BuilderSidebar>
@@ -25,6 +26,13 @@ import BuilderSidebar from './BuilderSidebar.vue'
 
 export default {
   name: 'BuilderLayout',
+
+  props: {
+    builder: {
+      required: true
+    }
+  },
+
   components: {
     BuilderSidebar
   },
